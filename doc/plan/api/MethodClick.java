@@ -1,5 +1,4 @@
-package PACKAGE_NAME;
-
+@FunctionalInterface
 public interface MethodClick {
-
+  public void onClick();
 }
