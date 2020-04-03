@@ -11,15 +11,8 @@ public interface Board {
   void movePlayer(int playerId, int numSpaces);
 
   /**
-   * Set a space as "active" to change the display on board
-   * @return the position of the space to set active
+   * @return the status of a space
    */
-  int setSpaceActive();
-
-  /**
-   * Set a space as "inactive" to change the display on board
-   * @return the position of the space to set active
-   */
-  int setSpaceInactive();
+  int getSpaceActive();
 
 }
