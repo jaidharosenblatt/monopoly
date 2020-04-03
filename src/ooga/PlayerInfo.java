@@ -1,5 +1,7 @@
 package ooga;
 
+import java.util.List;
+
 public interface PlayerInfo {
 
   //List of Properties
