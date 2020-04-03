@@ -1,8 +1,7 @@
-package ooga;
-
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import ooga.view.PlayerInfo;
 
 public interface FrontEndExternal {
 
@@ -20,7 +19,7 @@ public interface FrontEndExternal {
    * assets of the players.
    * @param currentPlayers This Map holds all of the current asset information for the players
    */
-  public void refreshPlayers(Map<Integer,PlayerInfo> currentPlayers);
+  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers);
 
   /**
    * Use this method to animate the movement of a players token to a new board space
@@ -39,7 +38,7 @@ public interface FrontEndExternal {
    * Use this method to change the theme of the board and the UI
    * @param pathToThemePropertyFile the new Theme to change to
    */
-  public void changeTheme (String pathToThemePropertyFile) throws FileNotFoundException;
+  public void changeTheme(String pathToThemePropertyFile) throws FileNotFoundException;
 
 
 }
