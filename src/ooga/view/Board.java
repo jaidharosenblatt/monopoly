@@ -8,22 +8,18 @@ public interface Board {
    * @param playerId  integer representation of the player
    * @param numSpaces amount of spaces the player needs to move
    */
-  public void movePlayer(int playerId, int numSpaces);
+  void movePlayer(int playerId, int numSpaces);
 
   /**
-   * Control whether a property is displayed is active
-   *
-   * @param isActive the new status of the property
-   * @param propertyId the property id
+   * Set a space as "active" to change the display on board
+   * @return the position of the space to set active
    */
-  public void setPropertyActive(boolean isActive, int propertyId);
+  int setSpaceActive();
 
   /**
-   * Control whether a property is displayed is mortgaged
-   *
-   * @param isMortgaged the new status of the property
-   * @param propertyId the property id
+   * Set a space as "inactive" to change the display on board
+   * @return the position of the space to set active
    */
-  public void setPropertyMortgaged(boolean isMortgaged, int propertyId);
+  int setSpaceInactive();
 
 }

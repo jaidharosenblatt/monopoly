@@ -5,17 +5,17 @@ public interface Card {
   /**
    * @return the category of this card
    */
-  public String getCategory();
+  String getCategory();
 
   /**
    * @return the state (used or not)
    */
-  public boolean isUsed();
+  boolean isUsed();
 
   /**
    * Activate the card on a given player
    *
-   * @param playerId the player to modify
+   * @return playerId the player to modify
    */
-  public void activate(int playerId);
+  int activate();
 }
