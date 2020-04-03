@@ -15,6 +15,8 @@ public interface PlayerInfo {
    */
   public List<Property> getPropertiesUnmodifiable();
 
+  public List<Card> getHeldCards(); 
+
   /**
    *
    * @return amount of money the player has
