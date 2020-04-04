@@ -2,7 +2,8 @@ package ooga.BackEnd;
 
 public class Property {
 
-    private String title_deed;
+    private Player owner;
+    private int propID;
     private int cost;
     private int base_rent;
     private int monopoly_rent;
@@ -15,10 +16,10 @@ public class Property {
     private int houses;
     private String group_color;
     private int group_number;
-    private boolean isMortgaged;
+    private boolean mortgaged;
 
     public Property(int propID) {
-        this.title_deed = null;
+        this.owner = null;
         this.cost = 0;
         this.base_rent = 0;
         this.monopoly_rent = 0;
@@ -31,7 +32,7 @@ public class Property {
         this.houses = 0;
         this.group_color = null;
         this.group_number = 0;
-        this.isMortgaged = false;
+        this.mortgaged = false;
     }
 
     public int getRent(Player P) {
@@ -51,7 +52,7 @@ public class Property {
             return this.rent_hotel;
         }
         else {
-            if (P.hasMonopoly(this)) {
+            if (this.owner.hasMonopoly(this)) {
                 return this.monopoly_rent;
             }
             else {
@@ -60,6 +61,10 @@ public class Property {
 
         }
     }
+    public boolean isOwned() {return (owner == null) ? false : true;}
+
+    public void setOwner(Player P) {this.owner = P;}
+
     public int getCost() {return this.cost;}
 
     public int getHouseCost() {return this.house_cost;}
@@ -69,4 +74,8 @@ public class Property {
     public String getGroupColor() {return this.group_color;}
 
     public int getGroupNumber() {return this.group_number;}
+
+    public boolean isMortgaged() {return this.mortgaged;}
+
+    public void setMortgaged() {this.mortgaged = true;}
 }
