@@ -13,9 +13,16 @@ public interface FrontEndExternal {
    * example of this is "Buy Property 1?" ,{"Yes","No"}
    *
    * @param decision the decision to present to the user
-   * @return The index corresponding to the chosen response by the user
+   * @return A list of indexes corresponding to the chosen responses by the user
    */
-  public int makeUserDecision(Decision decision);
+  List<Integer> makeUserDecision(Decision decision);
+
+  /**
+   * Display text to alert player
+   *
+   * @param text to display
+   */
+  void displayText(String text);
 
   /**
    * Use this method to refresh the players display after a turn has been completed. Specifically it
@@ -23,7 +30,7 @@ public interface FrontEndExternal {
    *
    * @param currentPlayers This Map holds all of the current asset information for the players
    */
-  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers);
+  void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers);
 
   /**
    * Use this method to animate the movement of a players token to a new board space
@@ -31,21 +38,21 @@ public interface FrontEndExternal {
    * @param playerId  integer representation of the player
    * @param numSpaces amount of spaces the player needs to move
    */
-  public void movePlayer(int playerId, int numSpaces);
+  void movePlayer(int playerId, int numSpaces);
 
   /**
    * Use this to display the result of the dice roll
    *
-   * @param diceResults a list of the value each die had
+   * @return a list of the value each die had
    */
-  public void rollDice(List<Integer> diceResults);
+  List<Integer> getRoll();
 
   /**
    * Use this method to change the theme of the board and the UI
    *
    * @param pathToThemePropertyFile the new Theme to change to
    */
-  public void changeTheme(String pathToThemePropertyFile) throws FileNotFoundException;
+  void changeTheme(String pathToThemePropertyFile) throws FileNotFoundException;
 
 
 }
