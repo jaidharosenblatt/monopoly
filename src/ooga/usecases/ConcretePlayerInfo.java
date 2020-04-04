@@ -1,7 +1,8 @@
-package ooga;
+package ooga.usecases;
 
 import java.util.Collections;
 import java.util.List;
+import ooga.PlayerInfo;
 import ooga.view.Card;
 import ooga.view.Property;
 

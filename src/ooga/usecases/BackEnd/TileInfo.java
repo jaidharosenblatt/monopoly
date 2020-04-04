@@ -1,4 +1,4 @@
-package ooga.BackEnd;
+package ooga.usecases.BackEnd;
 
 public interface TileInfo {
 
