@@ -2,19 +2,20 @@ package ooga.BackEnd;
 
 public class Property {
 
-    private String title_deed = null;
-    private int cost = 0;
-    private int base_rent = 0;
-    private int monopoly_rent = 0;
-    private int rent_one_house = 0;
-    private int rent_two_house = 0;
-    private int rent_three_house = 0;
-    private int rent_four_house = 0;
-    private int rent_hotel = 0;
-    private int house_cost = 0;
-    private int houses = 0;
-    private String group_color = null;
-    private int group_number = 0;
+    private String title_deed;
+    private int cost;
+    private int base_rent;
+    private int monopoly_rent;
+    private int rent_one_house;
+    private int rent_two_house;
+    private int rent_three_house;
+    private int rent_four_house;
+    private int rent_hotel;
+    private int house_cost;
+    private int houses;
+    private String group_color;
+    private int group_number;
+    private boolean isMortgaged;
 
     public Property(int propID) {
         this.title_deed = null;
@@ -30,6 +31,7 @@ public class Property {
         this.houses = 0;
         this.group_color = null;
         this.group_number = 0;
+        this.isMortgaged = false;
     }
 
     public int getRent(Player P) {
