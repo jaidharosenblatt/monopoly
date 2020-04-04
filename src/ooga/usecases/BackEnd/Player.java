@@ -1,4 +1,4 @@
-package ooga.BackEnd;
+package ooga.usecases.BackEnd;
 
 import java.util.ArrayList;
 import java.util.List;
