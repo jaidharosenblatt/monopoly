@@ -19,7 +19,7 @@ We are building variants of the classic game of Monopoly. The primary design goa
 * Buy Property
     * `void buyProperty(Property P)`
 * Mortgage Property
-    * `void mortgageProp(Property P)`
+    * `void mortgageProp()`
     * has to check if player owns property
 * Buy Houses
     * `void buyHouses(Property P, int amount)`
@@ -28,6 +28,8 @@ We are building variants of the classic game of Monopoly. The primary design goa
     * tradeable object is a property, card, or money
     * `void trade(Player p, TradeObject give, TradeObject get)`
 * Pay/roll/free card to get out of jail
+* Next turn
+    * void endTurn();
 
         
 ### Frontend
@@ -97,7 +99,7 @@ Displays information about users and allows for non-player specific actions.
     * Board position double check
 
 ![UML Diagram for front end](https://i.imgur.com/xv0jv6M.png "Front End UML")
-![UML Diagram for back end]()
+![UML Diagram for back end](https://i.imgur.com/F49WaXS.png)
 
 ## Design Details
 
@@ -125,6 +127,9 @@ The game display module will be a flexible class that is given options from the 
 It is also responsible for displaying a roll. We are using a Chance interface in order make our design flexible for types of different ways of displaying rolls (multiple dice or just a number to display). This interface has a single method, `List<Integer> displayRoll()` for displaying all of the randomly generated numbers from the model.
 
 #### Tabs Module
+The tabs module is responsible for the four tabs that display information about the game. These four are, PlayerDisplay, Properties, Rules, and Settings. The first three are all solely visual components. The Settings tab differes from these others because it can be interacted with to change some of the game and UI settings via drop-down menus. 
+
+The main method of the different tabs is the `void updateTab(Tab tab, info)` which is used to go to the corresponding tab and change its information. This will be only used for the three visual only tabs, as the settings tab doesn't change the information it displays. This update method will pass the relevant information to the respective tab and will cause the displayed information to fully refresh to match the new information. The different tabs will be instantiated and controlled through the TabsDisplay class whose purpose is to own and manage these tabs. 
 
 
 ## Example games
@@ -139,6 +144,12 @@ Movement Cards -- Give each player a set of cards numbered from 1 to 6. On each 
 ### Junior
 [Modified from](https://www.ultraboardgames.com/monopoly/junior-game-rules.php
 )
+This jounal game is meant to be played by younger people so it is the same as the original version expect it does not ahve the following components:
+* Houses
+* Trading
+* Mortgages
+* Free parking
+* Chance/community chest cards
 
 ### Longest Game
 [Modified from](https://www.ultraboardgames.com/monopoly/longest-game-ever-rules.php)
@@ -147,3 +158,6 @@ Key Differences:
 * Three versions of every property: To fill all the extra spaces each property is repeated three times on the board. This will require that whenever a property is bought all three versions get added to the players list of properties. This is important because while buying one gives you all three, you can arrange houses on them separately. 
 * Winning the game: In this version a winner is only crowned when they control all of the properties. This means that players are still in when they go bankrupt,though they don't pay anything and can only earn money(e.g. through passing GO). A specific rules class implementation on the back end will be able to evaluate the rules for bankrupty and winning the game
 ## Design Considerations
+* The first design consideration is what information we are going to pass from the backend to the front end. The first option is to pass the ignition condition of the game to the front end when creating the game. We then would only pass the information that has changed in an object. This object would be created in the back end and have methods that could be used by the front end to access the needed information. This info would then be used to change the board. This would be easier if we are making the animations interesting or adding extensions. This also allows the front end to not need to decipher what has changed because the back end is only giving the information that has changed. Another option is to do a “refresh” where the front end gets every piece of information every time something has been updated. This solution is not as efficient what make it easier for the front end. It is not doing any processing of the information. it is simply loading up the new information where the old info was. This puts all the mechanics of the change in the backend and creates better separation between the two parts. We have decided to do a combination of both, with the back end passing every piece of information but also specifics like what property the player is now on to allow the front end the flexibility to create interesting and appealing visuals.
+
+* Another important design consideration is how the back end is going to handle ownership of properties. The first option and most similar to real life is the play can have an instance carriable that holds a collection of the properties that that player owns. This is easy when the player is landing on a property they own and when the player is deciding to put houses on their properties. The second option is to have the property hold an enum corresponding to a players. This option is better when a player lands on another player’s property or when looking to trade. Another important consideration is the respective size of each of these objects. The player object already holds a tremendous amount of information such as imager, amount of money, current place on the board, cards, and houses. The properties hold much less like image and price. For these reasons we have decided that each player will hold the information regarding the properties that they own.
