@@ -1,5 +1,8 @@
 package ooga.BackEnd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
     private static final int INITIAL_BALANCE = 1500;
@@ -10,6 +13,7 @@ public class Player {
     private final int playerID;
     private int currentBalance;
     private int currentTile;
+    private List<Property> properties = new ArrayList<Property>();
 
     private boolean isJailed = false;
     private int getOutCards = 0;
@@ -59,4 +63,26 @@ public class Player {
     public void receive(int amount) {this.currentBalance += amount;}
 
     public void moveTo(int tile) {this.currentTile = tile;}
+
+    public void addProperty(Property P) {properties.add(P);}
+
+    public void loseProperty(Property P) {properties.remove(P);}
+
+    public void buyProperty(Property P) {
+        payBank(P.getCost());
+        addProperty(P);
+    }
+
+    public boolean hasMonopoly(Property P) {
+        int total = 0;
+        for (Property prop : properties) {
+            if (prop.getGroupColor().equals(P.getGroupColor())) {
+                total++;
+            }
+        }
+        if (total == P.getGroupNumber()) {
+            return true;
+        }
+        return false;
+    }
 }
