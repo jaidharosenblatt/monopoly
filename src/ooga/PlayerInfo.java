@@ -1,6 +1,8 @@
-package ooga.view;
+package ooga;
 
 import java.util.List;
+import ooga.view.Card;
+import ooga.view.Property;
 
 public interface PlayerInfo {
 
@@ -18,10 +20,12 @@ public interface PlayerInfo {
   /**
    * @return amount of money the player has
    */
-  int getCashBalance();
+  Integer getCashBalance();
 
   /**
    * @return Where on the board they are
    */
-  int getPositionOnBoard();
+  Integer getPositionOnBoard();
+
+  int getPlayerId();
 }
