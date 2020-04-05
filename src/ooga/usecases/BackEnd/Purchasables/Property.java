@@ -1,10 +1,9 @@
-package ooga.usecases.BackEnd;
+package ooga.usecases.BackEnd.Purchasables;
 
-public class Property {
+import ooga.usecases.BackEnd.Purchasables.Purchasable;
 
-    private Player owner;
-    private int propID;
-    private int cost;
+public class Property extends Purchasable {
+
     private int base_rent;
     private int monopoly_rent;
     private int rent_one_house;
@@ -14,11 +13,9 @@ public class Property {
     private int rent_hotel;
     private int house_cost;
     private int houses;
-    private String group_color;
-    private int group_number;
-    private boolean mortgaged;
 
     public Property(int propID) {
+        this.propID = propID;
         this.owner = null;
         this.cost = 0;
         this.base_rent = 0;
@@ -61,22 +58,12 @@ public class Property {
 
         }
     }
-    public boolean isOwned() {return (owner == null) ? false : true;}
-
-    public void setOwner(Player P) {this.owner = P;}
-
-    public int getCost() {return this.cost;}
 
     public int getHouseCost() {return this.house_cost;}
 
     public int getHouses() {return this.houses;}
 
-    public String getGroupColor() {return this.group_color;}
-
-    public int getGroupNumber() {return this.group_number;}
-
-    public boolean isMortgaged() {return this.mortgaged;}
-
+    @Override
     public void setMortgaged() {
         this.mortgaged = true;
         int sellHouses = 0;
@@ -84,10 +71,5 @@ public class Property {
             sellHouses = (this.houses * this.house_cost) / 2;
         }
         this.owner.receive((this.cost/2) + sellHouses);
-    }
-
-    public void liftMortgage() {
-        this.mortgaged = false;
-        this.owner.payBank((int) (this.cost * 1.1));
     }
 }

@@ -1,5 +1,8 @@
 package ooga.usecases.BackEnd;
 
+import ooga.usecases.BackEnd.Purchasables.Property;
+import ooga.usecases.BackEnd.Purchasables.Purchasable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ public class Player {
     private final int playerID;
     private int currentBalance;
     private int currentTile;
-    private List<Property> properties = new ArrayList<Property>();
+    private List<Purchasable> properties = new ArrayList<Purchasable>();
 
     private boolean isJailed = false;
     private int getOutCards = 0;
@@ -64,6 +67,8 @@ public class Player {
 
     public void moveTo(int tile) {this.currentTile = tile;}
 
+    public List<Purchasable> getProperties() {return properties;}
+
     public void addProperty(Property P) {properties.add(P);}
 
     public void loseProperty(Property P) {properties.remove(P);}
@@ -73,9 +78,9 @@ public class Player {
         addProperty(P);
     }
 
-    public boolean hasMonopoly(Property P) {
+    public boolean hasMonopoly(Purchasable P) {
         int total = 0;
-        for (Property prop : properties) {
+        for (Purchasable prop : properties) {
             if (prop.getGroupColor().equals(P.getGroupColor())) {
                 total++;
             }
