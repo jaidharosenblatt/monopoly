@@ -15,7 +15,7 @@ public abstract class Property extends Tile {
     @Override
     public void action() {
         if (!isOwned()) {
-            try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end action instead
+            try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end decision instead
                 System.out.print("Would you like to buy this? [Y or N]: ");
                 String input = scanner.nextLine();
                 if (input.equals("Y")) {
