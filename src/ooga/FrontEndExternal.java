@@ -46,7 +46,7 @@ public interface FrontEndExternal {
    *
    * @return a list of the value each die had
    */
-  List<Integer> getRoll();
+  void displayRoll(List<Integer> rolls);
 
   /**
    * Use this method to change the theme of the board and the UI
