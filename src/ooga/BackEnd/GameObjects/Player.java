@@ -1,8 +1,8 @@
-package ooga.usecases.BackEnd;
+package ooga.BackEnd.GameObjects;
 
-import ooga.usecases.BackEnd.Tiles.PropertyTiles.Property;
-import ooga.usecases.BackEnd.Tiles.PropertyTiles.Street;
-import ooga.usecases.BackEnd.Tiles.Tile;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;
 

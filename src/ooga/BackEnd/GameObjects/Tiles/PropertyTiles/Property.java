@@ -1,7 +1,7 @@
-package ooga.usecases.BackEnd.Tiles.PropertyTiles;
+package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
-import ooga.usecases.BackEnd.Player;
-import ooga.usecases.BackEnd.Tiles.Tile;
+import ooga.BackEnd.GameObjects.Player;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import java.util.Scanner;
 

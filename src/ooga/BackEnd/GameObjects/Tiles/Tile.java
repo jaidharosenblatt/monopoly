@@ -1,6 +1,6 @@
-package ooga.usecases.BackEnd.Tiles;
+package ooga.BackEnd.GameObjects.Tiles;
 
-import ooga.usecases.BackEnd.Player;
+import ooga.BackEnd.GameObjects.Player;
 
 public abstract class Tile {
     protected int boardIndex;

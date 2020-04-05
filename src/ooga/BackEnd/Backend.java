@@ -1,9 +1,8 @@
-package ooga.usecases;
+package ooga.BackEnd;
 
 import java.util.List;
 import ooga.BackendExternal;
 import ooga.PlayerInfo;
-import ooga.model.Player;
 import ooga.view.Property;
 
 public class Backend implements BackendExternal {
