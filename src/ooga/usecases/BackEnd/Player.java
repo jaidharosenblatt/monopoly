@@ -41,8 +41,6 @@ public class Player {
 
     public int getTile() {return currentTile;}
 
-    public boolean isJailed() {return isJailed;}
-
     public boolean hasJailFreeCards() {return (this.getOutCards > 0) ? true : false;}
 
     public void getJailFreeCard() {this.getOutCards += 1;}
@@ -76,6 +74,7 @@ public class Player {
         for (Tile t : this.boardGame) {
             if (t.getBoardIndex() == tile) {
                 t.onTile(this);
+                t.action();
             }
         }
     }
@@ -116,8 +115,10 @@ public class Player {
         S.removeHouse(amount);
     }
 
+
+
     public void rollDice() {
-        this.dice1 = (int) (Math.random()*6) + 1;
-        this.dice2 = (int) (Math.random()*6) + 1;
+        this.dice1 = (int) (Math.random() * 6) + 1;
+        this.dice2 = (int) (Math.random() * 6) + 1;
     }
 }

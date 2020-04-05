@@ -1,8 +1,10 @@
 package ooga.usecases.BackEnd.Tiles;
 
-public class GoToJail extends Tile{
+public class Go extends Tile{
 
-    public GoToJail(int tileID) {
+    private static final int GO_MONEY = 200;
+
+    public Go(int tileID) {
         this.tileID = tileID;
         this.boardIndex = 0;
         this.visiting = null;
@@ -10,7 +12,6 @@ public class GoToJail extends Tile{
 
     @Override
     public void action() {
-        this.visiting.setJailed();
-        this.visiting = null;
+        this.visiting.receive(GO_MONEY);
     }
 }

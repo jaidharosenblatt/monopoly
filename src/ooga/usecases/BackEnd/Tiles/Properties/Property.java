@@ -14,23 +14,23 @@ public abstract class Property extends Tile {
 
     @Override
     public void action() {
-        if (this.owner == null) {
+        if (!isOwned()) {
             try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end action instead
                 System.out.print("Would you like to buy this? [Y or N]: ");
                 String input = scanner.nextLine();
                 if (input.equals("Y")) {
                     if (this.visiting.getBalance() >= this.cost) {
-                        this.owner = this.visiting;
+                        this.setOwner(this.visiting);
                         this.owner.buyProperty(this);
                     }
                 }
             }
         }
-        else if (this.visiting != this.owner) {
+        else if (this.visiting != this.owner && !isMortgaged()) {
             this.visiting.payPlayer(this.owner, this.getRent());
         }
         else {
-            System.out.println("you are the owner, nothing happens");
+            System.out.println("just visiting, pay nothing");
         }
     }
 
