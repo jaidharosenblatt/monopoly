@@ -1,8 +1,6 @@
-package ooga.usecases.BackEnd.Purchasables;
+package ooga.usecases.BackEnd.Tiles.Properties;
 
-import ooga.usecases.BackEnd.Purchasables.Purchasable;
-
-public class Property extends Purchasable {
+public class Street extends Property {
 
     private int base_rent;
     private int monopoly_rent;
@@ -14,8 +12,9 @@ public class Property extends Purchasable {
     private int house_cost;
     private int houses;
 
-    public Property(int tileID) {
+    public Street(int tileID) {
         this.tileID = tileID;
+        this.boardIndex = 0;
         this.owner = null;
         this.cost = 0;
         this.base_rent = 0;
@@ -32,6 +31,7 @@ public class Property extends Purchasable {
         this.mortgaged = false;
     }
 
+    @Override
     public int getRent() {
         if (this.houses == 1) {
             return this.rent_one_house;

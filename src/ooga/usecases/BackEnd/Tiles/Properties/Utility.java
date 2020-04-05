@@ -1,11 +1,10 @@
-package ooga.usecases.BackEnd.Purchasables;
+package ooga.usecases.BackEnd.Tiles.Properties;
 
-import ooga.usecases.BackEnd.Purchasables.Purchasable;
-
-public class Utility extends Purchasable {
+public class Utility extends Property {
 
     public Utility(int tileID) {
         this.tileID = tileID;
+        this.boardIndex = 0;
         this.owner = null;
         this.cost = 0;
         this.group_color = "utils";
@@ -13,12 +12,13 @@ public class Utility extends Purchasable {
         this.mortgaged = false;
     }
 
-    public int getRent(int dice1, int dice2) {
+    @Override
+    public int getRent() {
         if (this.owner.hasMonopoly(this)) {
-            return (dice1 + dice2) * 10;
+            return (this.visiting.dice1 + this.visiting.dice2) * 10;
         }
         else {
-            return (dice1 + dice2) * 4;
+            return (this.visiting.dice1 + this.visiting.dice2) * 4;
         }
     }
 }

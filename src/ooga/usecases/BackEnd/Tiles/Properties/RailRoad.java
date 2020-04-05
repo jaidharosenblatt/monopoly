@@ -1,13 +1,12 @@
-package ooga.usecases.BackEnd.Purchasables;
+package ooga.usecases.BackEnd.Tiles.Properties;
 
-import ooga.usecases.BackEnd.Purchasables.Purchasable;
-
-public class RailRoad extends Purchasable {
+public class RailRoad extends Property {
 
     private static final int RENT = 25;
 
     public RailRoad(int tileID) {
         this.tileID = tileID;
+        this.boardIndex = 0;
         this.owner = null;
         this.cost = 0;
         this.group_color = "rr";
@@ -15,9 +14,10 @@ public class RailRoad extends Purchasable {
         this.mortgaged = false;
     }
 
-    public int getRent(int dice1, int dice2) {
+    @Override
+    public int getRent() {
         int total = 0;
-        for (Purchasable P : this.owner.getProperties()) {
+        for (Property P : this.owner.getProperties()) {
             if (P.group_color.equals(this.group_color)) {
                 total++;
             }
