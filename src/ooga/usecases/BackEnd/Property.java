@@ -35,7 +35,7 @@ public class Property {
         this.mortgaged = false;
     }
 
-    public int getRent(Player P) {
+    public int getRent() {
         if (this.houses == 1) {
             return this.rent_one_house;
         }
@@ -77,5 +77,17 @@ public class Property {
 
     public boolean isMortgaged() {return this.mortgaged;}
 
-    public void setMortgaged() {this.mortgaged = true;}
+    public void setMortgaged() {
+        this.mortgaged = true;
+        int sellHouses = 0;
+        if (this.houses > 0) {
+            sellHouses = (this.houses * this.house_cost) / 2;
+        }
+        this.owner.receive((this.cost/2) + sellHouses);
+    }
+
+    public void liftMortgage() {
+        this.mortgaged = false;
+        this.owner.payBank((int) (this.cost * 1.1));
+    }
 }
