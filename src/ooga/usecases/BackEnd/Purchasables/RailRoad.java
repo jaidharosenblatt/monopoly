@@ -6,7 +6,8 @@ public class RailRoad extends Purchasable {
 
     private static final int RENT = 25;
 
-    public RailRoad(int propID) {
+    public RailRoad(int tileID) {
+        this.tileID = tileID;
         this.owner = null;
         this.cost = 0;
         this.group_color = "rr";

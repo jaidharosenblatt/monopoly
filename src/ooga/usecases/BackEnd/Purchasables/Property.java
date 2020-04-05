@@ -14,8 +14,8 @@ public class Property extends Purchasable {
     private int house_cost;
     private int houses;
 
-    public Property(int propID) {
-        this.propID = propID;
+    public Property(int tileID) {
+        this.tileID = tileID;
         this.owner = null;
         this.cost = 0;
         this.base_rent = 0;

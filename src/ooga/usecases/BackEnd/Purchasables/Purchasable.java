@@ -1,17 +1,16 @@
 package ooga.usecases.BackEnd.Purchasables;
 
 import ooga.usecases.BackEnd.Player;
+import ooga.usecases.BackEnd.Tile;
 
-public class Purchasable {
-
+public class Purchasable extends Tile {
     protected Player owner;
-    protected int propID;
     protected int cost;
     protected String group_color;
     protected int group_number;
     protected boolean mortgaged;
 
-    public int getPropID() {return propID;}
+    public int getPropID() {return tileID;}
 
     public boolean isOwned() {return (owner == null) ? false : true;}
 

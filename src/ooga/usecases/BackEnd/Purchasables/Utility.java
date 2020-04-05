@@ -4,7 +4,8 @@ import ooga.usecases.BackEnd.Purchasables.Purchasable;
 
 public class Utility extends Purchasable {
 
-    public Utility(int propID) {
+    public Utility(int tileID) {
+        this.tileID = tileID;
         this.owner = null;
         this.cost = 0;
         this.group_color = "utils";
