@@ -11,9 +11,5 @@ public abstract class Tile {
 
     public int getBoardIndex() {return this.boardIndex;}
 
-    public void onTile(Player P) {
-        if (P.getTile() == this.boardIndex) {
-            this.visiting = P;
-        }
-    }
+    public void onTile(Player P) {this.visiting = P;}
 }

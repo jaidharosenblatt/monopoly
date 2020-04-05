@@ -12,6 +12,7 @@ public class GoToJail extends Tile{
     public void action() {
         if (this.visiting != null) {
             this.visiting.setJailed();
+            this.visiting = null;
         }
     }
 }

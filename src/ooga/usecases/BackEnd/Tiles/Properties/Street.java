@@ -31,6 +31,14 @@ public class Street extends Property {
         this.mortgaged = false;
     }
 
+    public int getHouseCost() {return this.house_cost;}
+
+    public int getHouses() {return this.houses;}
+
+    public void addHouse(int amount) {this.houses += amount;}
+
+    public void removeHouse(int amount) {this.houses -= amount;}
+
     @Override
     public int getRent() {
         if (this.houses == 1) {
@@ -58,10 +66,6 @@ public class Street extends Property {
 
         }
     }
-
-    public int getHouseCost() {return this.house_cost;}
-
-    public int getHouses() {return this.houses;}
 
     @Override
     public void setMortgaged() {

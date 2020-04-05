@@ -1,6 +1,7 @@
 package ooga.usecases.BackEnd;
 
 import ooga.usecases.BackEnd.Tiles.Properties.Property;
+import ooga.usecases.BackEnd.Tiles.Properties.Street;
 import ooga.usecases.BackEnd.Tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Player {
 
     private static final int INITIAL_BALANCE = 1500;
     private static final int BAIL = 50;
-    private static final int JAILINDEX = 10;
+    private static final int JAIL_INDEX = 10;
 
     private final String name;
     private final int playerID;
@@ -50,7 +51,7 @@ public class Player {
 
     public void setJailed() {
         this.isJailed = true;
-        moveTo(JAILINDEX);
+        moveTo(JAIL_INDEX);
     }
 
     public void useJailFreeCard() {
@@ -92,7 +93,7 @@ public class Player {
 
     public boolean hasMonopoly(Property P) {
         int total = 0;
-        for (Property prop : properties) {
+        for (Property prop : this.properties) {
             if (prop.getGroupColor().equals(P.getGroupColor())) {
                 total++;
             }
@@ -101,6 +102,18 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    public void buyHouse(int amount, Street S) {
+        if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
+            this.payBank(S.getHouseCost() * amount);
+            S.addHouse(amount);
+        }
+    }
+
+    public void sellHouse(int amount, Street S) {
+        this.receive((S.getHouseCost() * amount) / 2);
+        S.removeHouse(amount);
     }
 
     public void rollDice() {
