@@ -1,4 +1,4 @@
-package ooga.usecases.BackEnd.Tiles.Properties;
+package ooga.usecases.BackEnd.Tiles.PropertyTiles;
 
 public class RailRoad extends Property {
 

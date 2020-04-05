@@ -1,6 +1,8 @@
-package ooga.usecases.BackEnd.Tiles;
+package ooga.usecases.BackEnd.Tiles.EventTiles;
 
-public class GoToJail extends Tile{
+import ooga.usecases.BackEnd.Tiles.Tile;
+
+public class GoToJail extends Tile {
 
     public GoToJail(int tileID) {
         this.tileID = tileID;

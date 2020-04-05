@@ -1,4 +1,4 @@
-package ooga.usecases.BackEnd.Tiles.Properties;
+package ooga.usecases.BackEnd.Tiles.PropertyTiles;
 
 import ooga.usecases.BackEnd.Player;
 import ooga.usecases.BackEnd.Tiles.Tile;

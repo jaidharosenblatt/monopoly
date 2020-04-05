@@ -1,4 +1,6 @@
-package ooga.usecases.BackEnd.Tiles;
+package ooga.usecases.BackEnd.Tiles.EventTiles;
+
+import ooga.usecases.BackEnd.Tiles.Tile;
 
 public class FreeParking extends Tile {
 

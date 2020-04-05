@@ -1,6 +1,8 @@
-package ooga.usecases.BackEnd.Tiles;
+package ooga.usecases.BackEnd.Tiles.EventTiles;
 
-public class Tax extends Tile{
+import ooga.usecases.BackEnd.Tiles.Tile;
+
+public class Tax extends Tile {
 
     private int tax_cost;
 

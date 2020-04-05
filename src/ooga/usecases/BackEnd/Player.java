@@ -1,7 +1,7 @@
 package ooga.usecases.BackEnd;
 
-import ooga.usecases.BackEnd.Tiles.Properties.Property;
-import ooga.usecases.BackEnd.Tiles.Properties.Street;
+import ooga.usecases.BackEnd.Tiles.PropertyTiles.Property;
+import ooga.usecases.BackEnd.Tiles.PropertyTiles.Street;
 import ooga.usecases.BackEnd.Tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;

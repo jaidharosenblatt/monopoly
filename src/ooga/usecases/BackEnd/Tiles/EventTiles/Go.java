@@ -1,6 +1,8 @@
-package ooga.usecases.BackEnd.Tiles;
+package ooga.usecases.BackEnd.Tiles.EventTiles;
 
-public class Go extends Tile{
+import ooga.usecases.BackEnd.Tiles.Tile;
+
+public class Go extends Tile {
 
     private static final int GO_MONEY = 200;
 
