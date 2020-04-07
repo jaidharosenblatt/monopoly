@@ -1,10 +1,10 @@
-package ooga;
+package ooga.api;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
-import ooga.view.Decision;
-import ooga.PlayerInfo;
+import ooga.api.view.Decision;
+import ooga.api.view.PlayerInfo;
 
 
 public interface FrontEndExternal {

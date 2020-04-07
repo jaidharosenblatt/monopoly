@@ -1,7 +1,7 @@
 package ooga.BackEnd;
 
 import java.util.List;
-import ooga.view.Chance;
+import ooga.api.view.Chance;
 
 public class RollDice {
   private List<Integer> rolls;

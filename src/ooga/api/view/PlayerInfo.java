@@ -1,8 +1,8 @@
-package ooga;
+package ooga.api.view;
 
 import java.util.List;
-import ooga.view.Card;
-import ooga.view.Property;
+import ooga.api.view.Card;
+import ooga.api.view.Property;
 
 public interface PlayerInfo {
 

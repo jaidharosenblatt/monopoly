@@ -2,9 +2,9 @@ package ooga.BackEnd;
 
 import java.util.Collections;
 import java.util.List;
-import ooga.PlayerInfo;
-import ooga.view.Card;
-import ooga.view.Property;
+import ooga.api.view.PlayerInfo;
+import ooga.api.view.Card;
+import ooga.api.view.Property;
 
 public class ConcretePlayerInfo implements PlayerInfo {
 

@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.api.view;
 
 @FunctionalInterface
 public interface MethodClick {
