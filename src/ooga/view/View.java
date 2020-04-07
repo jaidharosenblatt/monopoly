@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class View extends BorderPane {
 
-  private static final double SCENE_WIDTH = 500;
+  private static final double SCENE_WIDTH = 700;
   private static final double SCENE_HEIGHT = 500;
 
   public View(Stage stage) {
