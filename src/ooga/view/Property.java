@@ -31,12 +31,12 @@ public class Property extends BorderPane{
     setBackground(
         new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
-    VBox text = new VBox();
+    VBox textBox = new VBox();
     Text nameText = new Text(name);
     Text priceText = new Text("$" + price);
-    text.getChildren().addAll(nameText, priceText);
+    textBox.getChildren().addAll(nameText, priceText);
 
-    setCenter(nameText);
+    setCenter(textBox);
     Shape category = new Rectangle(WIDTH, BAR_HEIGHT, color);
     setTop(category);
   }

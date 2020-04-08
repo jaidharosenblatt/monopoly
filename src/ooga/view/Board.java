@@ -8,6 +8,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import jdk.swing.interop.SwingInterOpUtils;
 
 public class Board extends GridPane {
 
@@ -24,28 +25,32 @@ public class Board extends GridPane {
 
 
   private void createGrid() {
-    //top
-    for (int col = 0; col < ROW_LENGTH; col++) {
-      Property property = tiles.get(col);
-      property.setRotate(180);
-      add(property, col, 0);
-    }
-    //right
-    for (int row = 0; row <= ROW_LENGTH; row++) {
-      Property property = tiles.get(row + ROW_LENGTH);
-      property.setRotate(270);
-      add(property, ROW_LENGTH, row);
-    }
-    //bottom
-    for (int col = 0; col < ROW_LENGTH; col++) {
-      Property property = tiles.get(ROW_LENGTH * 3 - col);
-      add(property, col, ROW_LENGTH);
-    }
-    //left
-    for (int row = 0; row < ROW_LENGTH - 1; row++) {
-      Property property = tiles.get(ROW_LENGTH * 4 - row - 1);
-      property.setRotate(90);
-      add(property, 0, row + 1);
+    for (int i = 0; i < NUMBER_OF_TILES; i++) {
+      Property property = tiles.get(i);
+      if (i % ROW_LENGTH == 0) {
+        continue;
+      }
+      if (i < ROW_LENGTH) {
+        property.setRotate(180);
+        add(property, i, 0);
+      }
+      if (i >= ROW_LENGTH && i < ROW_LENGTH * 2) {
+
+        property.setRotate(270);
+        add(property, ROW_LENGTH, i % ROW_LENGTH);
+      }
+      if (i >= ROW_LENGTH * 2 && i < ROW_LENGTH * 3) {
+        int backwardsIndex = ROW_LENGTH * 3 - i % ROW_LENGTH;
+        property = tiles.get(backwardsIndex);
+        add(property, i - 2 * ROW_LENGTH, ROW_LENGTH);
+      }
+      if (i >= ROW_LENGTH * 3) {
+        int backwardsIndex = ROW_LENGTH * 4 - i % ROW_LENGTH;
+        property = tiles.get(backwardsIndex);
+        property.setRotate(90);
+        System.out.println(i % ROW_LENGTH);
+        add(property, 0, i % ROW_LENGTH);
+      }
     }
   }
 
