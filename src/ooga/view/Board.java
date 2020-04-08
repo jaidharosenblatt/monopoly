@@ -24,26 +24,35 @@ public class Board extends GridPane {
 
 
   private void createGrid() {
-    for (int i = 0; i < ROW_LENGTH; i++) {
-      add(tiles.get(i), i, 0);
+    //top
+    for (int col = 0; col < ROW_LENGTH; col++) {
+      Property property = tiles.get(col);
+      property.setRotate(180);
+      add(property, col, 0);
     }
-    for (int i = 0; i < ROW_LENGTH; i++) {
-      add(tiles.get(i + ROW_LENGTH), ROW_LENGTH, i);
+    //right
+    for (int row = 0; row <= ROW_LENGTH; row++) {
+      Property property = tiles.get(row + ROW_LENGTH);
+      property.setRotate(270);
+      add(property, ROW_LENGTH, row);
     }
-    for (int i = 0; i < ROW_LENGTH; i++) {
-      add(tiles.get(ROW_LENGTH * 3 - i - 1), i, ROW_LENGTH);
+    //bottom
+    for (int col = 0; col < ROW_LENGTH; col++) {
+      Property property = tiles.get(ROW_LENGTH * 3 - col);
+      add(property, col, ROW_LENGTH);
     }
-
-    for (int i = 0; i < ROW_LENGTH; i++) {
-      add(tiles.get(ROW_LENGTH * 4 - i - 1), 0, i);
+    //left
+    for (int row = 0; row < ROW_LENGTH - 1; row++) {
+      Property property = tiles.get(ROW_LENGTH * 4 - row - 1);
+      property.setRotate(90);
+      add(property, 0, row + 1);
     }
-
   }
 
 
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
-      Property property = new Property(Color.BLACK, "hello", i);
+      Property property = new Property(Color.BLACK, "hi", i);
       tiles.add(property);
     }
   }
