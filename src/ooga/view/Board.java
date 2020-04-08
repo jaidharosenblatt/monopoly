@@ -8,7 +8,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import jdk.swing.interop.SwingInterOpUtils;
 
 public class Board extends GridPane {
 
@@ -18,7 +17,6 @@ public class Board extends GridPane {
 
   public Board() {
     setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-
     createBoard();
     createGrid();
   }
@@ -35,7 +33,6 @@ public class Board extends GridPane {
         add(property, i, 0);
       }
       if (i >= ROW_LENGTH && i < ROW_LENGTH * 2) {
-
         property.setRotate(270);
         add(property, ROW_LENGTH, i % ROW_LENGTH);
       }
@@ -48,10 +45,17 @@ public class Board extends GridPane {
         int backwardsIndex = ROW_LENGTH * 4 - i % ROW_LENGTH;
         property = tiles.get(backwardsIndex);
         property.setRotate(90);
-        System.out.println(i % ROW_LENGTH);
         add(property, 0, i % ROW_LENGTH);
       }
     }
+    add(new Property(Color.GREEN, "go", 0),0,0);
+    add(new Property(Color.GREEN, "go", 0),10,0);
+    add(new Property(Color.GREEN, "go", 0),10,10);
+    add(new Property(Color.GREEN, "go", 0),0,10);
+
+
+
+
   }
 
 
