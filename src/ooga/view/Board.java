@@ -48,20 +48,16 @@ public class Board extends GridPane {
         add(property, 0, i % ROW_LENGTH);
       }
     }
-    add(new Property(Color.GREEN, "go", 0),0,0);
-    add(new Property(Color.GREEN, "go", 0),10,0);
-    add(new Property(Color.GREEN, "go", 0),10,10);
-    add(new Property(Color.GREEN, "go", 0),0,10);
-
-
-
-
+    add(new Tile(Color.GREEN), 0, 0);
+    add(new Tile(Color.GREEN), 10, 0);
+    add(new Tile(Color.GREEN), 10, 10);
+    add(new Tile(Color.GREEN), 0, 10);
   }
 
 
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
-      Property property = new Property(Color.BLACK, "hi", i);
+      Property property = new Property(Color.BISQUE, Color.BLACK, "hi", i);
       tiles.add(property);
     }
   }
