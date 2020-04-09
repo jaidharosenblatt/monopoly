@@ -55,7 +55,7 @@ public class Board extends GridPane {
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       Property property = new Property("hi", i, Color.BISQUE, Color.BLACK);
-      property.setSize(50, 40);
+      property.setSize(60, 80);
       tiles.add(property);
     }
   }
