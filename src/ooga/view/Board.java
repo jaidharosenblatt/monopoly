@@ -22,30 +22,36 @@ public class Board extends GridPane {
     createBoard();
     createGrid();
   }
-  
+
   private void createGrid() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       Node tile = tiles.get(i).getHorizontalNode();
       if (i % ROW_LENGTH == 0) {
         continue;
       }
+      //top
       if (i < ROW_LENGTH) {
         tile.setRotate(180);
         add(tile, i, 0);
       }
+
+      //right
       if (i >= ROW_LENGTH && i < ROW_LENGTH * 2) {
-        tile = tiles.get(i).getVerticalNode();
+        tile = tiles.get(i).getRightNode();
         add(tile, ROW_LENGTH, i % ROW_LENGTH);
       }
+
+      //bottom
       if (i >= ROW_LENGTH * 2 && i < ROW_LENGTH * 3) {
         int backwardsIndex = ROW_LENGTH * 3 - i % ROW_LENGTH;
         tile = tiles.get(backwardsIndex).getHorizontalNode();
         add(tile, i - 2 * ROW_LENGTH, ROW_LENGTH);
       }
+
+      //left
       if (i >= ROW_LENGTH * 3) {
         int backwardsIndex = ROW_LENGTH * 4 - i % ROW_LENGTH;
-        tile = tiles.get(backwardsIndex).getVerticalNode();
-        tile.setRotate(90);
+        tile = tiles.get(backwardsIndex).getLeftNode();
         add(tile, 0, i % ROW_LENGTH);
       }
     }
@@ -55,7 +61,7 @@ public class Board extends GridPane {
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       Property property = new Property("hi", i, Color.BISQUE, Color.BLACK);
-      property.setSize(30, 40);
+      property.setSize(50, 40);
       tiles.add(property);
     }
   }

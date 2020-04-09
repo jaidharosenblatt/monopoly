@@ -1,5 +1,6 @@
 package ooga.view;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -17,7 +18,9 @@ public abstract class Tile {
     this.height = height;
   }
 
-  public abstract Pane getVerticalNode();
+  public abstract Pane getLeftNode();
+
+  public abstract Pane getRightNode();
 
   public abstract Pane getHorizontalNode();
 
