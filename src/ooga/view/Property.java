@@ -1,5 +1,6 @@
 package ooga.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -11,16 +12,17 @@ import javafx.scene.text.Text;
 public class Property extends Tile {
 
   private static final double BAR_HEIGHT = 20;
-  private VBox textBox;
   private Color backgroundColor;
   private Color categoryColor;
+  private String name;
+  private double price;
 
 
   public Property(String name, double price, Color backgroundColor, Color categoryColor) {
     this.backgroundColor = backgroundColor;
     this.categoryColor = categoryColor;
-
-    createTextBox(name, price);
+    this.price = price;
+    this.name = name;
   }
 
   @Override
@@ -29,39 +31,39 @@ public class Property extends Tile {
     property.setPrefSize(getWidth(), getHeight());
     setBackgroundColor(property, backgroundColor);
 
-    property.setTop(new Rectangle(getWidth(), BAR_HEIGHT, categoryColor));
-    property.setCenter(textBox);
+    VBox box = new VBox();
+    box.setAlignment(Pos.CENTER);
+    Text nameText = new Text(name);
+    box.getChildren().addAll(new Rectangle(getWidth(), BAR_HEIGHT, categoryColor), nameText);
+
+    property.setTop(box);
+    Text text = new Text("$" + price);
+    property.setBottom(text);
+    property.setAlignment(text, Pos.CENTER);
+
     return property;
   }
 
   @Override
-  public Pane getLeftNode() {
-    BorderPane property = getVerticalNode(90);
-    property.setCenter(textBox);
-    property.setRight(new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
-    return property;
-  }
-
-  @Override
-  public Pane getRightNode() {
-    BorderPane property = getVerticalNode(270);
-    property.setCenter(textBox);
-    property.setLeft(new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
-    return property;
-  }
-
-  private BorderPane getVerticalNode(double rotate) {
+  public Pane getVerticalNode() {
     BorderPane property = new BorderPane();
     property.setPrefSize(getHeight(), getWidth());
     setBackgroundColor(property, backgroundColor);
-    textBox.setRotate(rotate);
+    HBox box = new HBox();
+    box.setAlignment(Pos.CENTER);
+    box.getChildren()
+        .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
+    property.setRight(box);
+    Text text = createRotatedText("$" + price, 90);
+    property.setLeft(text);
+    property.setAlignment(text, Pos.CENTER);
+
     return property;
   }
 
-  private void createTextBox(String name, double price) {
-    textBox = new VBox();
-    Text nameText = new Text(name);
-    Text priceText = new Text("$" + price);
-    textBox.getChildren().addAll(nameText, priceText);
+  private Text createRotatedText(String s, double rotate) {
+    Text text = new Text(s);
+    text.setRotate(rotate);
+    return text;
   }
 }

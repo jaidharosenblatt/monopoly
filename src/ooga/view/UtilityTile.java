@@ -14,12 +14,7 @@ public class UtilityTile extends Tile {
 
 
   @Override
-  public Pane getLeftNode() {
-    return null;
-  }
-
-  @Override
-  public Pane getRightNode() {
+  public Pane getVerticalNode() {
     return null;
   }
 

@@ -35,7 +35,9 @@ public class Board extends GridPane {
 
     List<Tile> rightList = tiles.subList(ROW_LENGTH, ROW_LENGTH * 2);
     for (int i = 1; i < rightList.size(); i++) {
-      add(rightList.get(i).getRightNode(), ROW_LENGTH, i % ROW_LENGTH);
+      Node tile = topList.get(i).getVerticalNode();
+      tile.setRotate(180);
+      add(tile, ROW_LENGTH, i % ROW_LENGTH);
     }
 
     List<Tile> bottomList = tiles.subList(ROW_LENGTH * 2 + 1, ROW_LENGTH * 3);
@@ -47,7 +49,7 @@ public class Board extends GridPane {
     List<Tile> leftList = tiles.subList(ROW_LENGTH * 3 + 1, ROW_LENGTH * 4);
     Collections.reverse(leftList);
     for (int i = 0; i < leftList.size(); i++) {
-      add(leftList.get(i).getLeftNode(), 0, i % ROW_LENGTH + 1);
+      add(topList.get(i).getVerticalNode(), 0, i % ROW_LENGTH + 1);
     }
   }
 

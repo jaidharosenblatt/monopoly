@@ -18,9 +18,7 @@ public abstract class Tile {
     this.height = height;
   }
 
-  public abstract Pane getLeftNode();
-
-  public abstract Pane getRightNode();
+  public abstract Pane getVerticalNode();
 
   public abstract Pane getHorizontalNode();
 
