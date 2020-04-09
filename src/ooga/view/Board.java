@@ -1,6 +1,7 @@
 package ooga.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -24,36 +25,29 @@ public class Board extends GridPane {
   }
 
   private void createGrid() {
-    for (int i = 0; i < NUMBER_OF_TILES; i++) {
-      Node tile = tiles.get(i).getHorizontalNode();
-      if (i % ROW_LENGTH == 0) {
-        continue;
-      }
-      //top
-      if (i < ROW_LENGTH) {
-        tile.setRotate(180);
-        add(tile, i, 0);
-      }
 
-      //right
-      if (i >= ROW_LENGTH && i < ROW_LENGTH * 2) {
-        tile = tiles.get(i).getRightNode();
-        add(tile, ROW_LENGTH, i % ROW_LENGTH);
-      }
+    List<Tile> topList = tiles.subList(0, ROW_LENGTH);
+    for (int i = 1; i < topList.size(); i++) {
+      Node tile = topList.get(i).getHorizontalNode();
+      tile.setRotate(180);
+      add(tile, i, 0);
+    }
 
-      //bottom
-      if (i >= ROW_LENGTH * 2 && i < ROW_LENGTH * 3) {
-        int backwardsIndex = ROW_LENGTH * 3 - i % ROW_LENGTH;
-        tile = tiles.get(backwardsIndex).getHorizontalNode();
-        add(tile, i - 2 * ROW_LENGTH, ROW_LENGTH);
-      }
+    List<Tile> rightList = tiles.subList(ROW_LENGTH, ROW_LENGTH * 2);
+    for (int i = 1; i < rightList.size(); i++) {
+      add(rightList.get(i).getRightNode(), ROW_LENGTH, i % ROW_LENGTH);
+    }
 
-      //left
-      if (i >= ROW_LENGTH * 3) {
-        int backwardsIndex = ROW_LENGTH * 4 - i % ROW_LENGTH;
-        tile = tiles.get(backwardsIndex).getLeftNode();
-        add(tile, 0, i % ROW_LENGTH);
-      }
+    List<Tile> bottomList = tiles.subList(ROW_LENGTH * 2 + 1, ROW_LENGTH * 3);
+    Collections.reverse(bottomList);
+    for (int i = 0; i < bottomList.size(); i++) {
+      add(bottomList.get(i).getHorizontalNode(), i + 1, ROW_LENGTH);
+    }
+
+    List<Tile> leftList = tiles.subList(ROW_LENGTH * 3 + 1, ROW_LENGTH * 4);
+    Collections.reverse(leftList);
+    for (int i = 0; i < leftList.size(); i++) {
+      add(leftList.get(i).getLeftNode(), 0, i % ROW_LENGTH + 1);
     }
   }
 
