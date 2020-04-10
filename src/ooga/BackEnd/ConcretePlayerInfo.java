@@ -70,4 +70,9 @@ public class ConcretePlayerInfo implements PlayerInfo {
   public int getPlayerId() {
     return playerId;
   }
+
+  @Override
+  public String getPlayerColor() {
+    return null;
+  }
 }
