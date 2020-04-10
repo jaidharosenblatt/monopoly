@@ -1,7 +1,7 @@
 package ooga.view;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -18,9 +18,7 @@ public abstract class Tile {
     this.height = height;
   }
 
-  public abstract Pane getLeftNode();
-
-  public abstract Pane getRightNode();
+  public abstract Pane getVerticalNode();
 
   public abstract Pane getHorizontalNode();
 
@@ -37,5 +35,8 @@ public abstract class Tile {
         new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
   }
 
+  protected Image getImageByName(String name) {
+    return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
+  }
 
 }
