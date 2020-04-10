@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import ooga.api.view.PlayerInfo;
 
 
 public class UtilityTile extends Tile {
@@ -44,6 +45,16 @@ public class UtilityTile extends Tile {
     tile.setAlignment(priceText, Pos.CENTER);
 
     return tile;
+  }
+
+  @Override
+  public void removePlayer(PlayerInfo player) {
+
+  }
+
+  @Override
+  public void addPlayer(PlayerInfo player) {
+
   }
 
   @Override

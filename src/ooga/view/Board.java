@@ -2,26 +2,43 @@ package ooga.view;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import ooga.api.view.PlayerInfo;
 
 public class Board extends GridPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
   private List<Tile> tiles = new ArrayList<>();
+  private List<PlayerInfo> players = new ArrayList<>();
 
   public Board() {
     setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 
+    for (int i = 0; i < 4; i++) {
+      players.add(new PlayerTester(0, i, "2E86AB"));
+    }
+
     createBoard();
     createGrid();
+  }
+
+  public void movePlayer(PlayerInfo player, int newPosition) {
+    int oldPosition = player.getPositionOnBoard();
+    Tile oldTile = tiles.get(oldPosition);
+    oldTile.removePlayer(player);
+    Tile newTile = tiles.get(newPosition);
+    newTile.addPlayer(player);
   }
 
   private void createGrid() {
@@ -51,6 +68,10 @@ public class Board extends GridPane {
     for (int i = 0; i < leftList.size(); i++) {
       add(leftList.get(i).getVerticalNode(), 0, i % ROW_LENGTH + 1);
     }
+
+    Button button = new Button("Take turn");
+    button.setOnAction(e -> movePlayer(players.get(0), 1));
+    add(button, 5, 5);
   }
 
 

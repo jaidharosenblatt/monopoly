@@ -7,6 +7,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import ooga.api.view.PlayerInfo;
 
 public abstract class Tile {
 
@@ -17,6 +18,10 @@ public abstract class Tile {
     this.width = width;
     this.height = height;
   }
+
+  public abstract void removePlayer(PlayerInfo player);
+
+  public abstract void addPlayer(PlayerInfo player);
 
   public abstract Pane getVerticalNode();
 
