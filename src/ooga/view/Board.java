@@ -70,7 +70,7 @@ public class Board extends GridPane {
     }
 
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(players.get(0), 1));
+    button.setOnAction(e -> movePlayer(players.get(0), 3));
     add(button, 5, 5);
   }
 
