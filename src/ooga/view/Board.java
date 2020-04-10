@@ -79,14 +79,13 @@ public class Board extends GridPane {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       if (i % 5 == 0 && i % 10 != 0) {
         UtilityTile tile = new UtilityTile("Robert Duvall", i, Color.GREY, "rcd.jpg");
-        tile.setSize(60, 70);
         tiles.add(tile);
       } else if (i % 2 == 0) {
-        Property property = new Property("Some Property", i, Color.BISQUE, Color.GREEN);
+        Property property = new Property("Some Property", i, Color.BISQUE, Color.GREEN, 60, 70);
         property.setSize(60, 70);
         tiles.add(property);
       } else {
-        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET);
+        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET, 60, 70);
         property.setSize(60, 70);
         tiles.add(property);
       }

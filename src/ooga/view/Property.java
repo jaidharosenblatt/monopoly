@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import ooga.api.view.PlayerInfo;
 
 public class Property extends Tile {
 
@@ -16,20 +17,26 @@ public class Property extends Tile {
   private Color categoryColor;
   private String name;
   private double price;
+  private BorderPane horizontalPane;
+  private BorderPane verticalPane;
 
 
-  public Property(String name, double price, Color backgroundColor, Color categoryColor) {
+  public Property(String name, double price, Color backgroundColor, Color categoryColor, int width, int height) {
     this.backgroundColor = backgroundColor;
     this.categoryColor = categoryColor;
     this.price = price;
     this.name = name;
+    setSize(width,height);
+
+    setHorizontalPane();
+    setVerticalPane();
   }
 
-  @Override
-  public Pane getHorizontalNode() {
-    BorderPane property = new BorderPane();
-    property.setPrefSize(getWidth(), getHeight());
-    setBackgroundColor(property, backgroundColor);
+
+  private void setHorizontalPane(){
+    horizontalPane = new BorderPane();
+    horizontalPane.setPrefSize(getWidth(), getHeight());
+    setBackgroundColor(horizontalPane, backgroundColor);
 
     VBox box = new VBox();
     box.setAlignment(Pos.CENTER);
@@ -38,32 +45,48 @@ public class Property extends Tile {
 
     box.getChildren().addAll(new Rectangle(getWidth(), BAR_HEIGHT, categoryColor), nameText);
 
-    property.setTop(box);
+    horizontalPane.setTop(box);
     Text text = new Text("$" + price);
-    property.setBottom(text);
-    property.setAlignment(text, Pos.CENTER);
-
-    return property;
+    horizontalPane.setBottom(text);
+    horizontalPane.setAlignment(text, Pos.CENTER);
   }
 
-  @Override
-  public Pane getVerticalNode() {
-    BorderPane property = new BorderPane();
-    property.setPrefSize(getHeight(), getWidth());
-    setBackgroundColor(property, backgroundColor);
+  private void setVerticalPane(){
+    verticalPane = new BorderPane();
+    verticalPane.setPrefSize(getHeight(), getWidth());
+    setBackgroundColor(verticalPane, backgroundColor);
     HBox box = new HBox();
     box.setAlignment(Pos.CENTER);
     box.getChildren()
         .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
-    property.setRight(box);
+    verticalPane.setRight(box);
 
     Text priceText = new Text("M" + price);
     priceText.setRotate(90);
-    property.setLeft(priceText);
-    property.setAlignment(priceText, Pos.CENTER);
-
-    return property;
+    verticalPane.setLeft(priceText);
+    verticalPane.setAlignment(priceText, Pos.CENTER);
   }
+
+  @Override
+  public Pane getHorizontalNode() {
+    return horizontalPane;
+  }
+
+  @Override
+  public Pane getVerticalNode() {
+    return verticalPane;
+  }
+
+  @Override
+  public void removePlayer(PlayerInfo player) {
+
+  }
+
+  @Override
+  public void addPlayer(PlayerInfo player) {
+
+  }
+  
 
   private Text createRotatedText(String s, double rotate) {
     Text text = new Text(s);

@@ -14,7 +14,7 @@ public abstract class Tile {
   private double width;
   private double height;
 
-  public void setSize(double width, double height) {
+  protected void setSize(double width, double height) {
     this.width = width;
     this.height = height;
   }
