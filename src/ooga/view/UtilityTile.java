@@ -34,6 +34,8 @@ public class UtilityTile extends Tile {
     Text nameText = new Text(name);
     tile.setTop(nameText);
     tile.setAlignment(nameText, Pos.CENTER);
+    nameText.setWrappingWidth(getWidth());
+
 
     tile.setCenter(image);
     tile.setPrefSize(getWidth(), getHeight());
@@ -47,8 +49,26 @@ public class UtilityTile extends Tile {
 
   @Override
   public Pane getVerticalNode() {
-    Pane pane = getHorizontalNode();
-    return pane;
+    BorderPane tile = new BorderPane();
+    setBackgroundColor(tile, backgroundColor);
+
+    Text nameText = new Text(name);
+    nameText.setRotate(90);
+    nameText.setWrappingWidth(getWidth());
+
+    tile.setRight(nameText);
+    tile.setAlignment(nameText, Pos.CENTER_RIGHT);
+
+    image.setRotate(90);
+    tile.setCenter(image);
+    tile.setPrefSize(getWidth(), getHeight());
+
+    Text priceText = new Text("M" + price);
+    priceText.setRotate(90);
+    tile.setLeft(priceText);
+    tile.setAlignment(priceText, Pos.CENTER);
+
+    return tile;
   }
 
 

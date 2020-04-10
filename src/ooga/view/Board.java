@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 public class Board extends GridPane {
 
   private final static int NUMBER_OF_TILES = 40;
-  private final static int ROW_LENGTH = 10;
+  private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
   private List<Tile> tiles = new ArrayList<>();
 
   public Board() {
@@ -57,19 +57,16 @@ public class Board extends GridPane {
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       if (i % 5 == 0 && i % 10 != 0) {
-        UtilityTile tile = new UtilityTile("RCD", i, Color.GREY, "rcd.jpg");
-        tile.setSize(80, 80);
+        UtilityTile tile = new UtilityTile("Robert Duvall", i, Color.GREY, "rcd.jpg");
+        tile.setSize(60, 70);
         tiles.add(tile);
-      }
-
-      else if (i % 2 == 0) {
-        Property property = new Property("woahh", i, Color.BISQUE, Color.GREEN);
-        property.setSize(60, 80);
+      } else if (i % 2 == 0) {
+        Property property = new Property("Some Property", i, Color.BISQUE, Color.GREEN);
+        property.setSize(60, 70);
         tiles.add(property);
-      }
-      else {
-        Property property = new Property("hi", i, Color.BISQUE, Color.BLUEVIOLET);
-        property.setSize(60, 80);
+      } else {
+        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET);
+        property.setSize(60, 70);
         tiles.add(property);
       }
     }
