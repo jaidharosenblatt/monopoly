@@ -35,7 +35,7 @@ public class Board extends GridPane {
 
     List<Tile> rightList = tiles.subList(ROW_LENGTH, ROW_LENGTH * 2);
     for (int i = 1; i < rightList.size(); i++) {
-      Node tile = topList.get(i).getVerticalNode();
+      Node tile = rightList.get(i).getVerticalNode();
       tile.setRotate(180);
       add(tile, ROW_LENGTH, i % ROW_LENGTH);
     }
@@ -49,16 +49,22 @@ public class Board extends GridPane {
     List<Tile> leftList = tiles.subList(ROW_LENGTH * 3 + 1, ROW_LENGTH * 4);
     Collections.reverse(leftList);
     for (int i = 0; i < leftList.size(); i++) {
-      add(topList.get(i).getVerticalNode(), 0, i % ROW_LENGTH + 1);
+      add(leftList.get(i).getVerticalNode(), 0, i % ROW_LENGTH + 1);
     }
   }
 
 
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
-      Property property = new Property("hi", i, Color.BISQUE, Color.BLACK);
-      property.setSize(60, 80);
-      tiles.add(property);
+      if (i % 5 == 0 && i % 10 != 0) {
+        UtilityTile tile = new UtilityTile("hi", i, Color.GREEN, "rcd.jpg");
+        tile.setSize(60, 80);
+        tiles.add(tile);
+      } else {
+        Property property = new Property("hi", i, Color.BISQUE, Color.BLACK);
+        property.setSize(60, 80);
+        tiles.add(property);
+      }
     }
   }
 

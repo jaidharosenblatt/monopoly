@@ -1,7 +1,7 @@
 package ooga.view;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -33,6 +33,10 @@ public abstract class Tile {
   protected void setBackgroundColor(Pane pane, Color color) {
     pane.setBackground(
         new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+  }
+
+  protected Image getImageByName(String name) {
+    return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
   }
 
 
