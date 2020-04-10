@@ -32,7 +32,7 @@ public class Property extends Tile {
     setBackgroundColor(property, backgroundColor);
 
     VBox box = new VBox();
-    box.setAlignment(Pos.BASELINE_CENTER);
+    box.setAlignment(Pos.CENTER);
     Text nameText = new Text(name);
     nameText.setWrappingWidth(getWidth());
 
@@ -41,7 +41,7 @@ public class Property extends Tile {
     property.setTop(box);
     Text text = new Text("$" + price);
     property.setBottom(text);
-    property.setAlignment(text, Pos.BASELINE_CENTER);
+    property.setAlignment(text, Pos.CENTER);
 
     return property;
   }
@@ -56,9 +56,11 @@ public class Property extends Tile {
     box.getChildren()
         .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
     property.setRight(box);
-    Text text = createRotatedText("M" + price, 90);
-    property.setLeft(text);
-    property.setAlignment(text, Pos.CENTER);
+
+    Text priceText = new Text("M" + price);
+    priceText.setRotate(90);
+    property.setLeft(priceText);
+    property.setAlignment(priceText, Pos.CENTER);
 
     return property;
   }

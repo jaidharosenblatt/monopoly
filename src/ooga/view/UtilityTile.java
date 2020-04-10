@@ -36,7 +36,6 @@ public class UtilityTile extends Tile {
     tile.setAlignment(nameText, Pos.CENTER);
     nameText.setWrappingWidth(getWidth());
 
-
     tile.setCenter(image);
     tile.setPrefSize(getWidth(), getHeight());
 
@@ -57,7 +56,7 @@ public class UtilityTile extends Tile {
     nameText.setWrappingWidth(getWidth());
 
     tile.setRight(nameText);
-    tile.setAlignment(nameText, Pos.CENTER_RIGHT);
+    tile.setAlignment(nameText, Pos.CENTER);
 
     image.setRotate(90);
     tile.setCenter(image);
