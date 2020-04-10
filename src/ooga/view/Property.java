@@ -54,7 +54,7 @@ public class Property extends Tile {
     box.getChildren()
         .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getWidth(), categoryColor));
     property.setRight(box);
-    Text text = createRotatedText("$" + price, 90);
+    Text text = createRotatedText("M" + price, 90);
     property.setLeft(text);
     property.setAlignment(text, Pos.CENTER);
 

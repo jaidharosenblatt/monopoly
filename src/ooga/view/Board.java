@@ -57,11 +57,18 @@ public class Board extends GridPane {
   private void createBoard() {
     for (int i = 0; i < NUMBER_OF_TILES; i++) {
       if (i % 5 == 0 && i % 10 != 0) {
-        UtilityTile tile = new UtilityTile("hi", i, Color.GREEN, "rcd.jpg");
-        tile.setSize(60, 80);
+        UtilityTile tile = new UtilityTile("RCD", i, Color.GREY, "rcd.jpg");
+        tile.setSize(80, 80);
         tiles.add(tile);
-      } else {
-        Property property = new Property("hi", i, Color.BISQUE, Color.BLACK);
+      }
+
+      else if (i % 2 == 0) {
+        Property property = new Property("woahh", i, Color.BISQUE, Color.GREEN);
+        property.setSize(60, 80);
+        tiles.add(property);
+      }
+      else {
+        Property property = new Property("hi", i, Color.BISQUE, Color.BLUEVIOLET);
         property.setSize(60, 80);
         tiles.add(property);
       }

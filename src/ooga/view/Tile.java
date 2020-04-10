@@ -39,5 +39,4 @@ public abstract class Tile {
     return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
   }
 
-
 }
