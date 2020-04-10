@@ -28,4 +28,10 @@ public interface PlayerInfo {
   Integer getPositionOnBoard();
 
   int getPlayerId();
+
+  /**
+   *
+   * @return the hex of the player's color
+   */
+  String getPlayerColor();
 }
