@@ -13,8 +13,6 @@ public class Board extends BorderPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
-  public static final int PROPERTY_WIDTH = 60;
-  public static final int PROPERTY_HEIGHT = 80;
 
   private List<Tile> tiles = new ArrayList<>();
   private List<PlayerInfo> players = new ArrayList<>();
@@ -38,16 +36,14 @@ public class Board extends BorderPane {
 
   private void createCenter() {
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(players.get(0), 3));
+    button.setOnAction(e -> movePlayer(players.get(0), 20));
     setCenter(button);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {
     int oldPosition = player.getPositionOnBoard();
-    Tile oldTile = tiles.get(oldPosition);
-//    oldTile.removePlayer(player);
-    Tile newTile = tiles.get(newPosition);
-//    newTile.addPlayer(player);
+    Tile oldTile = getTileByIndex(newPosition);
+    oldTile.setBackgroundColor(oldTile,Color.GREEN);
   }
 
   private void createGrid() {
@@ -75,6 +71,21 @@ public class Board extends BorderPane {
     }
   }
 
+  private Tile getTileByIndex(int index) {
+    int position = index % ROW_LENGTH;
+
+    if (index < ROW_LENGTH) {
+      return (Tile) top.getChildren().get(position);
+    }
+    else if (index < ROW_LENGTH * 2) {
+      return (Tile) right.getChildren().get(position);
+    }
+    else if (index < ROW_LENGTH * 3) {
+      return (Tile) bottom.getChildren().get(position);
+    } else {
+      return (Tile) left.getChildren().get(position);
+    }
+  }
 
   private void setPanesToRoot() {
     setTop(top);
