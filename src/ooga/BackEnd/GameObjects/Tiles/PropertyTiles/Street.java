@@ -13,6 +13,8 @@ public class Street extends Property {
     private int house_cost;
     private int houses;
 
+    public Street() {}
+
     public Street(int tileID, int boardIndex, int cost, String title_deed, int base_rent, int monopoly_rent, int rent_one_house, int rent_two_house, int rent_three_house, int rent_four_house, int rent_hotel, int house_cost, String group_color, int group_number) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;

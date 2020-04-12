@@ -4,6 +4,8 @@ public class RailRoad extends Property {
 
     private static final int RENT = 25;
 
+    public RailRoad() {}
+
     public RailRoad(int tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;

@@ -2,412 +2,378 @@
 <boardGame>Classic Monopoly Board XML
     <author>Rodrigo Araujo</author>
     <properties>
-        <streets>
-            <Mediterranean>
-                <tileID>001</tileID>
-                <boardIndex>1</boardIndex>
-                <title_deed>Mediterranean Avenue</title_deed>
-                <cost>60</cost>
-                <color>brown</color>
-                <group_number>2</group_number>
-                <base_rent>2</base_rent>
-                <monopoly_rent>4</monopoly_rent>
-                <rent_one_house>10</rent_one_house>
-                <rent_two_house>30</rent_two_house>
-                <rent_three_house>90</rent_three_house>
-                <rent_four_house>160</rent_four_house>
-                <rent_hotel>250</rent_hotel>
-                <house_cost>50</house_cost>
-            </Mediterranean>
-            <Baltic>
-                <tileID>002</tileID>
-                <boardIndex>3</boardIndex>
-                <title_deed>Baltic Avenue</title_deed>
-                <cost>60</cost>
-                <color>brown</color>
-                <group_number>2</group_number>
-                <base_rent>4</base_rent>
-                <monopoly_rent>8</monopoly_rent>
-                <rent_one_house>20</rent_one_house>
-                <rent_two_house>60</rent_two_house>
-                <rent_three_house>180</rent_three_house>
-                <rent_four_house>320</rent_four_house>
-                <rent_hotel>450</rent_hotel>
-                <house_cost>50</house_cost>
-            </Baltic>
-            <Oriental>
-                <tileID>004</tileID>
-                <boardIndex>6</boardIndex>
-                <title_deed>Oriental Avenue</title_deed>
-                <cost>100</cost>
-                <color>light_blue</color>
-                <group_number>3</group_number>
-                <base_rent>6</base_rent>
-                <monopoly_rent>12</monopoly_rent>
-                <rent_one_house>30</rent_one_house>
-                <rent_two_house>90</rent_two_house>
-                <rent_three_house>270</rent_three_house>
-                <rent_four_house>400</rent_four_house>
-                <rent_hotel>550</rent_hotel>
-                <house_cost>50</house_cost>
-            </Oriental>
-            <Vermont>
-                <tileID>005</tileID>
-                <boardIndex>8</boardIndex>
-                <title_deed>Vermont Avenue</title_deed>
-                <cost>100</cost>
-                <color>light_blue</color>
-                <group_number>3</group_number>
-                <base_rent>6</base_rent>
-                <monopoly_rent>12</monopoly_rent>
-                <rent_one_house>30</rent_one_house>
-                <rent_two_house>90</rent_two_house>
-                <rent_three_house>270</rent_three_house>
-                <rent_four_house>400</rent_four_house>
-                <rent_hotel>550</rent_hotel>
-                <house_cost>50</house_cost>
-            </Vermont>
-            <Connecticut>
-                <tileID>006</tileID>
-                <boardIndex>9</boardIndex>
-                <title_deed>Connecticut Avenue</title_deed>
-                <cost>120</cost>
-                <color>light_blue</color>
-                <group_number>3</group_number>
-                <base_rent>8</base_rent>
-                <monopoly_rent>16</monopoly_rent>
-                <rent_one_house>40</rent_one_house>
-                <rent_two_house>100</rent_two_house>
-                <rent_three_house>300</rent_three_house>
-                <rent_four_house>450</rent_four_house>
-                <rent_hotel>600</rent_hotel>
-                <house_cost>50</house_cost>
-            </Connecticut>
-            <St.Charles>
-                <tileID>007</tileID>
-                <boardIndex>11</boardIndex>
-                <title_deed>St. Charles Place</title_deed>
-                <cost>140</cost>
-                <color>pink</color>
-                <group_number>3</group_number>
-                <base_rent>10</base_rent>
-                <monopoly_rent>20</monopoly_rent>
-                <rent_one_house>50</rent_one_house>
-                <rent_two_house>150</rent_two_house>
-                <rent_three_house>450</rent_three_house>
-                <rent_four_house>625</rent_four_house>
-                <rent_hotel>750</rent_hotel>
-                <house_cost>100</house_cost>
-            </St.Charles>
-            <States>
-                <tileID>009</tileID>
-                <boardIndex>13</boardIndex>
-                <title_deed>States Avenue</title_deed>
-                <cost>140</cost>
-                <color>pink</color>
-                <group_number>3</group_number>
-                <base_rent>10</base_rent>
-                <monopoly_rent>20</monopoly_rent>
-                <rent_one_house>50</rent_one_house>
-                <rent_two_house>150</rent_two_house>
-                <rent_three_house>450</rent_three_house>
-                <rent_four_house>625</rent_four_house>
-                <rent_hotel>750</rent_hotel>
-                <house_cost>100</house_cost>
-            </States>
-            <Virginia>
-                <tileID>010</tileID>
-                <boardIndex>14</boardIndex>
-                <title_deed>Virginia Avenue</title_deed>
-                <cost>160</cost>
-                <color>pink</color>
-                <group_number>3</group_number>
-                <base_rent>12</base_rent>
-                <monopoly_rent>24</monopoly_rent>
-                <rent_one_house>60</rent_one_house>
-                <rent_two_house>180</rent_two_house>
-                <rent_three_house>500</rent_three_house>
-                <rent_four_house>700</rent_four_house>
-                <rent_hotel>900</rent_hotel>
-                <house_cost>100</house_cost>
-            </Virginia>
-            <St.James>
-                <tileID>012</tileID>
-                <boardIndex>16</boardIndex>
-                <title_deed>St. James Place</title_deed>
-                <cost>180</cost>
-                <color>orange</color>
-                <group_number>3</group_number>
-                <base_rent>14</base_rent>
-                <monopoly_rent>28</monopoly_rent>
-                <rent_one_house>70</rent_one_house>
-                <rent_two_house>200</rent_two_house>
-                <rent_three_house>550</rent_three_house>
-                <rent_four_house>750</rent_four_house>
-                <rent_hotel>950</rent_hotel>
-                <house_cost>100</house_cost>
-            </St.James>
-            <Tennessee>
-                <tileID>013</tileID>
-                <boardIndex>18</boardIndex>
-                <title_deed>Tennessee Avenue</title_deed>
-                <cost>180</cost>
-                <color>orange</color>
-                <group_number>3</group_number>
-                <base_rent>14</base_rent>
-                <monopoly_rent>28</monopoly_rent>
-                <rent_one_house>70</rent_one_house>
-                <rent_two_house>200</rent_two_house>
-                <rent_three_house>550</rent_three_house>
-                <rent_four_house>750</rent_four_house>
-                <rent_hotel>950</rent_hotel>
-                <house_cost>100</house_cost>
-            </Tennessee>
-            <New_York>
-                <tileID>014</tileID>
-                <boardIndex>19</boardIndex>
-                <title_deed>New York Avenue</title_deed>
-                <cost>200</cost>
-                <color>orange</color>
-                <group_number>3</group_number>
-                <base_rent>16</base_rent>
-                <monopoly_rent>32</monopoly_rent>
-                <rent_one_house>80</rent_one_house>
-                <rent_two_house>220</rent_two_house>
-                <rent_three_house>600</rent_three_house>
-                <rent_four_house>800</rent_four_house>
-                <rent_hotel>1000</rent_hotel>
-                <house_cost>100</house_cost>
-            </New_York>
-            <Kentucky>
-                <tileID>015</tileID>
-                <boardIndex>21</boardIndex>
-                <title_deed>Kentucky Avenue</title_deed>
-                <cost>220</cost>
-                <color>red</color>
-                <group_number>3</group_number>
-                <base_rent>18</base_rent>
-                <monopoly_rent>36</monopoly_rent>
-                <rent_one_house>90</rent_one_house>
-                <rent_two_house>250</rent_two_house>
-                <rent_three_house>700</rent_three_house>
-                <rent_four_house>875</rent_four_house>
-                <rent_hotel>1050</rent_hotel>
-                <house_cost>150</house_cost>
-            </Kentucky>
-            <Indiana>
-                <tileID>016</tileID>
-                <boardIndex>23</boardIndex>
-                <title_deed>Indiana Avenue</title_deed>
-                <cost>220</cost>
-                <color>red</color>
-                <group_number>3</group_number>
-                <base_rent>18</base_rent>
-                <monopoly_rent>36</monopoly_rent>
-                <rent_one_house>90</rent_one_house>
-                <rent_two_house>250</rent_two_house>
-                <rent_three_house>700</rent_three_house>
-                <rent_four_house>875</rent_four_house>
-                <rent_hotel>1050</rent_hotel>
-                <house_cost>150</house_cost>
-            </Indiana>
-            <Illinois>
-                <tileID>017</tileID>
-                <boardIndex>24</boardIndex>
-                <title_deed>Illinois Avenue</title_deed>
-                <cost>240</cost>
-                <color>red</color>
-                <group_number>3</group_number>
-                <base_rent>20</base_rent>
-                <monopoly_rent>40</monopoly_rent>
-                <rent_one_house>100</rent_one_house>
-                <rent_two_house>300</rent_two_house>
-                <rent_three_house>750</rent_three_house>
-                <rent_four_house>925</rent_four_house>
-                <rent_hotel>1100</rent_hotel>
-                <house_cost>150</house_cost>
-            </Illinois>
-            <Atlantic>
-                <tileID>019</tileID>
-                <boardIndex>26</boardIndex>
-                <title_deed>Atlantic Avenue</title_deed>
-                <cost>260</cost>
-                <color>yellow</color>
-                <group_number>3</group_number>
-                <base_rent>22</base_rent>
-                <monopoly_rent>44</monopoly_rent>
-                <rent_one_house>110</rent_one_house>
-                <rent_two_house>330</rent_two_house>
-                <rent_three_house>800</rent_three_house>
-                <rent_four_house>975</rent_four_house>
-                <rent_hotel>1150</rent_hotel>
-                <house_cost>150</house_cost>
-            </Atlantic>
-            <Ventnor>
-                <tileID>020</tileID>
-                <boardIndex>27</boardIndex>
-                <title_deed>Ventnor Avenue</title_deed>
-                <cost>260</cost>
-                <color>yellow</color>
-                <group_number>3</group_number>
-                <base_rent>22</base_rent>
-                <monopoly_rent>44</monopoly_rent>
-                <rent_one_house>110</rent_one_house>
-                <rent_two_house>330</rent_two_house>
-                <rent_three_house>800</rent_three_house>
-                <rent_four_house>975</rent_four_house>
-                <rent_hotel>1150</rent_hotel>
-                <house_cost>150</house_cost>
-            </Ventnor>
-            <Marvin>
-                <tileID>022</tileID>
-                <boardIndex>29</boardIndex>
-                <title_deed>Marvin Gardens</title_deed>
-                <cost>280</cost>
-                <color>yellow</color>
-                <group_number>3</group_number>
-                <base_rent>24</base_rent>
-                <monopoly_rent>48</monopoly_rent>
-                <rent_one_house>120</rent_one_house>
-                <rent_two_house>360</rent_two_house>
-                <rent_three_house>850</rent_three_house>
-                <rent_four_house>1025</rent_four_house>
-                <rent_hotel>1200</rent_hotel>
-                <house_cost>150</house_cost>
-            </Marvin>
-            <Pacific>
-                <tileID>023</tileID>
-                <boardIndex>31</boardIndex>
-                <title_deed>Pacific Avenue</title_deed>
-                <cost>300</cost>
-                <color>green</color>
-                <group_number>3</group_number>
-                <base_rent>26</base_rent>
-                <monopoly_rent>52</monopoly_rent>
-                <rent_one_house>130</rent_one_house>
-                <rent_two_house>390</rent_two_house>
-                <rent_three_house>900</rent_three_house>
-                <rent_four_house>1100</rent_four_house>
-                <rent_hotel>1275</rent_hotel>
-                <house_cost>200</house_cost>
-            </Pacific>
-            <North_Carolina>
-                <tileID>024</tileID>
-                <boardIndex>32</boardIndex>
-                <title_deed>North Carolina Avenue</title_deed>
-                <cost>300</cost>
-                <color>green</color>
-                <group_number>3</group_number>
-                <base_rent>26</base_rent>
-                <monopoly_rent>52</monopoly_rent>
-                <rent_one_house>130</rent_one_house>
-                <rent_two_house>390</rent_two_house>
-                <rent_three_house>900</rent_three_house>
-                <rent_four_house>1100</rent_four_house>
-                <rent_hotel>1275</rent_hotel>
-                <house_cost>200</house_cost>
-            </North_Carolina>
-            <Pennsylvania>
-                <tileID>025</tileID>
-                <boardIndex>34</boardIndex>
-                <title_deed>Pennsylvania Avenue</title_deed>
-                <cost>320</cost>
-                <color>green</color>
-                <group_number>3</group_number>
-                <base_rent>28</base_rent>
-                <monopoly_rent>56</monopoly_rent>
-                <rent_one_house>150</rent_one_house>
-                <rent_two_house>450</rent_two_house>
-                <rent_three_house>1000</rent_three_house>
-                <rent_four_house>1200</rent_four_house>
-                <rent_hotel>1400</rent_hotel>
-                <house_cost>200</house_cost>
-            </Pennsylvania>
-            <Park>
-                <tileID>027</tileID>
-                <boardIndex>37</boardIndex>
-                <title_deed>Park Place</title_deed>
-                <cost>350</cost>
-                <color>blue</color>
-                <group_number>2</group_number>
-                <base_rent>35</base_rent>
-                <monopoly_rent>70</monopoly_rent>
-                <rent_one_house>175</rent_one_house>
-                <rent_two_house>500</rent_two_house>
-                <rent_three_house>1100</rent_three_house>
-                <rent_four_house>1300</rent_four_house>
-                <rent_hotel>1500</rent_hotel>
-                <house_cost>200</house_cost>
-            </Park>
-            <Boardwalk>
-                <tileID>028</tileID>
-                <boardIndex>39</boardIndex>
-                <title_deed>Boardwalk</title_deed>
-                <cost>400</cost>
-                <color>blue</color>
-                <group_number>2</group_number>
-                <base_rent>50</base_rent>
-                <monopoly_rent>100</monopoly_rent>
-                <rent_one_house>200</rent_one_house>
-                <rent_two_house>600</rent_two_house>
-                <rent_three_house>1400</rent_three_house>
-                <rent_four_house>1700</rent_four_house>
-                <rent_hotel>2000</rent_hotel>
-                <house_cost>200</house_cost>
-            </Boardwalk>
-        </streets>
-        <railroads>
-            <Reading>
-                <tileID>003</tileID>
-                <boardIndex>5</boardIndex>
-                <title_deed>Reading Railroad</title_deed>
-                <cost>200</cost>
-                <color>rr</color>
-                <group_number>4</group_number>
-            </Reading>
-            <Pennsylvania>
-                <tileID>011</tileID>
-                <boardIndex>15</boardIndex>
-                <title_deed>Pennsylvania Railroad</title_deed>
-                <cost>200</cost>
-                <color>rr</color>
-                <group_number>4</group_number>
-            </Pennsylvania>
-            <B.O>
-                <tileID>018</tileID>
-                <boardIndex>25</boardIndex>
-                <title_deed>B. &#38; O. Railroad</title_deed>
-                <cost>200</cost>
-                <color>rr</color>
-                <group_number>4</group_number>
-            </B.O>
-            <Short>
-                <tileID>026</tileID>
-                <boardIndex>35</boardIndex>
-                <title_deed>Short Line</title_deed>
-                <cost>200</cost>
-                <color>rr</color>
-                <group_number>4</group_number>
-            </Short>
-        </railroads>
-        <utilities>
-            <electric>
-                <tileID>008</tileID>
-                <boardIndex>12</boardIndex>
-                <title_deed>Electric Company</title_deed>
-                <cost>150</cost>
-                <color>util</color>
-                <group_number>2</group_number>
-            </electric>
-            <water>
-                <tileID>021</tileID>
-                <boardIndex>28</boardIndex>
-                <title_deed>Water Works</title_deed>
-                <cost>150</cost>
-                <color>util</color>
-                <group_number>2</group_number>
-            </water>
-        </utilities>
+        <street ID="1">
+            <boardIndex>1</boardIndex>
+            <title_deed>Mediterranean Avenue</title_deed>
+            <cost>60</cost>
+            <color>brown</color>
+            <group_number>2</group_number>
+            <base_rent>2</base_rent>
+            <monopoly_rent>4</monopoly_rent>
+            <rent_one_house>10</rent_one_house>
+            <rent_two_house>30</rent_two_house>
+            <rent_three_house>90</rent_three_house>
+            <rent_four_house>160</rent_four_house>
+            <rent_hotel>250</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="2">
+            <boardIndex>3</boardIndex>
+            <title_deed>Baltic Avenue</title_deed>
+            <cost>60</cost>
+            <color>brown</color>
+            <group_number>2</group_number>
+            <base_rent>4</base_rent>
+            <monopoly_rent>8</monopoly_rent>
+            <rent_one_house>20</rent_one_house>
+            <rent_two_house>60</rent_two_house>
+            <rent_three_house>180</rent_three_house>
+            <rent_four_house>320</rent_four_house>
+            <rent_hotel>450</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="4">
+            <boardIndex>6</boardIndex>
+            <title_deed>Oriental Avenue</title_deed>
+            <cost>100</cost>
+            <color>light_blue</color>
+            <group_number>3</group_number>
+            <base_rent>6</base_rent>
+            <monopoly_rent>12</monopoly_rent>
+            <rent_one_house>30</rent_one_house>
+            <rent_two_house>90</rent_two_house>
+            <rent_three_house>270</rent_three_house>
+            <rent_four_house>400</rent_four_house>
+            <rent_hotel>550</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="5">
+            <boardIndex>8</boardIndex>
+            <title_deed>Vermont Avenue</title_deed>
+            <cost>100</cost>
+            <color>light_blue</color>
+            <group_number>3</group_number>
+            <base_rent>6</base_rent>
+            <monopoly_rent>12</monopoly_rent>
+            <rent_one_house>30</rent_one_house>
+            <rent_two_house>90</rent_two_house>
+            <rent_three_house>270</rent_three_house>
+            <rent_four_house>400</rent_four_house>
+            <rent_hotel>550</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="6">
+            <boardIndex>9</boardIndex>
+            <title_deed>Connecticut Avenue</title_deed>
+            <cost>120</cost>
+            <color>light_blue</color>
+            <group_number>3</group_number>
+            <base_rent>8</base_rent>
+            <monopoly_rent>16</monopoly_rent>
+            <rent_one_house>40</rent_one_house>
+            <rent_two_house>100</rent_two_house>
+            <rent_three_house>300</rent_three_house>
+            <rent_four_house>450</rent_four_house>
+            <rent_hotel>600</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="7">
+            <boardIndex>11</boardIndex>
+            <title_deed>St. Charles Place</title_deed>
+            <cost>140</cost>
+            <color>pink</color>
+            <group_number>3</group_number>
+            <base_rent>10</base_rent>
+            <monopoly_rent>20</monopoly_rent>
+            <rent_one_house>50</rent_one_house>
+            <rent_two_house>150</rent_two_house>
+            <rent_three_house>450</rent_three_house>
+            <rent_four_house>625</rent_four_house>
+            <rent_hotel>750</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="9">
+            <boardIndex>13</boardIndex>
+            <title_deed>States Avenue</title_deed>
+            <cost>140</cost>
+            <color>pink</color>
+            <group_number>3</group_number>
+            <base_rent>10</base_rent>
+            <monopoly_rent>20</monopoly_rent>
+            <rent_one_house>50</rent_one_house>
+            <rent_two_house>150</rent_two_house>
+            <rent_three_house>450</rent_three_house>
+            <rent_four_house>625</rent_four_house>
+            <rent_hotel>750</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="10">
+            <boardIndex>14</boardIndex>
+            <title_deed>Virginia Avenue</title_deed>
+            <cost>160</cost>
+            <color>pink</color>
+            <group_number>3</group_number>
+            <base_rent>12</base_rent>
+            <monopoly_rent>24</monopoly_rent>
+            <rent_one_house>60</rent_one_house>
+            <rent_two_house>180</rent_two_house>
+            <rent_three_house>500</rent_three_house>
+            <rent_four_house>700</rent_four_house>
+            <rent_hotel>900</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="12">
+            <boardIndex>16</boardIndex>
+            <title_deed>St. James Place</title_deed>
+            <cost>180</cost>
+            <color>orange</color>
+            <group_number>3</group_number>
+            <base_rent>14</base_rent>
+            <monopoly_rent>28</monopoly_rent>
+            <rent_one_house>70</rent_one_house>
+            <rent_two_house>200</rent_two_house>
+            <rent_three_house>550</rent_three_house>
+            <rent_four_house>750</rent_four_house>
+            <rent_hotel>950</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="13">
+            <boardIndex>18</boardIndex>
+            <title_deed>Tennessee Avenue</title_deed>
+            <cost>180</cost>
+            <color>orange</color>
+            <group_number>3</group_number>
+            <base_rent>14</base_rent>
+            <monopoly_rent>28</monopoly_rent>
+            <rent_one_house>70</rent_one_house>
+            <rent_two_house>200</rent_two_house>
+            <rent_three_house>550</rent_three_house>
+            <rent_four_house>750</rent_four_house>
+            <rent_hotel>950</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="14">
+            <boardIndex>19</boardIndex>
+            <title_deed>New York Avenue</title_deed>
+            <cost>200</cost>
+            <color>orange</color>
+            <group_number>3</group_number>
+            <base_rent>16</base_rent>
+            <monopoly_rent>32</monopoly_rent>
+            <rent_one_house>80</rent_one_house>
+            <rent_two_house>220</rent_two_house>
+            <rent_three_house>600</rent_three_house>
+            <rent_four_house>800</rent_four_house>
+            <rent_hotel>1000</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="15">
+            <boardIndex>21</boardIndex>
+            <title_deed>Kentucky Avenue</title_deed>
+            <cost>220</cost>
+            <color>red</color>
+            <group_number>3</group_number>
+            <base_rent>18</base_rent>
+            <monopoly_rent>36</monopoly_rent>
+            <rent_one_house>90</rent_one_house>
+            <rent_two_house>250</rent_two_house>
+            <rent_three_house>700</rent_three_house>
+            <rent_four_house>875</rent_four_house>
+            <rent_hotel>1050</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="16">
+            <boardIndex>23</boardIndex>
+            <title_deed>Indiana Avenue</title_deed>
+            <cost>220</cost>
+            <color>red</color>
+            <group_number>3</group_number>
+            <base_rent>18</base_rent>
+            <monopoly_rent>36</monopoly_rent>
+            <rent_one_house>90</rent_one_house>
+            <rent_two_house>250</rent_two_house>
+            <rent_three_house>700</rent_three_house>
+            <rent_four_house>875</rent_four_house>
+            <rent_hotel>1050</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="17">
+            <boardIndex>24</boardIndex>
+            <title_deed>Illinois Avenue</title_deed>
+            <cost>240</cost>
+            <color>red</color>
+            <group_number>3</group_number>
+            <base_rent>20</base_rent>
+            <monopoly_rent>40</monopoly_rent>
+            <rent_one_house>100</rent_one_house>
+            <rent_two_house>300</rent_two_house>
+            <rent_three_house>750</rent_three_house>
+            <rent_four_house>925</rent_four_house>
+            <rent_hotel>1100</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="19">
+            <boardIndex>26</boardIndex>
+            <title_deed>Atlantic Avenue</title_deed>
+            <cost>260</cost>
+            <color>yellow</color>
+            <group_number>3</group_number>
+            <base_rent>22</base_rent>
+            <monopoly_rent>44</monopoly_rent>
+            <rent_one_house>110</rent_one_house>
+            <rent_two_house>330</rent_two_house>
+            <rent_three_house>800</rent_three_house>
+            <rent_four_house>975</rent_four_house>
+            <rent_hotel>1150</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="20">
+            <boardIndex>27</boardIndex>
+            <title_deed>Ventnor Avenue</title_deed>
+            <cost>260</cost>
+            <color>yellow</color>
+            <group_number>3</group_number>
+            <base_rent>22</base_rent>
+            <monopoly_rent>44</monopoly_rent>
+            <rent_one_house>110</rent_one_house>
+            <rent_two_house>330</rent_two_house>
+            <rent_three_house>800</rent_three_house>
+            <rent_four_house>975</rent_four_house>
+            <rent_hotel>1150</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="22">
+            <boardIndex>29</boardIndex>
+            <title_deed>Marvin Gardens</title_deed>
+            <cost>280</cost>
+            <color>yellow</color>
+            <group_number>3</group_number>
+            <base_rent>24</base_rent>
+            <monopoly_rent>48</monopoly_rent>
+            <rent_one_house>120</rent_one_house>
+            <rent_two_house>360</rent_two_house>
+            <rent_three_house>850</rent_three_house>
+            <rent_four_house>1025</rent_four_house>
+            <rent_hotel>1200</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="23">
+            <boardIndex>31</boardIndex>
+            <title_deed>Pacific Avenue</title_deed>
+            <cost>300</cost>
+            <color>green</color>
+            <group_number>3</group_number>
+            <base_rent>26</base_rent>
+            <monopoly_rent>52</monopoly_rent>
+            <rent_one_house>130</rent_one_house>
+            <rent_two_house>390</rent_two_house>
+            <rent_three_house>900</rent_three_house>
+            <rent_four_house>1100</rent_four_house>
+            <rent_hotel>1275</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="24">
+            <boardIndex>32</boardIndex>
+            <title_deed>North Carolina Avenue</title_deed>
+            <cost>300</cost>
+            <color>green</color>
+            <group_number>3</group_number>
+            <base_rent>26</base_rent>
+            <monopoly_rent>52</monopoly_rent>
+            <rent_one_house>130</rent_one_house>
+            <rent_two_house>390</rent_two_house>
+            <rent_three_house>900</rent_three_house>
+            <rent_four_house>1100</rent_four_house>
+            <rent_hotel>1275</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="25">
+            <boardIndex>34</boardIndex>
+            <title_deed>Pennsylvania Avenue</title_deed>
+            <cost>320</cost>
+            <color>green</color>
+            <group_number>3</group_number>
+            <base_rent>28</base_rent>
+            <monopoly_rent>56</monopoly_rent>
+            <rent_one_house>150</rent_one_house>
+            <rent_two_house>450</rent_two_house>
+            <rent_three_house>1000</rent_three_house>
+            <rent_four_house>1200</rent_four_house>
+            <rent_hotel>1400</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="27">
+            <boardIndex>37</boardIndex>
+            <title_deed>Park Place</title_deed>
+            <cost>350</cost>
+            <color>blue</color>
+            <group_number>2</group_number>
+            <base_rent>35</base_rent>
+            <monopoly_rent>70</monopoly_rent>
+            <rent_one_house>175</rent_one_house>
+            <rent_two_house>500</rent_two_house>
+            <rent_three_house>1100</rent_three_house>
+            <rent_four_house>1300</rent_four_house>
+            <rent_hotel>1500</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="28">
+            <boardIndex>39</boardIndex>
+            <title_deed>Boardwalk</title_deed>
+            <cost>400</cost>
+            <color>blue</color>
+            <group_number>2</group_number>
+            <base_rent>50</base_rent>
+            <monopoly_rent>100</monopoly_rent>
+            <rent_one_house>200</rent_one_house>
+            <rent_two_house>600</rent_two_house>
+            <rent_three_house>1400</rent_three_house>
+            <rent_four_house>1700</rent_four_house>
+            <rent_hotel>2000</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <railroad ID="3">
+            <boardIndex>5</boardIndex>
+            <title_deed>Reading Railroad</title_deed>
+            <cost>200</cost>
+            <color>rr</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="11">
+            <boardIndex>15</boardIndex>
+            <title_deed>Pennsylvania Railroad</title_deed>
+            <cost>200</cost>
+            <color>rr</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="18">
+            <boardIndex>25</boardIndex>
+            <title_deed>B. &#38; O. Railroad</title_deed>
+            <cost>200</cost>
+            <color>rr</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="26">
+            <boardIndex>35</boardIndex>
+            <title_deed>Short Line</title_deed>
+            <cost>200</cost>
+            <color>rr</color>
+            <group_number>4</group_number>
+        </railroad>
+        <utility ID="8">
+            <boardIndex>12</boardIndex>
+            <title_deed>Electric Company</title_deed>
+            <cost>150</cost>
+            <color>util</color>
+            <group_number>2</group_number>
+        </utility>
+        <utility ID="21">
+            <boardIndex>28</boardIndex>
+            <title_deed>Water Works</title_deed>
+            <cost>150</cost>
+            <color>util</color>
+            <group_number>2</group_number>
+        </utility>
     </properties>
     <eventTiles>
         <Go>

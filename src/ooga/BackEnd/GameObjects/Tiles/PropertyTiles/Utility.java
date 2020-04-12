@@ -2,6 +2,8 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
 public class Utility extends Property {
 
+    public Utility() {}
+
     public Utility(int tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
