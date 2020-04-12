@@ -4,7 +4,7 @@ public class Utility extends Property {
 
     public Utility() {}
 
-    public Utility(int tileID, int boardIndex) {
+    public Utility(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.owner = null;

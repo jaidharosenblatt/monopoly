@@ -6,6 +6,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import java.util.Scanner;
 
 public abstract class Property extends Tile {
+    protected String title_deed;
     protected Player owner;
     protected int cost;
     protected String group_color;
@@ -36,7 +37,9 @@ public abstract class Property extends Tile {
 
     public abstract int getRent();
 
-    public int getPropID() {return tileID;}
+    public void setTitle(String title) {this.title_deed = title;}
+
+    public String getPropID() {return tileID;}
 
     public boolean isOwned() {return (owner == null) ? false : true;}
 
@@ -66,5 +69,11 @@ public abstract class Property extends Tile {
     public void liftMortgage() {
         this.mortgaged = false;
         this.owner.payBank((int) (this.cost * 1.1));
+    }
+
+    @Override
+    public String toString() {
+        return "<" + tileID + ", " + title_deed + ", " + cost + ", " + group_color + ", "
+                + group_number + ">";
     }
 }

@@ -6,7 +6,7 @@ public class RailRoad extends Property {
 
     public RailRoad() {}
 
-    public RailRoad(int tileID, int boardIndex) {
+    public RailRoad(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.owner = null;

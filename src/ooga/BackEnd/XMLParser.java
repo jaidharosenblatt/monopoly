@@ -18,9 +18,11 @@ import javax.xml.stream.XMLStreamReader;
 
 public class XMLParser {
 
-    public void propertyParser(String pathname) throws FileNotFoundException, XMLStreamException {
+    public XMLParser() {}
+
+    public void streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
         ArrayList<Property> properties = null;
-        Property prop = null;
+        Street s = null;
         String text = null;
 
         XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -31,21 +33,12 @@ public class XMLParser {
 
             switch (Event) {
                 case XMLStreamConstants.START_ELEMENT: {
-                    if ("streets".equals(reader.getLocalName())) {
-                        prop = new Street();
-//                        prop.setID(reader.getAttributeValue(0));
-                    }
-                    if ("railroads".equals(reader.getLocalName())) {
-                        prop = new RailRoad();
-//                        prop.setID(reader.getAttributeValue(0));
-                    }
-                    if ("utilities".equals(reader.getLocalName())) {
-                        prop = new Utility();
-//                        prop.setID(reader.getAttributeValue(0));
+                    if ("street".equals(reader.getLocalName())) {
+                        s = new Street();
+                        s.setTileID(reader.getAttributeValue(0));
                     }
                     if ("properties".equals(reader.getLocalName()))
                         properties = new ArrayList<>();
-
                     break;
                 }
                 case XMLStreamConstants.CHARACTERS: {
@@ -54,25 +47,53 @@ public class XMLParser {
                 }
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
-                        case "Employee": {
-                            employees.add(empl);
+                        case "street": {
+                            properties.add(s);
                             break;
                         }
-                        case "Firstname": {
-                            empl.setFirstname(text);
+                        case "boardIndex": {
+                            s.setBoardIndex(Integer.parseInt(text));
                             break;
                         }
-                        case "Lastname": {
-                            empl.setLastname(text);
+                        case "title_deed": {
+                            s.setTitle(text);
                             break;
                         }
-                        case "Age": {
-                            empl.setAge(Integer.parseInt(text));
+                        case "cost": {
+                            s.setCost(Integer.parseInt(text));
                             break;
                         }
-                        case "Salary": {
-                            empl.setSalary(Double.parseDouble(text));
+                        case "color": {
+                            s.setGroupColor(text);
                             break;
+                        }
+                        case "group_number": {
+                            s.setGroupNumber(Integer.parseInt(text));
+                            break;
+                        }
+                        case "base_rent": {
+                            s.setBaseRent(Integer.parseInt(text));
+                        }
+                        case "monopoly_rent": {
+                            s.setMonopolyRent(Integer.parseInt(text));
+                        }
+                        case "rent_one_house": {
+                            s.setRent1H(Integer.parseInt(text));
+                        }
+                        case "rent_two_house": {
+                            s.setRent2H(Integer.parseInt(text));
+                        }
+                        case "rent_three_house": {
+                            s.setRent3H(Integer.parseInt(text));
+                        }
+                        case "rent_four_house": {
+                            s.setRent4H(Integer.parseInt(text));
+                        }
+                        case "rent_hotel": {
+                            s.setRentHotel(Integer.parseInt(text));
+                        }
+                        case "house_cost": {
+                            s.setHouseCost(Integer.parseInt(text));
                         }
                     }
                     break;
@@ -80,8 +101,8 @@ public class XMLParser {
             }
         }
 
-        // Print all employees.
-        for (Employee employee : employees)
-            System.out.println(employee.toString());
+        for (Property p : properties) {
+            System.out.println(p.toString());
+        }
     }
 }

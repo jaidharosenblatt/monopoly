@@ -2,7 +2,6 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
 public class Street extends Property {
 
-    private String title_deed;
     private int base_rent;
     private int monopoly_rent;
     private int rent_one_house;
@@ -15,7 +14,7 @@ public class Street extends Property {
 
     public Street() {}
 
-    public Street(int tileID, int boardIndex, int cost, String title_deed, int base_rent, int monopoly_rent, int rent_one_house, int rent_two_house, int rent_three_house, int rent_four_house, int rent_hotel, int house_cost, String group_color, int group_number) {
+    public Street(String tileID, int boardIndex, int cost, String title_deed, int base_rent, int monopoly_rent, int rent_one_house, int rent_two_house, int rent_three_house, int rent_four_house, int rent_hotel, int house_cost, String group_color, int group_number) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.cost = cost;
@@ -34,8 +33,6 @@ public class Street extends Property {
         this.houses = 0;
         this.mortgaged = false;
     }
-
-    public void setTitle(String title) {this.title_deed = title;}
 
     public void setBaseRent(int rent) {this.base_rent = rent;}
 

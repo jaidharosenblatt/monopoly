@@ -4,7 +4,7 @@ import ooga.BackEnd.GameObjects.Player;
 
 public abstract class Tile {
     protected int boardIndex;
-    protected int tileID;
+    protected String tileID;
     protected Player visiting;
 
     public abstract void action();
@@ -15,5 +15,5 @@ public abstract class Tile {
 
     public void setBoardIndex(int boardIndex) {this.boardIndex = boardIndex;}
 
-    public void setTileID(int tileID) {this.tileID = tileID;}
+    public void setTileID(String tileID) {this.tileID = tileID;}
 }
