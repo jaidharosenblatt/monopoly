@@ -42,6 +42,8 @@ public abstract class Property extends Tile {
 
     public void setOwner(Player P) {this.owner = P;}
 
+    public Player getOwner() {return this.owner;}
+
     public int getCost() {return this.cost;}
 
     public String getGroupColor() {return this.group_color;}
