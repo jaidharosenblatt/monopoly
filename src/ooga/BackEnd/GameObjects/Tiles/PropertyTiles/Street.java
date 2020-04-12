@@ -2,6 +2,7 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
 public class Street extends Property {
 
+    private String title_deed;
     private int base_rent;
     private int monopoly_rent;
     private int rent_one_house;
@@ -17,6 +18,7 @@ public class Street extends Property {
         this.boardIndex = 0;
         this.owner = null;
         this.cost = 0;
+        this.title_deed = null;
         this.base_rent = 0;
         this.monopoly_rent = 0;
         this.rent_one_house = 0;
