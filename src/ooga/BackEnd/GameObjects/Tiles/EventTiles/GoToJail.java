@@ -4,9 +4,9 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 public class GoToJail extends Tile {
 
-    public GoToJail(int tileID) {
+    public GoToJail(int tileID, int boardIndex) {
         this.tileID = tileID;
-        this.boardIndex = 0;
+        this.boardIndex = boardIndex;
         this.visiting = null;
     }
 
