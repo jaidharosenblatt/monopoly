@@ -17,6 +17,11 @@ public class Board extends BorderPane {
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
   private List<Tile> tiles = new ArrayList<>();
   private List<PlayerInfo> players = new ArrayList<>();
+  private HBox top = new HBox();
+  private VBox right = new VBox();
+  private HBox bottom = new HBox();
+  private VBox left = new VBox();
+
 
   public Board() {
     for (int i = 0; i < 4; i++) {
@@ -25,6 +30,16 @@ public class Board extends BorderPane {
 
     createBoard();
     createGrid();
+
+    setPanesToRoot();
+
+    createCenter();
+  }
+
+  private void createCenter() {
+    Button button = new Button("Take turn");
+    button.setOnAction(e -> movePlayer(players.get(0), 3));
+    setCenter(button);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {
@@ -36,10 +51,6 @@ public class Board extends BorderPane {
   }
 
   private void createGrid() {
-    HBox top = new HBox();
-    VBox right = new VBox();
-    HBox bottom = new HBox();
-    VBox left = new VBox();
 
     List<Tile> topList = tiles.subList(0, ROW_LENGTH);
     for (int i = 1; i < topList.size(); i++) {
@@ -66,14 +77,6 @@ public class Board extends BorderPane {
     for (int i = 0; i < leftList.size(); i++) {
       left.getChildren().add(leftList.get(i).getVerticalNode());
     }
-
-    Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(players.get(0), 3));
-//    add(button, 5, 5);
-    setTop(top);
-    setRight(right);
-    setBottom(bottom);
-    setLeft(left);
   }
 
 
@@ -87,11 +90,19 @@ public class Board extends BorderPane {
         property.setSize(60, 70);
         tiles.add(property);
       } else {
-        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET, 60, 70);
+        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET,
+            60, 70);
         property.setSize(60, 70);
         tiles.add(property);
       }
     }
+  }
+
+  private void setPanesToRoot() {
+    setTop(top);
+    setRight(right);
+    setBottom(bottom);
+    setLeft(left);
   }
 
 }
