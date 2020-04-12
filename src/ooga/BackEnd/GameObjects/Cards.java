@@ -1,8 +1,11 @@
 package ooga.BackEnd.GameObjects;
 
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Cards {
 
@@ -10,17 +13,25 @@ public class Cards {
     private static final int GO_INDEX = 0;
     private static final int ILLINOIS_INDEX = 24;
     private static final int ST_CHARLES_INDEX = 11;
+    private static final int BOARDWALK_INDEX = 39;
+    private static final int WATER_INDEX = 28;
+    private static final int ELECTRIC_INDEX = 12;
+    private static final int READING_RR_INDEX = 5;
+    private static final int BO_RR_INDEX = 25;
+    private static final int SHORT_RR_INDEX = 35;
 
     private static final int CROSS_GO = 200;
 
     private Player user;
     private String type;
     private ArrayList<Property> properties = new ArrayList<Property>();
+    private ArrayList<Player> players = new ArrayList<Player>();
 
-    public Cards(String type, Player user, ArrayList<Property> properties) {
+    public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players) {
         this.type = type;
         this.user = user;
         this.properties = properties;
+        this.players = players;
     }
 
     public void action() {
@@ -59,61 +70,93 @@ public class Cards {
                 case 4:
                     System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. " +
                                        "If owned, throw dice and pay owner a total 10 times the amount thrown.");
-
+                    if (user.getTile() > 20) {
+                        payUtil10(WATER_INDEX);
+                    }
+                    else {
+                        payUtil10(ELECTRIC_INDEX);
+                    }
                     break;
                 case 5:
-                    System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which " +
-                                       "he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
-
-                    break;
                 case 6:
                     System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which " +
-                            "he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
-
+                                       "he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
+                    if (user.getTile() < 10) {
+                        payRR2(READING_RR_INDEX);
+                    }
+                    else if (user.getTile() < 30) {
+                        payRR2(BO_RR_INDEX);
+                    }
+                    else {
+                        payRR2(SHORT_RR_INDEX);
+                    }
                     break;
                 case 7:
                     System.out.println("Bank pays you dividend of $50.");
-
+                    user.receive(50);
                     break;
                 case 8:
                     System.out.println("Get out of Jail Free. This card may be kept until needed, or traded/sold.");
-
+                    user.getJailFreeCard();
                     break;
                 case 9:
                     System.out.println("Go Back Three Spaces.");
-
+                    int newTile = this.user.getTile() - 3;
+                    this.user.moveTo(newTile);
+                    for (Property p : properties) {
+                        if (p.getBoardIndex() == newTile) {
+                            p.action();
+                        }
+                    }
                     break;
                 case 10:
                     System.out.println("Go to Jail. Go directly to Jail. Do not pass GO, do not collect $200.");
-
+                    user.setJailed();
                     break;
                 case 11:
                     System.out.println("Make general repairs on all your property: For each house pay $25, For each hotel $100.");
-
+                    user.payBank(user.getHouses() * 25);
                     break;
                 case 12:
                     System.out.println("Pay poor tax of $15");
-
+                    user.payBank(15);
                     break;
                 case 13:
                     System.out.println("Take a trip to Reading Railroad. If you pass Go, collect $200.");
-
+                    if (user.getTile() > READING_RR_INDEX) {
+                        user.receive(CROSS_GO);
+                    }
+                    user.moveTo(READING_RR_INDEX);
+                    for (Property p : properties) {
+                        if (p.getBoardIndex() == READING_RR_INDEX) {
+                            p.action();
+                        }
+                    }
                     break;
                 case 14:
                     System.out.println("Take a walk on the Boardwalk. Advance token to Boardwalk.");
-
+                    user.moveTo(BOARDWALK_INDEX);
+                    for (Property p : properties) {
+                        if (p.getBoardIndex() == BOARDWALK_INDEX) {
+                            p.action();
+                        }
+                    }
                     break;
                 case 15:
                     System.out.println("You have been elected Chairman of the Board. Pay each player $50.");
-
+                    for (Player p : players) {
+                        if (user != p) {
+                            user.payPlayer(p, 50);
+                        }
+                    }
                     break;
                 case 16:
                     System.out.println("Your building loan matures. Receive $150.");
-
+                    user.receive(150);
                     break;
                 case 17:
                     System.out.println("You have won a crossword competition. Collect $100.");
-
+                    user.receive(100);
                     break;
             }
         }
@@ -157,4 +200,44 @@ public class Cards {
             }
         }
     }
+
+    private void payUtil10(int utilTile) {
+        this.user.moveTo(utilTile);
+        for (Property p : this.properties) {
+            if (p.getBoardIndex() == utilTile) {
+                if (!p.isOwned()) {
+                    try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end decision instead
+                        System.out.print("Would you like to buy this? [Y or N]: ");
+                        String input = scanner.nextLine();
+                        if (input.equals("Y")) {
+                            if (this.user.getBalance() >= p.getCost()) {
+                                p.setOwner(this.user);
+                                this.user.buyProperty(p);
+                            }
+                        }
+                    }
+                }
+                else if (this.user != p.getOwner() && !p.isMortgaged()) {
+                    this.user.rollDice();
+                    this.user.payPlayer(p.getOwner(), (this.user.dice1 + this.user.dice2) * 10);
+                }
+                else {
+                    System.out.println("just visiting, pay nothing");
+                }
+            }
+        }
+    }
+
+    private void payRR2(int rrTile) {
+        this.user.moveTo(rrTile);
+        for (Property p : properties) {
+            if (p.getBoardIndex() == rrTile) {
+                p.action();
+                if (p.getOwner() != this.user && p.isOwned()) {
+                    this.user.payPlayer(p.getOwner(), p.getRent());
+                }
+            }
+        }
+    }
+
 }
