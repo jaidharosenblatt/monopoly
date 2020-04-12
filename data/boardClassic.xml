@@ -459,12 +459,4 @@
             <boardIndex>36</boardIndex>
         </Chance3>
     </eventTiles>
-    <cards>
-        <chance>
-
-        </chance>
-        <community>
-
-        </community>
-    </cards>
 </boardGame>
