@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Jail extends Tile {
 
-    public Jail(int tileID) {
+    public Jail(int tileID, int boardIndex) {
         this.tileID = tileID;
-        this.boardIndex = 0;
+        this.boardIndex = boardIndex;
         this.visiting = null;
     }
 

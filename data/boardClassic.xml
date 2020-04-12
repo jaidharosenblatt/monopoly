@@ -421,10 +421,12 @@
         <Income_Tax>
             <tileID>030</tileID>
             <boardIndex>4</boardIndex>
+            <tax_cost>200</tax_cost>
         </Income_Tax>
         <Luxury_Tax>
             <tileID>031</tileID>
             <boardIndex>38</boardIndex>
+            <tax_cost>75</tax_cost>
         </Luxury_Tax>
         <Free_Parking>
             <tileID>032</tileID>
