@@ -30,7 +30,7 @@ public class PropertyVertical extends Tile {
 
 
   public PropertyVertical(String name, double price, Color backgroundColor, Color categoryColor) {
-    this.setPrefSize(60,60);
+    this.setPrefSize(10,30);
 
     this.backgroundColor = backgroundColor;
     this.categoryColor = categoryColor;
@@ -46,7 +46,7 @@ public class PropertyVertical extends Tile {
     HBox box = new HBox();
     box.setAlignment(Pos.CENTER);
     box.getChildren()
-        .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getPrefWidth(), categoryColor));
+        .addAll(createRotatedText(name, 90), new Rectangle(BAR_HEIGHT, getPrefHeight(), categoryColor));
     setRight(box);
 
     Text priceText = new Text("M" + price);
@@ -58,7 +58,7 @@ public class PropertyVertical extends Tile {
   private Text createRotatedText(String s, double rotate) {
     Text text = new Text(s);
     text.setRotate(rotate);
-    text.setWrappingWidth(getPrefWidth());
+    text.setWrappingWidth(getPrefHeight());
 
     return text;
   }

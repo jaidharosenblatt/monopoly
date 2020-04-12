@@ -9,10 +9,7 @@ import javafx.scene.text.Text;
 public class UtilityTileVertical extends Tile {
 
 
-  public UtilityTileVertical(String name, double price, Color backgroundColor, String filename,
-      double width, double height) {
-    setPrefSize(width, height);
-
+  public UtilityTileVertical(String name, double price, Color backgroundColor, String filename) {
     ImageView image = new ImageView(getImageByName(filename));
     image.setFitHeight(30);
     image.setFitWidth(30);

@@ -58,7 +58,7 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 3; i > ROW_LENGTH * 2; i--) {
-      Tile tile = new PropertyHorizontal("property", i, Color.GREY, Color.BLUEVIOLET);
+      Tile tile = new UtilityTileHorizontal("rd", i, Color.GREY, "rcd.jpg");
       bottom.getChildren().add(tile);
     }
 

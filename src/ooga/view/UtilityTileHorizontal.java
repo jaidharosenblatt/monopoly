@@ -8,9 +8,8 @@ import javafx.scene.text.Text;
 
 public class UtilityTileHorizontal extends Tile {
 
-  public UtilityTileHorizontal(String name, double price, Color backgroundColor, String filename,
-      double width, double height) {
-    setPrefSize(width, height);
+  public UtilityTileHorizontal(String name, double price, Color backgroundColor, String filename) {
+    setPrefSize(60, 60);
     setBackgroundColor(this, backgroundColor);
 
     ImageView image = new ImageView(getImageByName(filename));
