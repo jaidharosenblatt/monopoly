@@ -21,6 +21,7 @@ public class Player {
     private List<Property> properties = new ArrayList<Property>();
 
     private boolean isJailed = false;
+    private int turnsinJail = 0;
     private int getOutCards = 0;
 
     public int dice1;
@@ -45,7 +46,16 @@ public class Player {
 
     public void getJailFreeCard() {this.getOutCards += 1;}
 
-    public void setFree() {this.isJailed = false;}
+    public boolean getJailStatus() {return this.isJailed;}
+
+    public void addJailTurn() {this.turnsinJail += 1;}
+
+    public int getJailTurn() {return this.turnsinJail;}
+
+    public void setFree() {
+        this.isJailed = false;
+        this.turnsinJail = 0;
+    }
 
     public void setJailed() {
         this.isJailed = true;
@@ -55,6 +65,7 @@ public class Player {
     public void useJailFreeCard() {
         if (hasJailFreeCards()) {
             this.getOutCards -= 1;
+            this.setFree();
         }
     }
 
