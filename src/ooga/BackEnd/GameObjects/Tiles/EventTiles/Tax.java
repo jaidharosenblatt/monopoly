@@ -6,7 +6,7 @@ public class Tax extends Tile {
 
     private int tax_cost;
 
-    public Tax(int tileID, int boardIndex, int tax_cost) {
+    public Tax(String tileID, int boardIndex, int tax_cost) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.tax_cost = tax_cost;

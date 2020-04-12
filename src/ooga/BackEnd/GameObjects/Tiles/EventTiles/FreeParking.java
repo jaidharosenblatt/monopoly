@@ -4,7 +4,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 public class FreeParking extends Tile {
 
-    public FreeParking(int tileID, int boardIndex) {
+    public FreeParking(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.visiting = null;

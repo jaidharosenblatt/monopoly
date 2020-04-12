@@ -6,7 +6,7 @@ public class Go extends Tile {
 
     private static final int GO_MONEY = 200;
 
-    public Go(int tileID, int boardIndex) {
+    public Go(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.visiting = null;
