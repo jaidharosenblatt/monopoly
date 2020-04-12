@@ -35,6 +35,24 @@ public class Street extends Property {
         this.mortgaged = false;
     }
 
+    public void setTitle(String title) {this.title_deed = title;}
+
+    public void setBaseRent(int rent) {this.base_rent = rent;}
+
+    public void setMonopolyRent(int rent) {this.monopoly_rent = rent;}
+
+    public void setRent1H(int rent) {this.rent_one_house = rent;}
+
+    public void setRent2H(int rent) {this.rent_two_house = rent;}
+
+    public void setRent3H(int rent) {this.rent_three_house = rent;}
+
+    public void setRent4H(int rent) {this.rent_four_house = rent;}
+
+    public void setRentHotel(int rent) {this.rent_hotel = rent;}
+
+    public void setHouseCost(int cost) {this.house_cost = cost;}
+
     public int getHouseCost() {return this.house_cost;}
 
     public int getHouses() {return this.houses;}

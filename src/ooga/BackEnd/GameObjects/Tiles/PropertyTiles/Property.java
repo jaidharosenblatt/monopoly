@@ -46,9 +46,15 @@ public abstract class Property extends Tile {
 
     public int getCost() {return this.cost;}
 
+    public void setCost(int cost) {this.cost = cost;}
+
     public String getGroupColor() {return this.group_color;}
 
+    public void setGroupColor(String groupColor) {this.group_color = groupColor;}
+
     public int getGroupNumber() {return this.group_number;}
+
+    public void setGroupNumber(int groupNumber) {this.group_number = groupNumber;}
 
     public boolean isMortgaged() {return this.mortgaged;}
 

@@ -12,4 +12,8 @@ public abstract class Tile {
     public int getBoardIndex() {return this.boardIndex;}
 
     public void onTile(Player P) {this.visiting = P;}
+
+    public void setBoardIndex(int boardIndex) {this.boardIndex = boardIndex;}
+
+    public void setTileID(int tileID) {this.tileID = tileID;}
 }
