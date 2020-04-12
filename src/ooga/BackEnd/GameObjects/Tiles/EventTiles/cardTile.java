@@ -12,11 +12,11 @@ public class cardTile extends Tile {
     private ArrayList<Property> properties = new ArrayList<Property>();
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    public cardTile(int tileID) {
+    public cardTile(int tileID, String type) {
         this.tileID = tileID;
         this.boardIndex = 0;
         this.visiting = null;
-        this.type = "chance";
+        this.type = type;
     }
 
     @Override
@@ -24,9 +24,7 @@ public class cardTile extends Tile {
         this.visiting.drawCard(this.type, properties, players);
     }
 
-    public void updateProps(ArrayList<Property> properties) {
-        this.properties = properties;
-    }
+    public void updateProps(ArrayList<Property> properties) { this.properties = properties; }
 
     public void playerList(ArrayList<Player> players) {
         this.players = players;
