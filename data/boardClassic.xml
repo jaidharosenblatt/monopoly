@@ -414,6 +414,50 @@
             <tileID>000</tileID>
             <boardIndex>0</boardIndex>
         </Go>
+        <Jail>
+            <tileID>029</tileID>
+            <boardIndex>10</boardIndex>
+        </Jail>
+        <Income_Tax>
+            <tileID>030</tileID>
+            <boardIndex>4</boardIndex>
+        </Income_Tax>
+        <Luxury_Tax>
+            <tileID>031</tileID>
+            <boardIndex>38</boardIndex>
+        </Luxury_Tax>
+        <Free_Parking>
+            <tileID>032</tileID>
+            <boardIndex>20</boardIndex>
+        </Free_Parking>
+        <GoToJail>
+            <tileID>033</tileID>
+            <boardIndex>30</boardIndex>
+        </GoToJail>
+        <Community1>
+            <tileID>034</tileID>
+            <boardIndex>2</boardIndex>
+        </Community1>
+        <Community2>
+            <tileID>035</tileID>
+            <boardIndex>17</boardIndex>
+        </Community2>
+        <Community3>
+            <tileID>036</tileID>
+            <boardIndex>33</boardIndex>
+        </Community3>
+        <Chance1>
+            <tileID>037</tileID>
+            <boardIndex>7</boardIndex>
+        </Chance1>
+        <Chance2>
+            <tileID>038</tileID>
+            <boardIndex>22</boardIndex>
+        </Chance2>
+        <Chance3>
+            <tileID>039</tileID>
+            <boardIndex>36</boardIndex>
+        </Chance3>
     </eventTiles>
     <cards>
         <chance>
