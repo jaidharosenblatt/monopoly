@@ -137,4 +137,9 @@ public class Player {
         this.dice1 = (int) (Math.random() * 6) + 1;
         this.dice2 = (int) (Math.random() * 6) + 1;
     }
+
+    public void drawCard(String type, ArrayList<Property> props, ArrayList<Player> players) {
+        Cards draw = new Cards(type, this, props, players);
+        draw.action();
+    }
 }
