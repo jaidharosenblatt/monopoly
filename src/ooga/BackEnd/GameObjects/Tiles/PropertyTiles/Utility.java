@@ -2,11 +2,11 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
 public class Utility extends Property {
 
-    public Utility(int tileID) {
+    public Utility(int tileID, int boardIndex) {
         this.tileID = tileID;
-        this.boardIndex = 0;
+        this.boardIndex = boardIndex;
         this.owner = null;
-        this.cost = 0;
+        this.cost = 150;
         this.group_color = "utils";
         this.group_number = 2;
         this.mortgaged = false;
