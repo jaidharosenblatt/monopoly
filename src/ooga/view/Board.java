@@ -14,7 +14,6 @@ public class Board extends BorderPane {
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
 
-  private List<Tile> tiles = new ArrayList<>();
   private List<PlayerInfo> players = new ArrayList<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
@@ -28,9 +27,7 @@ public class Board extends BorderPane {
     }
 
     createGrid();
-
     setPanesToRoot();
-
     createCenter();
   }
 
@@ -68,6 +65,10 @@ public class Board extends BorderPane {
     for (int i = ROW_LENGTH * 4; i > ROW_LENGTH * 3; i--) {
       Tile tile = new PropertyVertical("property", i, Color.GREY, Color.BLUEVIOLET);
       left.getChildren().add(tile);
+    }
+
+    for (int i = 1; i<ROW_LENGTH *4; i=i*5 ){
+
     }
   }
 
