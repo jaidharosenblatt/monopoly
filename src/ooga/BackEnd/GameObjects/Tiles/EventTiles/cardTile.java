@@ -12,11 +12,11 @@ public class cardTile extends Tile {
     private ArrayList<Property> properties = new ArrayList<Property>();
     private ArrayList<Player> players = new ArrayList<Player>();
 
-    public cardTile(int tileID, String type) {
+    public cardTile(int tileID, int boardIndex, String type) {
         this.tileID = tileID;
-        this.boardIndex = 0;
-        this.visiting = null;
+        this.boardIndex = boardIndex;
         this.type = type;
+        this.visiting = null;
     }
 
     @Override
