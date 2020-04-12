@@ -4,36 +4,16 @@ import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import ooga.api.view.PlayerInfo;
 
-public abstract class Tile {
+public abstract class Tile extends BorderPane {
+//  public abstract void removePlayer(PlayerInfo player);
 
-  private double width;
-  private double height;
-
-  protected void setSize(double width, double height) {
-    this.width = width;
-    this.height = height;
-  }
-
-  public abstract void removePlayer(PlayerInfo player);
-
-  public abstract void addPlayer(PlayerInfo player);
-
-  public abstract Pane getVerticalNode();
-
-  public abstract Pane getHorizontalNode();
-
-  protected double getWidth() {
-    return width;
-  }
-
-  protected double getHeight() {
-    return height;
-  }
+//  public abstract void addPlayer(PlayerInfo player);
 
   protected void setBackgroundColor(Pane pane, Color color) {
     pane.setBackground(

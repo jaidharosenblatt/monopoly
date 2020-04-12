@@ -1,9 +1,7 @@
 package ooga.view;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -15,6 +13,9 @@ public class Board extends BorderPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
+  public static final int PROPERTY_WIDTH = 60;
+  public static final int PROPERTY_HEIGHT = 80;
+
   private List<Tile> tiles = new ArrayList<>();
   private List<PlayerInfo> players = new ArrayList<>();
   private HBox top = new HBox();
@@ -28,7 +29,6 @@ public class Board extends BorderPane {
       players.add(new PlayerTester(0, i, "2E86AB"));
     }
 
-    createBoard();
     createGrid();
 
     setPanesToRoot();
@@ -45,58 +45,36 @@ public class Board extends BorderPane {
   public void movePlayer(PlayerInfo player, int newPosition) {
     int oldPosition = player.getPositionOnBoard();
     Tile oldTile = tiles.get(oldPosition);
-    oldTile.removePlayer(player);
+//    oldTile.removePlayer(player);
     Tile newTile = tiles.get(newPosition);
-    newTile.addPlayer(player);
+//    newTile.addPlayer(player);
   }
 
   private void createGrid() {
 
-    List<Tile> topList = tiles.subList(0, ROW_LENGTH);
-    for (int i = 1; i < topList.size(); i++) {
-      Node tile = topList.get(i).getHorizontalNode();
+    for (int i = 0; i < ROW_LENGTH; i++) {
+      Tile tile = new PropertyHorizontal("property", i, Color.GREY, Color.BLUEVIOLET);
       tile.setRotate(180);
       top.getChildren().add(tile);
     }
 
-    List<Tile> rightList = tiles.subList(ROW_LENGTH, ROW_LENGTH * 2);
-    for (int i = 1; i < rightList.size(); i++) {
-      Node tile = rightList.get(i).getVerticalNode();
+    for (int i = ROW_LENGTH; i < ROW_LENGTH * 2; i++) {
+      Tile tile = new PropertyVertical("property", i, Color.GREY, Color.BLUEVIOLET);
       tile.setRotate(180);
       right.getChildren().add(tile);
     }
 
-    List<Tile> bottomList = tiles.subList(ROW_LENGTH * 2 + 1, ROW_LENGTH * 3);
-    Collections.reverse(bottomList);
-    for (int i = 0; i < bottomList.size(); i++) {
-      bottom.getChildren().add(bottomList.get(i).getHorizontalNode());
+    for (int i = ROW_LENGTH * 3; i > ROW_LENGTH * 2; i--) {
+      Tile tile = new PropertyHorizontal("property", i, Color.GREY, Color.BLUEVIOLET);
+      bottom.getChildren().add(tile);
     }
 
-    List<Tile> leftList = tiles.subList(ROW_LENGTH * 3 + 1, ROW_LENGTH * 4);
-    Collections.reverse(leftList);
-    for (int i = 0; i < leftList.size(); i++) {
-      left.getChildren().add(leftList.get(i).getVerticalNode());
+    for (int i = ROW_LENGTH * 4; i > ROW_LENGTH * 3; i--) {
+      Tile tile = new PropertyVertical("property", i, Color.GREY, Color.BLUEVIOLET);
+      left.getChildren().add(tile);
     }
   }
 
-
-  private void createBoard() {
-    for (int i = 0; i < NUMBER_OF_TILES; i++) {
-      if (i % 5 == 0 && i % 10 != 0) {
-        UtilityTile tile = new UtilityTile("Robert Duvall", i, Color.GREY, "rcd.jpg");
-        tiles.add(tile);
-      } else if (i % 2 == 0) {
-        Property property = new Property("Some Property", i, Color.BISQUE, Color.GREEN, 60, 70);
-        property.setSize(60, 70);
-        tiles.add(property);
-      } else {
-        Property property = new Property("Some Other Property", i, Color.BISQUE, Color.BLUEVIOLET,
-            60, 70);
-        property.setSize(60, 70);
-        tiles.add(property);
-      }
-    }
-  }
 
   private void setPanesToRoot() {
     setTop(top);
