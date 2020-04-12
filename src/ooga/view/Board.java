@@ -2,20 +2,16 @@ package ooga.view;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.api.view.PlayerInfo;
 
-public class Board extends GridPane {
+public class Board extends BorderPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
@@ -23,8 +19,6 @@ public class Board extends GridPane {
   private List<PlayerInfo> players = new ArrayList<>();
 
   public Board() {
-    setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-
     for (int i = 0; i < 4; i++) {
       players.add(new PlayerTester(0, i, "2E86AB"));
     }
@@ -42,36 +36,44 @@ public class Board extends GridPane {
   }
 
   private void createGrid() {
+    HBox top = new HBox();
+    VBox right = new VBox();
+    HBox bottom = new HBox();
+    VBox left = new VBox();
 
     List<Tile> topList = tiles.subList(0, ROW_LENGTH);
     for (int i = 1; i < topList.size(); i++) {
       Node tile = topList.get(i).getHorizontalNode();
       tile.setRotate(180);
-      add(tile, i, 0);
+      top.getChildren().add(tile);
     }
 
     List<Tile> rightList = tiles.subList(ROW_LENGTH, ROW_LENGTH * 2);
     for (int i = 1; i < rightList.size(); i++) {
       Node tile = rightList.get(i).getVerticalNode();
       tile.setRotate(180);
-      add(tile, ROW_LENGTH, i % ROW_LENGTH);
+      right.getChildren().add(tile);
     }
 
     List<Tile> bottomList = tiles.subList(ROW_LENGTH * 2 + 1, ROW_LENGTH * 3);
     Collections.reverse(bottomList);
     for (int i = 0; i < bottomList.size(); i++) {
-      add(bottomList.get(i).getHorizontalNode(), i + 1, ROW_LENGTH);
+      bottom.getChildren().add(bottomList.get(i).getHorizontalNode());
     }
 
     List<Tile> leftList = tiles.subList(ROW_LENGTH * 3 + 1, ROW_LENGTH * 4);
     Collections.reverse(leftList);
     for (int i = 0; i < leftList.size(); i++) {
-      add(leftList.get(i).getVerticalNode(), 0, i % ROW_LENGTH + 1);
+      left.getChildren().add(leftList.get(i).getVerticalNode());
     }
 
     Button button = new Button("Take turn");
     button.setOnAction(e -> movePlayer(players.get(0), 3));
-    add(button, 5, 5);
+//    add(button, 5, 5);
+    setTop(top);
+    setRight(right);
+    setBottom(bottom);
+    setLeft(left);
   }
 
 
