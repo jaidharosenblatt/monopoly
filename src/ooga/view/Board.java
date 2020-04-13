@@ -21,6 +21,7 @@ public class Board extends BorderPane {
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
+  int oldPosition = 0;
 
 
   public Board() {
@@ -35,13 +36,14 @@ public class Board extends BorderPane {
 
   private void createCenter() {
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(players.get(0), 20));
+    button.setOnAction(e -> movePlayer(players.get(0), 1));
     setCenter(button);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {
-    int oldPosition = player.getPositionOnBoard();
-    Tile oldTile = getTileByIndex(newPosition);
+    oldPosition += newPosition;
+
+    Tile oldTile = getTileByIndex(oldPosition + newPosition);
     oldTile.setBackgroundColor(oldTile, Color.GREEN);
   }
 
@@ -55,7 +57,7 @@ public class Board extends BorderPane {
       top.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH+1; i < ROW_LENGTH * 2; i++) {
+    for (int i = ROW_LENGTH + 1; i < ROW_LENGTH * 2; i++) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(270);
@@ -70,7 +72,7 @@ public class Board extends BorderPane {
       bottom.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH * 4 -1 ; i > ROW_LENGTH * 3; i--) {
+    for (int i = ROW_LENGTH * 4 - 1; i > ROW_LENGTH * 3; i--) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(90);
@@ -81,16 +83,21 @@ public class Board extends BorderPane {
   }
 
   private Tile getTileByIndex(int index) {
+    index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
 
     if (index < ROW_LENGTH) {
       return (Tile) top.getChildren().get(position);
+    } else if (index == ROW_LENGTH) {
+      return (Tile) top.getChildren().get(ROW_LENGTH);
     } else if (index < ROW_LENGTH * 2) {
-      return (Tile) right.getChildren().get(position);
+      return (Tile) right.getChildren().get(position - 1);
     } else if (index < ROW_LENGTH * 3) {
-      return (Tile) bottom.getChildren().get(position);
+      return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
+    } else if (index == ROW_LENGTH * 3) {
+      return (Tile) bottom.getChildren().get(0);
     } else {
-      return (Tile) left.getChildren().get(position);
+      return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
     }
   }
 
