@@ -26,6 +26,7 @@ public abstract class Tile extends BorderPane {
   private StackPane centerTile = new StackPane();
 
   public Tile() {
+    this.getStyleClass().add("tile");
     playersPane.setAlignment(Pos.CENTER);
     centerTile.getChildren().add(playersPane);
     setCenter(centerTile);

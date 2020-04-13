@@ -20,6 +20,7 @@ public class View extends HBox {
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
     Group g = new Group(new Board());
     getChildren().add(g);
+    scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
     stage.show();

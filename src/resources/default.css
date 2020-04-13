@@ -1,0 +1,11 @@
+
+* {
+  -fx-base: #CDE6D0;
+}
+
+
+.tile{
+  -fx-background-color: -fx-base;
+  -fx-border-width: 1;
+  -fx-border-color: black;
+}
