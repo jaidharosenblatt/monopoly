@@ -14,7 +14,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import ooga.api.view.PlayerInfo;
 
-public class PropertyHorizontal extends Tile {
+public class Property extends Tile {
 
   private static final double BAR_HEIGHT = 20;
   private static final double PLAYER_SIZE = 10;
@@ -29,13 +29,12 @@ public class PropertyHorizontal extends Tile {
   private Map<PlayerInfo, Shape> players = new HashMap<>();
 
 
-  public PropertyHorizontal(String name, double price, Color backgroundColor, Color categoryColor) {
-    this.setPrefSize(60,80);
-
+  public Property(String name, double price, Color backgroundColor, Color categoryColor, double width, double height) {
     this.backgroundColor = backgroundColor;
     this.categoryColor = categoryColor;
     this.price = price;
     this.name = name;
+    setPrefSize(width,height);
 
     setHorizontalPane();
   }
@@ -45,8 +44,9 @@ public class PropertyHorizontal extends Tile {
 
     VBox box = new VBox();
     box.setAlignment(Pos.CENTER);
+
     Text nameText = new Text(name);
-    nameText.setWrappingWidth(getPrefWidth());
+//    nameText.setWrappingWidth(getPrefWidth());
 
     box.getChildren().addAll(new Rectangle(getPrefWidth(), BAR_HEIGHT, categoryColor), nameText);
 

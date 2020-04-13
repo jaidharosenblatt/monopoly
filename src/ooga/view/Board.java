@@ -7,12 +7,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import ooga.api.view.PlayerInfo;
 
 public class Board extends BorderPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
+  private final static int TILE_WIDTH = 70;
+  private final static int TILE_HEIGHT = 70;
 
   private List<PlayerInfo> players = new ArrayList<>();
   private HBox top = new HBox();
@@ -40,35 +43,41 @@ public class Board extends BorderPane {
   public void movePlayer(PlayerInfo player, int newPosition) {
     int oldPosition = player.getPositionOnBoard();
     Tile oldTile = getTileByIndex(newPosition);
-    oldTile.setBackgroundColor(oldTile,Color.GREEN);
+    oldTile.setBackgroundColor(oldTile, Color.GREEN);
   }
 
   private void createGrid() {
 
-    for (int i = 0; i < ROW_LENGTH; i++) {
-      Tile tile = new PropertyHorizontal("property", i, Color.GREY, Color.BLUEVIOLET);
+    for (int i = 0; i <= ROW_LENGTH; i++) {
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+          TILE_HEIGHT);
       tile.setRotate(180);
+
       top.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH; i < ROW_LENGTH * 2; i++) {
-      Tile tile = new PropertyVertical("property", i, Color.GREY, Color.BLUEVIOLET);
-      tile.setRotate(180);
+    for (int i = ROW_LENGTH+1; i <= ROW_LENGTH * 2; i++) {
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+          TILE_WIDTH);
+      tile.setRotate(270);
+      tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
+
       right.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 3; i > ROW_LENGTH * 2; i--) {
-      Tile tile = new UtilityTileHorizontal("rd", i, Color.GREY, "rcd.jpg");
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+          TILE_HEIGHT);
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 4; i > ROW_LENGTH * 3; i--) {
-      Tile tile = new PropertyVertical("property", i, Color.GREY, Color.BLUEVIOLET);
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+          TILE_WIDTH);
+      tile.setRotate(90);
+      tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
+
       left.getChildren().add(tile);
-    }
-
-    for (int i = 1; i<ROW_LENGTH *4; i=i*5 ){
-
     }
   }
 
@@ -77,11 +86,9 @@ public class Board extends BorderPane {
 
     if (index < ROW_LENGTH) {
       return (Tile) top.getChildren().get(position);
-    }
-    else if (index < ROW_LENGTH * 2) {
+    } else if (index < ROW_LENGTH * 2) {
       return (Tile) right.getChildren().get(position);
-    }
-    else if (index < ROW_LENGTH * 3) {
+    } else if (index < ROW_LENGTH * 3) {
       return (Tile) bottom.getChildren().get(position);
     } else {
       return (Tile) left.getChildren().get(position);
