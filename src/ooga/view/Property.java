@@ -25,7 +25,7 @@ public class Property extends Tile {
   private String name;
   private double price;
 
-  private Pane playersPane = new HBox();
+  private HBox playersPane = new HBox();
 
   private Map<PlayerInfo, Shape> players = new HashMap<>();
 
@@ -40,6 +40,7 @@ public class Property extends Tile {
 
     setHorizontalPane();
 
+    playersPane.setAlignment(Pos.CENTER);
     setCenter(playersPane);
 
   }

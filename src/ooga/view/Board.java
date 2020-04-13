@@ -23,7 +23,7 @@ public class Board extends BorderPane {
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
-
+  int counter = 1;
 
   public Board() {
     createGrid();
@@ -40,16 +40,19 @@ public class Board extends BorderPane {
 
   private void createCenter() {
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(playerPositions.keySet().iterator().next(), 1));
+    button.setOnAction(e -> movePlayer(playerPositions.keySet().iterator().next(), counter++));
     setCenter(button);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {
+
     int oldPosition = playerPositions.get(player);
+    playerPositions.put(player,newPosition);
 
     Tile oldTile = getTileByIndex(oldPosition);
     Tile newTile = getTileByIndex(newPosition);
 
+    oldTile.removePlayer(player);
     newTile.addPlayer(player);
 //    newTile.setBackgroundColor(newTile, Color.GREEN);
   }
