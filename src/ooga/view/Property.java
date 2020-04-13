@@ -46,7 +46,7 @@ public class Property extends Tile {
     box.setAlignment(Pos.CENTER);
 
     Text nameText = new Text(name);
-//    nameText.setWrappingWidth(getPrefWidth());
+    nameText.setWrappingWidth(getPrefWidth());
 
     box.getChildren().addAll(new Rectangle(getPrefWidth(), BAR_HEIGHT, categoryColor), nameText);
 

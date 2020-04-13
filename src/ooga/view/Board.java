@@ -7,15 +7,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import ooga.api.view.PlayerInfo;
 
 public class Board extends BorderPane {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
-  private final static int TILE_WIDTH = 70;
-  private final static int TILE_HEIGHT = 70;
+  private final static int TILE_WIDTH = 60;
+  private final static int TILE_HEIGHT = 60;
 
   private List<PlayerInfo> players = new ArrayList<>();
   private HBox top = new HBox();
@@ -56,7 +55,7 @@ public class Board extends BorderPane {
       top.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH+1; i <= ROW_LENGTH * 2; i++) {
+    for (int i = ROW_LENGTH+1; i < ROW_LENGTH * 2; i++) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(270);
@@ -65,13 +64,13 @@ public class Board extends BorderPane {
       right.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH * 3; i > ROW_LENGTH * 2; i--) {
+    for (int i = ROW_LENGTH * 3; i >= ROW_LENGTH * 2; i--) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
           TILE_HEIGHT);
       bottom.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH * 4; i > ROW_LENGTH * 3; i--) {
+    for (int i = ROW_LENGTH * 4 -1 ; i > ROW_LENGTH * 3; i--) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(90);
