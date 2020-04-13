@@ -60,7 +60,7 @@ public class Board extends BorderPane {
   private void createGrid() {
 
     for (int i = 0; i <= ROW_LENGTH; i++) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+      Tile tile = new UtilityTile("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
           TILE_HEIGHT);
       tile.setRotate(180);
 

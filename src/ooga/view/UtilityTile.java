@@ -9,8 +9,8 @@ import ooga.api.view.PlayerInfo;
 
 public class UtilityTile extends Tile {
 
-  public UtilityTile(String name, double price, Color backgroundColor, String filename) {
-    setPrefSize(60, 60);
+  public UtilityTile(String name, double price, Color backgroundColor, String filename, double width, double height) {
+    setPrefSize(width, height);
     setBackgroundColor(this, backgroundColor);
 
     ImageView image = new ImageView(getImageByName(filename));
@@ -22,21 +22,11 @@ public class UtilityTile extends Tile {
     setAlignment(nameText, Pos.CENTER);
     nameText.setWrappingWidth(getPrefWidth());
 
-    setCenter(image);
+    setToCenter(image);
 
     Text priceText = new Text("M" + price);
     setBottom(priceText);
     setAlignment(priceText, Pos.CENTER);
-
-  }
-
-  @Override
-  public void removePlayer(PlayerInfo player) {
-
-  }
-
-  @Override
-  public void addPlayer(PlayerInfo player) {
 
   }
 }

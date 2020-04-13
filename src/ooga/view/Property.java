@@ -25,11 +25,6 @@ public class Property extends Tile {
   private String name;
   private double price;
 
-  private HBox playersPane = new HBox();
-
-  private Map<PlayerInfo, Shape> players = new HashMap<>();
-
-
   public Property(String name, double price, Color backgroundColor, Color categoryColor,
       double width, double height) {
     this.backgroundColor = backgroundColor;
@@ -39,9 +34,6 @@ public class Property extends Tile {
     setPrefSize(width, height);
 
     setHorizontalPane();
-
-    playersPane.setAlignment(Pos.CENTER);
-    setCenter(playersPane);
 
   }
 
@@ -62,18 +54,5 @@ public class Property extends Tile {
     setAlignment(text, Pos.CENTER);
   }
 
-  @Override
-  public void removePlayer(PlayerInfo player) {
-    Shape piece = players.get(player);
-    playersPane.getChildren().remove(piece);
-    players.remove(player);
-  }
 
-  @Override
-  public void addPlayer(PlayerInfo player) {
-    Shape piece = new Circle(5, Color.web(player.getPlayerColor()));
-    players.put(player, piece);
-    playersPane.getChildren().clear();
-    playersPane.getChildren().addAll(players.values());
-  }
 }
