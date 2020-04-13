@@ -1,7 +1,9 @@
 package ooga.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,18 +18,18 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private List<PlayerInfo> players = new ArrayList<>();
+  private Map<Color, Integer> playerPositions = new HashMap<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
-  int oldPosition = 0;
 
 
   public Board() {
-    for (int i = 0; i < 4; i++) {
-      players.add(new PlayerTester(0, i, "2E86AB"));
-    }
+    playerPositions.put(Color.ORANGE, 0);
+    playerPositions.put(Color.BLACK, 0);
+    playerPositions.put(Color.GREEN, 0);
+    playerPositions.put(Color.PINK, 0);
 
     createGrid();
     setPanesToRoot();
@@ -36,15 +38,17 @@ public class Board extends BorderPane {
 
   private void createCenter() {
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(players.get(0), 1));
+    button.setOnAction(e -> movePlayer(Color.ORANGE, 1));
     setCenter(button);
   }
 
-  public void movePlayer(PlayerInfo player, int newPosition) {
-    oldPosition += newPosition;
+  public void movePlayer(Color player, int newPosition) {
+    int oldPosition = playerPositions.get(player);
 
-    Tile oldTile = getTileByIndex(oldPosition + newPosition);
-    oldTile.setBackgroundColor(oldTile, Color.GREEN);
+    Tile oldTile = getTileByIndex(oldPosition);
+    Tile newTile = getTileByIndex(newPosition);
+
+    newTile.setBackgroundColor(newTile, Color.GREEN);
   }
 
   private void createGrid() {
@@ -85,6 +89,7 @@ public class Board extends BorderPane {
   private Tile getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
+
 
     if (index < ROW_LENGTH) {
       return (Tile) top.getChildren().get(position);
