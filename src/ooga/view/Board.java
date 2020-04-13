@@ -104,9 +104,9 @@ public class Board extends BorderPane {
     } else if (index < ROW_LENGTH * 2) {
       return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
     } else if (index < ROW_LENGTH * 3) {
-      return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
+      return (Tile) top.getChildren().get(position);
     } else if (index == ROW_LENGTH * 3) {
-      return (Tile) bottom.getChildren().get(ROW_LENGTH);
+      return (Tile) top.getChildren().get(ROW_LENGTH);
     } else {
       return (Tile) right.getChildren().get(position - 1);
     }

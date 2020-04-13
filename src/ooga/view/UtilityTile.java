@@ -31,10 +31,4 @@ public class UtilityTile extends Tile {
     setAlignment(priceText, Pos.CENTER);
 
   }
-
-  @Override
-  public void addPlayer(PlayerInfo player) {
-    super.addPlayer(player);
-    setToCenter(image);
-  }
 }
