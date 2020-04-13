@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import ooga.api.view.PlayerInfo;
 
 
 public class UtilityTile extends Tile {
@@ -29,6 +28,5 @@ public class UtilityTile extends Tile {
     Text priceText = new Text("M" + price);
     setBottom(priceText);
     setAlignment(priceText, Pos.CENTER);
-
   }
 }

@@ -20,6 +20,7 @@ import ooga.api.view.PlayerInfo;
 
 public abstract class Tile extends BorderPane {
 
+  private static final double PLAYER_SIZE = 5;
   private HBox playersPane = new HBox();
   private Map<PlayerInfo, Shape> players = new HashMap<>();
   private StackPane centerTile = new StackPane();
@@ -53,7 +54,7 @@ public abstract class Tile extends BorderPane {
   }
 
   public void addPlayer(PlayerInfo player) {
-    Shape piece = new Circle(5, Color.web(player.getPlayerColor()));
+    Shape piece = new Circle(PLAYER_SIZE, Color.web(player.getPlayerColor()));
     players.put(player, piece);
     playersPane.getChildren().clear();
     playersPane.getChildren().addAll(players.values());

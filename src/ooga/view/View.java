@@ -1,15 +1,14 @@
 package ooga.view;
 
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class View extends Pane {
+public class View extends HBox {
 
   /**
    * TODO
-   * Fix utlitytile not moving when initially added
    * Add corners
    * Add actions display
    */
@@ -19,7 +18,8 @@ public class View extends Pane {
 
   public View(Stage stage) {
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    getChildren().add(new Board());
+    Group g = new Group(new Board());
+    getChildren().add(g);
 
     stage.setScene(scene);
     stage.show();
