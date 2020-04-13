@@ -18,7 +18,7 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private Map<Color, Integer> playerPositions = new HashMap<>();
+  private Map<PlayerInfo, Integer> playerPositions = new HashMap<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
@@ -26,29 +26,32 @@ public class Board extends BorderPane {
 
 
   public Board() {
-    playerPositions.put(Color.ORANGE, 0);
-    playerPositions.put(Color.BLACK, 0);
-    playerPositions.put(Color.GREEN, 0);
-    playerPositions.put(Color.PINK, 0);
-
     createGrid();
     setPanesToRoot();
+
+    for (int i = 0; i < 4; i++) {
+      PlayerInfo player = new PlayerTester(0, i, "2E86AB");
+      Tile tile = (Tile) top.getChildren().get(0);
+      tile.addPlayer(player);
+      playerPositions.put(player, 0);
+    }
     createCenter();
   }
 
   private void createCenter() {
     Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(Color.ORANGE, 1));
+    button.setOnAction(e -> movePlayer(playerPositions.keySet().iterator().next(), 1));
     setCenter(button);
   }
 
-  public void movePlayer(Color player, int newPosition) {
+  public void movePlayer(PlayerInfo player, int newPosition) {
     int oldPosition = playerPositions.get(player);
 
     Tile oldTile = getTileByIndex(oldPosition);
     Tile newTile = getTileByIndex(newPosition);
 
-    newTile.setBackgroundColor(newTile, Color.GREEN);
+    newTile.addPlayer(player);
+//    newTile.setBackgroundColor(newTile, Color.GREEN);
   }
 
   private void createGrid() {
@@ -89,7 +92,6 @@ public class Board extends BorderPane {
   private Tile getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
-
 
     if (index < ROW_LENGTH) {
       return (Tile) top.getChildren().get(position);

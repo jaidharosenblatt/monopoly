@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -29,14 +30,18 @@ public class Property extends Tile {
   private Map<PlayerInfo, Shape> players = new HashMap<>();
 
 
-  public Property(String name, double price, Color backgroundColor, Color categoryColor, double width, double height) {
+  public Property(String name, double price, Color backgroundColor, Color categoryColor,
+      double width, double height) {
     this.backgroundColor = backgroundColor;
     this.categoryColor = categoryColor;
     this.price = price;
     this.name = name;
-    setPrefSize(width,height);
+    setPrefSize(width, height);
 
     setHorizontalPane();
+
+    setCenter(playersPane);
+
   }
 
   private void setHorizontalPane() {
@@ -56,4 +61,18 @@ public class Property extends Tile {
     setAlignment(text, Pos.CENTER);
   }
 
+  @Override
+  public void removePlayer(PlayerInfo player) {
+    Shape piece = players.get(player);
+    playersPane.getChildren().remove(piece);
+    players.remove(player);
+  }
+
+  @Override
+  public void addPlayer(PlayerInfo player) {
+    Shape piece = new Circle(5, Color.web(player.getPlayerColor()));
+    players.put(player, piece);
+    playersPane.getChildren().clear();
+    playersPane.getChildren().addAll(players.values());
+  }
 }

@@ -11,9 +11,9 @@ import javafx.scene.paint.Color;
 import ooga.api.view.PlayerInfo;
 
 public abstract class Tile extends BorderPane {
-//  public abstract void removePlayer(PlayerInfo player);
+  public abstract void removePlayer(PlayerInfo player);
 
-//  public abstract void addPlayer(PlayerInfo player);
+  public abstract void addPlayer(PlayerInfo player);
 
   protected void setBackgroundColor(Pane pane, Color color) {
     pane.setBackground(
