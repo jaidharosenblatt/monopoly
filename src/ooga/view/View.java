@@ -7,6 +7,13 @@ import javafx.stage.Stage;
 
 public class View extends Pane {
 
+  /**
+   * TODO
+   * Flip board
+   * Add corners
+   * Add actions display
+   */
+
   private static final double SCENE_WIDTH = 700;
   private static final double SCENE_HEIGHT = 700;
 

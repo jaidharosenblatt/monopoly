@@ -47,7 +47,7 @@ public class Board extends BorderPane {
   public void movePlayer(PlayerInfo player, int newPosition) {
 
     int oldPosition = playerPositions.get(player);
-    playerPositions.put(player,newPosition);
+    playerPositions.put(player, newPosition);
 
     Tile oldTile = getTileByIndex(oldPosition);
     Tile newTile = getTileByIndex(newPosition);
@@ -59,7 +59,22 @@ public class Board extends BorderPane {
 
   private void createGrid() {
 
-    for (int i = 0; i <= ROW_LENGTH; i++) {
+    for (int i = ROW_LENGTH; i >= 0; i--) {
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+          TILE_HEIGHT);
+      bottom.getChildren().add(tile);
+    }
+
+    for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
+      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+          TILE_WIDTH);
+      tile.setRotate(90);
+      tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
+
+      left.getChildren().add(tile);
+    }
+
+    for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
       Tile tile = new UtilityTile("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
           TILE_HEIGHT);
       tile.setRotate(180);
@@ -67,7 +82,7 @@ public class Board extends BorderPane {
       top.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH + 1; i < ROW_LENGTH * 2; i++) {
+    for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
       Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(270);
@@ -76,20 +91,6 @@ public class Board extends BorderPane {
       right.getChildren().add(tile);
     }
 
-    for (int i = ROW_LENGTH * 3; i >= ROW_LENGTH * 2; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
-          TILE_HEIGHT);
-      bottom.getChildren().add(tile);
-    }
-
-    for (int i = ROW_LENGTH * 4 - 1; i > ROW_LENGTH * 3; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
-          TILE_WIDTH);
-      tile.setRotate(90);
-      tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
-
-      left.getChildren().add(tile);
-    }
   }
 
   private Tile getTileByIndex(int index) {
