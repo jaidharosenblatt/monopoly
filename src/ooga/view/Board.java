@@ -31,7 +31,7 @@ public class Board extends BorderPane {
 
     for (int i = 0; i < 4; i++) {
       PlayerInfo player = new PlayerTester(0, i, "2E86AB");
-      Tile tile = (Tile) top.getChildren().get(0);
+      Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
       playerPositions.put(player, 0);
     }
@@ -54,7 +54,6 @@ public class Board extends BorderPane {
 
     oldTile.removePlayer(player);
     newTile.addPlayer(player);
-//    newTile.setBackgroundColor(newTile, Color.GREEN);
   }
 
   private void createGrid() {
@@ -96,19 +95,20 @@ public class Board extends BorderPane {
   private Tile getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
+    System.out.println(index);
 
     if (index < ROW_LENGTH) {
-      return (Tile) top.getChildren().get(position);
+      return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
     } else if (index == ROW_LENGTH) {
-      return (Tile) top.getChildren().get(ROW_LENGTH);
+      return (Tile) bottom.getChildren().get(0);
     } else if (index < ROW_LENGTH * 2) {
-      return (Tile) right.getChildren().get(position - 1);
+      return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
     } else if (index < ROW_LENGTH * 3) {
       return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
     } else if (index == ROW_LENGTH * 3) {
-      return (Tile) bottom.getChildren().get(0);
+      return (Tile) bottom.getChildren().get(ROW_LENGTH);
     } else {
-      return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
+      return (Tile) right.getChildren().get(position - 1);
     }
   }
 

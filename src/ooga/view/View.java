@@ -9,7 +9,7 @@ public class View extends Pane {
 
   /**
    * TODO
-   * Flip board
+   * Fix utlitytile not moving when initially added
    * Add corners
    * Add actions display
    */

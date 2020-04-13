@@ -9,11 +9,13 @@ import ooga.api.view.PlayerInfo;
 
 public class UtilityTile extends Tile {
 
+  ImageView image;
+
   public UtilityTile(String name, double price, Color backgroundColor, String filename, double width, double height) {
     setPrefSize(width, height);
     setBackgroundColor(this, backgroundColor);
 
-    ImageView image = new ImageView(getImageByName(filename));
+    image = new ImageView(getImageByName(filename));
     image.setFitHeight(30);
     image.setFitWidth(30);
 
@@ -28,5 +30,11 @@ public class UtilityTile extends Tile {
     setBottom(priceText);
     setAlignment(priceText, Pos.CENTER);
 
+  }
+
+  @Override
+  public void addPlayer(PlayerInfo player) {
+    super.addPlayer(player);
+    setToCenter(image);
   }
 }
