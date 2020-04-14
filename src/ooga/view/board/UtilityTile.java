@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;

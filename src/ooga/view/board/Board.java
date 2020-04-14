@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.api.view.PlayerInfo;
+import ooga.view.PlayerTester;
 
 public class Board extends BorderPane {
 

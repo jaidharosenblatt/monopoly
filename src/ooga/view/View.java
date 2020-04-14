@@ -4,12 +4,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import ooga.view.board.Board;
 
 public class View extends HBox {
 
   /**
    * TODO
-   * Add corners
    * Add actions display
    */
 

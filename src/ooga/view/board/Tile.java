@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import java.util.HashMap;
 import java.util.Map;

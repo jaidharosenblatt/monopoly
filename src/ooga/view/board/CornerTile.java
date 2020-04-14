@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.board;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
