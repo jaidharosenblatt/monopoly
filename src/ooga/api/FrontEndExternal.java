@@ -36,10 +36,10 @@ public interface FrontEndExternal {
   /**
    * Use this method to animate the movement of a players token to a new board space
    *
-   * @param playerId  integer representation of the player
-   * @param numSpaces amount of spaces the player needs to move
+   * @param player player to move
+   * @param position position on board to move to
    */
-  void movePlayer(int playerId, int numSpaces);
+  void movePlayer(PlayerInfo player, int position);
 
   /**
    * Use this to display the result of the dice roll

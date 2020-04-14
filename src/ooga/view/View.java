@@ -1,29 +1,65 @@
 package ooga.view;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Map;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import ooga.api.FrontEndExternal;
+import ooga.api.view.Decision;
+import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
 
-public class View extends HBox {
+public class View extends HBox implements FrontEndExternal {
 
   /**
-   * TODO
-   * Add actions display
+   * TODO Add actions display
    */
 
+  private Board board;
   private static final double SCENE_WIDTH = 700;
   private static final double SCENE_HEIGHT = 700;
 
   public View(Stage stage) {
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    Group g = new Group(new Board());
-    getChildren().add(g);
+    board = new Board();
+    Group boardGroup = new Group(board);
+    getChildren().add(boardGroup);
     scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
     stage.show();
+  }
+
+  @Override
+  public List<Integer> makeUserDecision(Decision decision) {
+    return null;
+  }
+
+  @Override
+  public void displayText(String text) {
+
+  }
+
+  @Override
+  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
+
+  }
+
+  @Override
+  public void movePlayer(PlayerInfo player, int position) {
+    board.movePlayer(player, position);
+  }
+
+  @Override
+  public void displayRoll(List<Integer> rolls) {
+
+  }
+
+  @Override
+  public void changeTheme(String pathToThemePropertyFile) throws FileNotFoundException {
 
   }
 }
