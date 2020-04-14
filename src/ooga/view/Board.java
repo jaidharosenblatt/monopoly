@@ -88,6 +88,20 @@ public class Board extends BorderPane {
       right.getChildren().add(tile);
     }
 
+    bottom.getChildren().remove(ROW_LENGTH);
+    bottom.getChildren().add(new CornerTile(Color.GREY, "go.png", TILE_WIDTH, TILE_HEIGHT));
+
+    bottom.getChildren().remove(0);
+    bottom.getChildren()
+        .add(0, new CornerTile(Color.GREY, "jail.png", TILE_WIDTH, TILE_HEIGHT));
+
+    top.getChildren().remove(ROW_LENGTH);
+    top.getChildren().add(new CornerTile(Color.GREY, "gotojail.png", TILE_WIDTH, TILE_HEIGHT));
+
+    top.getChildren().remove(0);
+    top.getChildren()
+        .add(0, new CornerTile(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
+
   }
 
   private Tile getTileByIndex(int index) {
