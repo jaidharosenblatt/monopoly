@@ -19,7 +19,7 @@ public class View extends HBox implements FrontEndExternal {
    */
 
   private Board board;
-  private MultiDecisionView choicesDisplay;
+  private DecisionFactory decisionFactory;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 700;
 
@@ -30,9 +30,10 @@ public class View extends HBox implements FrontEndExternal {
 
     Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
 
-    choicesDisplay = new MultiDecisionView(d, this);
+    decisionFactory = new DecisionFactory(this);
+    DecisionView decisionView = decisionFactory.getDecision(d, 3);
 
-    getChildren().addAll(boardGroup, choicesDisplay);
+    getChildren().addAll(boardGroup, decisionView);
     scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
