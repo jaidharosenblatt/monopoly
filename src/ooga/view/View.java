@@ -1,7 +1,6 @@
 package ooga.view;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
@@ -20,7 +19,7 @@ public class View extends HBox implements FrontEndExternal {
    */
 
   private Board board;
-  private DecisionView choicesDisplay;
+  private MultiDecisionView choicesDisplay;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 700;
 
@@ -31,7 +30,7 @@ public class View extends HBox implements FrontEndExternal {
 
     Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
 
-    choicesDisplay = new DecisionView(d, this);
+    choicesDisplay = new MultiDecisionView(d, this);
 
     getChildren().addAll(boardGroup, choicesDisplay);
     scene.getStylesheets().add("resources/default.css");
