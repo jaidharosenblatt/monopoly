@@ -1,10 +1,13 @@
 package ooga.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import ooga.api.view.Decision;
 
 public class MultiDecisionView extends DecisionView {
+  private List<String> choices = new ArrayList<>();
 
   public MultiDecisionView(Decision decision, View view) {
     super(decision);
@@ -16,8 +19,16 @@ public class MultiDecisionView extends DecisionView {
     }
 
     Button submit = new Button("Submit");
-    submit.setOnAction(e -> view.submitDecision(getChoices()));
+    submit.setOnAction(e -> view.submitDecision(choices));
     getChildren().add(submit);
+  }
+
+  private void setChoice(String choice) {
+    if (choices.contains(choice)) {
+      choices.remove(choice);
+    } else {
+      choices.add(choice);
+    }
   }
 
 }

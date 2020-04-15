@@ -13,7 +13,7 @@ public class DecisionFactory extends Pane {
 
   public DecisionView getDecision(Decision decision, int numberOfChoices){
     if (numberOfChoices == 2){
-      return null;
+      return new TwoDecisionView(decision,view);
     }
     return new MultiDecisionView(decision,view);
   }

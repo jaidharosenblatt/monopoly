@@ -15,7 +15,11 @@ import ooga.view.board.Board;
 public class View extends HBox implements FrontEndExternal {
 
   /**
-   * TODO Add actions display
+   * TODO
+   * Add 2 action display
+   * No choice display
+   * Dice rolls
+   * Player display
    */
 
   private Board board;
