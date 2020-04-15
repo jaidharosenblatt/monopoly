@@ -1,7 +1,5 @@
 package ooga.view;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
@@ -20,42 +18,35 @@ public class DecisionView extends StackPane {
   private static final double WIDTH = 200;
   private List<Integer> choices = new ArrayList<>();
   private Decision decision;
-  private Method submitAction;
+  private View view;
 
-  public DecisionView(Decision decision, Method submitAction) {
+  public DecisionView(Decision decision, View view) {
+    this.view = view;
     setPrefWidth(WIDTH);
-    setBackground(new Background(new BackgroundFill(Color.SEAGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+    setBackground(
+        new Background(new BackgroundFill(Color.SEAGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 
     this.decision = decision;
-    this.submitAction = submitAction;
     Text text = new Text(decision.getPrompt());
     text.setWrappingWidth(WIDTH);
     getChildren().add(text);
 
-    VBox box= new VBox();
+    VBox box = new VBox();
     for (String choice : decision.getOptions()) {
       Button button = new Button(choice);
       button.setOnAction(e -> setChoice(choice));
       box.getChildren().add(button);
     }
 
+    Button submit = new Button("Submit");
+    submit.setOnAction(e -> view.submitDecision(choices));
+    box.getChildren().add(submit);
+
     getChildren().add(box);
   }
 
-  public List<Integer> getChoiceResponses(){
-    return choices;
-  }
-
-  private void setChoice(String choice){
-    try {
-      submitAction.invoke(choices);
-    } catch (IllegalAccessException e) {
-      e.printStackTrace();
-    } catch (InvocationTargetException e) {
-      e.printStackTrace();
-    }
+  private void setChoice(String choice) {
     choices.add(decision.getOptions().indexOf(choice));
-
   }
 
 }

@@ -30,13 +30,8 @@ public class View extends HBox implements FrontEndExternal {
     Group boardGroup = new Group(board);
 
     Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
-    Method m = null;
-    try {
-      m = getClass().getDeclaredMethod("submitDecision", List.class);
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
-    }
-    choicesDisplay = new DecisionView(d, m);
+
+    choicesDisplay = new DecisionView(d, this);
 
     getChildren().addAll(boardGroup, choicesDisplay);
     scene.getStylesheets().add("resources/default.css");
@@ -46,7 +41,7 @@ public class View extends HBox implements FrontEndExternal {
   }
 
   public void submitDecision(List<Integer> decision) {
-    System.out.println(decision);
+    System.out.println("hello" + decision);
   }
 
   @Override
