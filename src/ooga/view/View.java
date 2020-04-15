@@ -39,7 +39,7 @@ public class View extends HBox implements FrontEndExternal {
     stage.show();
   }
 
-  public void submitDecision(List<Integer> decision) {
+  public void submitDecision(List<String> decision) {
     System.out.println("hello" + decision);
   }
 
