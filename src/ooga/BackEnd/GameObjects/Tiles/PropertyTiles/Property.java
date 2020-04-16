@@ -13,6 +13,8 @@ public abstract class Property extends Tile {
     protected int group_number;
     protected boolean mortgaged;
 
+    //this class is large and by using open close a bit more can cut a lot of the fat
+
     @Override
     public void action() {
         if (!isOwned()) {

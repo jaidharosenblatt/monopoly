@@ -12,6 +12,8 @@ public class Jail extends Tile {
         this.visiting = null;
     }
 
+
+    //rather than checking jail status here it would probably be handle by a higher up class
     @Override
     public void action() {
         if (this.visiting.getJailStatus()) {
