@@ -39,6 +39,9 @@ public class Board extends BorderPane {
 
   private void createCenter() {
     Button button = new Button("Take turn");
+
+
+    //these buttons will need to be injected.
     button.setOnAction(e -> movePlayer(playerPositions.keySet().iterator().next(), counter++));
     setCenter(button);
   }
