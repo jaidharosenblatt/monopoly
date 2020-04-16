@@ -4,11 +4,13 @@ public class RailRoad extends Property {
 
     private static final int RENT = 25;
 
-    public RailRoad(int tileID) {
+    public RailRoad() {}
+
+    public RailRoad(String tileID, int boardIndex) {
         this.tileID = tileID;
-        this.boardIndex = 0;
+        this.boardIndex = boardIndex;
         this.owner = null;
-        this.cost = 0;
+        this.cost = 200;
         this.group_color = "rr";
         this.group_number = 4;
         this.mortgaged = false;

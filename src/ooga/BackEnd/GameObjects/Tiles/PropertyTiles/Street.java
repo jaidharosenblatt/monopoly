@@ -12,24 +12,43 @@ public class Street extends Property {
     private int house_cost;
     private int houses;
 
-    public Street(int tileID) {
+    public Street() {}
+
+    public Street(String tileID, int boardIndex, int cost, String title_deed, int base_rent, int monopoly_rent, int rent_one_house, int rent_two_house, int rent_three_house, int rent_four_house, int rent_hotel, int house_cost, String group_color, int group_number) {
         this.tileID = tileID;
-        this.boardIndex = 0;
+        this.boardIndex = boardIndex;
+        this.cost = cost;
+        this.title_deed = title_deed;
+        this.base_rent = base_rent;
+        this.monopoly_rent = monopoly_rent;
+        this.rent_one_house = rent_one_house;
+        this.rent_two_house = rent_two_house;
+        this.rent_three_house = rent_three_house;
+        this.rent_four_house = rent_four_house;
+        this.rent_hotel = rent_hotel;
+        this.house_cost = house_cost;
+        this.group_color = group_color;
+        this.group_number = group_number;
         this.owner = null;
-        this.cost = 0;
-        this.base_rent = 0;
-        this.monopoly_rent = 0;
-        this.rent_one_house = 0;
-        this.rent_two_house = 0;
-        this.rent_three_house = 0;
-        this.rent_four_house = 0;
-        this.rent_hotel = 0;
-        this.house_cost = 0;
         this.houses = 0;
-        this.group_color = null;
-        this.group_number = 0;
         this.mortgaged = false;
     }
+
+    public void setBaseRent(int rent) {this.base_rent = rent;}
+
+    public void setMonopolyRent(int rent) {this.monopoly_rent = rent;}
+
+    public void setRent1H(int rent) {this.rent_one_house = rent;}
+
+    public void setRent2H(int rent) {this.rent_two_house = rent;}
+
+    public void setRent3H(int rent) {this.rent_three_house = rent;}
+
+    public void setRent4H(int rent) {this.rent_four_house = rent;}
+
+    public void setRentHotel(int rent) {this.rent_hotel = rent;}
+
+    public void setHouseCost(int cost) {this.house_cost = cost;}
 
     public int getHouseCost() {return this.house_cost;}
 

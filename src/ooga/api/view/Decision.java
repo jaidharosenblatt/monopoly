@@ -6,19 +6,21 @@ public interface Decision {
 
   /**
    * Display a prompt for this decision
+   *
    * @return the prompt to display to the player
    */
-  String displayPrompt();
+  String getPrompt();
 
   /**
    * Display the choices available to the player
+   *
    * @return a list of possible choices as strings
    */
-  List<String>  displayChoices();
+  List<String> getOptions();
 
   /**
    * Set the choice that the player picked in the gui
-   * @param choice the choice that the player chose for this decision
+   *
    */
-  void setChoice(int choice);
+  List<Integer> getChoices();
 }

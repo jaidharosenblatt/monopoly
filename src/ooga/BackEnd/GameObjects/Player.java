@@ -19,8 +19,10 @@ public class Player {
     private int currentTile;
     private List<Tile> boardGame;
     private List<Property> properties = new ArrayList<Property>();
+    private int houses;
 
     private boolean isJailed = false;
+    private int turnsinJail = 0;
     private int getOutCards = 0;
 
     public int dice1;
@@ -32,20 +34,31 @@ public class Player {
         currentBalance = INITIAL_BALANCE;
         currentTile = 0;
         this.boardGame = boardGame;
-
+        this.houses = 0;
     }
 
-    public String getName() {return name;}
+    public String getName() {return this.name;}
 
-    public int getBalance() {return currentBalance;}
+    public int getHouses() {return this.houses;}
 
-    public int getTile() {return currentTile;}
+    public int getBalance() {return this.currentBalance;}
+
+    public int getTile() {return this.currentTile;}
 
     public boolean hasJailFreeCards() {return (this.getOutCards > 0) ? true : false;}
 
     public void getJailFreeCard() {this.getOutCards += 1;}
 
-    public void setFree() {this.isJailed = false;}
+    public boolean getJailStatus() {return this.isJailed;}
+
+    public void addJailTurn() {this.turnsinJail += 1;}
+
+    public int getJailTurn() {return this.turnsinJail;}
+
+    public void setFree() {
+        this.isJailed = false;
+        this.turnsinJail = 0;
+    }
 
     public void setJailed() {
         this.isJailed = true;
@@ -55,6 +68,7 @@ public class Player {
     public void useJailFreeCard() {
         if (hasJailFreeCards()) {
             this.getOutCards -= 1;
+            this.setFree();
         }
     }
 
@@ -107,12 +121,14 @@ public class Player {
         if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
             this.payBank(S.getHouseCost() * amount);
             S.addHouse(amount);
+            this.houses += amount;
         }
     }
 
     public void sellHouse(int amount, Street S) {
         this.receive((S.getHouseCost() * amount) / 2);
         S.removeHouse(amount);
+        this.houses -= amount;
     }
 
 
@@ -120,5 +136,10 @@ public class Player {
     public void rollDice() {
         this.dice1 = (int) (Math.random() * 6) + 1;
         this.dice2 = (int) (Math.random() * 6) + 1;
+    }
+
+    public void drawCard(String type, ArrayList<Property> props, ArrayList<Player> players) {
+        Cards draw = new Cards(type, this, props, players);
+        draw.action();
     }
 }
