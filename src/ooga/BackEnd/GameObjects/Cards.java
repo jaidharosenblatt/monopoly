@@ -34,6 +34,8 @@ public class Cards {
         this.players = players;
     }
 
+    //This class probably should be reworked with a Card subclass and stacks.
+
     public void action() {
         if (this.type.equals("Chance")) {
             int probality = (int) (Math.random() * 16) + 1;
@@ -160,6 +162,7 @@ public class Cards {
                     break;
             }
         }
+        //Using case probabilities does not mimic the real game effectively. Using a stack is simpler, cleaner and more realistic.
         if (this.type.equals("Community")) {
             int probality = (int) (Math.random() * 17) + 1;
             switch (probality) {

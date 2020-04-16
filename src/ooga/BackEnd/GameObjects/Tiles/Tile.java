@@ -9,6 +9,8 @@ public abstract class Tile {
 
     public abstract void action();
 
+    //their is probably no need for tiles to know their own index and should probably have a super class the holds and indexes
+
     public int getBoardIndex() {return this.boardIndex;}
 
     public void onTile(Player P) {this.visiting = P;}
