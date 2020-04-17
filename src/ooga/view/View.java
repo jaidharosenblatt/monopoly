@@ -46,7 +46,7 @@ public class View extends HBox implements FrontEndExternal {
   }
 
   public void submitDecision(List<String> decision) {
-    System.out.println("hello" + decision);
+    System.out.println("decision is: " + decision);
   }
 
   @Override
@@ -56,7 +56,7 @@ public class View extends HBox implements FrontEndExternal {
 
   @Override
   public void displayText(String text) {
-
+    gameDisplay.displayText(text);
   }
 
   @Override
@@ -71,7 +71,7 @@ public class View extends HBox implements FrontEndExternal {
 
   @Override
   public void displayRoll(List<Integer> rolls) {
-
+    gameDisplay.displayRoll(rolls);
   }
 
   @Override
