@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import ooga.api.view.Decision;
 
-public class DecisionView extends VBox {
+public abstract class DecisionView extends VBox {
 
   private static final double WIDTH = 200;
 

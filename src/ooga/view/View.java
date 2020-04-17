@@ -35,7 +35,7 @@ public class View extends HBox implements FrontEndExternal {
     Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
 
     decisionFactory = new DecisionFactory(this);
-    DecisionView decisionView = decisionFactory.getDecision(d, 3);
+    DecisionView decisionView = decisionFactory.getDecision(d, 1);
 
     getChildren().addAll(boardGroup, decisionView);
     scene.getStylesheets().add("resources/default.css");

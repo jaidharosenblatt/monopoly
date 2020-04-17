@@ -11,11 +11,11 @@ public class DecisionFactory extends Pane {
     this.view = view;
   }
 
-  public DecisionView getDecision(Decision decision, int numberOfChoices){
-    if (numberOfChoices == 2){
-      return new TwoDecisionView(decision,view);
+  public DecisionView getDecision(Decision decision, int numberOfChoices) {
+    if (numberOfChoices == 2) {
+      return new TwoDecisionView(decision, view);
     }
-    return new MultiDecisionView(decision,view);
+    return new MultiDecisionView(decision, view);
   }
 
 
