@@ -6,7 +6,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import java.util.ArrayList;
 
-public class cardTile extends Tile {
+public class cardTile extends Event {
 
     private String type;
     private ArrayList<Property> properties = new ArrayList<Property>();
@@ -31,4 +31,8 @@ public class cardTile extends Tile {
     public void playerList(ArrayList<Player> players) {
         this.players = players;
     }
+
+    public void setType(String type) {this.type = type;}
+
+    public String getType() {return this.type;}
 }

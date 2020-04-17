@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-  public static void main(String[] args) {
-    launch(args);
-  }
+//  public static void main(String[] args) {
+//    launch(args);
+//  }
 
-//  public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
-//      XMLParser parse = new XMLParser();
-//      ArrayList<Property> properties = parse.propertySetUp("data/boardClassic.xml");
+  public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
+      XMLParser parse = new XMLParser();
+      ArrayList<Property> properties = parse.propertySetUp("data/boardClassic.xml");
 //      for (Property p : properties) {
 //          System.out.println(p.getPropID());
 //          System.out.println(p.getTitle());
@@ -33,7 +33,7 @@ public class Main extends Application {
 //      }
 //      System.out.println();
 //      System.out.println(properties.size());
-//  }
+  }
 
   @Override
   public void start(Stage primaryStage) {

@@ -2,7 +2,7 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
-public class Go extends Tile {
+public class Go extends Event {
 
     private static final int GO_MONEY = 200;
 

@@ -4,7 +4,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import java.util.Scanner;
 
-public class Jail extends Tile {
+public class Jail extends Event {
 
     public Jail() {}
 

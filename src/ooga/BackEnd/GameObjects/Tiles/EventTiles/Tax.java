@@ -2,7 +2,7 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
-public class Tax extends Tile {
+public class Tax extends Event {
 
     private int tax_cost;
 

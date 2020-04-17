@@ -238,6 +238,7 @@ public class XMLParser {
                             break;
                         }
                         case "boardIndex": {
+                            System.out.println(reader.getLocalName());
                             if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
                             break;
                         }
@@ -265,24 +266,26 @@ public class XMLParser {
         return railroads;
     }
 
-//    private ArrayList<Tile> eventTileParser(String pathname) throws FileNotFoundException, XMLStreamException {
-//        ArrayList<Tile> eventTiles = null;
-//        Go g = null;
-//        Jail j = null;
-//        Tax t = null;
-//        FreeParking fp = null;
-//        GoToJail gtj = null;
-//        cardTile ct = null;
-//        String text = null;
-//
-//        XMLInputFactory factory = XMLInputFactory.newInstance();
-//        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
+    private ArrayList<Tile> eventTileParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Tile> eventTiles = null;
+        Go g = null;
+        Jail j = null;
+        Tax t = null;
+        FreeParking fp = null;
+        GoToJail gtj = null;
+        cardTile ct = null;
+        String text = null;
+        String header = null;
+
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
 
 //        while (reader.hasNext()) {
 //            int Event = reader.next();
 //
 //            switch (Event) {
 //                case XMLStreamConstants.START_ELEMENT: {
+//                    header = reader.getLocalName();
 //                    if ("go".equals(reader.getLocalName())) {
 //                        g = new Go();
 //                        g.setTileID(reader.getAttributeValue(0));
@@ -291,20 +294,33 @@ public class XMLParser {
 //                        j = new Jail();
 //                        j.setTileID(reader.getAttributeValue(0));
 //                    }
-//                    if ("railroad".equals(reader.getLocalName())) {
-//                        r = new RailRoad();
-//                        r.setTileID(reader.getAttributeValue(0));
+//                    if ("tax".equals(reader.getLocalName())) {
+//                        t = new Tax();
+//                        t.setTileID(reader.getAttributeValue(0));
 //                        break;
 //                    }
-//                    if ("properties".equals(reader.getLocalName()))
-//                        railroads = new ArrayList<>();
+//                    if ("free_parking".equals(reader.getLocalName())) {
+//                        fp = new FreeParking();
+//                        fp.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("go_to_jail".equals(reader.getLocalName())) {
+//                        gtj = new GoToJail();
+//                        gtj.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("community".equals(reader.getLocalName())) {
+//                        ct = new cardTile();
+//                        ct.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("chance".equals(reader.getLocalName())) {
+//                        ct = new cardTile();
+//                        ct.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("eventTiles".equals(reader.getLocalName()))
+//                        eventTiles = new ArrayList<>();
 //                    break;
 //                }
 //                case XMLStreamConstants.CHARACTERS: {
 //                    text = reader.getText().trim();
-//                    if (text.equals("O. Railroad")) { //ampersand causes xml to create new lines. #BANDAID
-//                        text = "B. & O. Railroad";
-//                    }
 //                    break;
 //                }
 //                case XMLStreamConstants.END_ELEMENT: {
@@ -338,7 +354,7 @@ public class XMLParser {
 //                }
 //            }
 //        }
-//        return railroads;
-//    }
+        return eventTiles;
+    }
 
 }
