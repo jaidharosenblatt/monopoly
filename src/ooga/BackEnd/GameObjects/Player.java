@@ -20,7 +20,7 @@ public class Player {
     private int currentBalance;
     private int currentTile;
     private ArrayList<Tile> boardGame;
-    private ArrayList<Property> properties = new ArrayList<Property>();
+    private ArrayList<Property> properties;
     private int houses;
 
     private boolean isJailed = false;
@@ -36,6 +36,7 @@ public class Player {
         currentBalance = INITIAL_BALANCE;
         currentTile = 0;
         this.boardGame = boardGame;
+        this.properties = new ArrayList<>();
         this.houses = 0;
     }
 

@@ -16,14 +16,13 @@ public abstract class Property extends Tile {
     @Override
     public void action() {
         if (!isOwned()) {
-            try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end decision instead
-                System.out.print("Would you like to buy this? [Y or N]: ");
-                String input = scanner.nextLine();
-                if (input.equals("Y")) {
-                    if (this.visiting.getBalance() >= this.cost) {
-                        this.setOwner(this.visiting);
-                        this.owner.buyProperty(this);
-                    }
+            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+            System.out.println("Would you like to buy this? [Y or N]: ");
+            String decision = myObj.nextLine();
+            if (decision.equals("Y")) {
+                if (this.visiting.getBalance() >= this.cost) {
+                    this.setOwner(this.visiting);
+                    this.owner.buyProperty(this);
                 }
             }
         }
