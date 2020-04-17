@@ -18,10 +18,22 @@ import javax.xml.stream.XMLStreamReader;
 
 public class XMLParser {
 
-    public XMLParser() {}
+    public XMLParser() {
+    }
 
-    public void streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> properties = null;
+    public ArrayList<Property> propertySetUp(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Property> streets = streetParser(pathname);
+        ArrayList<Property> utilities = utilityParser(pathname);
+        ArrayList<Property> railroads = railroadParser(pathname);
+        ArrayList<Property> properties = new ArrayList<>();
+        properties.addAll(streets);
+        properties.addAll(utilities);
+        properties.addAll(railroads);
+        return properties;
+    }
+
+    private ArrayList<Property> streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Property> streets = null;
         Street s = null;
         String text = null;
 
@@ -38,7 +50,7 @@ public class XMLParser {
                         s.setTileID(reader.getAttributeValue(0));
                     }
                     if ("properties".equals(reader.getLocalName()))
-                        properties = new ArrayList<>();
+                        streets = new ArrayList<>();
                     break;
                 }
                 case XMLStreamConstants.CHARACTERS: {
@@ -48,52 +60,60 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "street": {
-                            properties.add(s);
+                            streets.add(s);
                             break;
                         }
                         case "boardIndex": {
-                            s.setBoardIndex(Integer.parseInt(text));
+                            if (s.getBoardIndex() == 0) {s.setBoardIndex(Integer.parseInt(text));}
                             break;
                         }
                         case "title_deed": {
-                            s.setTitle(text);
+                            if (s.getTitle() == null) {s.setTitle(text);}
                             break;
                         }
                         case "cost": {
-                            s.setCost(Integer.parseInt(text));
+                            if (s.getCost() == 0) {s.setCost(Integer.parseInt(text));}
                             break;
                         }
                         case "color": {
-                            s.setGroupColor(text);
+                            if (s.getGroupColor() == null) {s.setGroupColor(text);}
                             break;
                         }
                         case "group_number": {
-                            s.setGroupNumber(Integer.parseInt(text));
+                            if (s.getGroupNumber() == 0) {s.setGroupNumber(Integer.parseInt(text));}
                             break;
                         }
                         case "base_rent": {
-                            s.setBaseRent(Integer.parseInt(text));
+                            if (s.getBaseRent() == 0) {s.setBaseRent(Integer.parseInt(text));}
+                            break;
                         }
                         case "monopoly_rent": {
-                            s.setMonopolyRent(Integer.parseInt(text));
+                            if (s.getMonopolyRent() == 0) {s.setMonopolyRent(Integer.parseInt(text));}
+                            break;
                         }
                         case "rent_one_house": {
-                            s.setRent1H(Integer.parseInt(text));
+                            if (s.getRent1H() == 0) {s.setRent1H(Integer.parseInt(text));}
+                            break;
                         }
                         case "rent_two_house": {
-                            s.setRent2H(Integer.parseInt(text));
+                            if (s.getRent2H() == 0) {s.setRent2H(Integer.parseInt(text));}
+                            break;
                         }
                         case "rent_three_house": {
-                            s.setRent3H(Integer.parseInt(text));
+                            if (s.getRent3H() == 0) {s.setRent3H(Integer.parseInt(text));}
+                            break;
                         }
                         case "rent_four_house": {
-                            s.setRent4H(Integer.parseInt(text));
+                            if (s.getRent4H() == 0) {s.setRent4H(Integer.parseInt(text));}
+                            break;
                         }
                         case "rent_hotel": {
-                            s.setRentHotel(Integer.parseInt(text));
+                            if (s.getRentHotel() == 0) {s.setRentHotel(Integer.parseInt(text));}
+                            break;
                         }
                         case "house_cost": {
-                            s.setHouseCost(Integer.parseInt(text));
+                            if (s.getHouseCost() == 0) {s.setHouseCost(Integer.parseInt(text));}
+                            break;
                         }
                     }
                     break;
@@ -101,8 +121,146 @@ public class XMLParser {
             }
         }
 
-        for (Property p : properties) {
-            System.out.println(p.toString());
-        }
+        return streets;
     }
+
+    private ArrayList<Property> utilityParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Property> utilities = null;
+        Utility u = null;
+        String text = null;
+
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
+
+        while (reader.hasNext()) {
+            int Event = reader.next();
+
+            switch (Event) {
+                case XMLStreamConstants.START_ELEMENT: {
+                    if ("street".equals(reader.getLocalName())) {
+                        u = new Utility();
+                        u.setTileID(reader.getAttributeValue(0));
+                    }
+                    if ("railroad".equals(reader.getLocalName())) {
+                        u = new Utility();
+                        u.setTileID(reader.getAttributeValue(0));
+                    }
+                    if ("utility".equals(reader.getLocalName())) {
+                        u = new Utility();
+                        u.setTileID(reader.getAttributeValue(0));
+                        break;
+                    }
+                    if ("properties".equals(reader.getLocalName()))
+                        utilities = new ArrayList<>();
+                    break;
+                }
+                case XMLStreamConstants.CHARACTERS: {
+                    text = reader.getText().trim();
+                    break;
+                }
+                case XMLStreamConstants.END_ELEMENT: {
+                    switch (reader.getLocalName()) {
+                        case "utility": {
+                            utilities.add(u);
+                            break;
+                        }
+                        case "boardIndex": {
+                            if (u.getBoardIndex() == 0) {u.setBoardIndex(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "title_deed": {
+                            if (u.getTitle() == null) {u.setTitle(text);}
+                            break;
+                        }
+                        case "cost": {
+                            if (u.getCost() == 0) {u.setCost(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "color": {
+                            if (u.getGroupColor() == null) {u.setGroupColor(text);}
+                            break;
+                        }
+                        case "group_number": {
+                            if (u.getGroupNumber() == 0) {u.setGroupNumber(Integer.parseInt(text));}
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return utilities;
+    }
+
+    private ArrayList<Property> railroadParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Property> railroads = null;
+        RailRoad r = null;
+        String text = null;
+
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
+
+        while (reader.hasNext()) {
+            int Event = reader.next();
+
+            switch (Event) {
+                case XMLStreamConstants.START_ELEMENT: {
+                    if ("street".equals(reader.getLocalName())) {
+                        r = new RailRoad();
+                        r.setTileID(reader.getAttributeValue(0));
+                    }
+                    if ("utility".equals(reader.getLocalName())) {
+                        r = new RailRoad();
+                        r.setTileID(reader.getAttributeValue(0));
+                    }
+                    if ("railroad".equals(reader.getLocalName())) {
+                        r = new RailRoad();
+                        r.setTileID(reader.getAttributeValue(0));
+                        break;
+                    }
+                    if ("properties".equals(reader.getLocalName()))
+                        railroads = new ArrayList<>();
+                    break;
+                }
+                case XMLStreamConstants.CHARACTERS: {
+                    text = reader.getText().trim();
+                    if (text.equals("O. Railroad")) { //ampersand causes xml to create new lines. #BANDAID
+                        text = "B. & O. Railroad";
+                    }
+                    break;
+                }
+                case XMLStreamConstants.END_ELEMENT: {
+                    switch (reader.getLocalName()) {
+                        case "railroad": {
+                            railroads.add(r);
+                            break;
+                        }
+                        case "boardIndex": {
+                            if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "title_deed": {
+                            if (r.getTitle() == null) {r.setTitle(text);}
+                            break;
+                        }
+                        case "cost": {
+                            if (r.getCost() == 0) {r.setCost(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "color": {
+                            if (r.getGroupColor() == null) {r.setGroupColor(text);}
+                            break;
+                        }
+                        case "group_number": {
+                            if (r.getGroupNumber() == 0) {r.setGroupNumber(Integer.parseInt(text));}
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return railroads;
+    }
+
 }

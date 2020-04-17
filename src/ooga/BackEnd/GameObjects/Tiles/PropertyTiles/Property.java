@@ -39,6 +39,8 @@ public abstract class Property extends Tile {
 
     public void setTitle(String title) {this.title_deed = title;}
 
+    public String getTitle() {return this.title_deed;}
+
     public String getPropID() {return tileID;}
 
     public boolean isOwned() {return (owner == null) ? false : true;}
