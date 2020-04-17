@@ -14,9 +14,8 @@ public interface FrontEndExternal {
    * example of this is "Buy Property 1?" ,{"Yes","No"}
    *
    * @param decision the decision to present to the user
-   * @return A list of indexes corresponding to the chosen responses by the user
    */
-  List<Integer> makeUserDecision(Decision decision);
+  void makeUserDecision(Decision decision);
 
   /**
    * Display text to alert player
