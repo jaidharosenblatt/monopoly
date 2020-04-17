@@ -1,7 +1,8 @@
-package ooga.view;
+package ooga.view.gamedisplay.decisions;
 
 import javafx.scene.layout.Pane;
 import ooga.api.view.Decision;
+import ooga.view.View;
 
 public class DecisionFactory extends Pane {
 

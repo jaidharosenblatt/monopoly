@@ -11,6 +11,8 @@ import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
+import ooga.view.gamedisplay.GameDisplay;
+import ooga.view.gamedisplay.decisions.DecisionTester;
 
 public class View extends HBox implements FrontEndExternal {
 
@@ -37,6 +39,8 @@ public class View extends HBox implements FrontEndExternal {
 
     Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
     makeUserDecision(d);
+
+    displayRoll(List.of(1,2,3));
 
     getChildren().addAll(boardGroup, gameDisplay);
     scene.getStylesheets().add("resources/default.css");

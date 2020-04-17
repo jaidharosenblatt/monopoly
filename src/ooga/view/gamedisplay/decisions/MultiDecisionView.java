@@ -1,10 +1,11 @@
-package ooga.view;
+package ooga.view.gamedisplay.decisions;
 
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import ooga.api.view.Decision;
+import ooga.view.View;
 
 public class MultiDecisionView extends DecisionView {
   private List<String> choices = new ArrayList<>();

@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.gamedisplay.decisions;
 
 
 import javafx.geometry.Insets;

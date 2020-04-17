@@ -1,8 +1,9 @@
-package ooga.view;
+package ooga.view.gamedisplay.decisions;
 
 import java.util.List;
 import javafx.scene.control.Button;
 import ooga.api.view.Decision;
+import ooga.view.View;
 
 public class TwoDecisionView extends DecisionView {
 

@@ -1,9 +1,13 @@
-package ooga.view;
+package ooga.view.gamedisplay;
 
 import java.util.List;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import ooga.api.view.Decision;
+import ooga.view.gamedisplay.decisions.DecisionFactory;
+import ooga.view.gamedisplay.decisions.DecisionView;
+import ooga.view.View;
 import ooga.view.board.Die;
 
 public class GameDisplay extends VBox {
@@ -18,7 +22,6 @@ public class GameDisplay extends VBox {
     DecisionView decisionView = decisionFactory.getDecision(decision, 1);
     getChildren().clear();
     getChildren().add(decisionView);
-    getChildren().add(new Die(1));
   }
 
   public void displayText(String text){
@@ -27,6 +30,10 @@ public class GameDisplay extends VBox {
   }
 
   public void displayRoll(List<Integer> rolls) {
-
+    HBox hBox = new HBox();
+    for (int die : rolls){
+      hBox.getChildren().add(new Die(die));
+    }
+    getChildren().add(hBox);
   }
 }
