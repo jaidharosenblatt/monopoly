@@ -24,8 +24,8 @@ public class Cards {
 
     private Player user;
     private String type;
-    private ArrayList<Property> properties = new ArrayList<Property>();
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private ArrayList<Property> properties;
+    private ArrayList<Player> players;
 
     public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players) {
         this.type = type;
