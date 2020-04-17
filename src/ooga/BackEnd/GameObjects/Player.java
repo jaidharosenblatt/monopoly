@@ -3,6 +3,8 @@ package ooga.BackEnd.GameObjects;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class Player {
     private final int playerID;
     private int currentBalance;
     private int currentTile;
-    private List<Tile> boardGame;
-    private List<Property> properties = new ArrayList<Property>();
+    private ArrayList<Tile> boardGame;
+    private ArrayList<Property> properties = new ArrayList<Property>();
     private int houses;
 
     private boolean isJailed = false;
@@ -28,7 +30,7 @@ public class Player {
     public int dice1;
     public int dice2;
 
-    public Player(String name, List<Tile> boardGame){
+    public Player(String name, ArrayList<Tile> boardGame){
         this.name = name;
         this.playerID = (int)(Math.random()*100);
         currentBalance = INITIAL_BALANCE;

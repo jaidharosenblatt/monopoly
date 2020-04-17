@@ -1,4 +1,4 @@
-package ooga.BackEnd;
+package ooga.BackEnd.GameLogic;
 
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.*;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -20,13 +19,25 @@ import javax.xml.stream.XMLStreamReader;
 
 public class XMLParser {
 
-    public XMLParser() {
+    public ArrayList<Street> streets;
+    public ArrayList<RailRoad> railroads;
+    public ArrayList<Utility> utilities;
+    public ArrayList<Property> properties;
+    public ArrayList<Event> eventTiles;
+    public ArrayList<Tile> allTiles;
+
+    public XMLParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        this.properties = propertySetUp(pathname);
+        this.eventTiles = eventSetUp(pathname);
+        this.allTiles = new ArrayList<>();
+        this.allTiles.addAll(properties);
+        this.allTiles.addAll(eventTiles);
     }
 
-    public ArrayList<Property> propertySetUp(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> streets = streetParser(pathname);
-        ArrayList<Property> railroads = railroadParser(pathname);
-        ArrayList<Property> utilities = utilityParser(pathname);
+    private ArrayList<Property> propertySetUp(String pathname) throws FileNotFoundException, XMLStreamException {
+        this.streets = streetParser(pathname);
+        this.railroads = railroadParser(pathname);
+        this.utilities = utilityParser(pathname);
         ArrayList<Property> properties = new ArrayList<>();
         properties.addAll(streets);
         properties.addAll(railroads);
@@ -34,13 +45,13 @@ public class XMLParser {
         return properties;
     }
 
-    public ArrayList<Event> eventSetUp(String pathname) throws FileNotFoundException, XMLStreamException {
+    private ArrayList<Event> eventSetUp(String pathname) throws FileNotFoundException, XMLStreamException {
         ArrayList<Event> eventTiles = eventTileParser(pathname);
         return eventTiles;
     }
 
-    private ArrayList<Property> streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> streets = null;
+    private ArrayList<Street> streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Street> streets = null;
         Street s = null;
         String text = null;
 
@@ -131,8 +142,8 @@ public class XMLParser {
         return streets;
     }
 
-    private ArrayList<Property> railroadParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> railroads = null;
+    private ArrayList<RailRoad> railroadParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<RailRoad> railroads = null;
         RailRoad r = null;
         String text = null;
 
@@ -194,8 +205,8 @@ public class XMLParser {
         return railroads;
     }
 
-    private ArrayList<Property> utilityParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> utilities = null;
+    private ArrayList<Utility> utilityParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Utility> utilities = null;
         Utility u = null;
         String text = null;
 
