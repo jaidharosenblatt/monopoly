@@ -19,4 +19,8 @@ public class Tax extends Event {
     public void action() {
         this.visiting.payBank(this.tax_cost);
     }
+
+    public void setTax(int tax) {this.tax_cost = tax;}
+
+    public int getTax() {return this.tax_cost;}
 }

@@ -25,13 +25,18 @@ public class XMLParser {
 
     public ArrayList<Property> propertySetUp(String pathname) throws FileNotFoundException, XMLStreamException {
         ArrayList<Property> streets = streetParser(pathname);
-        ArrayList<Property> utilities = utilityParser(pathname);
         ArrayList<Property> railroads = railroadParser(pathname);
+        ArrayList<Property> utilities = utilityParser(pathname);
         ArrayList<Property> properties = new ArrayList<>();
         properties.addAll(streets);
-        properties.addAll(utilities);
         properties.addAll(railroads);
+        properties.addAll(utilities);
         return properties;
+    }
+
+    public ArrayList<Event> eventSetUp(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Event> eventTiles = eventTileParser(pathname);
+        return eventTiles;
     }
 
     private ArrayList<Property> streetParser(String pathname) throws FileNotFoundException, XMLStreamException {
@@ -126,6 +131,69 @@ public class XMLParser {
         return streets;
     }
 
+    private ArrayList<Property> railroadParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Property> railroads = null;
+        RailRoad r = null;
+        String text = null;
+
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
+
+        while (reader.hasNext()) {
+            int Event = reader.next();
+
+            switch (Event) {
+                case XMLStreamConstants.START_ELEMENT: {
+                    if ("street".equals(reader.getLocalName()) || "railroad".equals(reader.getLocalName())) {
+                        r = new RailRoad();
+                        r.setTileID(reader.getAttributeValue(0));
+                        break;
+                    }
+                    if ("properties".equals(reader.getLocalName()))
+                        railroads = new ArrayList<>();
+                    break;
+                }
+                case XMLStreamConstants.CHARACTERS: {
+                    text = reader.getText().trim();
+                    if (text.equals("O. Railroad")) { //ampersand causes xml to create new lines. #BANDAID
+                        text = "B. & O. Railroad";
+                    }
+                    break;
+                }
+                case XMLStreamConstants.END_ELEMENT: {
+                    switch (reader.getLocalName()) {
+                        case "railroad": {
+                            railroads.add(r);
+                            break;
+                        }
+                        case "boardIndex": {
+                            if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "title_deed": {
+                            if (r.getTitle() == null) {r.setTitle(text);}
+                            break;
+                        }
+                        case "cost": {
+                            if (r.getCost() == 0) {r.setCost(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "color": {
+                            if (r.getGroupColor() == null) {r.setGroupColor(text);}
+                            break;
+                        }
+                        case "group_number": {
+                            if (r.getGroupNumber() == 0) {r.setGroupNumber(Integer.parseInt(text));}
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return railroads;
+    }
+
     private ArrayList<Property> utilityParser(String pathname) throws FileNotFoundException, XMLStreamException {
         ArrayList<Property> utilities = null;
         Utility u = null;
@@ -139,18 +207,9 @@ public class XMLParser {
 
             switch (Event) {
                 case XMLStreamConstants.START_ELEMENT: {
-                    if ("street".equals(reader.getLocalName())) {
+                    if ("street".equals(reader.getLocalName()) || "railroad".equals(reader.getLocalName()) || "utility".equals(reader.getLocalName())) {
                         u = new Utility();
                         u.setTileID(reader.getAttributeValue(0));
-                    }
-                    if ("railroad".equals(reader.getLocalName())) {
-                        u = new Utility();
-                        u.setTileID(reader.getAttributeValue(0));
-                    }
-                    if ("utility".equals(reader.getLocalName())) {
-                        u = new Utility();
-                        u.setTileID(reader.getAttributeValue(0));
-                        break;
                     }
                     if ("properties".equals(reader.getLocalName()))
                         utilities = new ArrayList<>();
@@ -194,80 +253,8 @@ public class XMLParser {
         return utilities;
     }
 
-    private ArrayList<Property> railroadParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Property> railroads = null;
-        RailRoad r = null;
-        String text = null;
-
-        XMLInputFactory factory = XMLInputFactory.newInstance();
-        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
-
-        while (reader.hasNext()) {
-            int Event = reader.next();
-
-            switch (Event) {
-                case XMLStreamConstants.START_ELEMENT: {
-                    if ("street".equals(reader.getLocalName())) {
-                        r = new RailRoad();
-                        r.setTileID(reader.getAttributeValue(0));
-                    }
-                    if ("utility".equals(reader.getLocalName())) {
-                        r = new RailRoad();
-                        r.setTileID(reader.getAttributeValue(0));
-                    }
-                    if ("railroad".equals(reader.getLocalName())) {
-                        r = new RailRoad();
-                        r.setTileID(reader.getAttributeValue(0));
-                        break;
-                    }
-                    if ("properties".equals(reader.getLocalName()))
-                        railroads = new ArrayList<>();
-                    break;
-                }
-                case XMLStreamConstants.CHARACTERS: {
-                    text = reader.getText().trim();
-                    if (text.equals("O. Railroad")) { //ampersand causes xml to create new lines. #BANDAID
-                        text = "B. & O. Railroad";
-                    }
-                    break;
-                }
-                case XMLStreamConstants.END_ELEMENT: {
-                    switch (reader.getLocalName()) {
-                        case "railroad": {
-                            railroads.add(r);
-                            break;
-                        }
-                        case "boardIndex": {
-                            System.out.println(reader.getLocalName());
-                            if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
-                            break;
-                        }
-                        case "title_deed": {
-                            if (r.getTitle() == null) {r.setTitle(text);}
-                            break;
-                        }
-                        case "cost": {
-                            if (r.getCost() == 0) {r.setCost(Integer.parseInt(text));}
-                            break;
-                        }
-                        case "color": {
-                            if (r.getGroupColor() == null) {r.setGroupColor(text);}
-                            break;
-                        }
-                        case "group_number": {
-                            if (r.getGroupNumber() == 0) {r.setGroupNumber(Integer.parseInt(text));}
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-        return railroads;
-    }
-
-    private ArrayList<Tile> eventTileParser(String pathname) throws FileNotFoundException, XMLStreamException {
-        ArrayList<Tile> eventTiles = null;
+    private ArrayList<Event> eventTileParser(String pathname) throws FileNotFoundException, XMLStreamException {
+        ArrayList<Event> eventTiles = null;
         Go g = null;
         Jail j = null;
         Tax t = null;
@@ -275,85 +262,82 @@ public class XMLParser {
         GoToJail gtj = null;
         cardTile ct = null;
         String text = null;
-        String header = null;
+        String name = null;
 
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
 
-//        while (reader.hasNext()) {
-//            int Event = reader.next();
-//
-//            switch (Event) {
-//                case XMLStreamConstants.START_ELEMENT: {
-//                    header = reader.getLocalName();
-//                    if ("go".equals(reader.getLocalName())) {
-//                        g = new Go();
-//                        g.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("jail".equals(reader.getLocalName())) {
-//                        j = new Jail();
-//                        j.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("tax".equals(reader.getLocalName())) {
-//                        t = new Tax();
-//                        t.setTileID(reader.getAttributeValue(0));
-//                        break;
-//                    }
-//                    if ("free_parking".equals(reader.getLocalName())) {
-//                        fp = new FreeParking();
-//                        fp.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("go_to_jail".equals(reader.getLocalName())) {
-//                        gtj = new GoToJail();
-//                        gtj.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("community".equals(reader.getLocalName())) {
-//                        ct = new cardTile();
-//                        ct.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("chance".equals(reader.getLocalName())) {
-//                        ct = new cardTile();
-//                        ct.setTileID(reader.getAttributeValue(0));
-//                    }
-//                    if ("eventTiles".equals(reader.getLocalName()))
-//                        eventTiles = new ArrayList<>();
-//                    break;
-//                }
-//                case XMLStreamConstants.CHARACTERS: {
-//                    text = reader.getText().trim();
-//                    break;
-//                }
-//                case XMLStreamConstants.END_ELEMENT: {
-//                    switch (reader.getLocalName()) {
-//                        case "railroad": {
-//                            railroads.add(r);
-//                            break;
-//                        }
-//                        case "boardIndex": {
-//                            if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
-//                            break;
-//                        }
-//                        case "title_deed": {
-//                            if (r.getTitle() == null) {r.setTitle(text);}
-//                            break;
-//                        }
-//                        case "cost": {
-//                            if (r.getCost() == 0) {r.setCost(Integer.parseInt(text));}
-//                            break;
-//                        }
-//                        case "color": {
-//                            if (r.getGroupColor() == null) {r.setGroupColor(text);}
-//                            break;
-//                        }
-//                        case "group_number": {
-//                            if (r.getGroupNumber() == 0) {r.setGroupNumber(Integer.parseInt(text));}
-//                            break;
-//                        }
-//                    }
-//                    break;
-//                }
-//            }
-//        }
+        while (reader.hasNext()) {
+            int Event = reader.next();
+            switch (Event) {
+                case XMLStreamConstants.START_ELEMENT: {
+                    if (reader.getLocalName().equals("name")) {name = "name";}
+                    if ("event".equals(reader.getLocalName()) || "properties".equals(reader.getLocalName()) || "street".equals(reader.getLocalName()) || "railroad".equals(reader.getLocalName()) || "utility".equals(reader.getLocalName())) {
+                        g = new Go();
+                        g.setTileID(reader.getAttributeValue(0));
+                        j = new Jail();
+                        j.setTileID(reader.getAttributeValue(0));
+                        t = new Tax();
+                        t.setTileID(reader.getAttributeValue(0));
+                        fp = new FreeParking();
+                        fp.setTileID(reader.getAttributeValue(0));
+                        gtj = new GoToJail();
+                        gtj.setTileID(reader.getAttributeValue(0));
+                        ct = new cardTile();
+                        ct.setTileID(reader.getAttributeValue(0));
+                    }
+                    if ("eventTiles".equals(reader.getLocalName()))
+                        eventTiles = new ArrayList<>();
+                    break;
+                }
+                case XMLStreamConstants.CHARACTERS: {
+                    if (name == "name") {name = reader.getText().trim();}
+                    text = reader.getText().trim();
+                    break;
+                }
+                case XMLStreamConstants.END_ELEMENT: {
+                    switch (reader.getLocalName()) {
+                        case "event": {
+                            if (name.equals("go")) {eventTiles.add(g);}
+                            if (name.equals("jail")) {eventTiles.add(j);}
+                            if (name.equals("tax")) {eventTiles.add(t);}
+                            if (name.equals("free_parking")) {eventTiles.add(fp);}
+                            if (name.equals("go_to_jail")) {eventTiles.add(gtj);}
+                            if (name.equals("card")) {eventTiles.add(ct);}
+                            name = null;
+                            break;
+                        }
+                        case "boardIndex": {
+                            if (g.getBoardIndex() == 0) {g.setBoardIndex(Integer.parseInt(text));}
+                            if (j.getBoardIndex() == 0) {j.setBoardIndex(Integer.parseInt(text));}
+                            if (t.getBoardIndex() == 0) {t.setBoardIndex(Integer.parseInt(text));}
+                            if (fp.getBoardIndex() == 0) {fp.setBoardIndex(Integer.parseInt(text));}
+                            if (gtj.getBoardIndex() == 0) {gtj.setBoardIndex(Integer.parseInt(text));}
+                            if (ct.getBoardIndex() == 0) {ct.setBoardIndex(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "name": {
+                            if (g.getName() == null) {g.setName(text);}
+                            if (j.getName() == null) {j.setName(text);}
+                            if (t.getName() == null) {t.setName(text);}
+                            if (fp.getName() == null) {fp.setName(text);}
+                            if (gtj.getName() == null) {gtj.setName(text);}
+                            if (ct.getName() == null) {ct.setName(text);}
+                            break;
+                        }
+                        case "tax_cost": {
+                            if (t.getTax() == 0) {t.setTax(Integer.parseInt(text));}
+                            break;
+                        }
+                        case "type": {
+                            if (ct.getType() == null) {ct.setType(text);}
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
         return eventTiles;
     }
 
