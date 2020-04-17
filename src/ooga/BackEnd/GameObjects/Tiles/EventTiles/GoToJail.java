@@ -4,6 +4,8 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 public class GoToJail extends Tile {
 
+    public GoToJail() {}
+
     public GoToJail(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;

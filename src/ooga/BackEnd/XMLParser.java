@@ -1,9 +1,11 @@
 package ooga.BackEnd;
 
+import ooga.BackEnd.GameObjects.Tiles.EventTiles.*;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.RailRoad;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Utility;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -262,5 +264,81 @@ public class XMLParser {
         }
         return railroads;
     }
+
+//    private ArrayList<Tile> eventTileParser(String pathname) throws FileNotFoundException, XMLStreamException {
+//        ArrayList<Tile> eventTiles = null;
+//        Go g = null;
+//        Jail j = null;
+//        Tax t = null;
+//        FreeParking fp = null;
+//        GoToJail gtj = null;
+//        cardTile ct = null;
+//        String text = null;
+//
+//        XMLInputFactory factory = XMLInputFactory.newInstance();
+//        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(new File(pathname)));
+
+//        while (reader.hasNext()) {
+//            int Event = reader.next();
+//
+//            switch (Event) {
+//                case XMLStreamConstants.START_ELEMENT: {
+//                    if ("go".equals(reader.getLocalName())) {
+//                        g = new Go();
+//                        g.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("jail".equals(reader.getLocalName())) {
+//                        j = new Jail();
+//                        j.setTileID(reader.getAttributeValue(0));
+//                    }
+//                    if ("railroad".equals(reader.getLocalName())) {
+//                        r = new RailRoad();
+//                        r.setTileID(reader.getAttributeValue(0));
+//                        break;
+//                    }
+//                    if ("properties".equals(reader.getLocalName()))
+//                        railroads = new ArrayList<>();
+//                    break;
+//                }
+//                case XMLStreamConstants.CHARACTERS: {
+//                    text = reader.getText().trim();
+//                    if (text.equals("O. Railroad")) { //ampersand causes xml to create new lines. #BANDAID
+//                        text = "B. & O. Railroad";
+//                    }
+//                    break;
+//                }
+//                case XMLStreamConstants.END_ELEMENT: {
+//                    switch (reader.getLocalName()) {
+//                        case "railroad": {
+//                            railroads.add(r);
+//                            break;
+//                        }
+//                        case "boardIndex": {
+//                            if (r.getBoardIndex() == 0) {r.setBoardIndex(Integer.parseInt(text));}
+//                            break;
+//                        }
+//                        case "title_deed": {
+//                            if (r.getTitle() == null) {r.setTitle(text);}
+//                            break;
+//                        }
+//                        case "cost": {
+//                            if (r.getCost() == 0) {r.setCost(Integer.parseInt(text));}
+//                            break;
+//                        }
+//                        case "color": {
+//                            if (r.getGroupColor() == null) {r.setGroupColor(text);}
+//                            break;
+//                        }
+//                        case "group_number": {
+//                            if (r.getGroupNumber() == 0) {r.setGroupNumber(Integer.parseInt(text));}
+//                            break;
+//                        }
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//        return railroads;
+//    }
 
 }

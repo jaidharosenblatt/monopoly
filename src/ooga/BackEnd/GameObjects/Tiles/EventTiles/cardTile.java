@@ -12,6 +12,8 @@ public class cardTile extends Tile {
     private ArrayList<Property> properties = new ArrayList<Property>();
     private ArrayList<Player> players = new ArrayList<Player>();
 
+    public cardTile() {}
+
     public cardTile(String tileID, int boardIndex, String type) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;

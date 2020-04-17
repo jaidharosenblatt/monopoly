@@ -376,61 +376,61 @@
         </utility>
     </properties>
     <eventTiles>
-        <Go>
+        <go ID="29">
             <tileID>000</tileID>
             <boardIndex>0</boardIndex>
-        </Go>
-        <Jail>
+        </go>
+        <jail ID="30">
             <tileID>029</tileID>
             <boardIndex>10</boardIndex>
-        </Jail>
-        <Income_Tax>
+        </jail>
+        <tax ID="31">
             <tileID>030</tileID>
             <boardIndex>4</boardIndex>
             <tax_cost>200</tax_cost>
-        </Income_Tax>
-        <Luxury_Tax>
+        </tax>
+        <tax ID="32">
             <tileID>031</tileID>
             <boardIndex>38</boardIndex>
             <tax_cost>75</tax_cost>
-        </Luxury_Tax>
-        <Free_Parking>
+        </tax>
+        <free_parking ID="33">
             <tileID>032</tileID>
             <boardIndex>20</boardIndex>
-        </Free_Parking>
-        <GoToJail>
+        </free_parking>
+        <go_to_jail ID="34">
             <tileID>033</tileID>
             <boardIndex>30</boardIndex>
-        </GoToJail>
-        <Community1>
+        </go_to_jail>
+        <community ID="35">
             <tileID>034</tileID>
             <boardIndex>2</boardIndex>
             <type>Community</type>
-        </Community1>
-        <Community2>
+        </community>
+        <community ID="36">
             <tileID>035</tileID>
             <boardIndex>17</boardIndex>
             <type>Community</type>
-        </Community2>
-        <Community3>
+        </community>
+        <community ID="37">
             <tileID>036</tileID>
             <boardIndex>33</boardIndex>
             <type>Community</type>
-        </Community3>
-        <Chance1>
+        </community>
+        <chance ID="38">
             <tileID>037</tileID>
             <boardIndex>7</boardIndex>
             <type>Chance</type>
-        </Chance1>
-        <Chance2>
+        </chance>
+        <chance ID="39">
             <tileID>038</tileID>
             <boardIndex>22</boardIndex>
             <type>Chance</type>
-        </Chance2>
-        <Chance3>
+        </chance>
+        <chance ID="40">
             <tileID>039</tileID>
             <boardIndex>36</boardIndex>
             <type>Chance</type>
-        </Chance3>
+        </chance>
     </eventTiles>
 </boardGame>
