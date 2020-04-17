@@ -1,14 +1,11 @@
 package ooga.view.board;
 
-import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.api.view.PlayerInfo;
-import ooga.view.PlayerTester;
 
 public class Board extends BorderPane {
 
@@ -17,30 +14,22 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private Map<PlayerInfo, Integer> playerPositions = new HashMap<>();
+  private Map<PlayerInfo, Integer> playerPositions;
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
-  int counter = 1;
 
-  public Board() {
+  public Board(Map<PlayerInfo, Integer> playerPositions) {
+    this.playerPositions = playerPositions;
     createGrid();
     setPanesToRoot();
 
-    for (int i = 0; i < 4; i++) {
-      PlayerInfo player = new PlayerTester(0, i, "2E86AB");
+    for (PlayerInfo player : playerPositions.keySet()) {
+      //add player to tile 0
       Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
-      playerPositions.put(player, 0);
     }
-    createCenter();
-  }
-
-  private void createCenter() {
-    Button button = new Button("Take turn");
-    button.setOnAction(e -> movePlayer(playerPositions.keySet().iterator().next(), counter++));
-    setCenter(button);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {
@@ -108,7 +97,6 @@ public class Board extends BorderPane {
   private Tile getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
-    System.out.println(index);
 
     if (index < ROW_LENGTH) {
       return (Tile) bottom.getChildren().get(ROW_LENGTH - position);

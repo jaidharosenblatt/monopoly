@@ -1,6 +1,7 @@
 package ooga.view;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
@@ -30,11 +31,12 @@ public class View extends HBox implements FrontEndExternal {
   private Controller controller;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 700;
+  private Map<PlayerInfo, Integer> playerPositions;
 
-  public View(Stage stage, Controller controller) {
+  public View(Stage stage, Controller controller, Map<PlayerInfo, Integer> playerPositions) {
     this.controller = controller;
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    board = new Board();
+    board = new Board(playerPositions);
     Group boardGroup = new Group(board);
 
 
@@ -47,6 +49,10 @@ public class View extends HBox implements FrontEndExternal {
     stage.show();
   }
 
+
+  public void handleRoll(){
+    controller.handleRoll();
+  }
 
   public void submitDecision(List<String> decision) {
     controller.submitDecision(decision);

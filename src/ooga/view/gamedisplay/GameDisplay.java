@@ -1,6 +1,7 @@
 package ooga.view.gamedisplay;
 
 import java.util.List;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -13,19 +14,26 @@ import ooga.view.board.Die;
 public class GameDisplay extends VBox {
 
   private DecisionFactory decisionFactory;
+  private View view;
 
   public GameDisplay(View view) {
+    this.view = view;
     decisionFactory = new DecisionFactory(view);
+    createCenter();
   }
 
   public void makeUserDecision(Decision decision, boolean multiChoice) {
     DecisionView decisionView = decisionFactory.getDecision(decision, multiChoice);
-    getChildren().clear();
     getChildren().add(decisionView);
   }
 
+  private void createCenter() {
+    Button button = new Button("Take turn");
+    button.setOnAction(e -> view.handleRoll());
+    getChildren().add(button);
+  }
+
   public void displayText(String text) {
-    getChildren().clear();
     getChildren().add(new Text(text));
   }
 
