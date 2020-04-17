@@ -18,20 +18,20 @@ public class GameDisplay extends VBox {
     decisionFactory = new DecisionFactory(view);
   }
 
-  public void makeUserDecision(Decision decision) {
-    DecisionView decisionView = decisionFactory.getDecision(decision, 1);
+  public void makeUserDecision(Decision decision, boolean multiChoice) {
+    DecisionView decisionView = decisionFactory.getDecision(decision, multiChoice);
     getChildren().clear();
     getChildren().add(decisionView);
   }
 
-  public void displayText(String text){
+  public void displayText(String text) {
     getChildren().clear();
     getChildren().add(new Text(text));
   }
 
   public void displayRoll(List<Integer> rolls) {
     HBox hBox = new HBox();
-    for (int die : rolls){
+    for (int die : rolls) {
       hBox.getChildren().add(new Die(die));
     }
     getChildren().add(hBox);

@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import ooga.Controller;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.api.view.PlayerInfo;
@@ -26,21 +27,18 @@ public class View extends HBox implements FrontEndExternal {
 
   private Board board;
   private GameDisplay gameDisplay;
+  private Controller controller;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 700;
 
-  public View(Stage stage) {
+  public View(Stage stage, Controller controller) {
+    this.controller = controller;
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
     board = new Board();
     Group boardGroup = new Group(board);
 
 
     gameDisplay = new GameDisplay(this);
-
-    Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
-    makeUserDecision(d);
-
-    displayRoll(List.of(1,2,3));
 
     getChildren().addAll(boardGroup, gameDisplay);
     scene.getStylesheets().add("resources/default.css");
@@ -49,13 +47,14 @@ public class View extends HBox implements FrontEndExternal {
     stage.show();
   }
 
+
   public void submitDecision(List<String> decision) {
-    System.out.println("decision is: " + decision);
+    controller.submitDecision(decision);
   }
 
   @Override
-  public void makeUserDecision(Decision decision) {
-    gameDisplay.makeUserDecision(decision);
+  public void makeUserDecision(Decision decision, boolean multiChoice) {
+    gameDisplay.makeUserDecision(decision, multiChoice);
   }
 
   @Override

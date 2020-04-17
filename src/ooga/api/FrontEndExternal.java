@@ -14,8 +14,9 @@ public interface FrontEndExternal {
    * example of this is "Buy Property 1?" ,{"Yes","No"}
    *
    * @param decision the decision to present to the user
+   * @param multiChoice whether the use can select multiple choices
    */
-  void makeUserDecision(Decision decision);
+  void makeUserDecision(Decision decision, boolean multiChoice);
 
   /**
    * Display text to alert player
