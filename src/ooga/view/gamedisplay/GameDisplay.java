@@ -19,7 +19,7 @@ public class GameDisplay extends VBox {
   public GameDisplay(View view) {
     this.view = view;
     decisionFactory = new DecisionFactory(view);
-    createCenter();
+    takeTurn();
   }
 
   public void makeUserDecision(Decision decision, boolean multiChoice) {
@@ -27,7 +27,7 @@ public class GameDisplay extends VBox {
     getChildren().add(decisionView);
   }
 
-  private void createCenter() {
+  private void takeTurn() {
     Button button = new Button("Take turn");
     button.setOnAction(e -> view.handleRoll());
     getChildren().add(button);
