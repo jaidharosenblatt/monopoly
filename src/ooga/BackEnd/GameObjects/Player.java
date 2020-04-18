@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameObjects;
 
+import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
@@ -47,6 +48,21 @@ public class Player {
     public int getBalance() {return this.currentBalance;}
 
     public int getTile() {return this.currentTile;}
+
+    public String getTileName() {
+        String result = "";
+        for (Tile t : this.boardGame) {
+            if (t.getBoardIndex() == this.currentTile) {
+                if (t instanceof Event) {
+                    result = ((Event) t).getName();
+                }
+                if (t instanceof Property) {
+                    result = ((Property) t).getTitle();
+                }
+            }
+        }
+        return result;
+    }
 
     public boolean hasJailFreeCards() {return (this.getOutCards > 0) ? true : false;}
 

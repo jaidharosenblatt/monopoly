@@ -100,6 +100,7 @@ public class LoadGame {
             System.out.print(" " + prop.getTitle() + " ");
         }
         System.out.println("");
+        System.out.println(p.getName() + " is on " + p.getTileName());
         System.out.println("---------------------------------");
     }
 
