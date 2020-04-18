@@ -28,7 +28,7 @@ public abstract class Property extends Tile {
             }
         }
         else if (this.visiting != this.owner && !isMortgaged()) {
-            System.out.println(this.visiting.getName() + "just paid " + this.owner.getName() + " $" + this.getRent());
+            System.out.println(this.visiting.getName() + " just paid " + this.owner.getName() + " $" + this.getRent());
             this.visiting.payPlayer(this.owner, this.getRent());
         }
         else {

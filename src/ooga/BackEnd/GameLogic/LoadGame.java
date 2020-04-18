@@ -43,13 +43,24 @@ public class LoadGame {
             temp[i] = new Player(name, this.allTiles);
         }
         this.players = rollForOrder(temp);
-
-        while(true) {
+        int t = 0;
+        while(t != 4) {
             for (Player p : this.players) {
                 p.rollDice();
                 int new_tile = p.getTile() + p.dice1 + p.dice2;
                 p.moveTo(new_tile);
+                if (p.dice1 == p.dice2) {
+                    System.out.println(p.getName() + " has rolled doubles! Roll again.");
+                    p.rollDice();
+                    new_tile = p.getTile() + p.dice1 + p.dice2;
+                    p.moveTo(new_tile);
+                    if (p.dice1 == p.dice2) {
+                        System.out.println(p.getName() + " was caught speeding! Go to Jail.");
+                        p.setJailed();
+                    }
+                }
             }
+            t++;
         }
     }
 
