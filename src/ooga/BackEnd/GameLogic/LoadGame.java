@@ -10,6 +10,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class LoadGame {
     private ArrayList<Utility> utilities;
     private ArrayList<Event> eventTiles;
     private ArrayList<Tile> allTiles;
+    Player[] players;
 
     public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
@@ -32,12 +34,29 @@ public class LoadGame {
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
-        Player[] players = new Player[player_number];
+        this.players = new Player[player_number];
+        Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
             Scanner myObj = new Scanner(System.in);
             System.out.println("Enter name: ");
             String name = myObj.nextLine();
-            players[i] = new Player(name, this.allTiles);
+            temp[i] = new Player(name, this.allTiles);
         }
+        this.players = rollForOrder(temp);
+    }
+
+    private Player[] rollForOrder(Player[] list) {
+        Player[] order = new Player[list.length];
+        int counter = 0;
+        ArrayList<Integer> chosen = new ArrayList<>();
+        while (chosen.size() < 4) {
+            int probality = (int) (Math.random() * list.length);
+            if (!chosen.contains(probality)) {
+                chosen.add(probality);
+                order[counter] = list[probality];
+                counter++;
+            }
+        }
+        return order;
     }
 }
