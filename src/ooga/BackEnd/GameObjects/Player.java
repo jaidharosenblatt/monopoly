@@ -87,6 +87,7 @@ public class Player {
     public void receive(int amount) {this.currentBalance += amount;}
 
     public void moveTo(int tile) {
+        System.out.println(this.name + "just moved to tile " + tile);
         this.currentTile = tile;
         for (Tile t : this.boardGame) {
             if (t.getBoardIndex() == tile) {

@@ -43,6 +43,14 @@ public class LoadGame {
             temp[i] = new Player(name, this.allTiles);
         }
         this.players = rollForOrder(temp);
+
+        while(true) {
+            for (Player p : this.players) {
+                p.rollDice();
+                int new_tile = p.getTile() + p.dice1 + p.dice2;
+                p.moveTo(new_tile);
+            }
+        }
     }
 
     private Player[] rollForOrder(Player[] list) {
