@@ -22,6 +22,7 @@ public class LoadGame {
     private ArrayList<Utility> utilities;
     private ArrayList<Event> eventTiles;
     private ArrayList<Tile> allTiles;
+    private ArrayList<Player> activePlayers;
     Player[] players;
 
     public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
@@ -34,6 +35,7 @@ public class LoadGame {
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
+        this.activePlayers = new ArrayList<>();
         this.players = new Player[player_number];
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
@@ -41,24 +43,18 @@ public class LoadGame {
             System.out.println("Enter name: ");
             String name = myObj.nextLine();
             temp[i] = new Player(name, this.allTiles);
+            activePlayers.add(temp[i]);
         }
         this.players = rollForOrder(temp);
         int t = 0;
         while(t != 4) {
             for (Player p : this.players) {
-                p.rollDice();
-                int new_tile = p.getTile() + p.dice1 + p.dice2;
-                p.moveTo(new_tile);
-                if (p.dice1 == p.dice2) {
-                    System.out.println(p.getName() + " has rolled doubles! Roll again.");
-                    p.rollDice();
-                    new_tile = p.getTile() + p.dice1 + p.dice2;
-                    p.moveTo(new_tile);
-                    if (p.dice1 == p.dice2) {
-                        System.out.println(p.getName() + " was caught speeding! Go to Jail.");
-                        p.setJailed();
-                    }
-                }
+                displayAssets(p);
+                System.out.println("");
+                basicTurn(p);
+                System.out.println("");
+                decision(p);
+
             }
             t++;
         }
@@ -77,5 +73,38 @@ public class LoadGame {
             }
         }
         return order;
+    }
+
+    private void displayAssets(Player p) {
+        System.out.println("---------------------------------");
+        System.out.println(p.getName() + " has $" + p.getBalance());
+        System.out.print(p.getName() + " owns:");
+        for (Property prop : p.getProperties()) {
+            System.out.print(" " + prop.getTitle() + " ");
+        }
+        System.out.println("");
+        System.out.println("---------------------------------");
+    }
+
+    private void basicTurn(Player p) {
+        if (this.activePlayers.contains(p)) {
+            p.rollDice();
+            int new_tile = p.getTile() + p.dice1 + p.dice2;
+            p.moveTo(new_tile);
+            if (p.dice1 == p.dice2) {
+                System.out.println(p.getName() + " has rolled doubles! Roll again.");
+                p.rollDice();
+                new_tile = p.getTile() + p.dice1 + p.dice2;
+                p.moveTo(new_tile);
+                if (p.dice1 == p.dice2) {
+                    System.out.println(p.getName() + " was caught speeding! Go to Jail.");
+                    p.setJailed();
+                }
+            }
+        }
+    }
+
+    private void decision(Player p) {
+        System.out.println("Player should choose to mortgage/build/trade property here");
     }
 }
