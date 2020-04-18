@@ -2,9 +2,11 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
-public class Tax extends Tile {
+public class Tax extends Event {
 
     private int tax_cost;
+
+    public Tax() {}
 
     public Tax(String tileID, int boardIndex, int tax_cost) {
         this.tileID = tileID;
@@ -17,4 +19,8 @@ public class Tax extends Tile {
     public void action() {
         this.visiting.payBank(this.tax_cost);
     }
+
+    public void setTax(int tax) {this.tax_cost = tax;}
+
+    public int getTax() {return this.tax_cost;}
 }

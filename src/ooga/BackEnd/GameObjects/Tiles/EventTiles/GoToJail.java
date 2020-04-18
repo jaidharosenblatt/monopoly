@@ -2,7 +2,9 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
-public class GoToJail extends Tile {
+public class GoToJail extends Event {
+
+    public GoToJail() {}
 
     public GoToJail(String tileID, int boardIndex) {
         this.tileID = tileID;

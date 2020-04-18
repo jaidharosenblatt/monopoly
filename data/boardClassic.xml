@@ -348,7 +348,7 @@
         </railroad>
         <railroad ID="18">
             <boardIndex>25</boardIndex>
-            <title_deed>B. &#38; O. Railroad</title_deed>
+            <title_deed>B. &#038; O. Railroad</title_deed>
             <cost>200</cost>
             <color>rr</color>
             <group_number>4</group_number>
@@ -376,61 +376,61 @@
         </utility>
     </properties>
     <eventTiles>
-        <Go>
-            <tileID>000</tileID>
+        <event ID="0">
             <boardIndex>0</boardIndex>
-        </Go>
-        <Jail>
-            <tileID>029</tileID>
+            <name>go</name>
+        </event>
+        <event ID="29">
             <boardIndex>10</boardIndex>
-        </Jail>
-        <Income_Tax>
-            <tileID>030</tileID>
+            <name>jail</name>
+        </event>
+        <event ID="30">
             <boardIndex>4</boardIndex>
+            <name>tax</name>
             <tax_cost>200</tax_cost>
-        </Income_Tax>
-        <Luxury_Tax>
-            <tileID>031</tileID>
+        </event>
+        <event ID="31">
             <boardIndex>38</boardIndex>
+            <name>tax</name>
             <tax_cost>75</tax_cost>
-        </Luxury_Tax>
-        <Free_Parking>
-            <tileID>032</tileID>
+        </event>
+        <event ID="32">
             <boardIndex>20</boardIndex>
-        </Free_Parking>
-        <GoToJail>
-            <tileID>033</tileID>
+            <name>free_parking</name>
+        </event>
+        <event ID="33">
             <boardIndex>30</boardIndex>
-        </GoToJail>
-        <Community1>
-            <tileID>034</tileID>
+            <name>go_to_jail</name>
+        </event>
+        <event ID="34">
             <boardIndex>2</boardIndex>
+            <name>card</name>
             <type>Community</type>
-        </Community1>
-        <Community2>
-            <tileID>035</tileID>
+        </event>
+        <event ID="35">
             <boardIndex>17</boardIndex>
+            <name>card</name>
             <type>Community</type>
-        </Community2>
-        <Community3>
-            <tileID>036</tileID>
+        </event>
+        <event ID="36">
             <boardIndex>33</boardIndex>
+            <name>card</name>
             <type>Community</type>
-        </Community3>
-        <Chance1>
-            <tileID>037</tileID>
+        </event>
+        <event ID="37">
             <boardIndex>7</boardIndex>
+            <name>card</name>
             <type>Chance</type>
-        </Chance1>
-        <Chance2>
-            <tileID>038</tileID>
+        </event>
+        <event ID="38">
             <boardIndex>22</boardIndex>
+            <name>card</name>
             <type>Chance</type>
-        </Chance2>
-        <Chance3>
-            <tileID>039</tileID>
+        </event>
+        <event ID="39">
             <boardIndex>36</boardIndex>
+            <name>card</name>
             <type>Chance</type>
-        </Chance3>
+        </event>
     </eventTiles>
 </boardGame>

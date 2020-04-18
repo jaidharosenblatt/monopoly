@@ -1,57 +1,71 @@
 package ooga.view;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import ooga.Controller;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
+import ooga.view.gamedisplay.GameDisplay;
+import ooga.view.gamedisplay.decisions.DecisionTester;
 
 public class View extends HBox implements FrontEndExternal {
 
   /**
-   * TODO Add actions display
+   * TODO
+   * Add 2 action display
+   * No choice display
+   * Dice rolls
+   * Player display
    */
 
   private Board board;
-  private DecisionView choicesDisplay;
+  private GameDisplay gameDisplay;
+  private Controller controller;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 700;
+  private Map<PlayerInfo, Integer> playerPositions;
 
-  public View(Stage stage) {
+  public View(Stage stage, Controller controller, Map<PlayerInfo, Integer> playerPositions) {
+    this.controller = controller;
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    board = new Board();
+    board = new Board(playerPositions);
     Group boardGroup = new Group(board);
 
-    Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
 
-    choicesDisplay = new DecisionView(d, this);
+    gameDisplay = new GameDisplay(this);
 
-    getChildren().addAll(boardGroup, choicesDisplay);
+    getChildren().addAll(boardGroup, gameDisplay);
     scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
     stage.show();
   }
 
-  public void submitDecision(List<Integer> decision) {
-    System.out.println("hello" + decision);
+
+  public void handleRoll(){
+    controller.handleRoll();
+  }
+
+  public void submitDecision(List<String> decision) {
+    controller.submitDecision(decision);
   }
 
   @Override
-  public List<Integer> makeUserDecision(Decision decision) {
-    return null;
+  public void makeUserDecision(Decision decision, boolean multiChoice) {
+    gameDisplay.makeUserDecision(decision, multiChoice);
   }
 
   @Override
   public void displayText(String text) {
-
+    gameDisplay.displayText(text);
   }
 
   @Override
@@ -66,7 +80,7 @@ public class View extends HBox implements FrontEndExternal {
 
   @Override
   public void displayRoll(List<Integer> rolls) {
-
+    gameDisplay.displayRoll(rolls);
   }
 
   @Override

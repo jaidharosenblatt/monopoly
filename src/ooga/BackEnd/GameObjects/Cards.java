@@ -24,8 +24,8 @@ public class Cards {
 
     private Player user;
     private String type;
-    private ArrayList<Property> properties = new ArrayList<Property>();
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private ArrayList<Property> properties;
+    private ArrayList<Player> players;
 
     public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players) {
         this.type = type;
@@ -35,6 +35,7 @@ public class Cards {
     }
 
     public void action() {
+        System.out.println("Player just pulled a " + this.type + " card");
         if (this.type.equals("Chance")) {
             int probality = (int) (Math.random() * 16) + 1;
             switch (probality) {
@@ -249,14 +250,13 @@ public class Cards {
         for (Property p : this.properties) {
             if (p.getBoardIndex() == utilTile) {
                 if (!p.isOwned()) {
-                    try (Scanner scanner = new Scanner(System.in)) { //replace this with front-end decision instead
-                        System.out.print("Would you like to buy this? [Y or N]: ");
-                        String input = scanner.nextLine();
-                        if (input.equals("Y")) {
-                            if (this.user.getBalance() >= p.getCost()) {
-                                p.setOwner(this.user);
-                                this.user.buyProperty(p);
-                            }
+                    Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+                    System.out.println("Would you like to buy this? [Y or N]: ");
+                    String decision = myObj.nextLine();
+                    if (decision.equals("Y")) {
+                        if (this.user.getBalance() >= p.getCost()) {
+                            p.setOwner(this.user);
+                            this.user.buyProperty(p);
                         }
                     }
                 }

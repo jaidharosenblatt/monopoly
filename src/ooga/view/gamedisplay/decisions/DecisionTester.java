@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.gamedisplay.decisions;
 
 import java.util.List;
 import ooga.api.view.Decision;

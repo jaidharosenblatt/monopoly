@@ -36,17 +36,31 @@ public class Street extends Property {
 
     public void setBaseRent(int rent) {this.base_rent = rent;}
 
+    public int getBaseRent() {return this.base_rent;}
+
     public void setMonopolyRent(int rent) {this.monopoly_rent = rent;}
+
+    public int getMonopolyRent() {return this.monopoly_rent;}
 
     public void setRent1H(int rent) {this.rent_one_house = rent;}
 
+    public int getRent1H() {return this.rent_one_house;}
+
     public void setRent2H(int rent) {this.rent_two_house = rent;}
+
+    public int getRent2H() {return this.rent_two_house;}
 
     public void setRent3H(int rent) {this.rent_three_house = rent;}
 
+    public int getRent3H() {return this.rent_three_house;}
+
     public void setRent4H(int rent) {this.rent_four_house = rent;}
 
+    public int getRent4H() {return this.rent_four_house;}
+
     public void setRentHotel(int rent) {this.rent_hotel = rent;}
+
+    public int getRentHotel() {return this.rent_hotel;}
 
     public void setHouseCost(int cost) {this.house_cost = cost;}
 

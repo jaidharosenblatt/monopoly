@@ -2,7 +2,9 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
-public class FreeParking extends Tile {
+public class FreeParking extends Event {
+
+    public FreeParking() {}
 
     public FreeParking(String tileID, int boardIndex) {
         this.tileID = tileID;
