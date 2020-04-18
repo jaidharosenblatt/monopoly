@@ -13,16 +13,16 @@ public class TabViewTester extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     Group root = new Group();
-    createTabs(root);
+    //createTabs(root);
     Scene scene = new Scene(root,300,200);
     primaryStage.setScene(scene);
     primaryStage.show();
   }
 
-  private void createTabs(Group root) {
+  private void createTabs(View root) {
      myTabView = new TabView(300,200);
     rulesTabID = myTabView.createTab("Rules");
-    myTabView.addTabPaneToRoot(root);
+    myTabView.addTabPaneToView(root);
     myTabView.updateTab(rulesTabID, List.of("Rule1", "Rule2", "Rule3"));
   }
 }

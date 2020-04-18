@@ -10,13 +10,13 @@ import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
-//  public static void main(String[] args) {
-//    launch(args);
-//  }
+  public static void main(String[] args) {
+    launch(args);
+ }
 
-  public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
-    LoadGame game = new LoadGame("data/boardClassic.xml", 4);
-  }
+  //public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
+    //LoadGame game = new LoadGame("data/boardClassic.xml", 4);
+  //}
 
   @Override
   public void start(Stage primaryStage) {

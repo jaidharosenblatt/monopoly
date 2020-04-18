@@ -35,7 +35,7 @@ public class TabView {
     tabs.get(tabNum).updateTab(info);
   }
 
-  protected void addTabPaneToRoot(Group root){
+  protected void addTabPaneToView(View root){
     root.getChildren().add(tabPane);
   }
 
