@@ -1,10 +1,11 @@
 package ooga.view;
 
-import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class TabViewTester extends Application {
   TabView myTabView;
