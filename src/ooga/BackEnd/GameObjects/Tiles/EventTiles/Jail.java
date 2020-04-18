@@ -17,6 +17,7 @@ public class Jail extends Event {
     @Override
     public void action() {
         if (this.visiting.getJailStatus()) {
+            System.out.println(this.visiting.getName() + "is currently in Jail.");
             if (this.visiting.hasJailFreeCards()) {
                 Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
                 System.out.println("Would you like to use your Get Out of Jail Free Card? [Y or N]: ");

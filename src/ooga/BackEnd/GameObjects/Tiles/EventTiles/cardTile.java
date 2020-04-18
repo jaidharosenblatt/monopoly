@@ -22,9 +22,7 @@ public class cardTile extends Event {
     }
 
     @Override
-    public void action() {
-        this.visiting.drawCard(this.type, properties, players);
-    }
+    public void action() {this.visiting.drawCard(this.type, properties, players);}
 
     public void updateProps(ArrayList<Property> properties) { this.properties = properties; }
 

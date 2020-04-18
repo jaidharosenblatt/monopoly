@@ -15,9 +15,10 @@ public abstract class Property extends Tile {
 
     @Override
     public void action() {
+        System.out.println(this.visiting.getName() + " just landed on " + this.title_deed);
         if (!isOwned()) {
             Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("Would you like to buy this? [Y or N]: ");
+            System.out.println("Would you like to buy this for $" + this.cost + "? [Y or N]: ");
             String decision = myObj.nextLine();
             if (decision.equals("Y")) {
                 if (this.visiting.getBalance() >= this.cost) {
@@ -30,7 +31,7 @@ public abstract class Property extends Tile {
             this.visiting.payPlayer(this.owner, this.getRent());
         }
         else {
-            System.out.println("just visiting, pay nothing");
+            System.out.println("just visiting");
         }
     }
 
