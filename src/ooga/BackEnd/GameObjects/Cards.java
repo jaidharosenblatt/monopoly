@@ -35,6 +35,7 @@ public class Cards {
     }
 
     public void action() {
+        System.out.println("Player just pulled a " + this.type + " card");
         if (this.type.equals("Chance")) {
             int probality = (int) (Math.random() * 16) + 1;
             switch (probality) {
