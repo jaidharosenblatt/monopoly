@@ -39,6 +39,7 @@ public class LoadGame {
         createPlayers(player_number);
 
         int t = 0;
+        String input = "";
         while(t != 4) {
             for (Player p : this.players) {
                 updateCardTiles();
@@ -46,8 +47,10 @@ public class LoadGame {
                 System.out.println("");
                 basicTurn(p);
                 System.out.println("");
-                decision(p);
-
+                input = "";
+                while(!input.equals("end")) {
+                    input = decision(p);
+                }
             }
             t++;
         }
@@ -125,7 +128,34 @@ public class LoadGame {
         p.moveTo(new_tile);
     }
 
-    private void decision(Player p) {
-        System.out.println("Player should choose to mortgage/build/trade property here");
+    private String decision(Player p) {
+        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+        System.out.println("Would you like to trade, build houses, mortgage property, or end your turn? [trade, build, mortgage, end]: ");
+        String input = myObj.nextLine();
+        if (input.equals("trade")) {
+            System.out.println("Which player would you like to trade with?");
+        }
+        if (input.equals("build")) {
+            if (p.getProperties().size() < 1) {
+                System.out.println("You do not have any properties to build houses with");
+                return "";
+            }
+            for (Property owned : p.getProperties()) {
+                if (p.hasMonopoly(owned)) {
+                    Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
+                    System.out.println("Would you like to build houses on " + owned.getGroupColor() + " set? [Y or N]");
+                    String input2 = myObj.nextLine();
+                    if (input2.equals("Y")) {
+                        System.out.println("[STOP HERE FOR NOW]");
+                    }
+                }
+            }
+
+            System.out.println("?");
+        }
+        if (input.equals("mortgage")) {
+            System.out.println("Which property would you like to mortgage?");
+        }
+        return input;
     }
 }
