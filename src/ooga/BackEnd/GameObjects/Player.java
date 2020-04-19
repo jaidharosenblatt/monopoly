@@ -133,6 +133,8 @@ public class Player {
 
     public List<Property> getProperties() {return properties;}
 
+    public void setProperties(ArrayList<Property> list) {this.properties = list;}
+
     public void addProperty(Property P) {properties.add(P);}
 
     public void loseProperty(Property P) {properties.remove(P);}
@@ -157,11 +159,14 @@ public class Player {
     }
 
     public void buyHouse(int amount, Street S) {
-        System.out.println(this.name + " has bought " + amount + " houses on " + S.getTitle());
         if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
+            System.out.println(this.name + " has bought " + amount + " houses on " + S.getTitle());
             this.payBank(S.getHouseCost() * amount);
             S.addHouse(amount);
             this.houses += amount;
+        }
+        else {
+            System.out.println("That's too many houses");
         }
     }
 

@@ -132,6 +132,13 @@ public class LoadGame {
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
         System.out.println("Would you like to trade, build houses, mortgage property, or end your turn? [trade, build, mortgage, end]: ");
         String input = myObj.nextLine();
+        if (input.equals("cheat")) {
+            p.setProperties(this.properties);
+            for (Property t : this.properties) {
+                t.setOwner(p);
+            }
+            return "";
+        }
         if (input.equals("trade")) {
             System.out.println("Which player would you like to trade with?");
         }
@@ -140,18 +147,53 @@ public class LoadGame {
                 System.out.println("You do not have any properties to build houses with");
                 return "";
             }
+            int check = 0;
             for (Property owned : p.getProperties()) {
                 if (p.hasMonopoly(owned)) {
-                    Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
-                    System.out.println("Would you like to build houses on " + owned.getGroupColor() + " set? [Y or N]");
-                    String input2 = myObj.nextLine();
-                    if (input2.equals("Y")) {
-                        System.out.println("[STOP HERE FOR NOW]");
+                    check++;
+                    if (owned instanceof Street) {
+                        if (p.getBalance() < ((Street) owned).getHouseCost()) {
+                            System.out.println("Not enough funds");
+                            return "";
+                        }
+                    }
+                }
+            }
+            if (check < 1) {
+                System.out.println("You do not have a monopoly of any property");
+                return "";
+            }
+
+            String test = "";
+            while(!test.equals("done")) {
+                Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
+                System.out.println("What property would you like to build a house on?");
+                String input2 = myObj.nextLine();
+                ArrayList<Street> monopoly_set = new ArrayList<>();
+                loop:
+                for (Property owned : p.getProperties()) {
+                    if (owned.getTitle().equals(input2) && (owned instanceof Street)) {
+                        monopoly_set.add((Street) owned);
+                        for (Property q : p.getProperties()) {
+                            if (owned.getGroupColor().equals(q.getGroupColor()) && (q instanceof Street)) {
+                                monopoly_set.add((Street) q);
+                            }
+                        }
+                        for (Street r : monopoly_set) {
+                            int diff = ((Street) owned).getHouses() - r.getHouses();
+                            if (diff > 0) {
+                                System.out.println("Choose another property, must keep house number even");
+                                break loop;
+                            }
+                        }
+                        p.buyHouse(1, (Street) owned);
+                        test = "done";
+                        break loop;
                     }
                 }
             }
 
-            System.out.println("?");
+            return "";
         }
         if (input.equals("mortgage")) {
             System.out.println("Which property would you like to mortgage?");
