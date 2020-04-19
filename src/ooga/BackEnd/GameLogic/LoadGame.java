@@ -45,6 +45,7 @@ public class LoadGame {
                 updateCardTiles();
                 displayAssets(p);
                 System.out.println("");
+                promptPlayer(p);
                 basicTurn(p);
                 System.out.println("");
                 input = "";
@@ -130,7 +131,7 @@ public class LoadGame {
 
     private String decision(Player p) {
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-        System.out.println("Would you like to trade, build houses, mortgage property, or end your turn? [trade, build, mortgage, end]: ");
+        System.out.println("Would you like to trade, build houses, mortgage property, or end your turn? [trade, build, sell, mortgage, end]: ");
         String input = myObj.nextLine();
         if (input.equals("cheat")) {
             p.setProperties(this.properties);
@@ -199,6 +200,17 @@ public class LoadGame {
                     test = "done";
                     break loop;
                 }
+            }
+        }
+    }
+    private void promptPlayer(Player p) {
+        String input = "";
+        System.out.println("Would you like to do anything before rolling? [Y or N]");
+        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+        String decision = myObj.nextLine();
+        if (decision.equals("Y")) {
+            while(!input.equals("end")) {
+                input = decision(p);
             }
         }
     }
