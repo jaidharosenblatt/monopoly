@@ -146,9 +146,14 @@ public class Player {
     public void loseProperty(Property P) {properties.remove(P);}
 
     public void buyProperty(Property P) {
-        System.out.println(this.name + " has bought " + P.getTitle());
-        payBank(P.getCost());
-        addProperty(P);
+        if (this.currentBalance > P.getCost()) {
+            System.out.println(this.name + " has bought " + P.getTitle());
+            payBank(P.getCost());
+            addProperty(P);
+        }
+        else {
+            System.out.println(this.name + " cannot afford " + P.getTitle());
+        }
     }
 
     public boolean hasMonopoly(Property P) {

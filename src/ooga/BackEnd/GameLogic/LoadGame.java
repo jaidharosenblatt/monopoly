@@ -13,6 +13,7 @@ import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class LoadGame {
@@ -26,6 +27,7 @@ public class LoadGame {
     private ArrayList<Event> eventTiles;
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
+    private Iterator<Player> itr;
     Player[] players;
 
     public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
@@ -43,7 +45,9 @@ public class LoadGame {
         int t = 0;
         String input = "";
         while(t != 4) {
-            for (Player p : this.players) {
+            this.itr = this.activePlayers.iterator();
+            while (itr.hasNext()) {
+                Player p = itr.next();
                 if (p.isJailed()) {
                     p.moveTo(JAIL_INDEX);
                     if (p.isJailed()) {
@@ -68,6 +72,7 @@ public class LoadGame {
                         input = decision(p);
                     }
                 }
+                isBankrupt(p);
             }
             t++;
         }
@@ -187,6 +192,10 @@ public class LoadGame {
         }
         if (input.equals("jail")) {
             p.setJailed();
+            return "";
+        }
+        if (input.equals("bankrupt")) {
+            p.payBank(2000);
             return "";
         }
         if (input.equals("trade")) {
@@ -339,6 +348,50 @@ public class LoadGame {
             }
         }
         return "";
+    }
+
+    private void isBankrupt(Player p) {
+        String input = "";
+        if (p.getBalance() < 0) {
+            if (checkAssets(p)) {
+                System.out.println(p.getName() + " can afford to end bankruptcy without trading");
+            }
+            else {
+                System.out.println(p.getName() + " must trade to avoid bankruptcy");
+            }
+            input = "";
+            while(!input.equals("end")) {
+                input = decision(p);
+            }
+            if (p.getBalance() < 0) {
+                System.out.println(p.getName() + " went bankrupt");
+                for (Property s : p.getProperties()) {
+                    s.setOwner(null);
+                }
+                p.setProperties(null);
+                itr.remove();
+            }
+        }
+    }
+
+    private boolean checkAssets(Player p) {
+        int total = p.getBalance();
+        if (p.getHouses() > 0) {
+            for (Property s : p.getProperties()) {
+                if (s instanceof Street) {
+                    if (((Street) s).getHouses() > 0) {
+                        total += (((Street) s).getHouseCost() * ((Street) s).getHouses()) / 2;
+                    }
+                }
+            }
+        }
+        for (Property q : p.getProperties()) {
+            total += (q.getCost() / 2);
+        }
+        if (total >= 0) {
+            return true;
+        }
+        return false;
     }
 
 }
