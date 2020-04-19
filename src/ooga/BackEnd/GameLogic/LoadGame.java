@@ -294,7 +294,7 @@ public class LoadGame {
             System.out.println("Which property would you like to mortgage?");
             String input = myObj.nextLine();
             for (Property s : p.getProperties()) {
-                if (s.getTitle().equals(input) && p.getProperties().contains(s)) {
+                if (s.getTitle().equals(input) && p.getProperties().contains(s) && !(s.isMortgaged())) {
                     s.setMortgaged();
                     test = "done";
                     break;
@@ -305,6 +305,19 @@ public class LoadGame {
     }
 
     private String unmortgage(Player p) {
+        String test = "";
+        while(!test.equals("done")) {
+            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+            System.out.println("Which property would you like to unmortgage?");
+            String input = myObj.nextLine();
+            for (Property s : p.getProperties()) {
+                if (s.getTitle().equals(input) && p.getProperties().contains(s) && s.isMortgaged()) {
+                    s.liftMortgage();
+                    test = "done";
+                    break;
+                }
+            }
+        }
         return "";
     }
 
