@@ -20,26 +20,25 @@ public class RulesTab extends DisplayTab {
   public RulesTab(String tabName, Pane pane) {
     super(tabName, pane);
     this.myPane = pane;
-    addTitle();
+    super.addTitle(TITLE);
   }
 
   @Override
-  void updateTab(List<String> info) {
+  void updateTab(List<Object> info) {
     myPane.getChildren().clear();
-    addTitle();
-    for (String rule: info){
-      addText(rule);
+    addTitle(TITLE);
+    for (Object rule: info){
+      try{
+        addText((String) rule);
+      }
+      catch (Exception exception){
+        System.out.println("Rules tab only accepts Strings");
+      }
+      addText((String) rule);
     }
   }
 
-  private void addTitle() {
-    HBox hbox = new HBox();
-    title = new Text(TITLE);
-    title.setFont(new Font(20));
-    hbox.setAlignment(Pos.CENTER);
-    hbox.getChildren().add(title);
-    myPane.getChildren().add(hbox);
-  }
+
 
 
 
