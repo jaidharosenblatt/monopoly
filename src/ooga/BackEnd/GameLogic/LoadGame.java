@@ -172,14 +172,20 @@ public class LoadGame {
                 System.out.println("You do not have any properties to mortgage");
                 return "";
             }
-            Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("Which property would you like to mortgage?");
-            String input5 = myObj5.nextLine();
-            for (Property s : p.getProperties()) {
-                if (s.getTitle().equals(input5) && p.getProperties().contains(s)) {
-                    s.setMortgaged();
+            String test = "";
+            while(!test.equals("done")) {
+                Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
+                System.out.println("Which property would you like to mortgage?");
+                String input5 = myObj5.nextLine();
+                for (Property s : p.getProperties()) {
+                    if (s.getTitle().equals(input5) && p.getProperties().contains(s)) {
+                        s.setMortgaged();
+                        test = "done";
+                        break;
+                    }
                 }
             }
+
         }
         return input;
     }
