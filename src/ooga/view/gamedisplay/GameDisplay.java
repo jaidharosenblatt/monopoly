@@ -39,11 +39,4 @@ public class GameDisplay extends VBox {
     getChildren().add(new Text(text));
   }
 
-  public void displayRoll(List<Integer> rolls) {
-    HBox hBox = new HBox();
-    for (int die : rolls) {
-      hBox.getChildren().add(new Die(die));
-    }
-    getChildren().add(hBox);
-  }
 }

@@ -1,6 +1,8 @@
 package ooga.view.board;
 
+import java.util.List;
 import java.util.Map;
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,6 +32,15 @@ public class Board extends BorderPane {
       Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
     }
+  }
+
+  public void displayRoll(List<Integer> rolls) {
+    HBox hBox = new HBox();
+    hBox.setAlignment(Pos.CENTER);
+    for (int die : rolls) {
+      hBox.getChildren().add(new Die(die));
+    }
+    setCenter(hBox);
   }
 
   public void movePlayer(PlayerInfo player, int newPosition) {

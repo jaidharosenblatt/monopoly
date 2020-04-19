@@ -79,7 +79,7 @@ public class View extends HBox implements FrontEndExternal {
 
   @Override
   public void displayRoll(List<Integer> rolls) {
-    gameDisplay.displayRoll(rolls);
+    board.displayRoll(rolls);
   }
 
   @Override
