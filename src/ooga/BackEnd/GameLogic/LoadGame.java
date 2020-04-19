@@ -198,23 +198,37 @@ public class LoadGame {
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
         System.out.println("Would you like to trade, build houses, sell houses, mortgage property, unmortgage property, or end your turn? [trade, build, sell, mortgage, unmortgage, end]: ");
         String input = myObj.nextLine();
-        if (input.equals("cheat")) {
+        if (input.equals("cheat")) { //FOR TESTING PURPOSES ONLY
             p.setProperties(this.properties);
             for (Property t : this.properties) {
                 t.setOwner(p);
             }
             return "";
         }
-        if (input.equals("jail")) {
+        if (input.equals("jail")) { //FOR TESTING PURPOSES ONLY
             p.setJailed();
             return "";
         }
-        if (input.equals("bankrupt")) {
+        if (input.equals("bankrupt")) { //FOR TESTING PURPOSES ONLY
             p.payBank(2000);
             return "";
         }
         if (input.equals("trade")) {
+            for (Player a : activePlayers) {
+                if (p != a) {
+                    System.out.print(a.getName() + " ");
+                }
+            }
+            System.out.println("");
             System.out.println("Which player would you like to trade with?");
+            Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
+            String decision = myObj2.nextLine();
+            for (Player b : activePlayers) {
+                if (b.getName().equals(decision)) {
+                    displayAssets(b);
+
+                }
+            }
         }
         if (input.equals("build")) {
             build(p);

@@ -137,7 +137,7 @@ public class Player {
         }
     }
 
-    public List<Property> getProperties() {return properties;}
+    public ArrayList<Property> getProperties() {return properties;}
 
     public void setProperties(ArrayList<Property> list) {this.properties = list;}
 
@@ -197,5 +197,17 @@ public class Player {
         System.out.println(this.name + " has drawn a " + type + " card.");
         Cards draw = new Cards(type, this, props, players);
         draw.action();
+    }
+
+    public void trade(int moneyGive, ArrayList<Property> propertiesGive, Player otherPlayer, int moneyReceive, ArrayList<Property> propertiesReceive) {
+        this.payPlayer(otherPlayer, moneyGive);
+        otherPlayer.payPlayer(this, moneyReceive);
+        this.properties.removeAll(propertiesGive);
+        this.properties.addAll(propertiesReceive);
+        ArrayList<Property> temp = otherPlayer.getProperties();
+        temp.removeAll(propertiesReceive);
+        temp.addAll(propertiesGive);
+        otherPlayer.setProperties(temp);
+
     }
 }
