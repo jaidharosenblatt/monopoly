@@ -25,6 +25,9 @@ public abstract class Property extends Tile {
                     this.setOwner(this.visiting);
                     this.owner.buyProperty(this);
                 }
+                else {
+                    System.out.println(this.visiting.getName() + " cannot afford it");
+                }
             }
         }
         else if (this.visiting != this.owner && !isMortgaged()) {

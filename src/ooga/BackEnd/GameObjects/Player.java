@@ -151,9 +151,6 @@ public class Player {
             payBank(P.getCost());
             addProperty(P);
         }
-        else {
-            System.out.println(this.name + " cannot afford " + P.getTitle());
-        }
     }
 
     public boolean hasMonopoly(Property P) {

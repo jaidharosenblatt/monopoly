@@ -28,7 +28,6 @@ public class LoadGame {
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
     private Iterator<Player> itr;
-    Player[] players;
 
     public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
@@ -48,6 +47,11 @@ public class LoadGame {
             this.itr = this.activePlayers.iterator();
             while (itr.hasNext()) {
                 Player p = itr.next();
+                if (activePlayers.size() == 1) {
+                    System.out.println(activePlayers.get(0).getName() + " wins!");
+                    itr.remove();
+                    break;
+                }
                 if (p.isJailed()) {
                     p.moveTo(JAIL_INDEX);
                     if (p.isJailed()) {
@@ -55,9 +59,15 @@ public class LoadGame {
                         promptPlayer(p);
                         continue;
                     }
-                    input = "";
-                    while(!input.equals("end")) {
-                        input = decision(p);
+                    if (p.getBalance() < 0) {
+                        isBankrupt(p);
+                    }
+                    else {
+                        System.out.println("");
+                        input = "";
+                        while(!input.equals("end")) {
+                            input = decision(p);
+                        }
                     }
                 }
                 else {
@@ -66,13 +76,17 @@ public class LoadGame {
                     System.out.println("");
                     promptPlayer(p);
                     basicTurn(p);
-                    System.out.println("");
-                    input = "";
-                    while(!input.equals("end")) {
-                        input = decision(p);
+                    if (p.getBalance() < 0) {
+                        isBankrupt(p);
+                    }
+                    else {
+                        System.out.println("");
+                        input = "";
+                        while(!input.equals("end")) {
+                            input = decision(p);
+                        }
                     }
                 }
-                isBankrupt(p);
             }
             t++;
         }
@@ -80,16 +94,17 @@ public class LoadGame {
 
     private void createPlayers(int player_number) {
         this.activePlayers = new ArrayList<>();
-        this.players = new Player[player_number];
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
             Scanner myObj = new Scanner(System.in);
             System.out.println("Enter name: ");
             String name = myObj.nextLine();
             temp[i] = new Player(name, this.allTiles);
-            activePlayers.add(temp[i]);
         }
-        this.players = rollForOrder(temp);
+        Player[] again = rollForOrder(temp);
+        for (Player p : again) {
+            this.activePlayers.add(p);
+        }
         updateCardTiles();
     }
 

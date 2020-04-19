@@ -41,7 +41,6 @@ public class Cards {
             switch (probality) {
                 case 1:
                     System.out.println("Advance to \"GO\". (Collect $200)");
-                    user.receive(CROSS_GO);
                     user.moveTo(GO_INDEX);
                     break;
                 case 2:
@@ -104,11 +103,6 @@ public class Cards {
                     System.out.println("Go Back Three Spaces.");
                     int newTile = this.user.getTile() - 3;
                     this.user.moveTo(newTile);
-                    for (Property p : properties) {
-                        if (p.getBoardIndex() == newTile) {
-                            p.action();
-                        }
-                    }
                     break;
                 case 10:
                     System.out.println("Go to Jail. Go directly to Jail. Do not pass GO, do not collect $200.");
@@ -128,20 +122,10 @@ public class Cards {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(READING_RR_INDEX);
-                    for (Property p : properties) {
-                        if (p.getBoardIndex() == READING_RR_INDEX) {
-                            p.action();
-                        }
-                    }
                     break;
                 case 14:
                     System.out.println("Take a walk on the Boardwalk. Advance token to Boardwalk.");
                     user.moveTo(BOARDWALK_INDEX);
-                    for (Property p : properties) {
-                        if (p.getBoardIndex() == BOARDWALK_INDEX) {
-                            p.action();
-                        }
-                    }
                     break;
                 case 15:
                     System.out.println("You have been elected Chairman of the Board. Pay each player $50.");
@@ -166,7 +150,6 @@ public class Cards {
             switch (probality) {
                 case 1:
                     System.out.println("Advance to \"GO\". (Collect $200)");
-                    user.receive(CROSS_GO);
                     user.moveTo(GO_INDEX);
                     break;
                 case 2:
