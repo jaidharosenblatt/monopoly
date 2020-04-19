@@ -162,7 +162,7 @@ public class Player {
 
     public void buyHouse(int amount, Street S) {
         if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
-            System.out.println(this.name + " has bought " + amount + " houses on " + S.getTitle());
+            System.out.println(this.name + " has bought " + amount + " house on " + S.getTitle());
             this.payBank(S.getHouseCost() * amount);
             S.addHouse(amount);
             this.houses += amount;
@@ -173,7 +173,7 @@ public class Player {
     }
 
     public void sellHouse(int amount, Street S) {
-        System.out.println(this.name + " has sold " + amount + " houses on " + S.getTitle());
+        System.out.println(this.name + " has sold " + amount + " house on " + S.getTitle());
         this.receive((S.getHouseCost() * amount) / 2);
         S.removeHouse(amount);
         this.houses -= amount;
