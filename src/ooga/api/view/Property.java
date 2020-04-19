@@ -3,7 +3,7 @@ package ooga.api.view;
 public interface Property {
 
   /**
-   * @return the category of this property
+   * @return the category of this property: comma separated R,G,B in 0-255 integer standard
    */
   String getCategory();
 
