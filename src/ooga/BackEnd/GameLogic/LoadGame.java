@@ -105,6 +105,23 @@ public class LoadGame {
         }
         System.out.println("");
         System.out.println(p.getName() + " is on " + p.getTileName());
+        System.out.print(p.getName() + " mortgaged:");
+        for (Property prop : p.getProperties()) {
+            if (prop.isMortgaged()) {
+                System.out.print(" " + prop.getTitle() + " ");
+            }
+        }
+        System.out.println("");
+        System.out.print(p.getName() + " monopolies:");
+        ArrayList<String> colors = new ArrayList<>();
+        for (Property prop : p.getProperties()) {
+            if (p.hasMonopoly(prop) && !(colors.contains(prop.getGroupColor()))) {
+                System.out.print(" " + prop.getGroupColor() + " ");
+                colors.add(prop.getGroupColor());
+            }
+        }
+        System.out.println("");
+        System.out.println(p.getName() + " has " + p.getNumJFC() + " Get Out of Jail Free cards");
         System.out.println("---------------------------------");
     }
 
@@ -131,7 +148,7 @@ public class LoadGame {
 
     private String decision(Player p) {
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-        System.out.println("Would you like to trade, build houses, mortgage property, or end your turn? [trade, build, sell, mortgage, end]: ");
+        System.out.println("Would you like to trade, build houses, sell houses, mortgage property, unmortgage property, or end your turn? [trade, build, sell, mortgage, unmortgage, end]: ");
         String input = myObj.nextLine();
         if (input.equals("cheat")) {
             p.setProperties(this.properties);

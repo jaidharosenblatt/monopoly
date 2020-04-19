@@ -70,6 +70,8 @@ public class Player {
 
     public boolean getJailStatus() {return this.isJailed;}
 
+    public int getNumJFC() {return this.getOutCards;}
+
     public void addJailTurn() {this.turnsinJail += 1;}
 
     public int getJailTurn() {return this.turnsinJail;}
