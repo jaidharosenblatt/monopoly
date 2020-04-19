@@ -17,6 +17,8 @@ import java.util.Scanner;
 
 public class LoadGame {
 
+    private static final int JAIL_INDEX = 10;
+
     private ArrayList<Property> properties;
     private ArrayList<Street> streets;
     private ArrayList<RailRoad> railroads;
@@ -42,15 +44,29 @@ public class LoadGame {
         String input = "";
         while(t != 4) {
             for (Player p : this.players) {
-                updateCardTiles();
-                displayAssets(p);
-                System.out.println("");
-                promptPlayer(p);
-                basicTurn(p);
-                System.out.println("");
-                input = "";
-                while(!input.equals("end")) {
-                    input = decision(p);
+                if (p.isJailed()) {
+                    p.moveTo(JAIL_INDEX);
+                    if (p.isJailed()) {
+                        System.out.println("You remain in jail");
+                        promptPlayer(p);
+                        continue;
+                    }
+                    input = "";
+                    while(!input.equals("end")) {
+                        input = decision(p);
+                    }
+                }
+                else {
+                    updateCardTiles();
+                    displayAssets(p);
+                    System.out.println("");
+                    promptPlayer(p);
+                    basicTurn(p);
+                    System.out.println("");
+                    input = "";
+                    while(!input.equals("end")) {
+                        input = decision(p);
+                    }
                 }
             }
             t++;
@@ -127,10 +143,10 @@ public class LoadGame {
 
     private void basicTurn(Player p) {
         if (this.activePlayers.contains(p)) {
-            rollDice(p);
+            rollDiceAndMove(p);
             if (p.dice1 == p.dice2) {
                 System.out.println(p.getName() + " has rolled doubles! Roll again.");
-                rollDice(p);
+                rollDiceAndMove(p);
                 if (p.dice1 == p.dice2) {
                     System.out.println(p.getName() + " was caught speeding! Go to Jail.");
                     p.setJailed();
@@ -139,7 +155,7 @@ public class LoadGame {
         }
     }
 
-    private void rollDice(Player p) {
+    private void rollDiceAndMove(Player p) {
         p.rollDice();
         int new_tile = p.getTile() + p.dice1 + p.dice2;
         if (new_tile > 39) {new_tile -= 40;}
@@ -148,7 +164,7 @@ public class LoadGame {
 
     private void promptPlayer(Player p) {
         String input = "";
-        System.out.println("Would you like to do anything before rolling? [Y or N]");
+        System.out.println("Would you like to do anything first? [Y or N]");
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
         String decision = myObj.nextLine();
         if (decision.equals("Y")) {
@@ -167,6 +183,10 @@ public class LoadGame {
             for (Property t : this.properties) {
                 t.setOwner(p);
             }
+            return "";
+        }
+        if (input.equals("jail")) {
+            p.setJailed();
             return "";
         }
         if (input.equals("trade")) {

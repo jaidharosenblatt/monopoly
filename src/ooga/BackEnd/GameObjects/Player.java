@@ -24,9 +24,9 @@ public class Player {
     private ArrayList<Property> properties;
     private int houses;
 
-    private boolean isJailed = false;
-    private int turnsinJail = 0;
-    private int getOutCards = 0;
+    private boolean isJailed;
+    private int turnsinJail;
+    private int getOutCards;
 
     public int dice1;
     public int dice2;
@@ -39,6 +39,10 @@ public class Player {
         this.boardGame = boardGame;
         this.properties = new ArrayList<>();
         this.houses = 0;
+        this.isJailed = false;
+        this.turnsinJail = 0;
+        this.getOutCards = 0;
+
     }
 
     public String getName() {return this.name;}
@@ -68,7 +72,7 @@ public class Player {
 
     public void getJailFreeCard() {this.getOutCards += 1;}
 
-    public boolean getJailStatus() {return this.isJailed;}
+    public boolean isJailed() {return this.isJailed;}
 
     public int getNumJFC() {return this.getOutCards;}
 

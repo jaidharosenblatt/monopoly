@@ -16,8 +16,8 @@ public class Jail extends Event {
 
     @Override
     public void action() {
-        if (this.visiting.getJailStatus()) {
-            System.out.println(this.visiting.getName() + "is currently in Jail.");
+        if (this.visiting.isJailed()) {
+            System.out.println(this.visiting.getName() + " is currently in Jail.");
             if (this.visiting.hasJailFreeCards()) {
                 Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
                 System.out.println("Would you like to use your Get Out of Jail Free Card? [Y or N]: ");
@@ -25,6 +25,8 @@ public class Jail extends Event {
                 if (decision.equals("Y")) {
                     this.visiting.useJailFreeCard();
                     this.visiting.setFree();
+                    this.visiting.rollDice();
+                    this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                 }
             }
             if (this.visiting.getJailTurn() < 2) {
@@ -34,18 +36,23 @@ public class Jail extends Event {
                 if (decision.equals("Y")) {
                     this.visiting.payBail();
                     this.visiting.setFree();
+                    this.visiting.rollDice();
+                    this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                 }
                 if (decision.equals("N")) {
                     this.visiting.addJailTurn();
                     this.visiting.rollDice();
                     if (this.visiting.dice1 == this.visiting.dice2) {
                         this.visiting.setFree();
+                        this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                     }
                 }
             }
             else {
                 this.visiting.payBail();
                 this.visiting.setFree();
+                this.visiting.rollDice();
+                this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
             }
         }
     }
