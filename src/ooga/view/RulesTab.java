@@ -34,7 +34,7 @@ public class RulesTab extends DisplayTab {
       catch (Exception exception){
         System.out.println("Rules tab only accepts Strings");
       }
-      addText((String) rule);
+
     }
   }
 

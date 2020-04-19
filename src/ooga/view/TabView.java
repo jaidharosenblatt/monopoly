@@ -28,10 +28,11 @@ public class TabView {
   public TabView(double width, double height){
     tabPane = new TabPane();
     tabPane.setPrefSize(width, height);
-    rulesTabID = this.createTab("Rules");
-    playersTabID = this.createTab("Players");
     tabsRegistry.put("Rules", RulesTab.class);
     tabsRegistry.put("Players", PlayersTab.class);
+    rulesTabID = this.createTab("Rules");
+    playersTabID = this.createTab("Players");
+
   }
 
   protected int createTab(String label) {
@@ -41,7 +42,6 @@ public class TabView {
     String tabType = label+ "Tab";
     DisplayTab displayTab;
     try {
-
       displayTab = (DisplayTab) tabsRegistry.get(label).getDeclaredConstructor(String.class, Pane.class).newInstance(tabType, vbox);
     }
     catch(NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException ex){

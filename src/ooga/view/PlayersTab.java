@@ -11,7 +11,7 @@ import ooga.api.view.Property;
 import java.util.List;
 
 public class PlayersTab extends DisplayTab{
-    private static final String TITLE = "Game Rules";
+    private static final String TITLE = "Player Assets";
     private static final int SPACING = 10;
     private static final double FONT_SIZE = 12;
 
