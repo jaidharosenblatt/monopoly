@@ -53,6 +53,16 @@ public class Player {
 
     public int getTile() {return this.currentTile;}
 
+    public void setTile(int tile) {
+        System.out.println(this.name + " just moved to tile " + tile);
+        this.currentTile = tile;
+        for (Tile t : this.boardGame) {
+            if (t.getBoardIndex() == tile) {
+                t.onTile(this);
+            }
+        }
+    }
+
     public String getTileName() {
         String result = "";
         for (Tile t : this.boardGame) {
@@ -203,11 +213,16 @@ public class Player {
         this.payPlayer(otherPlayer, moneyGive);
         otherPlayer.payPlayer(this, moneyReceive);
         this.properties.removeAll(propertiesGive);
-        this.properties.addAll(propertiesReceive);
+        for (Property p : propertiesGive) {
+            p.setOwner(otherPlayer);
+        }
         ArrayList<Property> temp = otherPlayer.getProperties();
         temp.removeAll(propertiesReceive);
+        for (Property p : propertiesReceive) {
+            p.setOwner(this);
+        }
+        this.properties.addAll(propertiesReceive);
         temp.addAll(propertiesGive);
         otherPlayer.setProperties(temp);
-
     }
 }

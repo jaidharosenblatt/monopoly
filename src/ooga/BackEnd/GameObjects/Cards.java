@@ -229,7 +229,7 @@ public class Cards {
     }
 
     private void payUtil10(int utilTile) {
-        this.user.moveTo(utilTile);
+        this.user.setTile(utilTile);
         for (Property p : this.properties) {
             if (p.getBoardIndex() == utilTile) {
                 if (!p.isOwned()) {
@@ -255,7 +255,7 @@ public class Cards {
     }
 
     private void payRR2(int rrTile) {
-        this.user.moveTo(rrTile);
+        this.user.setTile(rrTile);
         for (Property p : properties) {
             if (p.getBoardIndex() == rrTile) {
                 p.action();

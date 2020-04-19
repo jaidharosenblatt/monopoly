@@ -226,7 +226,34 @@ public class LoadGame {
             for (Player b : activePlayers) {
                 if (b.getName().equals(decision)) {
                     displayAssets(b);
-
+                    System.out.println("List properties you want and cash: Ex. [prop,prop,...,200]");
+                    Scanner myObj3 = new Scanner(System.in); //replace this with front-end decision instead
+                    String decision3 = myObj3.nextLine();
+                    String[] want = decision3.split(",");
+                    System.out.println("List properties and cash amount you will give: Ex. [prop,prop,...,200]");
+                    Scanner myObj4 = new Scanner(System.in); //replace this with front-end decision instead
+                    String decision4 = myObj4.nextLine();
+                    String[] give = decision4.split(",");
+                    int cashWant = Integer.parseInt(want[want.length - 1]);
+                    int cashGive = Integer.parseInt(give[give.length - 1]);
+                    ArrayList<Property> propWant = new ArrayList<>();
+                    ArrayList<Property> propGive = new ArrayList<>();
+                    int counter = 0;
+                    for (Property q : this.properties) {
+                        if (want[counter].equals(q.getTitle())) {
+                            propWant.add(q);
+                        }
+                        if (give[counter].equals(q.getTitle())) {
+                            propGive.add(q);
+                        }
+                    }
+                    System.out.println("Does " + b.getName() + " accept this trade? [Y or N]");
+                    Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
+                    String decision5 = myObj5.nextLine();
+                    if (decision5.equals("Y")) {
+                        System.out.println(p.getName() + " has successfully traded with " + b.getName());
+                        p.trade(cashGive, propGive, b, cashWant, propWant);
+                    }
                 }
             }
         }
