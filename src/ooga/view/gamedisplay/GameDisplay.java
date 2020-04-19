@@ -1,6 +1,5 @@
 package ooga.view.gamedisplay;
 
-import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -9,10 +8,10 @@ import ooga.api.view.Decision;
 import ooga.view.gamedisplay.decisions.DecisionFactory;
 import ooga.view.gamedisplay.decisions.DecisionView;
 import ooga.view.View;
-import ooga.view.board.Die;
 
 public class GameDisplay extends VBox {
 
+  private static final double PADDING = 5;
   private DecisionFactory decisionFactory;
   private View view;
 
@@ -20,8 +19,9 @@ public class GameDisplay extends VBox {
     this.getStyleClass().add("game-display");
     this.view = view;
     decisionFactory = new DecisionFactory(view);
-    takeTurn();
-    setSpacing(5);
+    createButtons();
+    setSpacing(PADDING);
+
   }
 
   public void makeUserDecision(Decision decision, boolean multiChoice) {
@@ -29,10 +29,21 @@ public class GameDisplay extends VBox {
     getChildren().add(decisionView);
   }
 
-  private void takeTurn() {
-    Button button = new Button("Take turn");
-    button.setOnAction(e -> view.handleRoll());
-    getChildren().add(button);
+  private void createButtons() {
+    HBox hBox = new HBox();
+    hBox.setSpacing(PADDING);
+    Button turn = new Button("Take turn");
+    turn.setOnAction(e -> view.handleRoll());
+
+    Button mortgage = new Button("Mortgage");
+    mortgage.setOnAction(e -> view.handleMortgage());
+
+    Button trade = new Button("Trade");
+    trade.setOnAction(e -> view.handleTrade());
+
+    hBox.getChildren().addAll(turn, mortgage, trade);
+
+    getChildren().add(hBox);
   }
 
   public void displayText(String text) {

@@ -53,6 +53,14 @@ public class View extends HBox implements FrontEndExternal {
     controller.handleRoll();
   }
 
+  public void handleMortgage(){
+    System.out.println("Mortgage");
+  }
+
+  public void handleTrade(){
+    System.out.println("Trade");
+  }
+
   public void submitDecision(List<String> decision) {
     controller.submitDecision(decision);
   }
