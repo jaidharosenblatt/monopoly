@@ -1,11 +1,38 @@
 
 * {
-  -fx-base: #CDE6D0;
+  -fx-primary: #CDE6D0;
+  -fx-secondary: grey;
+  -fx-accent: purple;
 }
 
-
-.tile{
-  -fx-background-color: -fx-base;
+.button{
+  -fx-background-color: -fx-secondary;
   -fx-border-width: 1;
   -fx-border-color: black;
+  -fx-border-radius: 5;
+  -fx-background-radius: 5;
+}
+
+.button:hover{
+  -fx-background-color: -fx-accent;
+}
+
+.tile{
+  -fx-background-color: -fx-primary;
+  -fx-border-width: 1;
+  -fx-border-color: black;
+}
+
+.game-display{
+  -fx-background-color: -fx-secondary;
+  -fx-border-width: 1;
+  -fx-border-color: black;
+  -fx-padding: 5;
+}
+
+.decision-display{
+  -fx-background-color: -fx-primary;
+  -fx-border-width: 1;
+  -fx-border-color: black;
+  -fx-padding: 5;
 }

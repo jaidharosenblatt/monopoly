@@ -17,9 +17,11 @@ public class GameDisplay extends VBox {
   private View view;
 
   public GameDisplay(View view) {
+    this.getStyleClass().add("game-display");
     this.view = view;
     decisionFactory = new DecisionFactory(view);
     takeTurn();
+    setSpacing(5);
   }
 
   public void makeUserDecision(Decision decision, boolean multiChoice) {

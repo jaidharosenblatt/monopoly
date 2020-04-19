@@ -39,7 +39,6 @@ public class View extends HBox implements FrontEndExternal {
     board = new Board(playerPositions);
     Group boardGroup = new Group(board);
 
-
     gameDisplay = new GameDisplay(this);
 
     getChildren().addAll(boardGroup, gameDisplay);
