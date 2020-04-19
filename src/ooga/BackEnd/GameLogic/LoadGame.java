@@ -41,47 +41,51 @@ public class LoadGame {
 
         createPlayers(player_number);
 
+        int game = 0;
         String input = "";
-        this.itr = this.activePlayers.iterator();
-        while (itr.hasNext()) {
-            Player p = itr.next();
-            if (activePlayers.size() == 1) {
-                System.out.println(activePlayers.get(0).getName() + " wins!");
-                itr.remove();
-                break;
-            }
-            if (p.isJailed()) {
-                p.moveTo(JAIL_INDEX);
+        while(game != 1) {
+            this.itr = this.activePlayers.iterator();
+            while (itr.hasNext()) {
+                Player p = itr.next();
+                if (activePlayers.size() == 1) {
+                    System.out.println(activePlayers.get(0).getName() + " wins!");
+                    itr.remove();
+                    game = 1;
+                    break;
+                }
                 if (p.isJailed()) {
-                    System.out.println("You remain in jail");
-                    promptPlayer(p);
-                    continue;
-                }
-                if (p.getBalance() < 0) {
-                    isBankrupt(p);
-                }
-                else {
-                    System.out.println("");
-                    input = "";
-                    while(!input.equals("end")) {
-                        input = decision(p);
+                    p.moveTo(JAIL_INDEX);
+                    if (p.isJailed()) {
+                        System.out.println("You remain in jail");
+                        promptPlayer(p);
+                        continue;
+                    }
+                    if (p.getBalance() < 0) {
+                        isBankrupt(p);
+                    }
+                    else {
+                        System.out.println("");
+                        input = "";
+                        while(!input.equals("end")) {
+                            input = decision(p);
+                        }
                     }
                 }
-            }
-            else {
-                updateCardTiles();
-                displayAssets(p);
-                System.out.println("");
-                promptPlayer(p);
-                basicTurn(p);
-                if (p.getBalance() < 0) {
-                    isBankrupt(p);
-                }
                 else {
+                    updateCardTiles();
+                    displayAssets(p);
                     System.out.println("");
-                    input = "";
-                    while(!input.equals("end")) {
-                        input = decision(p);
+                    promptPlayer(p);
+                    basicTurn(p);
+                    if (p.getBalance() < 0) {
+                        isBankrupt(p);
+                    }
+                    else {
+                        System.out.println("");
+                        input = "";
+                        while(!input.equals("end")) {
+                            input = decision(p);
+                        }
                     }
                 }
             }
