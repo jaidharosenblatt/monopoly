@@ -22,8 +22,12 @@ public class Controller {
     createPlayerInfo();
     view = new View(stage, this, playerPositions);
 
-    Decision d = new DecisionTester("oops", List.of("choice 1", "choice 2", "choice 3"));
-    view.makeUserDecision(d,false);
+    Decision d = new DecisionTester("Make a decision", List.of("choice 1", "choice 2", "choice 3"));
+    Decision d2 = new DecisionTester("Make a decision", List.of("choice 1", "choice 2"));
+
+    view.makeUserDecision(d,true);
+    view.makeUserDecision(d2,false);
+
   }
 
   /**

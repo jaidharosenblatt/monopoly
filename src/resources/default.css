@@ -1,14 +1,14 @@
 
 * {
-  -fx-primary: #CDE6D0;
-  -fx-secondary: grey;
-  -fx-accent: purple;
+  -fx-board: #CDE6D0;
+  -fx-primary: #E9E9E9;
+  -fx-secondary: #D1D1D1;
+  -fx-tertiary: #F8F8F8;
+  -fx-accent: #64A4E7;
 }
 
 .button{
-  -fx-background-color: -fx-secondary;
-  -fx-border-width: 1;
-  -fx-border-color: black;
+  -fx-background-color: -fx-tertiary;
   -fx-border-radius: 5;
   -fx-background-radius: 5;
 }
@@ -18,21 +18,17 @@
 }
 
 .tile{
-  -fx-background-color: -fx-primary;
-  -fx-border-width: 1;
-  -fx-border-color: black;
+  -fx-background-color: -fx-board;
 }
 
 .game-display{
   -fx-background-color: -fx-secondary;
-  -fx-border-width: 1;
-  -fx-border-color: black;
   -fx-padding: 5;
 }
 
 .decision-display{
   -fx-background-color: -fx-primary;
-  -fx-border-width: 1;
-  -fx-border-color: black;
   -fx-padding: 5;
+  -fx-border-radius: 5;
+  -fx-background-radius: 5;
 }
