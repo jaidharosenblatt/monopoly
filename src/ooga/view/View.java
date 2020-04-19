@@ -33,7 +33,6 @@ public class View extends HBox implements FrontEndExternal {
   private static final double SCENE_HEIGHT = 700;
   private Map<PlayerInfo, Integer> playerPositions;
   TabView myTabView;
-  private int rulesTabID;
 
   public View(Stage stage, Controller controller, Map<PlayerInfo, Integer> playerPositions) {
     this.controller = controller;
@@ -42,9 +41,8 @@ public class View extends HBox implements FrontEndExternal {
     Group boardGroup = new Group(board);
 
     myTabView = new TabView(SCENE_WIDTH/3,SCENE_HEIGHT);
-    rulesTabID = myTabView.createTab("Rules");
     myTabView.addTabPaneToView(this);
-    myTabView.updateTab(rulesTabID, List.of("Rule1", "Rule2", "Rule3"));
+    myTabView.updateRules(List.of("Rule1", "Rule2", "Rule3"));
 
     gameDisplay = new GameDisplay(this);
 
@@ -76,7 +74,7 @@ public class View extends HBox implements FrontEndExternal {
 
   @Override
   public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
-
+    myTabView.updatePlayersTab(currentPlayers);
   }
 
   @Override
