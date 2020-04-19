@@ -146,6 +146,18 @@ public class LoadGame {
         p.moveTo(new_tile);
     }
 
+    private void promptPlayer(Player p) {
+        String input = "";
+        System.out.println("Would you like to do anything before rolling? [Y or N]");
+        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+        String decision = myObj.nextLine();
+        if (decision.equals("Y")) {
+            while(!input.equals("end")) {
+                input = decision(p);
+            }
+        }
+    }
+
     private String decision(Player p) {
         Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
         System.out.println("Would you like to trade, build houses, sell houses, mortgage property, unmortgage property, or end your turn? [trade, build, sell, mortgage, unmortgage, end]: ");
@@ -161,50 +173,37 @@ public class LoadGame {
             System.out.println("Which player would you like to trade with?");
         }
         if (input.equals("build")) {
-            if (p.getProperties().size() < 1) {
-                System.out.println("You do not have any properties to build houses with");
-                return "";
-            }
-            int check = 0;
-            for (Property owned : p.getProperties()) {
-                if (p.hasMonopoly(owned)) {
-                    check++;
-                    if (owned instanceof Street) {
-                        if (p.getBalance() < ((Street) owned).getHouseCost()) {
-                            System.out.println("Not enough funds");
-                            return "";
-                        }
-                    }
-                }
-            }
-            if (check < 1) {
-                System.out.println("You do not have a monopoly of any property");
-                return "";
-            }
-            buildLoop(p);
-            return "";
+            build(p);
         }
         if (input.equals("mortgage")) {
-            if (p.getProperties().size() < 1) {
-                System.out.println("You do not have any properties to mortgage");
-                return "";
-            }
-            String test = "";
-            while(!test.equals("done")) {
-                Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
-                System.out.println("Which property would you like to mortgage?");
-                String input5 = myObj5.nextLine();
-                for (Property s : p.getProperties()) {
-                    if (s.getTitle().equals(input5) && p.getProperties().contains(s)) {
-                        s.setMortgaged();
-                        test = "done";
-                        break;
+            mortgage(p);
+        }
+        return input;
+    }
+
+    private String build(Player p) {
+        if (p.getProperties().size() < 1) {
+            System.out.println("You do not have any properties to build houses with");
+            return "";
+        }
+        int check = 0;
+        for (Property owned : p.getProperties()) {
+            if (p.hasMonopoly(owned)) {
+                check++;
+                if (owned instanceof Street) {
+                    if (p.getBalance() < ((Street) owned).getHouseCost()) {
+                        System.out.println("Not enough funds");
+                        return "";
                     }
                 }
             }
-
         }
-        return input;
+        if (check < 1) {
+            System.out.println("You do not have a monopoly of any property");
+            return "";
+        }
+        buildLoop(p);
+        return "";
     }
 
     private void buildLoop(Player p) {
@@ -237,15 +236,26 @@ public class LoadGame {
             }
         }
     }
-    private void promptPlayer(Player p) {
-        String input = "";
-        System.out.println("Would you like to do anything before rolling? [Y or N]");
-        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-        String decision = myObj.nextLine();
-        if (decision.equals("Y")) {
-            while(!input.equals("end")) {
-                input = decision(p);
+
+    private String mortgage(Player p) {
+        if (p.getProperties().size() < 1) {
+            System.out.println("You do not have any properties to mortgage");
+            return "";
+        }
+        String test = "";
+        while(!test.equals("done")) {
+            Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
+            System.out.println("Which property would you like to mortgage?");
+            String input5 = myObj5.nextLine();
+            for (Property s : p.getProperties()) {
+                if (s.getTitle().equals(input5) && p.getProperties().contains(s)) {
+                    s.setMortgaged();
+                    test = "done";
+                    break;
+                }
             }
         }
+        return "";
     }
+
 }
