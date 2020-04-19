@@ -168,7 +168,18 @@ public class LoadGame {
             return "";
         }
         if (input.equals("mortgage")) {
+            if (p.getProperties().size() < 1) {
+                System.out.println("You do not have any properties to mortgage");
+                return "";
+            }
+            Scanner myObj5 = new Scanner(System.in); //replace this with front-end decision instead
             System.out.println("Which property would you like to mortgage?");
+            String input5 = myObj5.nextLine();
+            for (Property s : p.getProperties()) {
+                if (s.getTitle().equals(input5) && p.getProperties().contains(s)) {
+                    s.setMortgaged();
+                }
+            }
         }
         return input;
     }

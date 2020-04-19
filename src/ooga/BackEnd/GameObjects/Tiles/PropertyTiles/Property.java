@@ -64,6 +64,7 @@ public abstract class Property extends Tile {
     public boolean isMortgaged() {return this.mortgaged;}
 
     public void setMortgaged() {
+        System.out.println(this.owner + " just mortgaged " + this.title_deed);
         this.mortgaged = true;
         this.owner.receive((this.cost/2));
     }
