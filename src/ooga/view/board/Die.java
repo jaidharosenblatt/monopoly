@@ -1,13 +1,12 @@
 package ooga.view.board;
 
-import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class Die extends StackPane {
 
-  private static final double SIZE = 40;
+  private static final double SIZE = 60;
   private ImageView image;
 
   public Die(int number) {
@@ -16,10 +15,6 @@ public class Die extends StackPane {
     image.setFitWidth(SIZE);
     image.setFitHeight(SIZE);
     getChildren().add(image);
-  }
-
-  public void setRoll(int number) {
-    image.setImage(getImage(number));
   }
 
   private Image getImage(int number) {

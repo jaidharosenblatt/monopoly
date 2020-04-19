@@ -26,6 +26,7 @@ public class Board extends BorderPane {
     this.playerPositions = playerPositions;
     createGrid();
     setPanesToRoot();
+    
 
     for (PlayerInfo player : playerPositions.keySet()) {
       //add player to tile 0
