@@ -37,4 +37,10 @@ public interface Property {
    * @param pathToImage the path to the new image
    */
   void changeImage(String pathToImage);
+
+  /**
+   *
+   * @return String value of the property's name.
+   */
+  String toString();
 }
