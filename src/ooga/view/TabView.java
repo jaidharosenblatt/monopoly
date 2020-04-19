@@ -55,7 +55,7 @@ public class TabView {
     tabs.get(rulesTabID).updateTab(info);
   }
 
-  protected void updateTab(Map<Integer, PlayerInfo> currentPlayers){
+  protected void updatePlayersTab(Map<Integer, PlayerInfo> currentPlayers){
     List<Object> information = playerInfoToList(currentPlayers);
     tabs.get(playersTabID).updateTab(information);
   }
