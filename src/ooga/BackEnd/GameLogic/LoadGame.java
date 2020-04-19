@@ -175,8 +175,14 @@ public class LoadGame {
         if (input.equals("build")) {
             build(p);
         }
+        if (input.equals("sell")) {
+            sell(p);
+        }
         if (input.equals("mortgage")) {
             mortgage(p);
+        }
+        if (input.equals("unmortgage")) {
+            unmortgage(p);
         }
         return input;
     }
@@ -237,6 +243,10 @@ public class LoadGame {
         }
     }
 
+    private String sell(Player p) {
+        return "";
+    }
+
     private String mortgage(Player p) {
         if (p.getProperties().size() < 1) {
             System.out.println("You do not have any properties to mortgage");
@@ -255,6 +265,10 @@ public class LoadGame {
                 }
             }
         }
+        return "";
+    }
+
+    private String unmortgage(Player p) {
         return "";
     }
 
