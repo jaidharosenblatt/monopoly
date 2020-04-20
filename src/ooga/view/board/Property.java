@@ -12,6 +12,7 @@ public class Property extends Tile {
 
   public Property(String name, double price, Color backgroundColor, Color categoryColor,
       double width, double height) {
+    //remove bg colors
 
     setPrefSize(width, height);
     setBackgroundColor(this, backgroundColor);

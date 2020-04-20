@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameLogic;
 
+import javafx.stage.Stage;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.cardTile;
@@ -15,6 +16,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import ooga.view.View;
 
 public class LoadGame {
 
@@ -28,25 +30,32 @@ public class LoadGame {
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
     private Iterator<Player> itr;
+    private View view;
 
-    public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
+    public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
 
-        this.properties = (ArrayList<Property>) parse.properties.clone();
+
+
+      this.properties = (ArrayList<Property>) parse.properties.clone();
         this.streets = (ArrayList<Street>) parse.streets.clone();
         this.utilities = (ArrayList<Utility>) parse.utilities.clone();
         this.railroads = (ArrayList<RailRoad>) parse.railroads.clone();
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
-        createPlayers(player_number);
 
-        int game = 0;
+        createPlayers(player_number);
+        view = new View(stage, this, activePlayers, allTiles);
+
+
+      int game = 0;
         String input = "";
         while(game != 1) {
             this.itr = this.activePlayers.iterator();
             while (itr.hasNext()) {
                 Player p = itr.next();
+                view.setCurrentPlayer(p);
                 if (activePlayers.size() == 1) {
                     System.out.println(activePlayers.get(0).getName() + " wins!");
                     itr.remove();
@@ -175,7 +184,7 @@ public class LoadGame {
         }
     }
 
-    private void rollDiceAndMove(Player p) {
+    public void rollDiceAndMove(Player p) {
         p.rollDice();
         int new_tile = p.getTile() + p.dice1 + p.dice2;
         if (new_tile > 39) {new_tile -= 40;}

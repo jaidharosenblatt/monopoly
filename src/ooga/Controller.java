@@ -20,10 +20,12 @@ public class Controller {
 
   public Controller(Stage stage) {
     createPlayerInfo();
-    view = new View(stage, this, playerPositions);
+//    view = new View(stage, this, playerPositions);
 
     Decision d = new DecisionTester("Make a decision", List.of("choice 1", "choice 2", "choice 3"));
     Decision d2 = new DecisionTester("Make a decision", List.of("choice 1", "choice 2"));
+
+    view.displayText("Text can be displayed");
 
     view.makeUserDecision(d,true);
     view.makeUserDecision(d2,false);
@@ -55,10 +57,10 @@ public class Controller {
   }
 
   public void handleRoll() {
-    System.out.println("moving to: " + counter);
-    PlayerInfo randomPlayer = playerPositions.keySet().iterator().next();
-    view.movePlayer(randomPlayer, counter++);
-    view.displayRoll(getRandomRolls());
+//    System.out.println("moving to: " + counter);
+//    Player randomPlayer = playerPositions.keySet().iterator().next();
+//    view.movePlayer(randomPlayer, counter++);
+//    view.displayRoll(getRandomRolls());
   }
 
 

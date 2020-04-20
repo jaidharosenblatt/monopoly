@@ -1,5 +1,6 @@
 package ooga.view.board;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.geometry.Pos;
@@ -7,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import ooga.BackEnd.GameObjects.Player;
 import ooga.api.view.PlayerInfo;
 
 public class Board extends BorderPane {
@@ -16,19 +18,20 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private Map<PlayerInfo, Integer> playerPositions;
+  private Map<Player, Integer> playerPositions = new HashMap<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
 
-  public Board(Map<PlayerInfo, Integer> playerPositions) {
-    this.playerPositions = playerPositions;
+  public Board(List<Player> players) {
+    for (Player p : players){
+      playerPositions.put(p,0);
+    }
     createGrid();
     setPanesToRoot();
-    
 
-    for (PlayerInfo player : playerPositions.keySet()) {
+    for (Player player : playerPositions.keySet()) {
       //add player to tile 0
       Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
@@ -44,7 +47,7 @@ public class Board extends BorderPane {
     setCenter(hBox);
   }
 
-  public void movePlayer(PlayerInfo player, int newPosition) {
+  public void movePlayer(Player player, int newPosition) {
 
     int oldPosition = playerPositions.get(player);
     playerPositions.put(player, newPosition);
