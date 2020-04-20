@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
 import ooga.BackEnd.GameObjects.Player;
@@ -16,7 +16,7 @@ import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.GameDisplay;
 
-public class View extends HBox implements FrontEndExternal {
+public class View extends BorderPane implements FrontEndExternal {
 
   /**
    * TODO
@@ -34,6 +34,7 @@ public class View extends HBox implements FrontEndExternal {
   private List<Player> players;
   private Player currentPlayer;
   private Stage stage;
+  private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
     getStylesheets().add("resources/default.css");
@@ -48,7 +49,16 @@ public class View extends HBox implements FrontEndExternal {
 
     gameDisplay = new GameDisplay(this);
 
-    getChildren().addAll(boardGroup, gameDisplay);
+    setLeft(boardGroup);
+    setTop(gameDisplay);
+
+    Group tabGroup = new Group();
+    tabView = new TabView(SCENE_WIDTH/3,SCENE_HEIGHT);
+    tabView.addTabPaneToGroup(tabGroup);
+
+    setRight(tabGroup);
+
+    tabView.updateRules(List.of("Rule1", "Rule2", "Rule3"));
 
     stage.setScene(scene);
     stage.show();
