@@ -31,6 +31,7 @@ public class LoadGame {
     private ArrayList<Player> activePlayers;
     private Iterator<Player> itr;
     private View view;
+    private Player currentPlayer;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
@@ -45,76 +46,98 @@ public class LoadGame {
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
 
-        createPlayers(player_number);
-        view = new View(stage, this, activePlayers, allTiles);
+
+      createPlayers(player_number);
+      currentPlayer = activePlayers.get(0);
+      view = new View(stage, this, activePlayers, allTiles);
+
+//      updateCardTiles();
 
 
-      int game = 0;
-        String input = "";
-        while(game != 1) {
-            this.itr = this.activePlayers.iterator();
-            while (itr.hasNext()) {
-                Player p = itr.next();
-                view.setCurrentPlayer(p);
-                if (activePlayers.size() == 1) {
-                    System.out.println(activePlayers.get(0).getName() + " wins!");
-                    itr.remove();
-                    game = 1;
-                    break;
-                }
-                if (p.isJailed()) {
-                    p.moveTo(JAIL_INDEX);
-                    if (p.isJailed()) {
-                        System.out.println("You remain in jail");
-                        promptPlayer(p);
-                        continue;
-                    }
-                    if (p.getBalance() < 0) {
-                        isBankrupt(p);
-                    }
-                    else {
-                        System.out.println("");
-                        input = "";
-                        while(!input.equals("end")) {
-                            input = decision(p);
-                        }
-                    }
-                }
-                else {
-                    updateCardTiles();
-                    displayAssets(p);
-                    System.out.println("");
-                    promptPlayer(p);
-                    basicTurn(p);
-                    if (p.getBalance() < 0) {
-                        isBankrupt(p);
-                    }
-                    else {
-                        System.out.println("");
-                        input = "";
-                        while(!input.equals("end")) {
-                            input = decision(p);
-                        }
-                    }
-                }
-            }
-        }
+//      int game = 0;
+//        String input = "";
+//        while(game != 1) {
+//            this.itr = this.activePlayers.iterator();
+//            while (itr.hasNext()) {
+//                Player p = itr.next();
+//                view.setCurrentPlayer(p);
+//                if (activePlayers.size() == 1) {
+//                    System.out.println(activePlayers.get(0).getName() + " wins!");
+//                    itr.remove();
+//                    game = 1;
+//                    break;
+//                }
+//                if (p.isJailed()) {
+//                    p.moveTo(JAIL_INDEX);
+//                    if (p.isJailed()) {
+//                        System.out.println("You remain in jail");
+//                        promptPlayer(p);
+//                        continue;
+//                    }
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//                else {
+//                    updateCardTiles();
+//                    displayAssets(p);
+//                    System.out.println("");
+//                    promptPlayer(p);
+//                    basicTurn(p);
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
+
+  private void nextPlayer(){
+      int i = activePlayers.indexOf(currentPlayer);
+      if (i+1 >= activePlayers.size()){
+        currentPlayer = activePlayers.get(0);
+      }
+      else {
+        currentPlayer = activePlayers.get(i+1);
+      }
+  }
+
+  public void takeTurn(){
+    nextPlayer();
+    updateCardTiles();
+    promptPlayer(currentPlayer);
+    basicTurn(currentPlayer);
+  }
 
     private void createPlayers(int player_number) {
         this.activePlayers = new ArrayList<>();
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
-            Scanner myObj = new Scanner(System.in);
-            System.out.println("Enter name: ");
-            String name = myObj.nextLine();
-            temp[i] = new Player(name, this.allTiles);
+//            Scanner myObj = new Scanner(System.in);
+//            System.out.println("Enter name: ");
+//            String name = myObj.nextLine();
+            temp[i] = new Player(i + "hi", this.allTiles);
+            this.activePlayers.add(temp[i]);
         }
-        Player[] again = rollForOrder(temp);
-        for (Player p : again) {
-            this.activePlayers.add(p);
-        }
-        updateCardTiles();
+//        Player[] again = rollForOrder(temp);
+//        for (Player p : again) {
+//            this.activePlayers.add(p);
+//        }
+
     }
 
     private void updateCardTiles() {
@@ -183,6 +206,8 @@ public class LoadGame {
             }
         }
     }
+
+
 
     public void rollDiceAndMove(Player p) {
         p.rollDice();

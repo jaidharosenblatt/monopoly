@@ -59,7 +59,7 @@ public class View extends HBox implements FrontEndExternal {
   }
 
   public void handleRoll(){
-    controller.rollDiceAndMove(currentPlayer);
+    controller.takeTurn();
   }
 
   public void handleMortgage(){
