@@ -20,9 +20,6 @@ public abstract class Property extends Tile {
     public void action() {
         System.out.println(this.visiting.getName() + " just landed on " + this.title_deed);
         if (!isOwned()) {
-//            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-//            System.out.println("Would you like to buy this for $" + this.cost + "? [Y or N]: ");
-//            String decision = myObj.nextLine();
 
             List<String> options = List.of("Yes","No");
             Decision d = new Decision("Would you like to buy this for $" + this.cost + "?",options);
