@@ -336,42 +336,42 @@
             <boardIndex>5</boardIndex>
             <title_deed>Reading Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="11">
             <boardIndex>15</boardIndex>
             <title_deed>Pennsylvania Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="18">
             <boardIndex>25</boardIndex>
             <title_deed>B. &#038; O. Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="26">
             <boardIndex>35</boardIndex>
             <title_deed>Short Line</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <utility ID="8">
             <boardIndex>12</boardIndex>
             <title_deed>Electric Company</title_deed>
             <cost>150</cost>
-            <color>util</color>
+            <color>#9c9ea0</color>
             <group_number>2</group_number>
         </utility>
         <utility ID="21">
             <boardIndex>28</boardIndex>
             <title_deed>Water Works</title_deed>
             <cost>150</cost>
-            <color>util</color>
+            <color>#9c9ea0</color>
             <group_number>2</group_number>
         </utility>
     </properties>
