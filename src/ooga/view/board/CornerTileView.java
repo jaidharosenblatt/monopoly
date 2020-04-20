@@ -6,9 +6,8 @@ import javafx.scene.paint.Color;
 public class CornerTileView extends TileView {
 
 
-  public CornerTileView(Color backgroundColor, String filename, double width, double height) {
+  public CornerTileView(String filename, double width, double height) {
     setPrefSize(width, height);
-    setBackgroundColor(this, backgroundColor);
 
     ImageView image = new ImageView(getImageByName(filename));
     image.setFitHeight(getPrefHeight());

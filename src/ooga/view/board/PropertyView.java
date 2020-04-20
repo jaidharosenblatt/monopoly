@@ -10,12 +10,11 @@ public class PropertyView extends TileView {
 
   private static final double BAR_HEIGHT = 10;
 
-  public PropertyView(String name, double price, Color backgroundColor, Color categoryColor,
+  public PropertyView(String name, double price, Color categoryColor,
       double width, double height) {
     //remove bg colors
 
     setPrefSize(width, height);
-    setBackgroundColor(this, backgroundColor);
 
     VBox box = new VBox();
     box.setAlignment(Pos.CENTER);

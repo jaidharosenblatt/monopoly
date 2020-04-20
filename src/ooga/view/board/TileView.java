@@ -40,11 +40,6 @@ public abstract class TileView extends BorderPane {
 
   }
 
-  protected void setBackgroundColor(Pane pane, Color color) {
-    pane.setBackground(
-        new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-  }
-
   protected Image getImageByName(String name) {
     return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
   }

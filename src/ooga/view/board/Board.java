@@ -98,18 +98,18 @@ public class Board extends BorderPane {
     }
 
     bottom.getChildren().remove(ROW_LENGTH);
-    bottom.getChildren().add(new CornerTileView(Color.GREY, "go.png", TILE_WIDTH, TILE_HEIGHT));
+    bottom.getChildren().add(new CornerTileView( "go.png", TILE_WIDTH, TILE_HEIGHT));
 
     bottom.getChildren().remove(0);
     bottom.getChildren()
-        .add(0, new CornerTileView(Color.GREY, "jail.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView("jail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(ROW_LENGTH);
-    top.getChildren().add(new CornerTileView(Color.GREY, "gotojail.png", TILE_WIDTH, TILE_HEIGHT));
+    top.getChildren().add(new CornerTileView("gotojail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(0);
     top.getChildren()
-        .add(0, new CornerTileView(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView("freeparking.png", TILE_WIDTH, TILE_HEIGHT));
 
   }
 
@@ -118,7 +118,7 @@ public class Board extends BorderPane {
       Property p = (Property) t;
       return p.convertFront();
     } else {
-      return new UtilityTileView("property", 30, Color.GREY, "rcd.jpg", TILE_WIDTH,
+      return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
           TILE_HEIGHT);
     }
   }
