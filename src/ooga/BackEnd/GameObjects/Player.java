@@ -6,6 +6,7 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.view.Card;
 import ooga.api.view.PlayerInfo;
+import ooga.view.View;
 import ooga.view.board.PropertyView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Player implements PlayerInfo {
     private int turnsinJail;
     private int getOutCards;
 
+    private View view;
     public int dice1;
     public int dice2;
 
@@ -207,7 +209,7 @@ public class Player implements PlayerInfo {
 
     public void drawCard(String type, ArrayList<Property> props, ArrayList<Player> players) {
         System.out.println(this.name + " has drawn a " + type + " card.");
-        Cards draw = new Cards(type, this, props, players);
+        Cards draw = new Cards(type, this, props, players, this.view);
         draw.action();
     }
 
@@ -228,11 +230,15 @@ public class Player implements PlayerInfo {
         otherPlayer.setProperties(temp);
     }
 
+    public View getView() {return view;}
+
+    public void setView(View view) {this.view = view;}
+
     @Override
     public List<PropertyView> getPropertiesUnmodifiable() {
         ArrayList<PropertyView> propertiesFront = new ArrayList<>();
         for (Property p : properties) {
-            propertiesFront.add(p.convertFront());
+            propertiesFront.add(p.convertView());
         }
         return propertiesFront;
     }
