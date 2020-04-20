@@ -2,6 +2,7 @@ package ooga.BackEnd.GameObjects;
 
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
+import ooga.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,18 @@ public class Cards {
 
     private static final int CROSS_GO = 200;
 
+    private View view;
     private Player user;
     private String type;
     private ArrayList<Property> properties;
     private ArrayList<Player> players;
 
-    public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players) {
+    public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players, View view) {
         this.type = type;
         this.user = user;
         this.properties = properties;
         this.players = players;
+        this.view = view;
     }
 
     public void action() {

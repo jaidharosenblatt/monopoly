@@ -9,6 +9,10 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.view.board.PropertyView;
 
 public abstract class Property extends Tile {
+
+    private final static int TILE_WIDTH = 60;
+    private final static int TILE_HEIGHT = 60;
+
     protected String title_deed;
     protected Player owner;
     protected int cost;
@@ -82,7 +86,7 @@ public abstract class Property extends Tile {
         this.owner.payBank((int) (this.cost * 1.1));
     }
 
-    public PropertyView convertFront() {
-        return new PropertyView(this.title_deed, this.cost, Color.GREY, Color.web(group_color), 60, 60);
+    public PropertyView convertView() {
+        return new PropertyView(this.title_deed, this.cost, Color.GREY, Color.web(group_color), TILE_WIDTH, TILE_HEIGHT);
     }
 }

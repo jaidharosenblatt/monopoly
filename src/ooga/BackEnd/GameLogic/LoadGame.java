@@ -39,7 +39,7 @@ public class LoadGame {
 
 
 
-      this.properties = (ArrayList<Property>) parse.properties.clone();
+        this.properties = (ArrayList<Property>) parse.properties.clone();
         this.streets = (ArrayList<Street>) parse.streets.clone();
         this.utilities = (ArrayList<Utility>) parse.utilities.clone();
         this.railroads = (ArrayList<RailRoad>) parse.railroads.clone();
@@ -48,13 +48,17 @@ public class LoadGame {
 
 
 
-      createPlayers(player_number);
-      currentPlayer = activePlayers.get(0);
-      view = new View(stage, this, activePlayers, allTiles);
+        createPlayers(player_number);
+        currentPlayer = activePlayers.get(0);
+        view = new View(stage, this, activePlayers, allTiles);
 
-      for (Tile t: allTiles){
-        t.setView(view);
-      }
+        for (Tile t: allTiles){
+            t.setView(view);
+        }
+        for (Player p : activePlayers) {
+            p.setView(view);
+        }
+
 
 //      updateCardTiles();
 

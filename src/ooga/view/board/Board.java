@@ -1,6 +1,5 @@
 package ooga.view.board;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -116,7 +115,7 @@ public class Board extends BorderPane {
   private TileView getPropertyFromTile(Tile t) {
     if (t instanceof Property) {
       Property p = (Property) t;
-      return p.convertFront();
+      return p.convertView();
     } else {
       return new UtilityTileView("property", 30, Color.GREY, "rcd.jpg", TILE_WIDTH,
           TILE_HEIGHT);
