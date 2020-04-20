@@ -2,28 +2,42 @@ package ooga.view.gamedisplay;
 
 
 import java.util.List;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import ooga.api.view.Decision;
 
-public class DecisionView extends VBox {
+public class DecisionView {
 
-  private static final double WIDTH = 200;
+  private HBox hBox = new HBox();
+  private Decision decision;
+  private Stage stage;
 
   public DecisionView(Decision decision) {
-    this.getStyleClass().add("decision-display");
+    this.decision = decision;
+    stage = new Stage();
+    Scene scene = new Scene(hBox);
+    hBox.getStyleClass().add("decision-display");
 
-    setPrefWidth(WIDTH);
     Text text = new Text(decision.getPrompt());
-    text.setWrappingWidth(WIDTH);
-    getChildren().add(text);
-    setSpacing(5);
+
+    hBox.getChildren().add(text);
+    hBox.setSpacing(5);
 
     for (String choice : decision.getOptions()) {
       Button button = new Button(choice);
-      button.setOnAction(e -> decision.setChoice(choice));
-      getChildren().add(button);
+      button.setOnAction(e -> handleClick(choice));
+      hBox.getChildren().add(button);
     }
+    stage.setScene(scene);
+    stage.showAndWait();
+  }
+
+  private void handleClick(String choice){
+    decision.setChoice(choice);
+    stage.close();
   }
 }

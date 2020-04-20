@@ -26,7 +26,6 @@ public abstract class Property extends Tile {
             List<String> options = List.of("Yes","No");
             Decision d = new Decision("Would you like to buy this for $" + this.cost + "?",options);
             getView().makeUserDecision(d);
-            getView().getStage().showAndWait();
 
           if (d.getChoice().equals("Yes")) {
             if (this.visiting.getBalance() >= this.cost) {

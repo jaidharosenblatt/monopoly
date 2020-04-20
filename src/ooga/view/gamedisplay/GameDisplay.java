@@ -22,17 +22,6 @@ public class GameDisplay extends VBox {
 
   }
 
-  public void makeUserDecision(Decision decision) {
-    Stage stage = new Stage();
-    HBox hBox = new HBox();
-    Scene scene = new Scene(hBox);
-    stage.setScene(scene);
-    DecisionView decisionView = new DecisionView(decision);
-    hBox.getChildren().add(decisionView);
-    stage.showAndWait();
-    System.out.println(decision.getChoice());
-  }
-
   private void createButtons() {
     HBox hBox = new HBox();
     hBox.setSpacing(PADDING);

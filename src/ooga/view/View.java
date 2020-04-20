@@ -13,6 +13,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.view.board.Board;
+import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.GameDisplay;
 
 public class View extends HBox implements FrontEndExternal {
@@ -72,13 +73,9 @@ public class View extends HBox implements FrontEndExternal {
     System.out.println("Trade");
   }
 
-  public void submitDecision(List<String> decision) {
-//    controller.submitDecision(decision);
-  }
-
   @Override
   public void makeUserDecision(Decision decision) {
-    gameDisplay.makeUserDecision(decision);
+    new DecisionView(decision);
   }
 
   @Override
