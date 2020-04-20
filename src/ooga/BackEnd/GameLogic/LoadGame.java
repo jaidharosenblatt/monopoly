@@ -121,7 +121,7 @@ public class LoadGame {
         Player[] order = new Player[list.length];
         int counter = 0;
         ArrayList<Integer> chosen = new ArrayList<>();
-        while (chosen.size() < 4) {
+        while (chosen.size() < list.length) {
             int probality = (int) (Math.random() * list.length);
             if (!chosen.contains(probality)) {
                 chosen.add(probality);
