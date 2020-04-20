@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
-import ooga.view.board.PropertyFront;
+import ooga.view.board.PropertyView;
 
 public abstract class Property extends Tile {
     protected String title_deed;
@@ -85,7 +85,7 @@ public abstract class Property extends Tile {
         this.owner.payBank((int) (this.cost * 1.1));
     }
 
-    public PropertyFront convertFront() {
-        return new PropertyFront(this.title_deed, this.cost, Color.GREY, Color.RED, 60, 60);
+    public PropertyView convertFront() {
+        return new PropertyView(this.title_deed, this.cost, Color.GREY, Color.RED, 60, 60);
     }
 }

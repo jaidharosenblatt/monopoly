@@ -6,12 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class PropertyFront extends Tile {
+public class PropertyView extends TileView {
 
   private static final double BAR_HEIGHT = 20;
 
-  public PropertyFront(String name, double price, Color backgroundColor, Color categoryColor,
-                       double width, double height) {
+  public PropertyView(String name, double price, Color backgroundColor, Color categoryColor,
+      double width, double height) {
     //remove bg colors
 
     setPrefSize(width, height);

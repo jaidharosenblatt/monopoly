@@ -6,9 +6,8 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.view.Card;
 import ooga.api.view.PlayerInfo;
-import ooga.view.board.PropertyFront;
+import ooga.view.board.PropertyView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -230,11 +229,12 @@ public class Player implements PlayerInfo {
     }
 
     @Override
-    public List<ooga.api.view.Property> getPropertiesUnmodifiable() {
-        ArrayList<PropertyFront> propertiesFront = new ArrayList<>();
+    public List<PropertyView> getPropertiesUnmodifiable() {
+        ArrayList<PropertyView> propertiesFront = new ArrayList<>();
         for (Property p : properties) {
             propertiesFront.add(p.convertFront());
         }
+        return propertiesFront;
     }
 
     @Override

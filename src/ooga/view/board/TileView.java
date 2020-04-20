@@ -19,14 +19,14 @@ import javafx.scene.shape.Shape;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.view.PlayerInfo;
 
-public abstract class Tile extends BorderPane {
+public abstract class TileView extends BorderPane {
 
   private static final double PLAYER_SIZE = 5;
   private HBox playersPane = new HBox();
   private Map<Player, Shape> players = new HashMap<>();
   private StackPane centerTile = new StackPane();
 
-  public Tile() {
+  public TileView() {
     this.getStyleClass().add("tile");
     playersPane.setAlignment(Pos.CENTER);
     centerTile.getChildren().add(playersPane);
