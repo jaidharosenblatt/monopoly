@@ -1,7 +1,9 @@
 package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
+import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Jail extends Event {
@@ -19,10 +21,11 @@ public class Jail extends Event {
         if (this.visiting.isJailed()) {
             System.out.println(this.visiting.getName() + " is currently in Jail.");
             if (this.visiting.hasJailFreeCards()) {
-                Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-                System.out.println("Would you like to use your Get Out of Jail Free Card? [Y or N]: ");
-                String decision = myObj.nextLine();
-                if (decision.equals("Y")) {
+                List<String> options = List.of("Yes","No");
+                Decision d = new Decision("Would you like to use your Get Out of Jail Free Card?",options);
+                getView().makeUserDecision(d);
+
+                if (d.getChoice().equals("Yes")) {
                     this.visiting.useJailFreeCard();
                     this.visiting.setFree();
                     this.visiting.rollDice();
@@ -30,16 +33,16 @@ public class Jail extends Event {
                 }
             }
             if (this.visiting.getJailTurn() < 2) {
-                Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-                System.out.println("Would you like to bail out of Jail? [Y or N]: ");
-                String decision = myObj.nextLine();
-                if (decision.equals("Y")) {
+                List<String> options = List.of("Yes","No");
+                Decision d = new Decision("Would you like to bail out of jail?",options);
+                getView().makeUserDecision(d);
+                if (d.getChoice().equals("Yes")) {
                     this.visiting.payBail();
                     this.visiting.setFree();
                     this.visiting.rollDice();
                     this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                 }
-                if (decision.equals("N")) {
+                if (d.getChoice().equals("No")) {
                     this.visiting.addJailTurn();
                     this.visiting.rollDice();
                     if (this.visiting.dice1 == this.visiting.dice2) {
