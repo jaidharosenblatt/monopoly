@@ -9,7 +9,7 @@ public class TurnActionButtons extends HBox {
   private static final double PADDING = 5;
 
   public TurnActionButtons(View view) {
-    this.getStyleClass().add("game-display");
+    setId("turn-buttons");
     setSpacing(PADDING);
 
     Button turn = new Button("Take turn");

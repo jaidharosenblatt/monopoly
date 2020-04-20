@@ -123,6 +123,7 @@ public class LoadGame {
 
   public void takeTurn(){
     nextPlayer();
+    view.setCurrentPlayer(currentPlayer);
     updateCardTiles();
     rollDiceAndMove(currentPlayer);
   }
