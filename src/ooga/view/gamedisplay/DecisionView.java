@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ooga.api.view.Decision;
 
@@ -19,6 +20,7 @@ public class DecisionView {
   public DecisionView(Decision decision) {
     this.decision = decision;
     stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
     Scene scene = new Scene(hBox);
     hBox.getStyleClass().add("decision-display");
 
