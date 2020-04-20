@@ -35,6 +35,8 @@ public class View extends HBox implements FrontEndExternal {
   private Stage stage;
 
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
+    getStylesheets().add("resources/default.css");
+
     this.stage = stage;
     this.players = players;
     this.controller = controller;
@@ -45,7 +47,6 @@ public class View extends HBox implements FrontEndExternal {
     gameDisplay = new GameDisplay(this);
 
     getChildren().addAll(boardGroup, gameDisplay);
-    scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
     stage.show();
@@ -76,8 +77,8 @@ public class View extends HBox implements FrontEndExternal {
   }
 
   @Override
-  public void makeUserDecision(Decision decision, boolean multiChoice) {
-    gameDisplay.makeUserDecision(decision, multiChoice);
+  public void makeUserDecision(Decision decision) {
+    gameDisplay.makeUserDecision(decision);
   }
 
   @Override

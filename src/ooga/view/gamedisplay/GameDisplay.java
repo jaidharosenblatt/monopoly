@@ -1,32 +1,36 @@
 package ooga.view.gamedisplay;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import ooga.api.view.Decision;
-import ooga.view.gamedisplay.decisions.DecisionFactory;
-import ooga.view.gamedisplay.decisions.DecisionView;
 import ooga.view.View;
 
 public class GameDisplay extends VBox {
 
   private static final double PADDING = 5;
-  private DecisionFactory decisionFactory;
   private View view;
 
   public GameDisplay(View view) {
     this.getStyleClass().add("game-display");
     this.view = view;
-    decisionFactory = new DecisionFactory(view);
     createButtons();
     setSpacing(PADDING);
 
   }
 
-  public void makeUserDecision(Decision decision, boolean multiChoice) {
-    DecisionView decisionView = decisionFactory.getDecision(decision, multiChoice);
-    getChildren().add(decisionView);
+  public void makeUserDecision(Decision decision) {
+    Stage stage = new Stage();
+    HBox hBox = new HBox();
+    Scene scene = new Scene(hBox);
+    stage.setScene(scene);
+    DecisionView decisionView = new DecisionView(decision);
+    hBox.getChildren().add(decisionView);
+    stage.showAndWait();
+    System.out.println(decision.getChoice());
   }
 
   private void createButtons() {
