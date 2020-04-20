@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.tabs;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;

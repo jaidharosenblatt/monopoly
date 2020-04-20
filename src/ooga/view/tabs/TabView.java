@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.tabs;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -6,13 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import ooga.api.view.PlayerInfo;
@@ -52,7 +48,7 @@ public class TabView {
     tabPane.getTabs().add(displayTab.getTab());
     return tabs.size()-1;
   }
-  protected void updateRules(List<Object> info){
+  public void updateRules(List<Object> info){
     tabs.get(rulesTabID).updateTab(info);
   }
 
@@ -72,7 +68,7 @@ public class TabView {
     return playerInfoList;
   }
 
-  protected void addTabPaneToGroup(Group root){
+  public void addTabPaneToGroup(Group root){
     root.getChildren().add(tabPane);
   }
 

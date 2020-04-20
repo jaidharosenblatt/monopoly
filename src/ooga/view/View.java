@@ -15,6 +15,7 @@ import ooga.api.view.Decision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.GameDisplay;
+import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {
 

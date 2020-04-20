@@ -1,4 +1,4 @@
-package ooga.view;
+package ooga.view.tabs;
 
 import java.util.List;
 

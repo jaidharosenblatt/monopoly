@@ -1,9 +1,7 @@
-package ooga.view;
+package ooga.view.tabs;
 
 import java.util.List;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
