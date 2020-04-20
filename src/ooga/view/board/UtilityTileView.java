@@ -6,11 +6,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 
-public class UtilityTile extends Tile {
+public class UtilityTileView extends TileView {
 
   ImageView image;
 
-  public UtilityTile(String name, double price, Color backgroundColor, String filename, double width, double height) {
+  public UtilityTileView(String name, double price, Color backgroundColor, String filename, double width, double height) {
     setPrefSize(width, height);
     setBackgroundColor(this, backgroundColor);
 

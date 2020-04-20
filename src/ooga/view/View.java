@@ -38,11 +38,12 @@ public class View extends HBox implements FrontEndExternal {
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
     getStylesheets().add("resources/default.css");
 
+    System.out.println(tiles);
     this.stage = stage;
     this.players = players;
     this.controller = controller;
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    board = new Board(players);
+    board = new Board(players, tiles);
     Group boardGroup = new Group(board);
 
     gameDisplay = new GameDisplay(this);

@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Player;
-import ooga.api.view.PlayerInfo;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 public class Board extends BorderPane {
 
@@ -24,7 +24,10 @@ public class Board extends BorderPane {
   private HBox bottom = new HBox();
   private VBox left = new VBox();
 
-  public Board(List<Player> players) {
+  public Board(List<Player> players, List<Tile> tiles) {
+    for (Tile t : tiles){
+
+    }
     for (Player p : players){
       playerPositions.put(p,0);
     }
@@ -33,7 +36,7 @@ public class Board extends BorderPane {
 
     for (Player player : playerPositions.keySet()) {
       //add player to tile 0
-      Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
+      TileView tile = (TileView) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
     }
   }
@@ -52,8 +55,8 @@ public class Board extends BorderPane {
     int oldPosition = playerPositions.get(player);
     playerPositions.put(player, newPosition);
 
-    Tile oldTile = getTileByIndex(oldPosition);
-    Tile newTile = getTileByIndex(newPosition);
+    TileView oldTile = getTileByIndex(oldPosition);
+    TileView newTile = getTileByIndex(newPosition);
 
     oldTile.removePlayer(player);
     newTile.addPlayer(player);
@@ -62,13 +65,13 @@ public class Board extends BorderPane {
   private void createGrid() {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
           TILE_HEIGHT);
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(90);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
@@ -77,7 +80,7 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
-      Tile tile = new UtilityTile("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
+      TileView tile = new UtilityTileView("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
           TILE_HEIGHT);
       tile.setRotate(180);
 
@@ -85,7 +88,7 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
@@ -94,37 +97,37 @@ public class Board extends BorderPane {
     }
 
     bottom.getChildren().remove(ROW_LENGTH);
-    bottom.getChildren().add(new CornerTile(Color.GREY, "go.png", TILE_WIDTH, TILE_HEIGHT));
+    bottom.getChildren().add(new CornerTileView(Color.GREY, "go.png", TILE_WIDTH, TILE_HEIGHT));
 
     bottom.getChildren().remove(0);
     bottom.getChildren()
-        .add(0, new CornerTile(Color.GREY, "jail.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView(Color.GREY, "jail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(ROW_LENGTH);
-    top.getChildren().add(new CornerTile(Color.GREY, "gotojail.png", TILE_WIDTH, TILE_HEIGHT));
+    top.getChildren().add(new CornerTileView(Color.GREY, "gotojail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(0);
     top.getChildren()
-        .add(0, new CornerTile(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
 
   }
 
-  private Tile getTileByIndex(int index) {
+  private TileView getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
 
     if (index < ROW_LENGTH) {
-      return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
+      return (TileView) bottom.getChildren().get(ROW_LENGTH - position);
     } else if (index == ROW_LENGTH) {
-      return (Tile) bottom.getChildren().get(0);
+      return (TileView) bottom.getChildren().get(0);
     } else if (index < ROW_LENGTH * 2) {
-      return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
+      return (TileView) left.getChildren().get(ROW_LENGTH - position - 1);
     } else if (index < ROW_LENGTH * 3) {
-      return (Tile) top.getChildren().get(position);
+      return (TileView) top.getChildren().get(position);
     } else if (index == ROW_LENGTH * 3) {
-      return (Tile) top.getChildren().get(ROW_LENGTH);
+      return (TileView) top.getChildren().get(ROW_LENGTH);
     } else {
-      return (Tile) right.getChildren().get(position - 1);
+      return (TileView) right.getChildren().get(position - 1);
     }
   }
 

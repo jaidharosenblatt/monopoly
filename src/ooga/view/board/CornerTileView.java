@@ -3,10 +3,10 @@ package ooga.view.board;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public class CornerTile extends Tile {
+public class CornerTileView extends TileView {
 
 
-  public CornerTile(Color backgroundColor, String filename, double width, double height) {
+  public CornerTileView(Color backgroundColor, String filename, double width, double height) {
     setPrefSize(width, height);
     setBackgroundColor(this, backgroundColor);
 
