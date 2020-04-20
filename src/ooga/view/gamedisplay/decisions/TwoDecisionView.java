@@ -12,7 +12,7 @@ public class TwoDecisionView extends DecisionView {
 
     for (String choice : decision.getOptions()) {
       Button button = new Button(choice);
-      button.setOnAction(e -> view.submitDecision(List.of(choice)));
+      button.setOnAction(e -> decision.setChoices(List.of(choice)));
       getChildren().add(button);
     }
   }

@@ -22,5 +22,5 @@ public interface Decision {
    * Set the choice that the player picked in the gui
    *
    */
-  List<Integer> getChoices();
+  void setChoices(List<String> choices);
 }

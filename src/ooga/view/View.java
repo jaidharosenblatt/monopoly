@@ -1,8 +1,6 @@
 package ooga.view;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
@@ -12,13 +10,10 @@ import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
-import ooga.Controller;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
-import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.GameDisplay;
-import ooga.view.gamedisplay.decisions.DecisionTester;
 
 public class View extends HBox implements FrontEndExternal {
 
@@ -37,8 +32,10 @@ public class View extends HBox implements FrontEndExternal {
   private static final double SCENE_HEIGHT = 700;
   private List<Player> players;
   private Player currentPlayer;
+  private Stage stage;
 
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
+    this.stage = stage;
     this.players = players;
     this.controller = controller;
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
@@ -52,6 +49,10 @@ public class View extends HBox implements FrontEndExternal {
 
     stage.setScene(scene);
     stage.show();
+  }
+
+  public Stage getStage() {
+    return stage;
   }
 
   public void setCurrentPlayer(Player p){

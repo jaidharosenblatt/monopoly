@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameLogic;
 
+import java.util.List;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
@@ -50,6 +51,10 @@ public class LoadGame {
       createPlayers(player_number);
       currentPlayer = activePlayers.get(0);
       view = new View(stage, this, activePlayers, allTiles);
+
+      for (Tile t: allTiles){
+        t.setView(view);
+      }
 
 //      updateCardTiles();
 
@@ -119,8 +124,7 @@ public class LoadGame {
   public void takeTurn(){
     nextPlayer();
     updateCardTiles();
-    promptPlayer(currentPlayer);
-    basicTurn(currentPlayer);
+    rollDiceAndMove(currentPlayer);
   }
 
     private void createPlayers(int player_number) {
@@ -193,25 +197,11 @@ public class LoadGame {
         System.out.println("---------------------------------");
     }
 
-    private void basicTurn(Player p) {
-        if (this.activePlayers.contains(p)) {
-            rollDiceAndMove(p);
-            if (p.dice1 == p.dice2) {
-                System.out.println(p.getName() + " has rolled doubles! Roll again.");
-                rollDiceAndMove(p);
-                if (p.dice1 == p.dice2) {
-                    System.out.println(p.getName() + " was caught speeding! Go to Jail.");
-                    p.setJailed();
-                }
-            }
-        }
-    }
-
-
-
-    public void rollDiceAndMove(Player p) {
+    private void rollDiceAndMove(Player p) {
         p.rollDice();
+        view.displayRoll(List.of(p.dice1,p.dice2));
         int new_tile = p.getTile() + p.dice1 + p.dice2;
+        view.movePlayer(p,new_tile);
         if (new_tile > 39) {new_tile -= 40;}
         p.moveTo(new_tile);
     }

@@ -20,7 +20,7 @@ public class MultiDecisionView extends DecisionView {
     }
 
     Button submit = new Button("Submit");
-    submit.setOnAction(e -> view.submitDecision(choices));
+    submit.setOnAction(e -> decision.setChoices(choices));
     getChildren().add(submit);
   }
 
