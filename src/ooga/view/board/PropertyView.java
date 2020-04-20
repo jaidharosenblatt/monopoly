@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 
 public class PropertyView extends TileView {
 
-  private static final double BAR_HEIGHT = 20;
+  private static final double BAR_HEIGHT = 10;
 
   public PropertyView(String name, double price, Color backgroundColor, Color categoryColor,
       double width, double height) {

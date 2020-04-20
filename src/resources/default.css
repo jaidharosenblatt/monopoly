@@ -19,6 +19,7 @@
 
 .tile{
   -fx-background-color: -fx-board;
+  -fx-font-size: 10;
 }
 
 .game-display{

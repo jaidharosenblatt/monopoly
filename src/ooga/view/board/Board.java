@@ -1,5 +1,8 @@
 package ooga.view.board;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Player;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 
@@ -26,13 +30,12 @@ public class Board extends BorderPane {
   private VBox left = new VBox();
 
   public Board(List<Player> players, List<Tile> tiles) {
-    for (Tile t : tiles){
+    Collections.sort(tiles, Comparator.comparingInt(Tile::getBoardIndex));
 
+    for (Player p : players) {
+      playerPositions.put(p, 0);
     }
-    for (Player p : players){
-      playerPositions.put(p,0);
-    }
-    createGrid();
+    createGrid(tiles);
     setPanesToRoot();
 
     for (Player player : playerPositions.keySet()) {
@@ -63,16 +66,16 @@ public class Board extends BorderPane {
     newTile.addPlayer(player);
   }
 
-  private void createGrid() {
+  private void createGrid(List<Tile> tiles) {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
-          TILE_HEIGHT);
+
+      TileView tile = getPropertyFromTile(tiles.get(i));
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
-      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT, TILE_WIDTH);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(90);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
 
@@ -80,15 +83,14 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
-      TileView tile = new UtilityTileView("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
-          TILE_HEIGHT);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(180);
 
       top.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
-      TileView tile = new PropertyView("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT, TILE_WIDTH);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
 
@@ -109,6 +111,16 @@ public class Board extends BorderPane {
     top.getChildren()
         .add(0, new CornerTileView(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
 
+  }
+
+  private TileView getPropertyFromTile(Tile t) {
+    if (t instanceof Property) {
+      Property p = (Property) t;
+      return p.convertFront();
+    } else {
+      return new UtilityTileView("property", 30, Color.GREY, "rcd.jpg", TILE_WIDTH,
+          TILE_HEIGHT);
+    }
   }
 
   private TileView getTileByIndex(int index) {
