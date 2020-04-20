@@ -3,7 +3,7 @@ package ooga.view;
 import java.util.List;
 import ooga.api.view.Card;
 import ooga.api.view.PlayerInfo;
-import ooga.api.view.Property;
+import ooga.view.board.PropertyView;
 
 public class PlayerTester implements PlayerInfo {
 
@@ -18,7 +18,7 @@ public class PlayerTester implements PlayerInfo {
   }
 
   @Override
-  public List<Property> getPropertiesUnmodifiable() {
+  public List<PropertyView> getPropertiesUnmodifiable() {
     return null;
   }
 
