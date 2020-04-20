@@ -10,9 +10,8 @@ public class UtilityTileView extends TileView {
 
   ImageView image;
 
-  public UtilityTileView(String name, double price, Color backgroundColor, String filename, double width, double height) {
+  public UtilityTileView(String name, double price, String filename, double width, double height) {
     setPrefSize(width, height);
-    setBackgroundColor(this, backgroundColor);
 
     image = new ImageView(getImageByName(filename));
     image.setFitHeight(30);
