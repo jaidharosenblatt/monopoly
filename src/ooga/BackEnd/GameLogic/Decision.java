@@ -6,7 +6,7 @@ public class Decision implements ooga.api.view.Decision {
 
   private String prompt;
   private List<String> options;
-  private List<String> choices;
+  private String choice;
 
   public Decision(String prompt, List<String> options) {
     this.prompt = prompt;
@@ -24,11 +24,12 @@ public class Decision implements ooga.api.view.Decision {
   }
 
   @Override
-  public void setChoices(List<String> choices) {
-    this.choices = choices;
+  public void setChoice(String choice) {
+    this.choice = choice;
   }
 
-  public List<String> getChoices() {
-    return choices;
+  @Override
+  public String getChoice() {
+    return choice;
   }
 }

@@ -22,5 +22,7 @@ public interface Decision {
    * Set the choice that the player picked in the gui
    *
    */
-  void setChoices(List<String> choices);
+  void setChoice(String choice);
+
+  String getChoice();
 }

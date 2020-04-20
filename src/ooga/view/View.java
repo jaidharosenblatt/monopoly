@@ -13,6 +13,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.view.board.Board;
+import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.GameDisplay;
 
 public class View extends HBox implements FrontEndExternal {
@@ -35,6 +36,8 @@ public class View extends HBox implements FrontEndExternal {
   private Stage stage;
 
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
+    getStylesheets().add("resources/default.css");
+
     this.stage = stage;
     this.players = players;
     this.controller = controller;
@@ -45,7 +48,6 @@ public class View extends HBox implements FrontEndExternal {
     gameDisplay = new GameDisplay(this);
 
     getChildren().addAll(boardGroup, gameDisplay);
-    scene.getStylesheets().add("resources/default.css");
 
     stage.setScene(scene);
     stage.show();
@@ -71,13 +73,9 @@ public class View extends HBox implements FrontEndExternal {
     System.out.println("Trade");
   }
 
-  public void submitDecision(List<String> decision) {
-//    controller.submitDecision(decision);
-  }
-
   @Override
-  public void makeUserDecision(Decision decision, boolean multiChoice) {
-    gameDisplay.makeUserDecision(decision, multiChoice);
+  public void makeUserDecision(Decision decision) {
+    new DecisionView(decision);
   }
 
   @Override
