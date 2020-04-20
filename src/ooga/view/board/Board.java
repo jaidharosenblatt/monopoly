@@ -69,7 +69,6 @@ public class Board extends BorderPane {
   private void createGrid(List<Tile> tiles) {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-
       TileView tile = getPropertyFromTile(tiles.get(i));
       bottom.getChildren().add(tile);
     }
@@ -85,7 +84,6 @@ public class Board extends BorderPane {
     for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
       TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(180);
-
       top.getChildren().add(tile);
     }
 
@@ -93,7 +91,6 @@ public class Board extends BorderPane {
       TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
-
       right.getChildren().add(tile);
     }
 

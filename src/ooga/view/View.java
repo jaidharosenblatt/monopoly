@@ -14,59 +14,41 @@ import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
-import ooga.view.gamedisplay.GameDisplay;
+import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {
 
-  /**
-   * TODO
-   * Add 2 action display
-   * No choice display
-   * Dice rolls
-   * Player display
-   */
-
   private Board board;
-  private GameDisplay gameDisplay;
+  private TurnActionButtons gameDisplay;
   private LoadGame controller;
   private static final double SCENE_WIDTH = 900;
   private static final double SCENE_HEIGHT = 700;
   private List<Player> players;
   private Player currentPlayer;
-  private Stage stage;
   private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
-    getStylesheets().add("resources/default.css");
-
-    System.out.println(tiles);
-    this.stage = stage;
     this.players = players;
     this.controller = controller;
+
+    getStylesheets().add("resources/default.css");
+
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
+
     board = new Board(players, tiles);
     Group boardGroup = new Group(board);
-
-    gameDisplay = new GameDisplay(this);
-
-    setLeft(boardGroup);
-    setTop(gameDisplay);
-
+    gameDisplay = new TurnActionButtons(this);
     Group tabGroup = new Group();
     tabView = new TabView(SCENE_WIDTH/3,SCENE_HEIGHT);
     tabView.addTabPaneToGroup(tabGroup);
 
+    setLeft(boardGroup);
+    setTop(gameDisplay);
     setRight(tabGroup);
-
-    tabView.updateRules(List.of("Rule1", "Rule2", "Rule3"));
 
     stage.setScene(scene);
     stage.show();
-  }
-
-  public Stage getStage() {
-    return stage;
   }
 
   public void setCurrentPlayer(Player p){
@@ -92,7 +74,6 @@ public class View extends BorderPane implements FrontEndExternal {
 
   @Override
   public void displayText(String text) {
-    gameDisplay.displayText(text);
   }
 
   @Override
