@@ -9,15 +9,11 @@ public abstract class Tile {
     protected String tileID;
     protected Player visiting;
 
-  public View getView() {
-    return view;
-  }
+    public abstract void action();
 
-  public void setView(View view) {
-    this.view = view;
-  }
+    public View getView() {return view;}
 
-  public abstract void action();
+    public void setView(View view) {this.view = view;}
 
     public int getBoardIndex() {return this.boardIndex;}
 

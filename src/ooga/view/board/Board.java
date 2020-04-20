@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Player;
-import ooga.api.view.PlayerInfo;
 
 public class Board extends BorderPane {
 
@@ -62,13 +61,13 @@ public class Board extends BorderPane {
   private void createGrid() {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
+      Tile tile = new PropertyFront("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
           TILE_HEIGHT);
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+      Tile tile = new PropertyFront("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(90);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
@@ -85,7 +84,7 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
+      Tile tile = new PropertyFront("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
           TILE_WIDTH);
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);

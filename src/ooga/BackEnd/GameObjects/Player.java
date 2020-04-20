@@ -4,13 +4,16 @@ import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.api.view.Card;
+import ooga.api.view.PlayerInfo;
+import ooga.view.board.PropertyFront;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Player {
+public class Player implements PlayerInfo {
 
     private static final int INITIAL_BALANCE = 1500;
     private static final int BAIL = 50;
@@ -213,16 +216,49 @@ public class Player {
         this.payPlayer(otherPlayer, moneyGive);
         otherPlayer.payPlayer(this, moneyReceive);
         this.properties.removeAll(propertiesGive);
+        ArrayList<Property> temp = otherPlayer.getProperties();
+        temp.removeAll(propertiesReceive);
         for (Property p : propertiesGive) {
             p.setOwner(otherPlayer);
         }
-        ArrayList<Property> temp = otherPlayer.getProperties();
-        temp.removeAll(propertiesReceive);
         for (Property p : propertiesReceive) {
             p.setOwner(this);
         }
         this.properties.addAll(propertiesReceive);
         temp.addAll(propertiesGive);
         otherPlayer.setProperties(temp);
+    }
+
+    @Override
+    public List<ooga.api.view.Property> getPropertiesUnmodifiable() {
+        ArrayList<PropertyFront> propertiesFront = new ArrayList<>();
+        for (Property p : properties) {
+            propertiesFront.add(p.convertFront());
+        }
+    }
+
+    @Override
+    public List<Card> getHeldCardsUnmodifiable() {
+        return null;
+    }
+
+    @Override
+    public Integer getCashBalance() {
+        return null;
+    }
+
+    @Override
+    public Integer getPositionOnBoard() {
+        return null;
+    }
+
+    @Override
+    public int getPlayerId() {
+        return 0;
+    }
+
+    @Override
+    public String getPlayerColor() {
+        return null;
     }
 }
