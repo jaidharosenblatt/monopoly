@@ -56,11 +56,6 @@ public class Cards {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(ILLINOIS_INDEX);
-                    for (Property p : properties) {
-                        if (p.getBoardIndex() == ILLINOIS_INDEX) {
-                            p.action();
-                        }
-                    }
                     break;
                 case 3:
                     Decision d3 = new Decision("Advance to St. Charles Place. If you pass Go, collect $200.", option);
@@ -69,11 +64,6 @@ public class Cards {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(ST_CHARLES_INDEX);
-                    for (Property p : properties) {
-                        if (p.getBoardIndex() == ST_CHARLES_INDEX) {
-                            p.action();
-                        }
-                    }
                     break;
                 case 4:
                     Decision d4 = new Decision("Advance token to nearest Utility. If unowned, you may buy it from the Bank. " +
