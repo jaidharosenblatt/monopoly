@@ -65,7 +65,7 @@ public class LoadGame {
 
          playerInfoList = new ArrayList<>();
         playerInfoList.addAll(activePlayers);
-         
+
         view = new View(stage, this, playerInfoList, allTiles);
 
         for (Tile t : allTiles) {

@@ -74,14 +74,12 @@ public class View extends BorderPane implements FrontEndExternal {
 
   @Override
   public void makeUserDecision(Decision decision) {
-    new DecisionView(decision, currentPlayer.getName(), Color.NAVY);
-
-//    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
+    new DecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override
   public void makeMultiDecision(MultiDecision decision) {
-    new MultiDecisionView(decision, currentPlayer.getName(), Color.NAVY);
+    new MultiDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override
