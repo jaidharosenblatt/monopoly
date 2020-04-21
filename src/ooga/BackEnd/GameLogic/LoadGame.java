@@ -44,6 +44,9 @@ public class LoadGame {
 
         createPlayers(player_number);
         currentPlayer = activePlayers.get(0);
+
+        ///////////////////////////////////////////////////////////////////////////////////
+        //TESTING PURPOSES ONLY: last player in turn gets the first 12 available properties
         ArrayList<Property> test = new ArrayList<>();
         for (Tile t : allTiles) {
             if (t.getBoardIndex() < 12 && t instanceof Property) {
@@ -52,6 +55,9 @@ public class LoadGame {
             }
         }
         currentPlayer.setProperties(test);
+        //DELETE AFTER FINISHING TESTING
+        ///////////////////////////////////////////////////////////////////////////////////
+
         view = new View(stage, this, activePlayers, allTiles);
 
         for (Tile t : allTiles) {
