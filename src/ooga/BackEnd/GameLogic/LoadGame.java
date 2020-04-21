@@ -139,14 +139,18 @@ public class LoadGame {
                 check++;
                 if (owned instanceof Street) {
                     if (currentPlayer.getBalance() < ((Street) owned).getHouseCost()) {
-                        System.out.println("Not enough funds");
+                        List<String> options = List.of("OK");
+                        Decision d = new Decision("ERROR: You do not have enough funds",options);
+                        view.makeUserDecision(d);
                         return;
                     }
                 }
             }
         }
         if (check < 1) {
-            System.out.println("You do not have a monopoly of any property");
+            List<String> options = List.of("OK");
+            Decision d = new Decision("ERROR: You do not have a monopoly",options);
+            view.makeUserDecision(d);
             return;
         }
         buildLoop(currentPlayer);
