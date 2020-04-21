@@ -335,7 +335,7 @@ public class LoadGame {
     public void mortgage() {
         if (currentPlayer.getProperties().size() < 1) {
             List<String> option = List.of("OK");
-            Decision d = new Decision("ERROR: You do not have an properties to mortgage",option);
+            Decision d = new Decision("ERROR: You do not have an properties",option);
             view.makeUserDecision(d);
             return;
         }
@@ -357,21 +357,29 @@ public class LoadGame {
         }
     }
 
-    private String unmortgage(Player p) {
-        String test = "";
-        while(!test.equals("done")) {
-            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("Which property would you like to unmortgage?");
-            String input = myObj.nextLine();
-            for (Property s : p.getProperties()) {
-                if (s.getTitle().equals(input) && p.getProperties().contains(s) && s.isMortgaged()) {
-                    s.liftMortgage();
-                    test = "done";
-                    break;
-                }
+    public void unmortgage() {
+        if (currentPlayer.getProperties().size() < 1) {
+            List<String> option = List.of("OK");
+            Decision d = new Decision("ERROR: You do not have an properties",option);
+            view.makeUserDecision(d);
+            return;
+        }
+        ArrayList<Property> filter = new ArrayList<>();
+        for (Property p: currentPlayer.getProperties()) {
+            if (p.isMortgaged()) {
+                filter.add(p);
             }
         }
-        return "";
+
+        List<Property> options = filter;
+        MultiDecision d = new MultiDecision("Which property would you like to unmortgage?",options);
+        view.makeMultiDecision(d);
+
+        for (Property p : d.getChoice()) {
+            if (p.isMortgaged()) {
+                p.liftMortgage();
+            }
+        }
     }
 
     private String trade(Player p) {

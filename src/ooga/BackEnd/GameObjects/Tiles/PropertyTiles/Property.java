@@ -82,6 +82,7 @@ public abstract class Property extends Tile {
     }
 
     public void liftMortgage() {
+        System.out.println(this.owner + " just paid " + this.cost * 1.1 + " to unmortgage " + this.title_deed);
         this.mortgaged = false;
         this.owner.payBank((int) (this.cost * 1.1), false);
     }

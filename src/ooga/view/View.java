@@ -65,9 +65,7 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleMortgage() {controller.mortgage();}
 
-  public void handleUnmortgage() {
-    System.out.println("Mortgage");
-  }
+  public void handleUnmortgage() {controller.unmortgage();}
 
   public void handleTrade() {
     System.out.println("Trade");
