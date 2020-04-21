@@ -422,13 +422,18 @@ public class LoadGame {
                     int cashGive = Integer.parseInt(give[give.length - 1]);
                     ArrayList<Property> propWant = new ArrayList<>();
                     ArrayList<Property> propGive = new ArrayList<>();
-                    int counter = 0;
                     for (Property q : this.properties) {
-                        if (want[counter].equals(q.getTitle())) {
-                            propWant.add(q);
+                        for (String s : want) {
+                            if (s.equals(q.getTitle())) {
+                                propWant.add(q);
+                            }
                         }
-                        if (give[counter].equals(q.getTitle())) {
-                            propGive.add(q);
+                    }
+                    for (Property q : this.properties) {
+                        for (String s : give) {
+                            if (s.equals(q.getTitle())) {
+                                propGive.add(q);
+                            }
                         }
                     }
                     if (!(p.getProperties().containsAll(propGive)) || !(b.getProperties().containsAll(propWant)) || p.getBalance() < cashGive || b.getBalance() < cashWant) {
