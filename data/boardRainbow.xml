@@ -156,7 +156,7 @@
             <boardIndex>19</boardIndex>
             <title_deed>New York Avenue</title_deed>
             <cost>200</cost>
-            <color>#fdcd00</color>
+            <color>#357ea0</color>
             <group_number>1</group_number>
             <base_rent>16</base_rent>
             <monopoly_rent>32</monopoly_rent>
@@ -261,7 +261,7 @@
             <boardIndex>31</boardIndex>
             <title_deed>Pacific Avenue</title_deed>
             <cost>300</cost>
-            <color>#ffffff</color>
+            <color>#f34202</color>
             <group_number>1</group_number>
             <base_rent>26</base_rent>
             <monopoly_rent>52</monopoly_rent>
