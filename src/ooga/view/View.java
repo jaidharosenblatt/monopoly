@@ -14,6 +14,7 @@ import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
+import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
@@ -88,8 +89,9 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void refreshPlayers(Map<Integer, Player> currentPlayers) {
-
+  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
+    tabView.updatePlayersTab(currentPlayers);
+    System.out.println("RefreshPlayers");
   }
 
   @Override
