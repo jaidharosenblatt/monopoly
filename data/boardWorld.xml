@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<boardGame>Classic Monopoly Board XML
+    <author>Rodrigo Araujo</author>
+    <properties>
+        <street ID="1">
+            <boardIndex>1</boardIndex>
+            <title_deed>Gdynia</title_deed>
+            <cost>60</cost>
+            <color>#955636</color>
+            <group_number>2</group_number>
+            <base_rent>2</base_rent>
+            <monopoly_rent>4</monopoly_rent>
+            <rent_one_house>10</rent_one_house>
+            <rent_two_house>30</rent_two_house>
+            <rent_three_house>90</rent_three_house>
+            <rent_four_house>160</rent_four_house>
+            <rent_hotel>250</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="2">
+            <boardIndex>3</boardIndex>
+            <title_deed>Taipei</title_deed>
+            <cost>60</cost>
+            <color>#955636</color>
+            <group_number>2</group_number>
+            <base_rent>4</base_rent>
+            <monopoly_rent>8</monopoly_rent>
+            <rent_one_house>20</rent_one_house>
+            <rent_two_house>60</rent_two_house>
+            <rent_three_house>180</rent_three_house>
+            <rent_four_house>320</rent_four_house>
+            <rent_hotel>450</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="4">
+            <boardIndex>6</boardIndex>
+            <title_deed>Tokyo</title_deed>
+            <cost>100</cost>
+            <color>#a8def8</color>
+            <group_number>3</group_number>
+            <base_rent>6</base_rent>
+            <monopoly_rent>12</monopoly_rent>
+            <rent_one_house>30</rent_one_house>
+            <rent_two_house>90</rent_two_house>
+            <rent_three_house>270</rent_three_house>
+            <rent_four_house>400</rent_four_house>
+            <rent_hotel>550</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="5">
+            <boardIndex>8</boardIndex>
+            <title_deed>Barcelona</title_deed>
+            <cost>100</cost>
+            <color>#a8def8</color>
+            <group_number>3</group_number>
+            <base_rent>6</base_rent>
+            <monopoly_rent>12</monopoly_rent>
+            <rent_one_house>30</rent_one_house>
+            <rent_two_house>90</rent_two_house>
+            <rent_three_house>270</rent_three_house>
+            <rent_four_house>400</rent_four_house>
+            <rent_hotel>550</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="6">
+            <boardIndex>9</boardIndex>
+            <title_deed>Athens</title_deed>
+            <cost>120</cost>
+            <color>#a8def8</color>
+            <group_number>3</group_number>
+            <base_rent>8</base_rent>
+            <monopoly_rent>16</monopoly_rent>
+            <rent_one_house>40</rent_one_house>
+            <rent_two_house>100</rent_two_house>
+            <rent_three_house>300</rent_three_house>
+            <rent_four_house>450</rent_four_house>
+            <rent_hotel>600</rent_hotel>
+            <house_cost>50</house_cost>
+        </street>
+        <street ID="7">
+            <boardIndex>11</boardIndex>
+            <title_deed>Istanbul</title_deed>
+            <cost>140</cost>
+            <color>#d93a96</color>
+            <group_number>3</group_number>
+            <base_rent>10</base_rent>
+            <monopoly_rent>20</monopoly_rent>
+            <rent_one_house>50</rent_one_house>
+            <rent_two_house>150</rent_two_house>
+            <rent_three_house>450</rent_three_house>
+            <rent_four_house>625</rent_four_house>
+            <rent_hotel>750</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="9">
+            <boardIndex>13</boardIndex>
+            <title_deed>Kyiv</title_deed>
+            <cost>140</cost>
+            <color>#d93a96</color>
+            <group_number>3</group_number>
+            <base_rent>10</base_rent>
+            <monopoly_rent>20</monopoly_rent>
+            <rent_one_house>50</rent_one_house>
+            <rent_two_house>150</rent_two_house>
+            <rent_three_house>450</rent_three_house>
+            <rent_four_house>625</rent_four_house>
+            <rent_hotel>750</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="10">
+            <boardIndex>14</boardIndex>
+            <title_deed>Toronto</title_deed>
+            <cost>160</cost>
+            <color>#d93a96</color>
+            <group_number>3</group_number>
+            <base_rent>12</base_rent>
+            <monopoly_rent>24</monopoly_rent>
+            <rent_one_house>60</rent_one_house>
+            <rent_two_house>180</rent_two_house>
+            <rent_three_house>500</rent_three_house>
+            <rent_four_house>700</rent_four_house>
+            <rent_hotel>900</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="12">
+            <boardIndex>16</boardIndex>
+            <title_deed>Rome</title_deed>
+            <cost>180</cost>
+            <color>#f9941e</color>
+            <group_number>3</group_number>
+            <base_rent>14</base_rent>
+            <monopoly_rent>28</monopoly_rent>
+            <rent_one_house>70</rent_one_house>
+            <rent_two_house>200</rent_two_house>
+            <rent_three_house>550</rent_three_house>
+            <rent_four_house>750</rent_four_house>
+            <rent_hotel>950</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="13">
+            <boardIndex>18</boardIndex>
+            <title_deed>Shanghai</title_deed>
+            <cost>180</cost>
+            <color>#f9941e</color>
+            <group_number>3</group_number>
+            <base_rent>14</base_rent>
+            <monopoly_rent>28</monopoly_rent>
+            <rent_one_house>70</rent_one_house>
+            <rent_two_house>200</rent_two_house>
+            <rent_three_house>550</rent_three_house>
+            <rent_four_house>750</rent_four_house>
+            <rent_hotel>950</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="14">
+            <boardIndex>19</boardIndex>
+            <title_deed>Vancouver</title_deed>
+            <cost>200</cost>
+            <color>#f9941e</color>
+            <group_number>3</group_number>
+            <base_rent>16</base_rent>
+            <monopoly_rent>32</monopoly_rent>
+            <rent_one_house>80</rent_one_house>
+            <rent_two_house>220</rent_two_house>
+            <rent_three_house>600</rent_three_house>
+            <rent_four_house>800</rent_four_house>
+            <rent_hotel>1000</rent_hotel>
+            <house_cost>100</house_cost>
+        </street>
+        <street ID="15">
+            <boardIndex>21</boardIndex>
+            <title_deed>Sydney</title_deed>
+            <cost>220</cost>
+            <color>#f01824</color>
+            <group_number>3</group_number>
+            <base_rent>18</base_rent>
+            <monopoly_rent>36</monopoly_rent>
+            <rent_one_house>90</rent_one_house>
+            <rent_two_house>250</rent_two_house>
+            <rent_three_house>700</rent_three_house>
+            <rent_four_house>875</rent_four_house>
+            <rent_hotel>1050</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="16">
+            <boardIndex>23</boardIndex>
+            <title_deed>New York</title_deed>
+            <cost>220</cost>
+            <color>#f01824</color>
+            <group_number>3</group_number>
+            <base_rent>18</base_rent>
+            <monopoly_rent>36</monopoly_rent>
+            <rent_one_house>90</rent_one_house>
+            <rent_two_house>250</rent_two_house>
+            <rent_three_house>700</rent_three_house>
+            <rent_four_house>875</rent_four_house>
+            <rent_hotel>1050</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="17">
+            <boardIndex>24</boardIndex>
+            <title_deed>London</title_deed>
+            <cost>240</cost>
+            <color>#f01824</color>
+            <group_number>3</group_number>
+            <base_rent>20</base_rent>
+            <monopoly_rent>40</monopoly_rent>
+            <rent_one_house>100</rent_one_house>
+            <rent_two_house>300</rent_two_house>
+            <rent_three_house>750</rent_three_house>
+            <rent_four_house>925</rent_four_house>
+            <rent_hotel>1100</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="19">
+            <boardIndex>26</boardIndex>
+            <title_deed>Beijing</title_deed>
+            <cost>260</cost>
+            <color>#fdef08</color>
+            <group_number>3</group_number>
+            <base_rent>22</base_rent>
+            <monopoly_rent>44</monopoly_rent>
+            <rent_one_house>110</rent_one_house>
+            <rent_two_house>330</rent_two_house>
+            <rent_three_house>800</rent_three_house>
+            <rent_four_house>975</rent_four_house>
+            <rent_hotel>1150</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="20">
+            <boardIndex>27</boardIndex>
+            <title_deed>Hong Kong</title_deed>
+            <cost>260</cost>
+            <color>#fdef08</color>
+            <group_number>3</group_number>
+            <base_rent>22</base_rent>
+            <monopoly_rent>44</monopoly_rent>
+            <rent_one_house>110</rent_one_house>
+            <rent_two_house>330</rent_two_house>
+            <rent_three_house>800</rent_three_house>
+            <rent_four_house>975</rent_four_house>
+            <rent_hotel>1150</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="22">
+            <boardIndex>29</boardIndex>
+            <title_deed>Jerusalem</title_deed>
+            <cost>280</cost>
+            <color>#fdef08</color>
+            <group_number>3</group_number>
+            <base_rent>24</base_rent>
+            <monopoly_rent>48</monopoly_rent>
+            <rent_one_house>120</rent_one_house>
+            <rent_two_house>360</rent_two_house>
+            <rent_three_house>850</rent_three_house>
+            <rent_four_house>1025</rent_four_house>
+            <rent_hotel>1200</rent_hotel>
+            <house_cost>150</house_cost>
+        </street>
+        <street ID="23">
+            <boardIndex>31</boardIndex>
+            <title_deed>Paris</title_deed>
+            <cost>300</cost>
+            <color>#28b05b</color>
+            <group_number>3</group_number>
+            <base_rent>26</base_rent>
+            <monopoly_rent>52</monopoly_rent>
+            <rent_one_house>130</rent_one_house>
+            <rent_two_house>390</rent_two_house>
+            <rent_three_house>900</rent_three_house>
+            <rent_four_house>1100</rent_four_house>
+            <rent_hotel>1275</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="24">
+            <boardIndex>32</boardIndex>
+            <title_deed>Belgrade</title_deed>
+            <cost>300</cost>
+            <color>#28b05b</color>
+            <group_number>3</group_number>
+            <base_rent>26</base_rent>
+            <monopoly_rent>52</monopoly_rent>
+            <rent_one_house>130</rent_one_house>
+            <rent_two_house>390</rent_two_house>
+            <rent_three_house>900</rent_three_house>
+            <rent_four_house>1100</rent_four_house>
+            <rent_hotel>1275</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="25">
+            <boardIndex>34</boardIndex>
+            <title_deed>Cape Town</title_deed>
+            <cost>320</cost>
+            <color>#28b05b</color>
+            <group_number>3</group_number>
+            <base_rent>28</base_rent>
+            <monopoly_rent>56</monopoly_rent>
+            <rent_one_house>150</rent_one_house>
+            <rent_two_house>450</rent_two_house>
+            <rent_three_house>1000</rent_three_house>
+            <rent_four_house>1200</rent_four_house>
+            <rent_hotel>1400</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="27">
+            <boardIndex>37</boardIndex>
+            <title_deed>Riga</title_deed>
+            <cost>350</cost>
+            <color>#1778c2</color>
+            <group_number>2</group_number>
+            <base_rent>35</base_rent>
+            <monopoly_rent>70</monopoly_rent>
+            <rent_one_house>175</rent_one_house>
+            <rent_two_house>500</rent_two_house>
+            <rent_three_house>1100</rent_three_house>
+            <rent_four_house>1300</rent_four_house>
+            <rent_hotel>1500</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <street ID="28">
+            <boardIndex>39</boardIndex>
+            <title_deed>Montreal</title_deed>
+            <cost>400</cost>
+            <color>#1778c2</color>
+            <group_number>2</group_number>
+            <base_rent>50</base_rent>
+            <monopoly_rent>100</monopoly_rent>
+            <rent_one_house>200</rent_one_house>
+            <rent_two_house>600</rent_two_house>
+            <rent_three_house>1400</rent_three_house>
+            <rent_four_house>1700</rent_four_house>
+            <rent_hotel>2000</rent_hotel>
+            <house_cost>200</house_cost>
+        </street>
+        <railroad ID="3">
+            <boardIndex>5</boardIndex>
+            <title_deed>Monopoly Rail</title_deed>
+            <cost>200</cost>
+            <color>#07040d</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="11">
+            <boardIndex>15</boardIndex>
+            <title_deed>Monopoly Air</title_deed>
+            <cost>200</cost>
+            <color>#07040d</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="18">
+            <boardIndex>25</boardIndex>
+            <title_deed>Monopoly Ship</title_deed>
+            <cost>200</cost>
+            <color>#07040d</color>
+            <group_number>4</group_number>
+        </railroad>
+        <railroad ID="26">
+            <boardIndex>35</boardIndex>
+            <title_deed>Monopoly Space</title_deed>
+            <cost>200</cost>
+            <color>#07040d</color>
+            <group_number>4</group_number>
+        </railroad>
+        <utility ID="8">
+            <boardIndex>12</boardIndex>
+            <title_deed>Solar Power</title_deed>
+            <cost>150</cost>
+            <color>#9c9ea0</color>
+            <group_number>2</group_number>
+        </utility>
+        <utility ID="21">
+            <boardIndex>28</boardIndex>
+            <title_deed>Wind Power</title_deed>
+            <cost>150</cost>
+            <color>#9c9ea0</color>
+            <group_number>2</group_number>
+        </utility>
+    </properties>
+    <eventTiles>
+        <event ID="0">
+            <boardIndex>0</boardIndex>
+            <name>go</name>
+        </event>
+        <event ID="29">
+            <boardIndex>10</boardIndex>
+            <name>jail</name>
+        </event>
+        <event ID="30">
+            <boardIndex>4</boardIndex>
+            <name>tax</name>
+            <tax_cost>200</tax_cost>
+        </event>
+        <event ID="31">
+            <boardIndex>38</boardIndex>
+            <name>tax</name>
+            <tax_cost>75</tax_cost>
+        </event>
+        <event ID="32">
+            <boardIndex>20</boardIndex>
+            <name>free_parking</name>
+        </event>
+        <event ID="33">
+            <boardIndex>30</boardIndex>
+            <name>go_to_jail</name>
+        </event>
+        <event ID="34">
+            <boardIndex>2</boardIndex>
+            <name>card</name>
+            <type>Community</type>
+        </event>
+        <event ID="35">
+            <boardIndex>17</boardIndex>
+            <name>card</name>
+            <type>Community</type>
+        </event>
+        <event ID="36">
+            <boardIndex>33</boardIndex>
+            <name>card</name>
+            <type>Community</type>
+        </event>
+        <event ID="37">
+            <boardIndex>7</boardIndex>
+            <name>card</name>
+            <type>Chance</type>
+        </event>
+        <event ID="38">
+            <boardIndex>22</boardIndex>
+            <name>card</name>
+            <type>Chance</type>
+        </event>
+        <event ID="39">
+            <boardIndex>36</boardIndex>
+            <name>card</name>
+            <type>Chance</type>
+        </event>
+    </eventTiles>
+</boardGame>

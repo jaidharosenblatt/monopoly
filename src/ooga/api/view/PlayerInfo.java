@@ -1,8 +1,8 @@
 package ooga.api.view;
 
 import java.util.List;
-import ooga.api.view.Card;
-import ooga.api.view.Property;
+
+import javafx.scene.paint.Paint;
 import ooga.view.board.PropertyView;
 
 public interface PlayerInfo {
@@ -34,5 +34,8 @@ public interface PlayerInfo {
    *
    * @return the hex of the player's color in 0-255 integer standard, comma separate the values.
    */
-  String getPlayerColor();
+  Paint getPlayerColor();
+
+  String getName();
+
 }

@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.api.view.PlayerInfo;
 
 
 public class Board extends BorderPane {
@@ -22,21 +23,21 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private Map<Player, Integer> playerPositions = new HashMap<>();
+  private Map<PlayerInfo, Integer> playerPositions = new HashMap<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
 
-  public Board(List<Player> players, List<Tile> tiles) {
+  public Board(List<PlayerInfo> players, List<Tile> tiles) {
 
-    for (Player p : players) {
+    for (PlayerInfo p : players) {
       playerPositions.put(p, 0);
     }
     createGrid(tiles);
     setPanesToRoot();
 
-    for (Player player : playerPositions.keySet()) {
+    for (PlayerInfo player : playerPositions.keySet()) {
       //add player to tile 0
       TileView tile = (TileView) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);

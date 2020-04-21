@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameObjects;
 
+import javafx.scene.paint.Paint;
 import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
@@ -10,6 +11,7 @@ import ooga.api.view.PlayerInfo;
 import ooga.view.View;
 import ooga.view.board.PropertyView;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class Player implements PlayerInfo {
     private static final List<String> option = List.of("OK");
 
     private final String name;
+
     private final int playerID;
     private int currentBalance;
     private int currentTile;
@@ -34,7 +37,7 @@ public class Player implements PlayerInfo {
     private int getOutCards;
 
     private View view;
-    private String color;
+    private Color color;
 
     public int dice1;
     public int dice2;
@@ -50,7 +53,6 @@ public class Player implements PlayerInfo {
         this.isJailed = false;
         this.turnsinJail = 0;
         this.getOutCards = 0;
-        this.color = "";
     }
 
     public String getName() {return this.name;}
@@ -59,7 +61,7 @@ public class Player implements PlayerInfo {
 
     public int getBalance() {return this.currentBalance;}
 
-    public void setColor(String c) {this.color = c;}
+    public void setColor(Color c) {this.color = c;}
 
     public int getTile() {return this.currentTile;}
 
@@ -269,7 +271,14 @@ public class Player implements PlayerInfo {
     }
 
     @Override
-    public String getPlayerColor() {
-        return color;
+    public Paint getPlayerColor() {
+        java.awt.Color awtColor = color;
+        int r = awtColor.getRed();
+        int g = awtColor.getGreen();
+        int b = awtColor.getBlue();
+        int a = awtColor.getAlpha();
+        double opacity = a / 255.0 ;
+        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(r, g, b, opacity);
+        return fxColor;
     }
 }

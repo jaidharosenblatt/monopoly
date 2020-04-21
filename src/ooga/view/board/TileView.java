@@ -23,7 +23,7 @@ public abstract class TileView extends BorderPane {
 
   private static final double PLAYER_SIZE = 5;
   private HBox playersPane = new HBox();
-  private Map<Player, Shape> players = new HashMap<>();
+  private Map<PlayerInfo, Shape> players = new HashMap<>();
   private StackPane centerTile = new StackPane();
 
   public TileView() {
@@ -44,14 +44,15 @@ public abstract class TileView extends BorderPane {
     return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
   }
 
-  public void removePlayer(Player player) {
+  public void removePlayer(PlayerInfo player) {
     Shape piece = players.get(player);
     playersPane.getChildren().remove(piece);
     players.remove(player);
   }
 
-  public void addPlayer(Player player) {
-    Shape piece = new Circle(PLAYER_SIZE, Color.RED);
+  public void addPlayer(PlayerInfo player) {
+    Shape piece = new Circle(PLAYER_SIZE, player.getPlayerColor());
+
     players.put(player, piece);
     playersPane.getChildren().clear();
     playersPane.getChildren().addAll(players.values());

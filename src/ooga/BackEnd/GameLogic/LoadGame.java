@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameLogic;
 
+import java.awt.*;
 import java.util.*;
 
 import javafx.stage.Stage;
@@ -15,7 +16,9 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
+import java.util.List;
 
+import ooga.api.view.PlayerInfo;
 import ooga.view.View;
 
 public class LoadGame {
@@ -29,12 +32,14 @@ public class LoadGame {
     private ArrayList<Event> eventTiles;
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
+    private ArrayList<PlayerInfo> playerInfoList;
     private Iterator<Player> itr;
     private View view;
     private Player currentPlayer;
     private int doubleTurns;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
+
         XMLParser parse = new XMLParser(game_pathname);
 
         this.properties = (ArrayList<Property>) parse.properties.clone();
@@ -58,7 +63,10 @@ public class LoadGame {
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
-        view = new View(stage, this, activePlayers, allTiles);
+         playerInfoList = new ArrayList<>();
+        playerInfoList.addAll(activePlayers);
+
+        view = new View(stage, this, playerInfoList, allTiles);
 
         for (Tile t : allTiles) {
             t.setView(view);
@@ -70,12 +78,14 @@ public class LoadGame {
 
     private void createPlayers(int player_number) {
         this.activePlayers = new ArrayList<>();
+        List<Color> colors = List.of(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW);
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
             //----------------------------------------------
             //INPUT FRONT-END TEXT-FIELD USER-INTERFACE HERE
             //----------------------------------------------
             temp[i] = new Player("Player " + (i + 1), this.allTiles);
+            temp[i].setColor(colors.get(i));
         }
         temp = rollForOrder(temp);
         for (Player p : temp) {
@@ -102,6 +112,7 @@ public class LoadGame {
         if (doubleTurns == 0) {
             nextPlayer();
         }
+        displayAssets(currentPlayer);
         view.setCurrentPlayer(currentPlayer);
         updateCardTiles();
         if (currentPlayer.isJailed()) {
@@ -502,6 +513,35 @@ public class LoadGame {
             return true;
         }
         return false;
+    }
+
+    private void displayAssets(Player p) {
+        System.out.println("---------------------------------");
+        System.out.println(p.getName() + " has $" + p.getBalance());
+        System.out.print(p.getName() + " owns:");
+        for (Property prop : p.getProperties()) {
+            System.out.print(" " + prop.getTitle() + " ");
+        }
+        System.out.println("");
+        System.out.println(p.getName() + " is on " + p.getTileName());
+        System.out.print(p.getName() + " mortgaged:");
+        for (Property prop : p.getProperties()) {
+            if (prop.isMortgaged()) {
+                System.out.print(" " + prop.getTitle() + " ");
+            }
+        }
+        System.out.println("");
+        System.out.print(p.getName() + " monopolies:");
+        ArrayList<String> colors = new ArrayList<>();
+        for (Property prop : p.getProperties()) {
+            if (p.hasMonopoly(prop) && !(colors.contains(prop.getGroupColor()))) {
+                System.out.print(" " + prop.getGroupColor() + " ");
+                colors.add(prop.getGroupColor());
+            }
+        }
+        System.out.println("");
+        System.out.println(p.getName() + " has " + p.getNumJFC() + " Get Out of Jail Free cards");
+        System.out.println("---------------------------------");
     }
 
 }
