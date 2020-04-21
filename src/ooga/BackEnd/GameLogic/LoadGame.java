@@ -201,7 +201,10 @@ public class LoadGame {
     private void rollDiceAndMove(Player p) {
         p.rollDice();
         int new_tile = p.getTile() + p.dice1 + p.dice2;
-        if (new_tile > 39) {new_tile -= 40;}
+        if (new_tile > 39) {
+            new_tile -= 40;
+            p.receive(200);
+        }
         p.moveTo(new_tile);
     }
 
