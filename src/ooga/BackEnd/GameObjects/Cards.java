@@ -187,31 +187,45 @@ public class Cards {
             int probality = (int) (Math.random() * 17) + 1;
             switch (probality) {
                 case 1:
-                    System.out.println("Advance to \"GO\". (Collect $200)");
+                    List<String> option1 = List.of("Ok");
+                    Decision d1 = new Decision("Advance to \"GO\". (Collect $200)", option1);
+                    view.makeUserDecision(d1);
                     user.moveTo(GO_INDEX);
                     break;
                 case 2:
-                    System.out.println("Bank error in your favor. Collect $200.");
+                    List<String> option2 = List.of("Ok");
+                    Decision d2 = new Decision("Bank error in your favor. Collect $200.", option2);
+                    view.makeUserDecision(d2);
                     user.receive(CROSS_GO);
                     break;
                 case 3:
-                    System.out.println("Doctor's fees. Pay $50.");
+                    List<String> option3 = List.of("Ok");
+                    Decision d3 = new Decision("Doctor's fees. Pay $50.", option3);
+                    view.makeUserDecision(d3);
                     user.payBank(50);
                     break;
                 case 4:
-                    System.out.println("From sale of stock you get $50. ");
+                    List<String> option4 = List.of("Ok");
+                    Decision d4 = new Decision("From sale of stock you get $50.", option4);
+                    view.makeUserDecision(d4);
                     user.receive(50);
                     break;
                 case 5:
-                    System.out.println("Get Out of Jail Free. This card may be kept until needed or sold/traded.");
+                    List<String> option5 = List.of("Ok");
+                    Decision d5 = new Decision("Get Out of Jail Free. This card may be kept until needed or sold/traded.", option5);
+                    view.makeUserDecision(d5);
                     user.getJailFreeCard();
                     break;
                 case 6:
-                    System.out.println("Go to Jail. Go directly to jail. Do not pass Go, Do not collect $200.");
+                    List<String> option6 = List.of("Ok");
+                    Decision d6 = new Decision("Go to Jail. Go directly to jail. Do not pass Go, Do not collect $200.", option6);
+                    view.makeUserDecision(d6);
                     user.setJailed();
                     break;
                 case 7:
-                    System.out.println("Grand Opera Night. Collect $50 from every player for opening night seats.");
+                    List<String> option7 = List.of("Ok");
+                    Decision d7 = new Decision("Grand Opera Night. Collect $50 from every player for opening night seats.", option7);
+                    view.makeUserDecision(d7);
                     for (Player p : players) {
                         if (user != p) {
                             p.payPlayer(user, 50);
@@ -219,15 +233,21 @@ public class Cards {
                     }
                     break;
                 case 8:
-                    System.out.println("Holiday Fund matures. Receive $100.");
+                    List<String> option8 = List.of("Ok");
+                    Decision d8 = new Decision("Holiday Fund matures. Receive $100.", option8);
+                    view.makeUserDecision(d8);
                     user.receive(100);
                     break;
                 case 9:
-                    System.out.println("Income tax refund. Collect $20.");
+                    List<String> option9 = List.of("Ok");
+                    Decision d9 = new Decision("Income tax refund. Collect $20.", option9);
+                    view.makeUserDecision(d9);
                     user.receive(20);
                     break;
                 case 10:
-                    System.out.println("It is your birthday. Collect $10 from every player.");
+                    List<String> option10 = List.of("Ok");
+                    Decision d10 = new Decision("It is your birthday. Collect $10 from every player.", option10);
+                    view.makeUserDecision(d10);
                     for (Player p : players) {
                         if (user != p) {
                             p.payPlayer(user, 10);
@@ -235,31 +255,46 @@ public class Cards {
                     }
                     break;
                 case 11:
-                    System.out.println("Life insurance matures. Collect $100");
+                    List<String> option11 = List.of("Ok");
+                    Decision d11 = new Decision("Life insurance matures. Collect $100", option11);
+                    view.makeUserDecision(d11);
                     user.receive(100);
                     break;
                 case 12:
-                    System.out.println("Hospital Fees. Pay $50.");
+                    List<String> option12 = List.of("Ok");
+                    Decision d12 = new Decision("Hospital Fees. Pay $50.", option12);
+                    view.makeUserDecision(d12);
                     user.payBank(50);
                     break;
                 case 13:
-                    System.out.println("School Fees. Pay $50.");
+                    List<String> option13 = List.of("Ok");
+                    Decision d13 = new Decision("School Fees. Pay $50.", option13);
+                    view.makeUserDecision(d13);
                     user.payBank(50);
                     break;
                 case 14:
-                    System.out.println("Receive $25 consultancy fee.");
+                    List<String> option14 = List.of("Ok");
+                    Decision d14 = new Decision("Receive $25 consultancy fee.", option14);
+                    view.makeUserDecision(d14);
                     user.receive(25);
                     break;
                 case 15:
-                    System.out.println("You are assessed for street repairs: Pay $40 per house and $200 per hotel you own.");
+
+                    List<String> option15 = List.of("Ok");
+                    Decision d15 = new Decision("You are assessed for street repairs: Pay $40 per house and $200 per hotel you own.", option15);
+                    view.makeUserDecision(d15);
                     user.payBank(user.getHouses() * 40);
                     break;
                 case 16:
-                    System.out.println("You have won second prize in a beauty contest. Collect $10.");
+                    List<String> option16 = List.of("Ok");
+                    Decision d16 = new Decision("You have won second prize in a beauty contest. Collect $10.", option16);
+                    view.makeUserDecision(d16);
                     user.receive(10);
                     break;
                 case 17:
-                    System.out.println("You inherit $100.");
+                    List<String> option17 = List.of("Ok");
+                    Decision d17 = new Decision("You inherit $100.", option17);
+                    view.makeUserDecision(d17);
                     user.receive(100);
                     break;
             }
