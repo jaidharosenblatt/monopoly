@@ -19,6 +19,14 @@ public interface FrontEndExternal {
   void makeUserDecision(Decision decision);
 
   /**
+   * This method is used by the back end to prompt the player for an input to a set of responses. An
+   * example of this is "Which Property?" ,{"Baltic Avenue","Mediterranean Avenue", "Oriental Avenue"}
+   *
+   * @param decision the decision to present to the user
+   */
+  void makeMultiDecision(Decision decision);
+
+  /**
    * Display text to alert player
    *
    * @param text to display
