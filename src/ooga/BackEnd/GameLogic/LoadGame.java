@@ -218,7 +218,7 @@ public class LoadGame {
             }
         }
         List<Property> options = streets;
-        MultiDecision d = new MultiDecision("Which property would you like to select?",options);
+        MultiDecision d = new MultiDecision("Which property would you like to buy a house on?",options);
         view.makeMultiDecision(d);
 
         Map<String, ArrayList<Property>> choicemap = new HashMap<>();
@@ -274,31 +274,55 @@ public class LoadGame {
     }
 
     private void sellLoop(Player p) {
-        String test = "";
-        while(!test.equals("done")) {
-            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("What property would you like to sell a house from?");
-            String input = myObj.nextLine();
-            ArrayList<Street> monopoly_set = new ArrayList<>();
-            loop:
-            for (Property owned : p.getProperties()) {
-                if (owned.getTitle().equals(input) && (owned instanceof Street)) {
-                    monopoly_set.add((Street) owned);
-                    for (Property q : p.getProperties()) {
-                        if (owned.getGroupColor().equals(q.getGroupColor()) && (q instanceof Street)) {
-                            monopoly_set.add((Street) q);
-                        }
-                    }
-                    for (Street r : monopoly_set) {
-                        int diff = ((Street) owned).getHouses() - r.getHouses();
-                        if (diff < 0) {
-                            System.out.println("Choose another property, must keep house number even");
-                            break loop;
+        List<Property> streets = new ArrayList<>();
+        for(Property q : p.getProperties()) {
+            if (q instanceof Street && !q.isMortgaged() && p.hasMonopoly(q)) {
+                if (((Street) q).getHouses() > 0) {
+                    streets.add((Street) q);
+                }
+            }
+        }
+        List<Property> options = streets;
+        MultiDecision d = new MultiDecision("Which property would you like to sell a house on?",options);
+        view.makeMultiDecision(d);
+
+        Map<String, ArrayList<Property>> choicemap = new HashMap<>();
+        for (Property r : d.getChoice()) {
+            if (!choicemap.containsKey(r.getGroupColor())) {
+                choicemap.put(r.getGroupColor(), new ArrayList<Property>());
+            }
+            choicemap.get(r.getGroupColor()).add(r);
+        }
+
+        Map<String, ArrayList<Property>> originalMap = new HashMap<>();
+        for (Property opt : d.getOptions()) {
+            if (!originalMap.containsKey(opt.getGroupColor())) {
+                originalMap.put(opt.getGroupColor(), new ArrayList<Property>());
+            }
+            originalMap.get(opt.getGroupColor()).add(opt);
+        }
+
+        loop:
+        for (Property owned : d.getChoice()) {
+            for (String key : choicemap.keySet()) {
+                if (owned.getGroupNumber() == choicemap.get(key).size()) {
+                    p.sellHouse(1, (Street) owned);
+                    continue loop;
+                }
+                else if (owned.getGroupColor().equals(key)) {
+                    for (Property w : originalMap.get(key)) {
+                        if (w instanceof Street && owned instanceof Street && owned != w) {
+                            int diff = ((Street) owned).getHouses() - ((Street) w).getHouses();
+                            if (diff < 0) {
+                                List<String> options1 = List.of("OK");
+                                Decision d1 = new Decision("ERROR: Houses must be distributed evenly",options1);
+                                view.makeUserDecision(d1);
+                                break loop;
+                            }
                         }
                     }
                     p.sellHouse(1, (Street) owned);
-                    test = "done";
-                    break loop;
+                    continue loop;
                 }
             }
         }
