@@ -123,23 +123,27 @@ public class Player implements PlayerInfo {
         }
     }
 
-    public void payPlayer(Player otherPlayer, int amount) {
-        Decision d = new Decision("You've paid " + otherPlayer.getName() + " $" + amount, option);
-        view.makeUserDecision(d);
+    public void payPlayer(Player otherPlayer, int amount, Boolean alert) {
+        if (alert) {
+            Decision d = new Decision("You've paid " + otherPlayer.getName() + " $" + amount, option);
+            view.makeUserDecision(d);
+        }
         this.currentBalance -= amount;
         otherPlayer.receive(amount);
     }
 
-    public void payBank(int amount) {
-        Decision d = new Decision("You've paid the bank $" + amount, option);
-        view.makeUserDecision(d);
+    public void payBank(int amount, Boolean alert) {
+        if (alert) {
+            Decision d = new Decision("You've paid the bank $" + amount, option);
+            view.makeUserDecision(d);
+        }
         this.currentBalance -= amount;
     }
 
     public void payBail() {
-        Decision d = new Decision("You've paid bail", option);
+        Decision d = new Decision("You've paid $50 for bail", option);
         view.makeUserDecision(d);
-        payBank(BAIL);
+        payBank(BAIL, false);
     }
 
     public void receive(int amount) {
@@ -170,7 +174,7 @@ public class Player implements PlayerInfo {
     public void buyProperty(Property P) {
         if (this.currentBalance > P.getCost()) {
             System.out.println(this.name + " has bought " + P.getTitle());
-            payBank(P.getCost());
+            payBank(P.getCost(), false);
             addProperty(P);
         }
     }
@@ -191,7 +195,7 @@ public class Player implements PlayerInfo {
     public void buyHouse(int amount, Street S) {
         if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
             System.out.println(this.name + " has bought " + amount + " house on " + S.getTitle());
-            this.payBank(S.getHouseCost() * amount);
+            this.payBank(S.getHouseCost() * amount, false);
             S.addHouse(amount);
             this.houses += amount;
         }
@@ -223,8 +227,8 @@ public class Player implements PlayerInfo {
     }
 
     public void trade(int moneyGive, ArrayList<Property> propertiesGive, Player otherPlayer, int moneyReceive, ArrayList<Property> propertiesReceive) {
-        this.payPlayer(otherPlayer, moneyGive);
-        otherPlayer.payPlayer(this, moneyReceive);
+        this.payPlayer(otherPlayer, moneyGive, false);
+        otherPlayer.payPlayer(this, moneyReceive, false);
         this.properties.removeAll(propertiesGive);
         ArrayList<Property> temp = otherPlayer.getProperties();
         temp.removeAll(propertiesReceive);

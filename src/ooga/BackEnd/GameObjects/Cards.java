@@ -125,12 +125,12 @@ public class Cards {
                 case 11:
                     Decision d10 = new Decision( "Make general repairs on all your property: For each house pay $25, For each hotel $125.", option);
                     view.makeUserDecision(d10);
-                    user.payBank(user.getHouses() * 25);
+                    user.payBank(user.getHouses() * 25, false);
                     break;
                 case 12:
                     Decision d11 = new Decision( "Pay poor tax of $15", option);
                     view.makeUserDecision(d11);
-                    user.payBank(15);
+                    user.payBank(15, false);
                     break;
                 case 13:
                     Decision d12 = new Decision( "Take a trip to Reading Railroad. If you pass Go, collect $200.", option);
@@ -150,7 +150,7 @@ public class Cards {
                     view.makeUserDecision(d14);
                     for (Player p : players) {
                         if (user != p) {
-                            user.payPlayer(p, 50);
+                            user.payPlayer(p, 50, false);
                         }
                     }
                     break;
@@ -182,7 +182,7 @@ public class Cards {
                 case 3:
                     Decision d3 = new Decision("Doctor's fees. Pay $50.", option);
                     view.makeUserDecision(d3);
-                    user.payBank(50);
+                    user.payBank(50, false);
                     break;
                 case 4:
                     Decision d4 = new Decision("From sale of stock you get $50.", option);
@@ -204,7 +204,7 @@ public class Cards {
                     view.makeUserDecision(d7);
                     for (Player p : players) {
                         if (user != p) {
-                            p.payPlayer(user, 50);
+                            p.payPlayer(user, 50, false);
                         }
                     }
                     break;
@@ -223,7 +223,7 @@ public class Cards {
                     view.makeUserDecision(d10);
                     for (Player p : players) {
                         if (user != p) {
-                            p.payPlayer(user, 10);
+                            p.payPlayer(user, 10, false);
                         }
                     }
                     break;
@@ -235,12 +235,12 @@ public class Cards {
                 case 12:
                     Decision d12 = new Decision("Hospital Fees. Pay $50.", option);
                     view.makeUserDecision(d12);
-                    user.payBank(50);
+                    user.payBank(50, false);
                     break;
                 case 13:
                     Decision d13 = new Decision("School Fees. Pay $50.", option);
                     view.makeUserDecision(d13);
-                    user.payBank(50);
+                    user.payBank(50, false);
                     break;
                 case 14:
                     Decision d14 = new Decision("Receive $25 consultancy fee.", option);
@@ -250,7 +250,7 @@ public class Cards {
                 case 15:
                     Decision d15 = new Decision("You are assessed for street repairs: Pay $40 per house and $200 per hotel you own.", option);
                     view.makeUserDecision(d15);
-                    user.payBank(user.getHouses() * 40);
+                    user.payBank(user.getHouses() * 40, false);
                     break;
                 case 16:
                     Decision d16 = new Decision("You have won second prize in a beauty contest. Collect $10.", option);
@@ -284,7 +284,7 @@ public class Cards {
                 }
                 else if (this.user != p.getOwner() && !p.isMortgaged()) {
                     this.user.rollDice();
-                    this.user.payPlayer(p.getOwner(), (this.user.dice1 + this.user.dice2) * 10);
+                    this.user.payPlayer(p.getOwner(), (this.user.dice1 + this.user.dice2) * 10, true);
                 }
                 else {
                     System.out.println("just visiting, pay nothing");
@@ -300,7 +300,7 @@ public class Cards {
             if (p.getBoardIndex() == rrTile) {
                 p.action();
                 if (p.getOwner() != this.user && p.isOwned()) {
-                    this.user.payPlayer(p.getOwner(), p.getRent());
+                    this.user.payPlayer(p.getOwner(), p.getRent(), true);
                 }
             }
         }

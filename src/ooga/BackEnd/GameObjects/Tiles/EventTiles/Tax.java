@@ -17,7 +17,7 @@ public class Tax extends Event {
 
     @Override
     public void action() {
-        this.visiting.payBank(this.tax_cost);
+        this.visiting.payBank(this.tax_cost, true);
     }
 
     public void setTax(int tax) {this.tax_cost = tax;}

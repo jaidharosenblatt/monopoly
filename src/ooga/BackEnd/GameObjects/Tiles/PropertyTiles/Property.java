@@ -26,7 +26,7 @@ public abstract class Property extends Tile {
         if (!isOwned()) {
 
             List<String> options = List.of("Yes","No");
-            Decision d = new Decision("Would you like to buy this for $" + this.cost + "?",options);
+            Decision d = new Decision("Would you like to buy " + this.title_deed + " for $" + this.cost + "?",options);
             getView().makeUserDecision(d);
 
           if (d.getChoice().equals("Yes")) {
@@ -40,7 +40,7 @@ public abstract class Property extends Tile {
           }
         }
         else if (this.visiting != this.owner && !isMortgaged()) {
-            this.visiting.payPlayer(this.owner, this.getRent());
+            this.visiting.payPlayer(this.owner, this.getRent(), true);
         }
         else {
             System.out.println("just visiting");
@@ -83,7 +83,7 @@ public abstract class Property extends Tile {
 
     public void liftMortgage() {
         this.mortgaged = false;
-        this.owner.payBank((int) (this.cost * 1.1));
+        this.owner.payBank((int) (this.cost * 1.1), false);
     }
 
     public PropertyView convertView() {
