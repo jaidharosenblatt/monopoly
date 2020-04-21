@@ -34,6 +34,8 @@ public class Player implements PlayerInfo {
     private int getOutCards;
 
     private View view;
+    private String color;
+
     public int dice1;
     public int dice2;
 
@@ -48,7 +50,7 @@ public class Player implements PlayerInfo {
         this.isJailed = false;
         this.turnsinJail = 0;
         this.getOutCards = 0;
-
+        this.color = "";
     }
 
     public String getName() {return this.name;}
@@ -56,6 +58,8 @@ public class Player implements PlayerInfo {
     public int getHouses() {return this.houses;}
 
     public int getBalance() {return this.currentBalance;}
+
+    public void setColor(String c) {this.color = c;}
 
     public int getTile() {return this.currentTile;}
 
@@ -251,21 +255,21 @@ public class Player implements PlayerInfo {
 
     @Override
     public Integer getCashBalance() {
-        return null;
+        return currentBalance;
     }
 
     @Override
     public Integer getPositionOnBoard() {
-        return null;
+        return currentTile;
     }
 
     @Override
     public int getPlayerId() {
-        return 0;
+        return playerID;
     }
 
     @Override
     public String getPlayerColor() {
-        return null;
+        return color;
     }
 }
