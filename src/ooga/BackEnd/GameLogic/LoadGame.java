@@ -1,6 +1,7 @@
 package ooga.BackEnd.GameLogic;
 
-import java.util.List;
+import java.util.*;
+
 import javafx.stage.Stage;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
@@ -14,9 +15,7 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+
 import ooga.view.View;
 
 public class LoadGame {
@@ -37,6 +36,7 @@ public class LoadGame {
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
 
+        this.properties = (ArrayList<Property>) parse.properties.clone();
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
@@ -208,42 +208,57 @@ public class LoadGame {
     }
 
     private void buildLoop(Player p) {
-        List<Property> options = p.getProperties();
+
+        List<Property> streets = new ArrayList<>();
+        for(Property q : p.getProperties()) {
+            if (q instanceof Street && !q.isMortgaged() && p.hasMonopoly(q)) {
+                streets.add((Street) q);
+            }
+        }
+        List<Property> options = streets;
         MultiDecision d = new MultiDecision("Which property would you like to select?",options);
         view.makeMultiDecision(d);
 
-        String test = "";
-        while(!test.equals("done")) {
-            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("What property would you like to build a house on?");
-            String input = myObj.nextLine();
-            ArrayList<Street> monopoly_set = new ArrayList<>();
-            loop:
-            for (Property owned : p.getProperties()) {
-                if (owned.getTitle().equals(input) && (owned instanceof Street)) {
-                    if (owned.isMortgaged()) {
-                        System.out.println("can't build a house on a mortgaged property");
-                        break loop;
-                    }
-                    monopoly_set.add((Street) owned);
-                    for (Property q : p.getProperties()) {
-                        if (owned.getGroupColor().equals(q.getGroupColor()) && (q instanceof Street)) {
-                            monopoly_set.add((Street) q);
-                        }
-                    }
-                    for (Street r : monopoly_set) {
-                        int diff = ((Street) owned).getHouses() - r.getHouses();
-                        if (diff > 0) {
-                            System.out.println("Choose another property, must keep house number even");
-                            break loop;
-                        }
-                    }
-                    p.buyHouse(1, (Street) owned);
-                    test = "done";
-                    break loop;
-                }
+        ArrayList<Property> choices = d.getChoice();
+
+        Map<String, Integer> setMap = new HashMap<>();
+        for (Property owned : choices) {
+            if (!setMap.containsKey(owned.getGroupColor())) {
+                setMap.put(owned.getGroupColor(), 1);
+            }
+            else {
+                setMap.put(owned.getGroupColor(), setMap.get(owned.getGroupColor()) + 1);
             }
         }
+
+//        String test = "";
+//        while(!test.equals("done")) {
+//            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+//            System.out.println("What property would you like to build a house on?");
+//            String input = myObj.nextLine();
+//            ArrayList<Street> monopoly_set = new ArrayList<>();
+//            loop:
+//            for (Property owned : p.getProperties()) {
+//                if (owned.getTitle().equals(input) && (owned instanceof Street)) {
+//                    monopoly_set.add((Street) owned);
+//                    for (Property q : p.getProperties()) {
+//                        if (owned.getGroupColor().equals(q.getGroupColor()) && (q instanceof Street)) {
+//                            monopoly_set.add((Street) q);
+//                        }
+//                    }
+//                    for (Street r : monopoly_set) {
+//                        int diff = ((Street) owned).getHouses() - r.getHouses();
+//                        if (diff > 0) {
+//                            System.out.println("Choose another property, must keep house number even");
+//                            break loop;
+//                        }
+//                    }
+//                    p.buyHouse(1, (Street) owned);
+//                    test = "done";
+//                    break loop;
+//                }
+//            }
+//        }
     }
 
     private String sell(Player p) {
