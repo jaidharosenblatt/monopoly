@@ -32,6 +32,7 @@ public class LoadGame {
     private Iterator<Player> itr;
     private View view;
     private Player currentPlayer;
+    private int doubleTurns;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
@@ -39,6 +40,7 @@ public class LoadGame {
         this.properties = (ArrayList<Property>) parse.properties.clone();
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
+        this.doubleTurns = 0;
 
         createPlayers(player_number);
         currentPlayer = activePlayers.get(0);
@@ -91,7 +93,9 @@ public class LoadGame {
     }
 
     public void takeTurn(){
-        nextPlayer();
+        if (doubleTurns == 0) {
+            nextPlayer();
+        }
         view.setCurrentPlayer(currentPlayer);
         updateCardTiles();
         rollDiceAndMove(currentPlayer);
@@ -118,12 +122,19 @@ public class LoadGame {
 
     private void rollDiceAndMove(Player p) {
         p.rollDice();
+        if (p.dice1 == p.dice2) {doubles();}
+        if (doubleTurns == 3) {p.setJailed();}
+        if (doubleTurns > 0 && p.dice1 != p.dice2) {doubleTurns = 0;}
         int new_tile = p.getTile() + p.dice1 + p.dice2;
         if (new_tile > 39) {
             new_tile -= 40;
             p.receive(200);
         }
         p.moveTo(new_tile);
+    }
+
+    private void doubles() {
+        doubleTurns++;
     }
 
     public void build() {
