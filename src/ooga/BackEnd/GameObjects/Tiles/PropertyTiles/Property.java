@@ -1,11 +1,18 @@
 package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
+import java.util.List;
+
+import javafx.scene.paint.Color;
+import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
-
-import java.util.Scanner;
+import ooga.view.board.PropertyView;
 
 public abstract class Property extends Tile {
+
+    private final static int TILE_WIDTH = 60;
+    private final static int TILE_HEIGHT = 60;
+
     protected String title_deed;
     protected Player owner;
     protected int cost;
@@ -17,18 +24,20 @@ public abstract class Property extends Tile {
     public void action() {
         System.out.println(this.visiting.getName() + " just landed on " + this.title_deed);
         if (!isOwned()) {
-            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            System.out.println("Would you like to buy this for $" + this.cost + "? [Y or N]: ");
-            String decision = myObj.nextLine();
-            if (decision.equals("Y")) {
-                if (this.visiting.getBalance() >= this.cost) {
-                    this.setOwner(this.visiting);
-                    this.owner.buyProperty(this);
-                }
-                else {
-                    System.out.println(this.visiting.getName() + " cannot afford it");
-                }
+
+            List<String> options = List.of("Yes","No");
+            Decision d = new Decision("Would you like to buy this for $" + this.cost + "?",options);
+            getView().makeUserDecision(d);
+
+          if (d.getChoice().equals("Yes")) {
+            if (this.visiting.getBalance() >= this.cost) {
+              this.setOwner(this.visiting);
+              this.owner.buyProperty(this);
             }
+            else {
+              System.out.println(this.visiting.getName() + " cannot afford it");
+            }
+          }
         }
         else if (this.visiting != this.owner && !isMortgaged()) {
             this.visiting.payPlayer(this.owner, this.getRent());
@@ -77,9 +86,7 @@ public abstract class Property extends Tile {
         this.owner.payBank((int) (this.cost * 1.1));
     }
 
-    @Override
-    public String toString() {
-        return "<" + tileID + ", " + title_deed + ", " + cost + ", " + group_color + ", "
-                + group_number + ">";
+    public PropertyView convertView() {
+        return new PropertyView(this.title_deed, this.cost, Color.web(group_color), TILE_WIDTH, TILE_HEIGHT);
     }
 }

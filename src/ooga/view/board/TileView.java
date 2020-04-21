@@ -16,17 +16,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import ooga.BackEnd.GameObjects.Player;
 import ooga.api.view.PlayerInfo;
 
-public abstract class Tile extends BorderPane {
+public abstract class TileView extends BorderPane {
 
   private static final double PLAYER_SIZE = 5;
   private HBox playersPane = new HBox();
-  private Map<PlayerInfo, Shape> players = new HashMap<>();
+  private Map<Player, Shape> players = new HashMap<>();
   private StackPane centerTile = new StackPane();
 
-  public Tile() {
-    this.getStyleClass().add("tile");
+  public TileView() {
+    this.setId("tile");
     playersPane.setAlignment(Pos.CENTER);
     centerTile.getChildren().add(playersPane);
     setCenter(centerTile);
@@ -39,23 +40,18 @@ public abstract class Tile extends BorderPane {
 
   }
 
-  protected void setBackgroundColor(Pane pane, Color color) {
-    pane.setBackground(
-        new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-  }
-
   protected Image getImageByName(String name) {
     return new Image(this.getClass().getClassLoader().getResourceAsStream(name));
   }
 
-  public void removePlayer(PlayerInfo player) {
+  public void removePlayer(Player player) {
     Shape piece = players.get(player);
     playersPane.getChildren().remove(piece);
     players.remove(player);
   }
 
-  public void addPlayer(PlayerInfo player) {
-    Shape piece = new Circle(PLAYER_SIZE, Color.web(player.getPlayerColor()));
+  public void addPlayer(Player player) {
+    Shape piece = new Circle(PLAYER_SIZE, Color.RED);
     players.put(player, piece);
     playersPane.getChildren().clear();
     playersPane.getChildren().addAll(players.values());

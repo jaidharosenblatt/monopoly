@@ -3,7 +3,7 @@ package ooga.api.view;
 public interface Property {
 
   /**
-   * @return the category of this property
+   * @return the category of this property: comma separated R,G,B in 0-255 integer standard
    */
   String getCategory();
 
@@ -37,4 +37,10 @@ public interface Property {
    * @param pathToImage the path to the new image
    */
   void changeImage(String pathToImage);
+
+  /**
+   *
+   * @return String value of the property's name.
+   */
+  String toString();
 }

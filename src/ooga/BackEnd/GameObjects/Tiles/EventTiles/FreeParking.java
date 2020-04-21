@@ -14,7 +14,7 @@ public class FreeParking extends Event {
 
     @Override
     public void action() {
-        System.out.println("Some versions of the game allow for this spot to do something");
+        System.out.println("Free Parking");
     }
 }
 

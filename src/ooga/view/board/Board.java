@@ -1,5 +1,8 @@
 package ooga.view.board;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.geometry.Pos;
@@ -7,7 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import ooga.api.view.PlayerInfo;
+import ooga.BackEnd.GameObjects.Player;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
+
 
 public class Board extends BorderPane {
 
@@ -16,21 +22,24 @@ public class Board extends BorderPane {
   private final static int TILE_WIDTH = 60;
   private final static int TILE_HEIGHT = 60;
 
-  private Map<PlayerInfo, Integer> playerPositions;
+  private Map<Player, Integer> playerPositions = new HashMap<>();
   private HBox top = new HBox();
   private VBox right = new VBox();
   private HBox bottom = new HBox();
   private VBox left = new VBox();
 
-  public Board(Map<PlayerInfo, Integer> playerPositions) {
-    this.playerPositions = playerPositions;
-    createGrid();
-    setPanesToRoot();
-    
+  public Board(List<Player> players, List<Tile> tiles) {
+    Collections.sort(tiles, Comparator.comparingInt(Tile::getBoardIndex));
 
-    for (PlayerInfo player : playerPositions.keySet()) {
+    for (Player p : players) {
+      playerPositions.put(p, 0);
+    }
+    createGrid(tiles);
+    setPanesToRoot();
+
+    for (Player player : playerPositions.keySet()) {
       //add player to tile 0
-      Tile tile = (Tile) bottom.getChildren().get(ROW_LENGTH);
+      TileView tile = (TileView) bottom.getChildren().get(ROW_LENGTH);
       tile.addPlayer(player);
     }
   }
@@ -44,29 +53,27 @@ public class Board extends BorderPane {
     setCenter(hBox);
   }
 
-  public void movePlayer(PlayerInfo player, int newPosition) {
+  public void movePlayer(Player player, int newPosition) {
 
     int oldPosition = playerPositions.get(player);
     playerPositions.put(player, newPosition);
 
-    Tile oldTile = getTileByIndex(oldPosition);
-    Tile newTile = getTileByIndex(newPosition);
+    TileView oldTile = getTileByIndex(oldPosition);
+    TileView newTile = getTileByIndex(newPosition);
 
     oldTile.removePlayer(player);
     newTile.addPlayer(player);
   }
 
-  private void createGrid() {
+  private void createGrid(List<Tile> tiles) {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_WIDTH,
-          TILE_HEIGHT);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
-          TILE_WIDTH);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(90);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
 
@@ -74,54 +81,60 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
-      Tile tile = new UtilityTile("property", i, Color.GREY, "rcd.jpg", TILE_WIDTH,
-          TILE_HEIGHT);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(180);
-
       top.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
-      Tile tile = new Property("property", i, Color.GREY, Color.BLUEVIOLET, TILE_HEIGHT,
-          TILE_WIDTH);
+      TileView tile = getPropertyFromTile(tiles.get(i));
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
-
       right.getChildren().add(tile);
     }
 
     bottom.getChildren().remove(ROW_LENGTH);
-    bottom.getChildren().add(new CornerTile(Color.GREY, "go.png", TILE_WIDTH, TILE_HEIGHT));
+    bottom.getChildren().add(new CornerTileView( "go.png", TILE_WIDTH, TILE_HEIGHT));
 
     bottom.getChildren().remove(0);
     bottom.getChildren()
-        .add(0, new CornerTile(Color.GREY, "jail.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView("jail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(ROW_LENGTH);
-    top.getChildren().add(new CornerTile(Color.GREY, "gotojail.png", TILE_WIDTH, TILE_HEIGHT));
+    top.getChildren().add(new CornerTileView("gotojail.png", TILE_WIDTH, TILE_HEIGHT));
 
     top.getChildren().remove(0);
     top.getChildren()
-        .add(0, new CornerTile(Color.GREY, "freeparking.png", TILE_WIDTH, TILE_HEIGHT));
+        .add(0, new CornerTileView("freeparking.png", TILE_WIDTH, TILE_HEIGHT));
 
   }
 
-  private Tile getTileByIndex(int index) {
+  private TileView getPropertyFromTile(Tile t) {
+    if (t instanceof Property) {
+      Property p = (Property) t;
+      return p.convertView();
+    } else {
+      return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
+          TILE_HEIGHT);
+    }
+  }
+
+  private TileView getTileByIndex(int index) {
     index = index % NUMBER_OF_TILES;
     int position = index % ROW_LENGTH;
 
     if (index < ROW_LENGTH) {
-      return (Tile) bottom.getChildren().get(ROW_LENGTH - position);
+      return (TileView) bottom.getChildren().get(ROW_LENGTH - position);
     } else if (index == ROW_LENGTH) {
-      return (Tile) bottom.getChildren().get(0);
+      return (TileView) bottom.getChildren().get(0);
     } else if (index < ROW_LENGTH * 2) {
-      return (Tile) left.getChildren().get(ROW_LENGTH - position - 1);
+      return (TileView) left.getChildren().get(ROW_LENGTH - position - 1);
     } else if (index < ROW_LENGTH * 3) {
-      return (Tile) top.getChildren().get(position);
+      return (TileView) top.getChildren().get(position);
     } else if (index == ROW_LENGTH * 3) {
-      return (Tile) top.getChildren().get(ROW_LENGTH);
+      return (TileView) top.getChildren().get(ROW_LENGTH);
     } else {
-      return (Tile) right.getChildren().get(position - 1);
+      return (TileView) right.getChildren().get(position - 1);
     }
   }
 

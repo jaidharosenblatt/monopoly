@@ -1,5 +1,7 @@
 package ooga.BackEnd.GameLogic;
 
+import java.util.List;
+import javafx.stage.Stage;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.cardTile;
@@ -15,6 +17,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import ooga.view.View;
 
 public class LoadGame {
 
@@ -28,8 +31,10 @@ public class LoadGame {
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
     private Iterator<Player> itr;
+    private View view;
+    private Player currentPlayer;
 
-    public LoadGame(String game_pathname, int player_number) throws FileNotFoundException, XMLStreamException {
+    public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
 
         this.properties = (ArrayList<Property>) parse.properties.clone();
@@ -40,72 +45,104 @@ public class LoadGame {
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
         createPlayers(player_number);
+        currentPlayer = activePlayers.get(0);
+        view = new View(stage, this, activePlayers, allTiles);
 
-        int game = 0;
-        String input = "";
-        while(game != 1) {
-            this.itr = this.activePlayers.iterator();
-            while (itr.hasNext()) {
-                Player p = itr.next();
-                if (activePlayers.size() == 1) {
-                    System.out.println(activePlayers.get(0).getName() + " wins!");
-                    itr.remove();
-                    game = 1;
-                    break;
-                }
-                if (p.isJailed()) {
-                    p.moveTo(JAIL_INDEX);
-                    if (p.isJailed()) {
-                        System.out.println("You remain in jail");
-                        promptPlayer(p);
-                        continue;
-                    }
-                    if (p.getBalance() < 0) {
-                        isBankrupt(p);
-                    }
-                    else {
-                        System.out.println("");
-                        input = "";
-                        while(!input.equals("end")) {
-                            input = decision(p);
-                        }
-                    }
-                }
-                else {
-                    updateCardTiles();
-                    displayAssets(p);
-                    System.out.println("");
-                    promptPlayer(p);
-                    basicTurn(p);
-                    if (p.getBalance() < 0) {
-                        isBankrupt(p);
-                    }
-                    else {
-                        System.out.println("");
-                        input = "";
-                        while(!input.equals("end")) {
-                            input = decision(p);
-                        }
-                    }
-                }
-            }
+        for (Tile t: allTiles){
+            t.setView(view);
         }
+        for (Player p : activePlayers) {
+            p.setView(view);
+        }
+
+
+//      updateCardTiles();
+
+
+//      int game = 0;
+//        String input = "";
+//        while(game != 1) {
+//            this.itr = this.activePlayers.iterator();
+//            while (itr.hasNext()) {
+//                Player p = itr.next();
+//                view.setCurrentPlayer(p);
+//                if (activePlayers.size() == 1) {
+//                    System.out.println(activePlayers.get(0).getName() + " wins!");
+//                    itr.remove();
+//                    game = 1;
+//                    break;
+//                }
+//                if (p.isJailed()) {
+//                    p.moveTo(JAIL_INDEX);
+//                    if (p.isJailed()) {
+//                        System.out.println("You remain in jail");
+//                        promptPlayer(p);
+//                        continue;
+//                    }
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//                else {
+//                    updateCardTiles();
+//                    displayAssets(p);
+//                    System.out.println("");
+//                    promptPlayer(p);
+//                    basicTurn(p);
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
+
+  private void nextPlayer(){
+      int i = activePlayers.indexOf(currentPlayer);
+      if (i+1 >= activePlayers.size()){
+        currentPlayer = activePlayers.get(0);
+      }
+      else {
+        currentPlayer = activePlayers.get(i+1);
+      }
+  }
+
+  public void takeTurn(){
+    nextPlayer();
+    view.setCurrentPlayer(currentPlayer);
+    updateCardTiles();
+    rollDiceAndMove(currentPlayer);
+  }
 
     private void createPlayers(int player_number) {
         this.activePlayers = new ArrayList<>();
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
-            Scanner myObj = new Scanner(System.in);
-            System.out.println("Enter name: ");
-            String name = myObj.nextLine();
-            temp[i] = new Player(name, this.allTiles);
+//            Scanner myObj = new Scanner(System.in);
+//            System.out.println("Enter name: ");
+//            String name = myObj.nextLine();
+            temp[i] = new Player(i + "hi", this.allTiles);
+            this.activePlayers.add(temp[i]);
         }
-        Player[] again = rollForOrder(temp);
-        for (Player p : again) {
-            this.activePlayers.add(p);
-        }
-        updateCardTiles();
+//        Player[] again = rollForOrder(temp);
+//        for (Player p : again) {
+//            this.activePlayers.add(p);
+//        }
+
     }
 
     private void updateCardTiles() {
@@ -161,23 +198,11 @@ public class LoadGame {
         System.out.println("---------------------------------");
     }
 
-    private void basicTurn(Player p) {
-        if (this.activePlayers.contains(p)) {
-            rollDiceAndMove(p);
-            if (p.dice1 == p.dice2) {
-                System.out.println(p.getName() + " has rolled doubles! Roll again.");
-                rollDiceAndMove(p);
-                if (p.dice1 == p.dice2) {
-                    System.out.println(p.getName() + " was caught speeding! Go to Jail.");
-                    p.setJailed();
-                }
-            }
-        }
-    }
-
     private void rollDiceAndMove(Player p) {
         p.rollDice();
+        view.displayRoll(List.of(p.dice1,p.dice2));
         int new_tile = p.getTile() + p.dice1 + p.dice2;
+        view.movePlayer(p,new_tile);
         if (new_tile > 39) {new_tile -= 40;}
         p.moveTo(new_tile);
     }

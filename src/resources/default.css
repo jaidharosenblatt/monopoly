@@ -17,18 +17,22 @@
   -fx-background-color: -fx-accent;
 }
 
-.tile{
+#tile{
   -fx-background-color: -fx-board;
+  -fx-font-size: 10;
 }
 
-.game-display{
+#turn-buttons{
   -fx-background-color: -fx-secondary;
   -fx-padding: 5;
 }
 
-.decision-display{
+#decision-display {
   -fx-background-color: -fx-primary;
   -fx-padding: 5;
-  -fx-border-radius: 5;
-  -fx-background-radius: 5;
+}
+
+#decision-display #name {
+  -fx-font-size: 20;
+  -fx-font-weight: bold;
 }

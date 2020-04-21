@@ -1,79 +1,92 @@
 package ooga.view;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import ooga.Controller;
+import ooga.BackEnd.GameLogic.LoadGame;
+import ooga.BackEnd.GameObjects.Player;
+import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
-import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
-import ooga.view.gamedisplay.GameDisplay;
-import ooga.view.gamedisplay.decisions.DecisionTester;
+import ooga.view.gamedisplay.DecisionView;
+import ooga.view.gamedisplay.TurnActionButtons;
+import ooga.view.tabs.TabView;
 
-public class View extends HBox implements FrontEndExternal {
+public class View extends BorderPane implements FrontEndExternal {
 
-  /**
-   * TODO
-   * Add 2 action display
-   * No choice display
-   * Dice rolls
-   * Player display
-   */
-
+  public static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
   private Board board;
-  private GameDisplay gameDisplay;
-  private Controller controller;
-  private static final double SCENE_WIDTH = 1000;
+  private TurnActionButtons gameDisplay;
+  private LoadGame controller;
+  private static final double SCENE_WIDTH = 900;
   private static final double SCENE_HEIGHT = 700;
-  private Map<PlayerInfo, Integer> playerPositions;
+  private List<Player> players;
+  private Player currentPlayer;
+  private TabView tabView;
 
-  public View(Stage stage, Controller controller, Map<PlayerInfo, Integer> playerPositions) {
+  public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
+    this.players = players;
     this.controller = controller;
+
+    getStylesheets().add(RESOURCES_DEFAULT_CSS);
+
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
-    board = new Board(playerPositions);
+
+    board = new Board(players, tiles);
     Group boardGroup = new Group(board);
+    gameDisplay = new TurnActionButtons(this);
+    Group tabGroup = new Group();
+    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT);
+    tabView.addTabPaneToGroup(tabGroup);
 
-    gameDisplay = new GameDisplay(this);
-
-    getChildren().addAll(boardGroup, gameDisplay);
-    scene.getStylesheets().add("resources/default.css");
+    setLeft(boardGroup);
+    setTop(gameDisplay);
+    setRight(tabGroup);
 
     stage.setScene(scene);
     stage.show();
   }
 
-
-  public void handleRoll(){
-    controller.handleRoll();
+  public void setCurrentPlayer(Player p) {
+    this.currentPlayer = p;
   }
 
-  public void submitDecision(List<String> decision) {
-    controller.submitDecision(decision);
+  public void handleRoll() {
+    controller.takeTurn();
+  }
+
+  public void handleMortgage() {
+    System.out.println("Mortgage");
+  }
+
+  public void handleTrade() {
+    System.out.println("Trade");
   }
 
   @Override
-  public void makeUserDecision(Decision decision, boolean multiChoice) {
-    gameDisplay.makeUserDecision(decision, multiChoice);
+  public void makeUserDecision(Decision decision) {
+    new DecisionView(decision, currentPlayer.getName(), Color.NAVY);
+
+//    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void displayText(String text) {
-    gameDisplay.displayText(text);
   }
 
   @Override
-  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
+  public void refreshPlayers(Map<Integer, Player> currentPlayers) {
 
   }
 
   @Override
-  public void movePlayer(PlayerInfo player, int position) {
+  public void movePlayer(Player player, int position) {
     board.movePlayer(player, position);
   }
 

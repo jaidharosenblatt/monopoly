@@ -6,7 +6,7 @@
             <boardIndex>1</boardIndex>
             <title_deed>Mediterranean Avenue</title_deed>
             <cost>60</cost>
-            <color>brown</color>
+            <color>#955636</color>
             <group_number>2</group_number>
             <base_rent>2</base_rent>
             <monopoly_rent>4</monopoly_rent>
@@ -21,7 +21,7 @@
             <boardIndex>3</boardIndex>
             <title_deed>Baltic Avenue</title_deed>
             <cost>60</cost>
-            <color>brown</color>
+            <color>#955636</color>
             <group_number>2</group_number>
             <base_rent>4</base_rent>
             <monopoly_rent>8</monopoly_rent>
@@ -36,7 +36,7 @@
             <boardIndex>6</boardIndex>
             <title_deed>Oriental Avenue</title_deed>
             <cost>100</cost>
-            <color>light_blue</color>
+            <color>#a8def8</color>
             <group_number>3</group_number>
             <base_rent>6</base_rent>
             <monopoly_rent>12</monopoly_rent>
@@ -51,7 +51,7 @@
             <boardIndex>8</boardIndex>
             <title_deed>Vermont Avenue</title_deed>
             <cost>100</cost>
-            <color>light_blue</color>
+            <color>#a8def8</color>
             <group_number>3</group_number>
             <base_rent>6</base_rent>
             <monopoly_rent>12</monopoly_rent>
@@ -66,7 +66,7 @@
             <boardIndex>9</boardIndex>
             <title_deed>Connecticut Avenue</title_deed>
             <cost>120</cost>
-            <color>light_blue</color>
+            <color>#a8def8</color>
             <group_number>3</group_number>
             <base_rent>8</base_rent>
             <monopoly_rent>16</monopoly_rent>
@@ -81,7 +81,7 @@
             <boardIndex>11</boardIndex>
             <title_deed>St. Charles Place</title_deed>
             <cost>140</cost>
-            <color>pink</color>
+            <color>#d93a96</color>
             <group_number>3</group_number>
             <base_rent>10</base_rent>
             <monopoly_rent>20</monopoly_rent>
@@ -96,7 +96,7 @@
             <boardIndex>13</boardIndex>
             <title_deed>States Avenue</title_deed>
             <cost>140</cost>
-            <color>pink</color>
+            <color>#d93a96</color>
             <group_number>3</group_number>
             <base_rent>10</base_rent>
             <monopoly_rent>20</monopoly_rent>
@@ -111,7 +111,7 @@
             <boardIndex>14</boardIndex>
             <title_deed>Virginia Avenue</title_deed>
             <cost>160</cost>
-            <color>pink</color>
+            <color>#d93a96</color>
             <group_number>3</group_number>
             <base_rent>12</base_rent>
             <monopoly_rent>24</monopoly_rent>
@@ -126,7 +126,7 @@
             <boardIndex>16</boardIndex>
             <title_deed>St. James Place</title_deed>
             <cost>180</cost>
-            <color>orange</color>
+            <color>#f9941e</color>
             <group_number>3</group_number>
             <base_rent>14</base_rent>
             <monopoly_rent>28</monopoly_rent>
@@ -141,7 +141,7 @@
             <boardIndex>18</boardIndex>
             <title_deed>Tennessee Avenue</title_deed>
             <cost>180</cost>
-            <color>orange</color>
+            <color>#f9941e</color>
             <group_number>3</group_number>
             <base_rent>14</base_rent>
             <monopoly_rent>28</monopoly_rent>
@@ -156,7 +156,7 @@
             <boardIndex>19</boardIndex>
             <title_deed>New York Avenue</title_deed>
             <cost>200</cost>
-            <color>orange</color>
+            <color>#f9941e</color>
             <group_number>3</group_number>
             <base_rent>16</base_rent>
             <monopoly_rent>32</monopoly_rent>
@@ -171,7 +171,7 @@
             <boardIndex>21</boardIndex>
             <title_deed>Kentucky Avenue</title_deed>
             <cost>220</cost>
-            <color>red</color>
+            <color>#f01824</color>
             <group_number>3</group_number>
             <base_rent>18</base_rent>
             <monopoly_rent>36</monopoly_rent>
@@ -186,7 +186,7 @@
             <boardIndex>23</boardIndex>
             <title_deed>Indiana Avenue</title_deed>
             <cost>220</cost>
-            <color>red</color>
+            <color>#f01824</color>
             <group_number>3</group_number>
             <base_rent>18</base_rent>
             <monopoly_rent>36</monopoly_rent>
@@ -201,7 +201,7 @@
             <boardIndex>24</boardIndex>
             <title_deed>Illinois Avenue</title_deed>
             <cost>240</cost>
-            <color>red</color>
+            <color>#f01824</color>
             <group_number>3</group_number>
             <base_rent>20</base_rent>
             <monopoly_rent>40</monopoly_rent>
@@ -216,7 +216,7 @@
             <boardIndex>26</boardIndex>
             <title_deed>Atlantic Avenue</title_deed>
             <cost>260</cost>
-            <color>yellow</color>
+            <color>#fdef08</color>
             <group_number>3</group_number>
             <base_rent>22</base_rent>
             <monopoly_rent>44</monopoly_rent>
@@ -231,7 +231,7 @@
             <boardIndex>27</boardIndex>
             <title_deed>Ventnor Avenue</title_deed>
             <cost>260</cost>
-            <color>yellow</color>
+            <color>#fdef08</color>
             <group_number>3</group_number>
             <base_rent>22</base_rent>
             <monopoly_rent>44</monopoly_rent>
@@ -246,7 +246,7 @@
             <boardIndex>29</boardIndex>
             <title_deed>Marvin Gardens</title_deed>
             <cost>280</cost>
-            <color>yellow</color>
+            <color>#fdef08</color>
             <group_number>3</group_number>
             <base_rent>24</base_rent>
             <monopoly_rent>48</monopoly_rent>
@@ -261,7 +261,7 @@
             <boardIndex>31</boardIndex>
             <title_deed>Pacific Avenue</title_deed>
             <cost>300</cost>
-            <color>green</color>
+            <color>#28b05b</color>
             <group_number>3</group_number>
             <base_rent>26</base_rent>
             <monopoly_rent>52</monopoly_rent>
@@ -276,7 +276,7 @@
             <boardIndex>32</boardIndex>
             <title_deed>North Carolina Avenue</title_deed>
             <cost>300</cost>
-            <color>green</color>
+            <color>#28b05b</color>
             <group_number>3</group_number>
             <base_rent>26</base_rent>
             <monopoly_rent>52</monopoly_rent>
@@ -291,7 +291,7 @@
             <boardIndex>34</boardIndex>
             <title_deed>Pennsylvania Avenue</title_deed>
             <cost>320</cost>
-            <color>green</color>
+            <color>#28b05b</color>
             <group_number>3</group_number>
             <base_rent>28</base_rent>
             <monopoly_rent>56</monopoly_rent>
@@ -306,7 +306,7 @@
             <boardIndex>37</boardIndex>
             <title_deed>Park Place</title_deed>
             <cost>350</cost>
-            <color>blue</color>
+            <color>#1778c2</color>
             <group_number>2</group_number>
             <base_rent>35</base_rent>
             <monopoly_rent>70</monopoly_rent>
@@ -321,7 +321,7 @@
             <boardIndex>39</boardIndex>
             <title_deed>Boardwalk</title_deed>
             <cost>400</cost>
-            <color>blue</color>
+            <color>#1778c2</color>
             <group_number>2</group_number>
             <base_rent>50</base_rent>
             <monopoly_rent>100</monopoly_rent>
@@ -336,42 +336,42 @@
             <boardIndex>5</boardIndex>
             <title_deed>Reading Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="11">
             <boardIndex>15</boardIndex>
             <title_deed>Pennsylvania Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="18">
             <boardIndex>25</boardIndex>
             <title_deed>B. &#038; O. Railroad</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <railroad ID="26">
             <boardIndex>35</boardIndex>
             <title_deed>Short Line</title_deed>
             <cost>200</cost>
-            <color>rr</color>
+            <color>#07040d</color>
             <group_number>4</group_number>
         </railroad>
         <utility ID="8">
             <boardIndex>12</boardIndex>
             <title_deed>Electric Company</title_deed>
             <cost>150</cost>
-            <color>util</color>
+            <color>#9c9ea0</color>
             <group_number>2</group_number>
         </utility>
         <utility ID="21">
             <boardIndex>28</boardIndex>
             <title_deed>Water Works</title_deed>
             <cost>150</cost>
-            <color>util</color>
+            <color>#9c9ea0</color>
             <group_number>2</group_number>
         </utility>
     </properties>

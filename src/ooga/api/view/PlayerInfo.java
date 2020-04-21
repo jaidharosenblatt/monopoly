@@ -3,6 +3,7 @@ package ooga.api.view;
 import java.util.List;
 import ooga.api.view.Card;
 import ooga.api.view.Property;
+import ooga.view.board.PropertyView;
 
 public interface PlayerInfo {
 
@@ -10,7 +11,7 @@ public interface PlayerInfo {
    * @return a List of unmodifiable properties that a player currently owns as well as any
    * houses/hotels
    */
-  List<Property> getPropertiesUnmodifiable();
+  List<PropertyView> getPropertiesUnmodifiable();
 
   /**
    * @return a List of cards that a player currently owns
@@ -31,7 +32,7 @@ public interface PlayerInfo {
 
   /**
    *
-   * @return the hex of the player's color
+   * @return the hex of the player's color in 0-255 integer standard, comma separate the values.
    */
   String getPlayerColor();
 }
