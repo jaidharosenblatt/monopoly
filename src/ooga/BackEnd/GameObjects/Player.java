@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameObjects;
 
+import javafx.scene.paint.Color;
 import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
@@ -22,6 +23,7 @@ public class Player implements PlayerInfo {
     private static final List<String> option = List.of("OK");
 
     private final String name;
+
     private final int playerID;
     private int currentBalance;
     private int currentTile;
@@ -34,7 +36,7 @@ public class Player implements PlayerInfo {
     private int getOutCards;
 
     private View view;
-    private String color;
+    private java.awt.Color color;
 
     public int dice1;
     public int dice2;
@@ -50,7 +52,6 @@ public class Player implements PlayerInfo {
         this.isJailed = false;
         this.turnsinJail = 0;
         this.getOutCards = 0;
-        this.color = "";
     }
 
     public String getName() {return this.name;}
@@ -59,7 +60,7 @@ public class Player implements PlayerInfo {
 
     public int getBalance() {return this.currentBalance;}
 
-    public void setColor(String c) {this.color = c;}
+    public void setColor(java.awt.Color c) {this.color = c;}
 
     public int getTile() {return this.currentTile;}
 
@@ -270,6 +271,6 @@ public class Player implements PlayerInfo {
 
     @Override
     public String getPlayerColor() {
-        return color;
+        return color.toString();
     }
 }
