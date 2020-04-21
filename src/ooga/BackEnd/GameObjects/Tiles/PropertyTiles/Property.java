@@ -26,7 +26,7 @@ public abstract class Property extends Tile {
         if (!isOwned()) {
 
             List<String> options = List.of("Yes","No");
-            Decision d = new Decision("Would you like to buy this for $" + this.cost + "?",options);
+            Decision d = new Decision("Would you like to buy " + this.title_deed + " for $" + this.cost + "?",options);
             getView().makeUserDecision(d);
 
           if (d.getChoice().equals("Yes")) {
