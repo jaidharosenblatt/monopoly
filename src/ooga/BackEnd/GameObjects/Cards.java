@@ -306,10 +306,10 @@ public class Cards {
         for (Property p : this.properties) {
             if (p.getBoardIndex() == utilTile) {
                 if (!p.isOwned()) {
-                    Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-                    System.out.println("Would you like to buy this? [Y or N]: ");
-                    String decision = myObj.nextLine();
-                    if (decision.equals("Y")) {
+                    List<String> option = List.of("Yes", "No");
+                    Decision d = new Decision("Would you like to buy " + p.getTitle() + " for $" + p.getCost() + "?", option);
+                    view.makeUserDecision(d);
+                    if (d.getChoice().equals("Yes")) {
                         if (this.user.getBalance() >= p.getCost()) {
                             p.setOwner(this.user);
                             this.user.buyProperty(p);
