@@ -126,61 +126,6 @@ public class LoadGame {
         p.moveTo(new_tile);
     }
 
-//      updateCardTiles();
-
-
-//      int game = 0;
-//        String input = "";
-//        while(game != 1) {
-//            this.itr = this.activePlayers.iterator();
-//            while (itr.hasNext()) {
-//                Player p = itr.next();
-//                view.setCurrentPlayer(p);
-//                if (activePlayers.size() == 1) {
-//                    System.out.println(activePlayers.get(0).getName() + " wins!");
-//                    itr.remove();
-//                    game = 1;
-//                    break;
-//                }
-//                if (p.isJailed()) {
-//                    p.moveTo(JAIL_INDEX);
-//                    if (p.isJailed()) {
-//                        System.out.println("You remain in jail");
-//                        promptPlayer(p);
-//                        continue;
-//                    }
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//                else {
-//                    updateCardTiles();
-//                    displayAssets(p);
-//                    System.out.println("");
-//                    promptPlayer(p);
-//                    basicTurn(p);
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-
     public void build() {
         if (currentPlayer.getProperties().size() < 1) {
             List<String> options = List.of("OK");
@@ -327,6 +272,61 @@ public class LoadGame {
             }
         }
     }
+
+//      updateCardTiles();
+
+
+//      int game = 0;
+//        String input = "";
+//        while(game != 1) {
+//            this.itr = this.activePlayers.iterator();
+//            while (itr.hasNext()) {
+//                Player p = itr.next();
+//                view.setCurrentPlayer(p);
+//                if (activePlayers.size() == 1) {
+//                    System.out.println(activePlayers.get(0).getName() + " wins!");
+//                    itr.remove();
+//                    game = 1;
+//                    break;
+//                }
+//                if (p.isJailed()) {
+//                    p.moveTo(JAIL_INDEX);
+//                    if (p.isJailed()) {
+//                        System.out.println("You remain in jail");
+//                        promptPlayer(p);
+//                        continue;
+//                    }
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//                else {
+//                    updateCardTiles();
+//                    displayAssets(p);
+//                    System.out.println("");
+//                    promptPlayer(p);
+//                    basicTurn(p);
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
 
     private String mortgage(Player p) {
         if (p.getProperties().size() < 1) {
