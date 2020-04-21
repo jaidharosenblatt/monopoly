@@ -5,7 +5,7 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiDecision implements ooga.api.view.MultiDecision {
+public class MultiDecision implements ooga.api.objects.MultiDecision {
 
     private String prompt;
     private List<Property> options;

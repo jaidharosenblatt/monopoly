@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ooga.api.view.Decision;
+import ooga.api.objects.Decision;
 
 public class DecisionView {
 

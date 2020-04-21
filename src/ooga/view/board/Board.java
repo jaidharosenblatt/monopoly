@@ -1,7 +1,5 @@
 package ooga.view.board;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.PlayerInfo;
 
 
 public class Board extends BorderPane {
@@ -53,7 +49,7 @@ public class Board extends BorderPane {
     setCenter(hBox);
   }
 
-  public void movePlayer(Player player, int newPosition) {
+  public void movePlayer(PlayerInfo player, int newPosition) {
 
     int oldPosition = playerPositions.get(player);
     playerPositions.put(player, newPosition);

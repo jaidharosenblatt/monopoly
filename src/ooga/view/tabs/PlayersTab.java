@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import ooga.api.view.Property;
+import ooga.api.objects.Property;
 
 import java.util.List;
 

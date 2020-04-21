@@ -1,4 +1,4 @@
-package ooga.api.view;
+package ooga.api.objects;
 
 public interface Board {
 

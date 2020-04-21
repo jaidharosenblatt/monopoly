@@ -15,10 +15,9 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.List;
 
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
 public class LoadGame {
