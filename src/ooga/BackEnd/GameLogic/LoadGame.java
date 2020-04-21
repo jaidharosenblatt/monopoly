@@ -292,6 +292,10 @@ public class LoadGame {
             loop:
             for (Property owned : p.getProperties()) {
                 if (owned.getTitle().equals(input) && (owned instanceof Street)) {
+                    if (owned.isMortgaged()) {
+                        System.out.println("can't build a house on a mortgaged property");
+                        break loop;
+                    }
                     monopoly_set.add((Street) owned);
                     for (Property q : p.getProperties()) {
                         if (owned.getGroupColor().equals(q.getGroupColor()) && (q instanceof Street)) {
