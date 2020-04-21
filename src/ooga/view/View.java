@@ -62,7 +62,7 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   public void handleBuild() {
-    System.out.println("Mortgage");
+    controller.build();
   }
 
   public void handleSell() {

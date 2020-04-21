@@ -48,13 +48,79 @@ public class LoadGame {
         currentPlayer = activePlayers.get(0);
         view = new View(stage, this, activePlayers, allTiles);
 
-        for (Tile t: allTiles){
+        for (Tile t : allTiles) {
             t.setView(view);
         }
         for (Player p : activePlayers) {
             p.setView(view);
         }
+    }
 
+    private void createPlayers(int player_number) {
+        this.activePlayers = new ArrayList<>();
+        Player[] temp = new Player[player_number];
+        for (int i = 0; i < player_number; i++) {
+            //----------------------------------------------
+            //INPUT FRONT-END TEXT-FIELD USER-INTERFACE HERE
+            //----------------------------------------------
+            temp[i] = new Player("Player " + i, this.allTiles);
+        }
+        temp = rollForOrder(temp);
+        for (Player p : temp) {
+            this.activePlayers.add(p);
+        }
+    }
+
+    private Player[] rollForOrder(Player[] list) {
+        Player[] order = new Player[list.length];
+        int counter = 0;
+        ArrayList<Integer> chosen = new ArrayList<>();
+        while (chosen.size() < list.length) {
+            int probality = (int) (Math.random() * list.length);
+            if (!chosen.contains(probality)) {
+                chosen.add(probality);
+                order[counter] = list[probality];
+                counter++;
+            }
+        }
+        return order;
+    }
+
+    public void takeTurn(){
+        nextPlayer();
+        view.setCurrentPlayer(currentPlayer);
+        updateCardTiles();
+        rollDiceAndMove(currentPlayer);
+    }
+
+    private void nextPlayer(){
+        int i = activePlayers.indexOf(currentPlayer);
+        if (i+1 >= activePlayers.size()){
+            currentPlayer = activePlayers.get(0);
+        }
+        else {
+            currentPlayer = activePlayers.get(i+1);
+        }
+    }
+
+    private void updateCardTiles() {
+        for (Event e : this.eventTiles) {
+            if (e instanceof cardTile) {
+                ((cardTile) e).playerList(this.activePlayers);
+                ((cardTile) e).updateProps(this.properties);
+            }
+        }
+    }
+
+    private void rollDiceAndMove(Player p) {
+        p.rollDice();
+        int new_tile = p.getTile() + p.dice1 + p.dice2;
+        if (new_tile > 39) {
+            new_tile -= 40;
+            p.receive(200);
+        }
+        p.moveTo(new_tile);
+    }
 
 //      updateCardTiles();
 
@@ -109,177 +175,32 @@ public class LoadGame {
 //                }
 //            }
 //        }
-    }
 
-  private void nextPlayer(){
-      int i = activePlayers.indexOf(currentPlayer);
-      if (i+1 >= activePlayers.size()){
-        currentPlayer = activePlayers.get(0);
-      }
-      else {
-        currentPlayer = activePlayers.get(i+1);
-      }
-  }
 
-  public void takeTurn(){
-    nextPlayer();
-    view.setCurrentPlayer(currentPlayer);
-    updateCardTiles();
-    rollDiceAndMove(currentPlayer);
-  }
-
-    private void createPlayers(int player_number) {
-        this.activePlayers = new ArrayList<>();
-        Player[] temp = new Player[player_number];
-        for (int i = 0; i < player_number; i++) {
-//            Scanner myObj = new Scanner(System.in);
-//            System.out.println("Enter name: ");
-//            String name = myObj.nextLine();
-            temp[i] = new Player(i + "hi", this.allTiles);
-            this.activePlayers.add(temp[i]);
-        }
-//        Player[] again = rollForOrder(temp);
-//        for (Player p : again) {
-//            this.activePlayers.add(p);
-//        }
-
-    }
-
-    private void updateCardTiles() {
-        for (Event e : this.eventTiles) {
-            if (e instanceof cardTile) {
-                ((cardTile) e).playerList(this.activePlayers);
-                ((cardTile) e).updateProps(this.properties);
-            }
-        }
-    }
-
-    private Player[] rollForOrder(Player[] list) {
-        Player[] order = new Player[list.length];
-        int counter = 0;
-        ArrayList<Integer> chosen = new ArrayList<>();
-        while (chosen.size() < list.length) {
-            int probality = (int) (Math.random() * list.length);
-            if (!chosen.contains(probality)) {
-                chosen.add(probality);
-                order[counter] = list[probality];
-                counter++;
-            }
-        }
-        return order;
-    }
-
-    private void displayAssets(Player p) {
-        System.out.println("---------------------------------");
-        System.out.println(p.getName() + " has $" + p.getBalance());
-        System.out.print(p.getName() + " owns:");
-        for (Property prop : p.getProperties()) {
-            System.out.print(" " + prop.getTitle() + " ");
-        }
-        System.out.println("");
-        System.out.println(p.getName() + " is on " + p.getTileName());
-        System.out.print(p.getName() + " mortgaged:");
-        for (Property prop : p.getProperties()) {
-            if (prop.isMortgaged()) {
-                System.out.print(" " + prop.getTitle() + " ");
-            }
-        }
-        System.out.println("");
-        System.out.print(p.getName() + " monopolies:");
-        ArrayList<String> colors = new ArrayList<>();
-        for (Property prop : p.getProperties()) {
-            if (p.hasMonopoly(prop) && !(colors.contains(prop.getGroupColor()))) {
-                System.out.print(" " + prop.getGroupColor() + " ");
-                colors.add(prop.getGroupColor());
-            }
-        }
-        System.out.println("");
-        System.out.println(p.getName() + " has " + p.getNumJFC() + " Get Out of Jail Free cards");
-        System.out.println("---------------------------------");
-    }
-
-    private void rollDiceAndMove(Player p) {
-        p.rollDice();
-        int new_tile = p.getTile() + p.dice1 + p.dice2;
-        if (new_tile > 39) {
-            new_tile -= 40;
-            p.receive(200);
-        }
-        p.moveTo(new_tile);
-    }
-
-    private void promptPlayer(Player p) {
-        String input = "";
-        System.out.println("Would you like to do anything first? [Y or N]");
-        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-        String decision = myObj.nextLine();
-        if (decision.equals("Y")) {
-            while(!input.equals("end")) {
-                input = decision(p);
-            }
-        }
-    }
-
-    private String decision(Player p) {
-        Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-        System.out.println("Would you like to trade, build houses, sell houses, mortgage property, unmortgage property, or end your turn? [trade, build, sell, mortgage, unmortgage, end]: ");
-        String input = myObj.nextLine();
-        if (input.equals("cheat")) { //FOR TESTING PURPOSES ONLY
-            p.setProperties(this.properties);
-            for (Property t : this.properties) {
-                t.setOwner(p);
-            }
-            return "";
-        }
-        if (input.equals("jail")) { //FOR TESTING PURPOSES ONLY
-            p.setJailed();
-            return "";
-        }
-        if (input.equals("bankrupt")) { //FOR TESTING PURPOSES ONLY
-            p.payBank(2000);
-            return "";
-        }
-        if (input.equals("trade")) {
-            trade(p);
-        }
-        if (input.equals("build")) {
-            build(p);
-        }
-        if (input.equals("sell")) {
-            sell(p);
-        }
-        if (input.equals("mortgage")) {
-            mortgage(p);
-        }
-        if (input.equals("unmortgage")) {
-            unmortgage(p);
-        }
-        return input;
-    }
-
-    private String build(Player p) {
-        if (p.getProperties().size() < 1) {
-            System.out.println("You do not have any properties to build houses with");
-            return "";
+    public void build() {
+        if (currentPlayer.getProperties().size() < 1) {
+            List<String> options = List.of("OK");
+            Decision d = new Decision("ERROR: You do not own any properties",options);
+            view.makeUserDecision(d);
+            return;
         }
         int check = 0;
-        for (Property owned : p.getProperties()) {
-            if (p.hasMonopoly(owned)) {
+        for (Property owned : currentPlayer.getProperties()) {
+            if (currentPlayer.hasMonopoly(owned)) {
                 check++;
                 if (owned instanceof Street) {
-                    if (p.getBalance() < ((Street) owned).getHouseCost()) {
+                    if (currentPlayer.getBalance() < ((Street) owned).getHouseCost()) {
                         System.out.println("Not enough funds");
-                        return "";
+                        return;
                     }
                 }
             }
         }
         if (check < 1) {
             System.out.println("You do not have a monopoly of any property");
-            return "";
+            return;
         }
-        buildLoop(p);
-        return "";
+        buildLoop(currentPlayer);
     }
 
     private void buildLoop(Player p) {
@@ -409,7 +330,6 @@ public class LoadGame {
             String input = myObj.nextLine();
             for (Player b : activePlayers) {
                 if (b.getName().equals(input)) {
-                    displayAssets(b);
                     System.out.println("List properties you want and cash: Ex. [prop,prop,...,200]");
                     Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
                     String input2 = myObj2.nextLine();
@@ -465,10 +385,6 @@ public class LoadGame {
             }
             else {
                 System.out.println(p.getName() + " must trade to avoid bankruptcy");
-            }
-            input = "";
-            while(!input.equals("end")) {
-                input = decision(p);
             }
             if (p.getBalance() < 0) {
                 System.out.println(p.getName() + " went bankrupt");
