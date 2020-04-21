@@ -98,7 +98,12 @@ public class LoadGame {
         }
         view.setCurrentPlayer(currentPlayer);
         updateCardTiles();
-        rollDiceAndMove(currentPlayer);
+        if (currentPlayer.isJailed()) {
+            allTiles.get(JAIL_INDEX).action();
+        }
+        else {
+            rollDiceAndMove(currentPlayer);
+        }
     }
 
     private void nextPlayer(){
