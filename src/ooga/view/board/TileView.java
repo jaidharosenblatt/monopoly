@@ -51,7 +51,7 @@ public abstract class TileView extends BorderPane {
   }
 
   public void addPlayer(Player player) {
-    Shape piece = new Circle(PLAYER_SIZE, Color.RED);
+    Shape piece = new Circle(PLAYER_SIZE, player.getPlayerColor());
     players.put(player, piece);
     playersPane.getChildren().clear();
     playersPane.getChildren().addAll(players.values());
