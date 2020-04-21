@@ -263,13 +263,14 @@ public class LoadGame {
         }
     }
 
-    private String sell(Player p) {
-        if (p.getHouses() < 1) {
-            System.out.println("You do not have any houses to sell");
-            return "";
+    public void sell() {
+        if (currentPlayer.getHouses() < 1) {
+            List<String> options = List.of("OK");
+            Decision d = new Decision("ERROR: You do not have any houses to sell",options);
+            view.makeUserDecision(d);
+            return;
         }
-        sellLoop(p);
-        return "";
+        sellLoop(currentPlayer);
     }
 
     private void sellLoop(Player p) {
