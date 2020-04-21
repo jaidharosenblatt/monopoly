@@ -55,25 +55,15 @@ public class View extends BorderPane implements FrontEndExternal {
     stage.show();
   }
 
-  public void setCurrentPlayer(Player p) {
-    this.currentPlayer = p;
-  }
+  public void setCurrentPlayer(Player p) { this.currentPlayer = p;}
 
-  public void handleRoll() {
-    controller.takeTurn();
-  }
+  public void handleRoll() {controller.takeTurn();}
 
-  public void handleBuild() {
-    controller.build();
-  }
+  public void handleBuild() {controller.build();}
 
-  public void handleSell() {
-    controller.sell();
-  }
+  public void handleSell() {controller.sell();}
 
-  public void handleMortgage() {
-    System.out.println("Mortgage");
-  }
+  public void handleMortgage() {controller.mortgage();}
 
   public void handleUnmortgage() {
     System.out.println("Mortgage");
