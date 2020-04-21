@@ -289,9 +289,6 @@ public class Cards {
         for (Property p : properties) {
             if (p.getBoardIndex() == rrTile) {
                 p.action();
-                if (p.getOwner() != this.user && p.isOwned()) {
-                    this.user.payPlayer(p.getOwner(), p.getRent(), true);
-                }
             }
         }
     }

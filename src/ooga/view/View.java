@@ -9,12 +9,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
+import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
+import ooga.view.gamedisplay.MultiDecisionView;
 import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
 
@@ -86,6 +88,11 @@ public class View extends BorderPane implements FrontEndExternal {
     new DecisionView(decision, currentPlayer.getName(), Color.NAVY);
 
 //    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
+  }
+
+  @Override
+  public void makeMultiDecision(MultiDecision decision) {
+    new MultiDecisionView(decision, currentPlayer.getName(), Color.NAVY);
   }
 
   @Override

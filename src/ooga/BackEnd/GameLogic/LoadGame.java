@@ -42,6 +42,14 @@ public class LoadGame {
 
         createPlayers(player_number);
         currentPlayer = activePlayers.get(0);
+        ArrayList<Property> test = new ArrayList<>();
+        for (Tile t : allTiles) {
+            if (t.getBoardIndex() < 12 && t instanceof Property) {
+                ((Property) t).setOwner(currentPlayer);
+                test.add((Property) t);
+            }
+        }
+        currentPlayer.setProperties(test);
         view = new View(stage, this, activePlayers, allTiles);
 
         for (Tile t : allTiles) {
@@ -200,6 +208,10 @@ public class LoadGame {
     }
 
     private void buildLoop(Player p) {
+        List<Property> options = p.getProperties();
+        MultiDecision d = new MultiDecision("Which property would you like to select?",options);
+        view.makeMultiDecision(d);
+
         String test = "";
         while(!test.equals("done")) {
             Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead

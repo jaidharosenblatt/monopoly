@@ -3,6 +3,8 @@ package ooga.api;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+
+import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.view.Decision;
 import ooga.api.view.PlayerInfo;
@@ -24,7 +26,7 @@ public interface FrontEndExternal {
    *
    * @param decision the decision to present to the user
    */
-  void makeMultiDecision(Decision decision);
+  void makeMultiDecision(MultiDecision decision);
 
   /**
    * Display text to alert player
