@@ -106,6 +106,7 @@ public class Player implements PlayerInfo {
         this.currentTile = JAIL_INDEX;
         for (Tile t : this.boardGame) {
             if (t.getBoardIndex() == JAIL_INDEX) {
+                view.movePlayer(this,JAIL_INDEX);
                 t.onTile(this);
             }
         }
@@ -145,6 +146,7 @@ public class Player implements PlayerInfo {
         this.currentTile = tile;
         for (Tile t : this.boardGame) {
             if (t.getBoardIndex() == tile) {
+                view.movePlayer(this,tile);
                 t.onTile(this);
                 t.action();
             }
@@ -204,6 +206,7 @@ public class Player implements PlayerInfo {
     public void rollDice() {
         this.dice1 = (int) (Math.random() * 6) + 1;
         this.dice2 = (int) (Math.random() * 6) + 1;
+        view.displayRoll(List.of(dice1,dice2));
         System.out.println(this.name + " has rolled a " + dice1 + " and a " + dice2 + ", so " + (dice1 + dice2) + " total.");
     }
 

@@ -303,6 +303,7 @@ public class Cards {
 
     private void payUtil10(int utilTile) {
         this.user.setTile(utilTile);
+        view.movePlayer(this.user,utilTile);
         for (Property p : this.properties) {
             if (p.getBoardIndex() == utilTile) {
                 if (!p.isOwned()) {
@@ -329,6 +330,7 @@ public class Cards {
 
     private void payRR2(int rrTile) {
         this.user.setTile(rrTile);
+        view.movePlayer(this.user,rrTile);
         for (Property p : properties) {
             if (p.getBoardIndex() == rrTile) {
                 p.action();
