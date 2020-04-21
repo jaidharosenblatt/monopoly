@@ -27,7 +27,7 @@ public abstract class TileView extends BorderPane {
   private StackPane centerTile = new StackPane();
 
   public TileView() {
-    this.getStyleClass().add("tile");
+    this.setId("tile");
     playersPane.setAlignment(Pos.CENTER);
     centerTile.getChildren().add(playersPane);
     setCenter(centerTile);

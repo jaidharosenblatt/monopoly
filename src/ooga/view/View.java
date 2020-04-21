@@ -6,6 +6,7 @@ import java.util.Map;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
 import ooga.BackEnd.GameObjects.Player;
@@ -19,6 +20,7 @@ import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {
 
+  public static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
   private Board board;
   private TurnActionButtons gameDisplay;
   private LoadGame controller;
@@ -32,7 +34,7 @@ public class View extends BorderPane implements FrontEndExternal {
     this.players = players;
     this.controller = controller;
 
-    getStylesheets().add("resources/default.css");
+    getStylesheets().add(RESOURCES_DEFAULT_CSS);
 
     Scene scene = new Scene(this, SCENE_WIDTH, SCENE_HEIGHT);
 
@@ -40,7 +42,7 @@ public class View extends BorderPane implements FrontEndExternal {
     Group boardGroup = new Group(board);
     gameDisplay = new TurnActionButtons(this);
     Group tabGroup = new Group();
-    tabView = new TabView(SCENE_WIDTH/3,SCENE_HEIGHT);
+    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT);
     tabView.addTabPaneToGroup(tabGroup);
 
     setLeft(boardGroup);
@@ -51,25 +53,27 @@ public class View extends BorderPane implements FrontEndExternal {
     stage.show();
   }
 
-  public void setCurrentPlayer(Player p){
+  public void setCurrentPlayer(Player p) {
     this.currentPlayer = p;
   }
 
-  public void handleRoll(){
+  public void handleRoll() {
     controller.takeTurn();
   }
 
-  public void handleMortgage(){
+  public void handleMortgage() {
     System.out.println("Mortgage");
   }
 
-  public void handleTrade(){
+  public void handleTrade() {
     System.out.println("Trade");
   }
 
   @Override
   public void makeUserDecision(Decision decision) {
-    new DecisionView(decision);
+    new DecisionView(decision, currentPlayer.getName(), Color.NAVY);
+
+//    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
