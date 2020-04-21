@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -32,6 +34,7 @@ public class XMLParser {
         this.allTiles = new ArrayList<>();
         this.allTiles.addAll(properties);
         this.allTiles.addAll(eventTiles);
+        Collections.sort(allTiles, Comparator.comparingInt(Tile::getBoardIndex));
     }
 
     private ArrayList<Property> propertySetUp(String pathname) throws FileNotFoundException, XMLStreamException {

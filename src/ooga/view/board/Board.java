@@ -29,7 +29,6 @@ public class Board extends BorderPane {
   private VBox left = new VBox();
 
   public Board(List<Player> players, List<Tile> tiles) {
-    Collections.sort(tiles, Comparator.comparingInt(Tile::getBoardIndex));
 
     for (Player p : players) {
       playerPositions.put(p, 0);

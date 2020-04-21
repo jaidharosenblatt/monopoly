@@ -37,11 +37,6 @@ public class LoadGame {
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
         XMLParser parse = new XMLParser(game_pathname);
 
-        this.properties = (ArrayList<Property>) parse.properties.clone();
-        this.streets = (ArrayList<Street>) parse.streets.clone();
-        this.utilities = (ArrayList<Utility>) parse.utilities.clone();
-        this.railroads = (ArrayList<RailRoad>) parse.railroads.clone();
-        this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
 
         createPlayers(player_number);
@@ -63,7 +58,7 @@ public class LoadGame {
             //----------------------------------------------
             //INPUT FRONT-END TEXT-FIELD USER-INTERFACE HERE
             //----------------------------------------------
-            temp[i] = new Player("Player " + i, this.allTiles);
+            temp[i] = new Player("Player " + i + 1, this.allTiles);
         }
         temp = rollForOrder(temp);
         for (Player p : temp) {

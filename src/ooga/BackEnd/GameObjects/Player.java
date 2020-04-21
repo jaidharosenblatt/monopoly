@@ -60,19 +60,15 @@ public class Player implements PlayerInfo {
     public int getTile() {return this.currentTile;}
 
     public void setTile(int tile) {
-        System.out.println(this.name + " just moved to tile " + tile);
-        this.currentTile = tile;
-        for (Tile t : this.boardGame) {
-            if (t.getBoardIndex() == tile) {
-                t.onTile(this);
-            }
-        }
+        System.out.println(name + " just moved to tile " + tile);
+        currentTile = tile;
+        boardGame.get(tile).onTile(this);
     }
 
     public String getTileName() {
         String result = "";
-        for (Tile t : this.boardGame) {
-            if (t.getBoardIndex() == this.currentTile) {
+        for (Tile t : boardGame) {
+            if (t.getBoardIndex() == currentTile) {
                 if (t instanceof Event) {
                     result = ((Event) t).getName();
                 }
@@ -107,12 +103,8 @@ public class Player implements PlayerInfo {
         view.makeUserDecision(d);
         this.isJailed = true;
         this.currentTile = JAIL_INDEX;
-        for (Tile t : this.boardGame) {
-            if (t.getBoardIndex() == JAIL_INDEX) {
-                view.movePlayer(this,JAIL_INDEX);
-                t.onTile(this);
-            }
-        }
+        boardGame.get(JAIL_INDEX).onTile(this);
+        view.movePlayer(this,JAIL_INDEX);
     }
 
     public void useJailFreeCard() {
@@ -154,13 +146,9 @@ public class Player implements PlayerInfo {
     public void moveTo(int tile) {
         System.out.println(this.name + " just moved to tile " + tile);
         this.currentTile = tile;
-        for (Tile t : this.boardGame) {
-            if (t.getBoardIndex() == tile) {
-                view.movePlayer(this,tile);
-                t.onTile(this);
-                t.action();
-            }
-        }
+        view.movePlayer(this,tile);
+        boardGame.get(tile).onTile(this);
+        boardGame.get(tile).action();
     }
 
     public ArrayList<Property> getProperties() {return properties;}
