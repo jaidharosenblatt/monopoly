@@ -35,6 +35,7 @@ public class LoadGame {
     private View view;
     private Player currentPlayer;
     private int doubleTurns;
+    private Map<Integer, Player> map;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
 
@@ -73,6 +74,7 @@ public class LoadGame {
 
     private void createPlayers(int player_number) {
         this.activePlayers = new ArrayList<>();
+        this.map = new HashMap<>();
         List<Color> colors = List.of(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW);
         Player[] temp = new Player[player_number];
         for (int i = 0; i < player_number; i++) {
@@ -81,6 +83,7 @@ public class LoadGame {
             //----------------------------------------------
             temp[i] = new Player("Player " + (i + 1), this.allTiles);
             temp[i].setColor(colors.get(i));
+            this.map.put(i, temp[i]);
         }
         temp = rollForOrder(temp);
         for (Player p : temp) {
@@ -109,6 +112,7 @@ public class LoadGame {
         }
         displayAssets(currentPlayer);
         view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
         updateCardTiles();
         if (currentPlayer.isJailed()) {
             allTiles.get(JAIL_INDEX).action();
