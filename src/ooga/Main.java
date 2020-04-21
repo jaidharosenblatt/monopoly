@@ -16,6 +16,6 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) throws FileNotFoundException, XMLStreamException {
-    new LoadGame("data/boardRainbow.xml", 4, primaryStage);
+    new LoadGame("data/boardSpace.xml", 4, primaryStage);
   }
 }
