@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.List;
 
+import ooga.api.view.PlayerInfo;
 import ooga.view.View;
 
 public class LoadGame {
@@ -31,6 +32,7 @@ public class LoadGame {
     private ArrayList<Event> eventTiles;
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
+    private ArrayList<PlayerInfo> playerInfoList;
     private Iterator<Player> itr;
     private View view;
     private Player currentPlayer;
@@ -61,7 +63,10 @@ public class LoadGame {
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
-        view = new View(stage, this, activePlayers, allTiles);
+         playerInfoList = new ArrayList<>();
+        playerInfoList.addAll(activePlayers);
+         
+        view = new View(stage, this, playerInfoList, allTiles);
 
         for (Tile t : allTiles) {
             t.setView(view);

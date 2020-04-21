@@ -14,6 +14,7 @@ import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.view.Decision;
+import ooga.api.view.PlayerInfo;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
@@ -28,11 +29,11 @@ public class View extends BorderPane implements FrontEndExternal {
   private LoadGame controller;
   private static final double SCENE_WIDTH = 900;
   private static final double SCENE_HEIGHT = 700;
-  private List<Player> players;
-  private Player currentPlayer;
+  private List<PlayerInfo> players;
+  private PlayerInfo currentPlayer;
   private TabView tabView;
 
-  public View(Stage stage, LoadGame controller, List<Player> players, List<Tile> tiles) {
+  public View(Stage stage, LoadGame controller, List<PlayerInfo> players, List<Tile> tiles) {
     this.players = players;
     this.controller = controller;
 
