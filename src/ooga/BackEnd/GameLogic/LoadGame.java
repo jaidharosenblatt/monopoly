@@ -277,6 +277,56 @@ public class LoadGame {
         }
     }
 
+    public void mortgage() {
+        if (currentPlayer.getProperties().size() < 1) {
+            List<String> option = List.of("OK");
+            Decision d = new Decision("ERROR: You do not have an properties",option);
+            view.makeUserDecision(d);
+            return;
+        }
+        ArrayList<Property> filter = new ArrayList<>();
+        for (Property p: currentPlayer.getProperties()) {
+            if (!p.isMortgaged()) {
+                filter.add(p);
+            }
+        }
+
+        List<Property> options = filter;
+        MultiDecision d = new MultiDecision("Which property would you like to mortgage?",options);
+        view.makeMultiDecision(d);
+
+        for (Property p : d.getChoice()) {
+            if (!(p.isMortgaged())) {
+                p.setMortgaged();
+            }
+        }
+    }
+
+    public void unmortgage() {
+        if (currentPlayer.getProperties().size() < 1) {
+            List<String> option = List.of("OK");
+            Decision d = new Decision("ERROR: You do not have an properties",option);
+            view.makeUserDecision(d);
+            return;
+        }
+        ArrayList<Property> filter = new ArrayList<>();
+        for (Property p: currentPlayer.getProperties()) {
+            if (p.isMortgaged()) {
+                filter.add(p);
+            }
+        }
+
+        List<Property> options = filter;
+        MultiDecision d = new MultiDecision("Which property would you like to unmortgage?",options);
+        view.makeMultiDecision(d);
+
+        for (Property p : d.getChoice()) {
+            if (p.isMortgaged()) {
+                p.liftMortgage();
+            }
+        }
+    }
+
 //      updateCardTiles();
 
 
@@ -330,57 +380,6 @@ public class LoadGame {
 //                }
 //            }
 //        }
-
-
-    public void mortgage() {
-        if (currentPlayer.getProperties().size() < 1) {
-            List<String> option = List.of("OK");
-            Decision d = new Decision("ERROR: You do not have an properties",option);
-            view.makeUserDecision(d);
-            return;
-        }
-        ArrayList<Property> filter = new ArrayList<>();
-        for (Property p: currentPlayer.getProperties()) {
-            if (!p.isMortgaged()) {
-                filter.add(p);
-            }
-        }
-
-        List<Property> options = filter;
-        MultiDecision d = new MultiDecision("Which property would you like to mortgage?",options);
-        view.makeMultiDecision(d);
-
-        for (Property p : d.getChoice()) {
-            if (!(p.isMortgaged())) {
-                p.setMortgaged();
-            }
-        }
-    }
-
-    public void unmortgage() {
-        if (currentPlayer.getProperties().size() < 1) {
-            List<String> option = List.of("OK");
-            Decision d = new Decision("ERROR: You do not have an properties",option);
-            view.makeUserDecision(d);
-            return;
-        }
-        ArrayList<Property> filter = new ArrayList<>();
-        for (Property p: currentPlayer.getProperties()) {
-            if (p.isMortgaged()) {
-                filter.add(p);
-            }
-        }
-
-        List<Property> options = filter;
-        MultiDecision d = new MultiDecision("Which property would you like to unmortgage?",options);
-        view.makeMultiDecision(d);
-
-        for (Property p : d.getChoice()) {
-            if (p.isMortgaged()) {
-                p.liftMortgage();
-            }
-        }
-    }
 
     private String trade(Player p) {
         String test = "";
