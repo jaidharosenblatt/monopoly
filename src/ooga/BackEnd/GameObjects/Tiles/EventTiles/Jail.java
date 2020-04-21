@@ -49,9 +49,11 @@ public class Jail extends Event {
                         this.visiting.setFree();
                         this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                     }
-                    List<String> option = List.of("OK");
-                    Decision d1 = new Decision(this.visiting.getName() + " remains in Jail",option);
-                    view.makeUserDecision(d1);
+                    else {
+                        List<String> option = List.of("OK");
+                        Decision d1 = new Decision(this.visiting.getName() + " remains in Jail",option);
+                        view.makeUserDecision(d1);
+                    }
                 }
             }
             else {
