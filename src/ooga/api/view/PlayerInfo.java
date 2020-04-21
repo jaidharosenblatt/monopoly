@@ -35,4 +35,7 @@ public interface PlayerInfo {
    * @return the hex of the player's color in 0-255 integer standard, comma separate the values.
    */
   Paint getPlayerColor();
+
+  String getName();
+
 }
