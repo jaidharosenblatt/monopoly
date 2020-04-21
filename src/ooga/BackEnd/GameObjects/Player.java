@@ -1,5 +1,6 @@
 package ooga.BackEnd.GameObjects;
 
+import ooga.BackEnd.GameLogic.Decision;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
@@ -18,6 +19,7 @@ public class Player implements PlayerInfo {
     private static final int INITIAL_BALANCE = 1500;
     private static final int BAIL = 50;
     private static final int JAIL_INDEX = 10;
+    private static final List<String> option = List.of("OK");
 
     private final String name;
     private final int playerID;
@@ -101,7 +103,8 @@ public class Player implements PlayerInfo {
     }
 
     public void setJailed() {
-        System.out.println(this.name + " has been jailed.");
+        Decision d = new Decision("You've been jailed!", option);
+        view.makeUserDecision(d);
         this.isJailed = true;
         this.currentTile = JAIL_INDEX;
         for (Tile t : this.boardGame) {
@@ -121,18 +124,21 @@ public class Player implements PlayerInfo {
     }
 
     public void payPlayer(Player otherPlayer, int amount) {
-        System.out.println(this.name + " has paid " + otherPlayer.getName() + " $" + amount);
+        Decision d = new Decision("You've paid " + otherPlayer.getName() + " $" + amount, option);
+        view.makeUserDecision(d);
         this.currentBalance -= amount;
         otherPlayer.receive(amount);
     }
 
     public void payBank(int amount) {
-        System.out.println(this.name + " has paid the bank $" + amount);
+        Decision d = new Decision("You've paid the bank $" + amount, option);
+        view.makeUserDecision(d);
         this.currentBalance -= amount;
     }
 
     public void payBail() {
-        System.out.println(this.name + " has paid bail to be free.");
+        Decision d = new Decision("You've paid bail", option);
+        view.makeUserDecision(d);
         payBank(BAIL);
     }
 
@@ -239,11 +245,11 @@ public class Player implements PlayerInfo {
 
     @Override
     public List<PropertyView> getPropertiesUnmodifiable() {
-        ArrayList<PropertyView> propertiesFront = new ArrayList<>();
+        ArrayList<PropertyView> propertiesView = new ArrayList<>();
         for (Property p : properties) {
-            propertiesFront.add(p.convertView());
+            propertiesView.add(p.convertView());
         }
-        return propertiesFront;
+        return propertiesView;
     }
 
     @Override
