@@ -428,6 +428,10 @@ public class LoadGame {
         MultiPlayerDecision decisionPlayer = new MultiPlayerDecision("Which player would you like to trade with?", options);
         view.makeMultiPlayerDecision(decisionPlayer);
 
+        if (decisionPlayer.getChoice().size() == 0) {
+            return;
+        }
+
         List<Property> options1 = decisionPlayer.getChoice().get(0).getProperties();
         MultiPropDecision decisionPropWant = new MultiPropDecision("Which property do you want from " + decisionPlayer.getChoice().get(0).getName() + "?",options1);
         view.makeMultiDecision(decisionPropWant);
@@ -435,10 +439,8 @@ public class LoadGame {
         StringDecision decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
         view.makeStringDecision(decisionCashWant);
 
-        while(decisionPlayer.getChoice().get(0).getBalance() < Integer.parseInt(decisionCashWant.getChoice())) {
-            decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
-            view.makeStringDecision(decisionCashWant);
-        }
+        decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
+        view.makeStringDecision(decisionCashWant);
 
         List<Property> options2 = currentPlayer.getProperties();
         MultiPropDecision decisionPropGive = new MultiPropDecision("Which property will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?",options2);
@@ -447,9 +449,16 @@ public class LoadGame {
         StringDecision decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
         view.makeStringDecision(decisionCashGive);
 
-        while(currentPlayer.getBalance() < Integer.parseInt(decisionCashGive.getChoice())) {
-            decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
-            view.makeStringDecision(decisionCashGive);
+        decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
+        view.makeStringDecision(decisionCashGive);
+
+        int cashGive = 0;
+        if (isNumeric(decisionCashGive.getChoice())) {
+            cashGive = Integer.parseInt(decisionCashGive.getChoice());
+        }
+        int cashWant = 0;
+        if (isNumeric(decisionCashWant.getChoice())) {
+            cashWant = Integer.parseInt(decisionCashWant.getChoice());
         }
 
         List<String> option = List.of("Yes", "No");
@@ -457,8 +466,8 @@ public class LoadGame {
         view.makeUserDecision(d);
 
         if (d.getChoice().equals("Yes")) {
-            currentPlayer.trade(Integer.parseInt(decisionCashGive.getChoice()), decisionPropGive.getChoice(),
-                    decisionPlayer.getChoice().get(0), Integer.parseInt(decisionCashWant.getChoice()), decisionPropWant.getChoice());
+            currentPlayer.trade(cashGive, decisionPropGive.getChoice(),
+                    decisionPlayer.getChoice().get(0), cashWant, decisionPropWant.getChoice());
         }
     }
 
@@ -529,6 +538,21 @@ public class LoadGame {
         System.out.println("");
         System.out.println(p.getName() + " has " + p.getNumJFC() + " Get Out of Jail Free cards");
         System.out.println("---------------------------------");
+    }
+
+    public boolean isNumeric(String str) {
+        if (str == null || str.length() == 0) {
+            return false;
+        }
+
+        for (char c : str.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+
+        return true;
+
     }
 
 }
