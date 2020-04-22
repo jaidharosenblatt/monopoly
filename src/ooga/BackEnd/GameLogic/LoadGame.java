@@ -116,6 +116,9 @@ public class LoadGame {
     }
 
     public void takeTurn(){
+        if (currentPlayer.isJailed()) {
+            doubleTurns = 0;
+        }
         if (doubleTurns == 0) {
             nextPlayer();
         }
@@ -152,7 +155,10 @@ public class LoadGame {
     private void rollDiceAndMove(Player p) {
         p.rollDice();
         if (p.dice1 == p.dice2) {doubles();}
-        if (doubleTurns == 3) {p.setJailed();}
+        if (doubleTurns == 3) {
+            p.setJailed();
+            return;
+        }
         if (doubleTurns > 0 && p.dice1 != p.dice2) {doubleTurns = 0;}
         int new_tile = p.getTile() + p.dice1 + p.dice2;
         if (new_tile > 39) {
