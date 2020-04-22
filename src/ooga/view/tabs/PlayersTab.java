@@ -48,16 +48,7 @@ public class PlayersTab extends DisplayTab{
 
 
     private HBox makeColorAndTextHbox(String color, String text, boolean property) {
-        System.out.println(color);
-        if (color.length() > 7) {
-            color = color.substring(4);
-            color = "#" + color;
-        }
-//        String [] colorStrings = color.split(",");
-//        int [] colors = new int[colorStrings.length];
-//        for (int i =0; i < colors.length; i ++)
-//            colors[i] = Integer.parseInt(colorStrings[i]);
-        Circle circle = new Circle(FONT_SIZE /2, Color.rgb(Integer.valueOf(color.substring( 1, 3 ), 16 ), Integer.valueOf( color.substring( 3, 5 ), 16 ), Integer.valueOf( color.substring( 5, 7 ), 16 )));
+        Circle circle = new Circle(FONT_SIZE /2, Color.web(color));
         Text playerNum = new Text(text);
         HBox hBox = new HBox(SPACING);
         hBox.getChildren().addAll(circle,playerNum);
