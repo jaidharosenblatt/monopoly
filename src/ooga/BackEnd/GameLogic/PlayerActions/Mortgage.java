@@ -4,6 +4,7 @@ import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.view.View;
 
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ public class Mortgage {
         ArrayList<Property> filter = new ArrayList<>();
         for (Property p: currentPlayer.getProperties()) {
             if (!p.isMortgaged()) {
+                if (p instanceof Street) {
+                    if (((Street) p).getHouses() > 0) {
+                        continue;
+                    }
+                }
                 filter.add(p);
             }
         }
