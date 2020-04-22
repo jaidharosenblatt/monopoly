@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -26,8 +27,9 @@ public class TabView {
   public TabView(double width, double height){
     tabPane = new TabPane();
     tabPane.setPrefSize(width, height);
-    tabsRegistry.put("Rules", RulesTab.class);
     tabsRegistry.put("Players", PlayersTab.class);
+    tabsRegistry.put("Rules", RulesTab.class);
+
     rulesTabID = this.createTab("Rules");
     playersTabID = this.createTab("Players");
 
@@ -35,6 +37,8 @@ public class TabView {
 
   protected int createTab(String label) {
     VBox vbox =  new VBox(SPACING);
+    ScrollPane scrollPane = new ScrollPane();
+    scrollPane.setContent(vbox);
     vbox.setAlignment(Pos.TOP_LEFT);
     vbox.setFillWidth(true);
     String tabType = label+ "Tab";
@@ -46,6 +50,7 @@ public class TabView {
       displayTab = new RulesTab("Rules",vbox);
     }
     tabs.add(displayTab);
+    displayTab.getTab().setContent(scrollPane);
     tabPane.getTabs().add(displayTab.getTab());
     return tabs.size()-1;
   }
@@ -70,6 +75,7 @@ public class TabView {
   }
 
   public void addTabPaneToGroup(Group root){
+
     root.getChildren().add(tabPane);
   }
 
