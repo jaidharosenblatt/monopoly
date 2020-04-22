@@ -15,10 +15,9 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.List;
 
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
 public class LoadGame {
@@ -53,14 +52,14 @@ public class LoadGame {
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets the first 12 available properties
-        ArrayList<Property> test = new ArrayList<>();
-        for (Tile t : allTiles) {
-            if (t.getBoardIndex() < 12 && t instanceof Property) {
-                ((Property) t).setOwner(currentPlayer);
-                test.add((Property) t);
-            }
-        }
-        currentPlayer.setProperties(test);
+//        ArrayList<Property> test = new ArrayList<>();
+//        for (Tile t : allTiles) {
+//            if (t.getBoardIndex() < 12 && t instanceof Property) {
+//                ((Property) t).setOwner(currentPlayer);
+//                test.add((Property) t);
+//            }
+//        }
+//        currentPlayer.setProperties(test);
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 

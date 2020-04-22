@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
-import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
-import ooga.api.view.Decision;
+import ooga.api.objects.Decision;
+import ooga.api.objects.MultiDecision;
+import ooga.api.objects.PlayerInfo;
+import ooga.api.objects.StringDecision;
 
 
 public interface FrontEndExternal {
@@ -26,6 +28,13 @@ public interface FrontEndExternal {
    * @param decision the decision to present to the user
    */
   void makeMultiDecision(MultiDecision decision);
+
+
+  /**
+   * Prompt a user and get a answer from a text input
+   * @param decision the decision to present to the user
+   */
+  void makeStringDecision(StringDecision decision);
 
   /**
    * Display text to alert player
@@ -48,7 +57,7 @@ public interface FrontEndExternal {
    * @param player player to move
    * @param position position on board to move to
    */
-  void movePlayer(Player player, int position);
+  void movePlayer(PlayerInfo player, int position);
 
   /**
    * Use this to display the result of the dice roll

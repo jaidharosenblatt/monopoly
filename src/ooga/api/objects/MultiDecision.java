@@ -1,8 +1,7 @@
-package ooga.api.view;
+package ooga.api.objects;
 
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface MultiDecision {
@@ -30,5 +29,5 @@ public interface MultiDecision {
 
     void remChoice(Property p);
 
-    ArrayList<Property> getChoice();
+    List<Property> getChoice();
 }

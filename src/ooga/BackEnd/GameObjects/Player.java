@@ -6,8 +6,8 @@ import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
-import ooga.api.view.Card;
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.Card;
+import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 import ooga.view.board.PropertyView;
 

@@ -9,15 +9,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
-import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
-import ooga.api.view.Decision;
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.Decision;
+import ooga.api.objects.MultiDecision;
+import ooga.api.objects.PlayerInfo;
+import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
+import ooga.view.gamedisplay.StringDecisionView;
 import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
 
@@ -72,6 +74,10 @@ public class View extends BorderPane implements FrontEndExternal {
     System.out.println("Trade");
   }
 
+  public void makeStringDecision(StringDecision decision){
+    new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+  }
+
   @Override
   public void makeUserDecision(Decision decision) {
     new DecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
@@ -93,7 +99,7 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void movePlayer(Player player, int position) {
+  public void movePlayer(PlayerInfo player, int position) {
     board.movePlayer(player, position);
   }
 

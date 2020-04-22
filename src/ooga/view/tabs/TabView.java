@@ -12,7 +12,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import ooga.BackEnd.GameObjects.Player;
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.PlayerInfo;
 
 public class TabView {
 
