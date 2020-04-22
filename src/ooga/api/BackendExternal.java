@@ -1,8 +1,8 @@
 package ooga.api;
 
 import java.util.List;
-import ooga.api.view.PlayerInfo;
-import ooga.api.view.Property;
+import ooga.api.objects.PlayerInfo;
+import ooga.api.objects.Property;
 
 public interface BackendExternal {
   List<Integer> rollDice();

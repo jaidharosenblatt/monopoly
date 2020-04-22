@@ -2,7 +2,7 @@ package ooga.BackEnd.GameLogic;
 
 import java.util.List;
 
-public class Decision implements ooga.api.view.Decision {
+public class Decision implements ooga.api.objects.Decision {
 
   private String prompt;
   private List<String> options;

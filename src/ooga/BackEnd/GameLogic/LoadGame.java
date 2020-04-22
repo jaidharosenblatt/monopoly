@@ -15,10 +15,9 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.List;
 
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
 public class LoadGame {
@@ -37,7 +36,7 @@ public class LoadGame {
     private View view;
     private Player currentPlayer;
     private int doubleTurns;
-    private Map<Integer, Player> map;
+    private Map<Integer, PlayerInfo> map;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
 

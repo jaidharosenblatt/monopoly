@@ -9,12 +9,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
-import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
-import ooga.api.view.Decision;
-import ooga.api.view.PlayerInfo;
+import ooga.api.objects.Decision;
+import ooga.api.objects.MultiDecision;
+import ooga.api.objects.PlayerInfo;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
@@ -87,13 +87,13 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void refreshPlayers(Map<Integer, Player> currentPlayers) {
+  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
     tabView.updatePlayersTab(currentPlayers);
     System.out.println("RefreshPlayers");
   }
 
   @Override
-  public void movePlayer(Player player, int position) {
+  public void movePlayer(PlayerInfo player, int position) {
     board.movePlayer(player, position);
   }
 

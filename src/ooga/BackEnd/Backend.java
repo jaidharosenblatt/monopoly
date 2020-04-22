@@ -2,8 +2,8 @@ package ooga.BackEnd;
 
 import java.util.List;
 import ooga.api.BackendExternal;
-import ooga.api.view.PlayerInfo;
-import ooga.api.view.Property;
+import ooga.api.objects.PlayerInfo;
+import ooga.api.objects.Property;
 
 public class Backend implements BackendExternal {
 
