@@ -321,10 +321,17 @@ public class XMLParser {
                         case "event": {
                             if (name.equals("go")) {eventTiles.add(g);}
                             if (name.equals("jail")) {eventTiles.add(j);}
-                            if (name.equals("tax")) {eventTiles.add(t);}
+                            if (name.equals("tax")) {
+                                if (t.getTax() == 75) {t.setPathname("resources/luxury.png");}
+                                eventTiles.add(t);
+                            }
                             if (name.equals("free_parking")) {eventTiles.add(fp);}
                             if (name.equals("go_to_jail")) {eventTiles.add(gtj);}
-                            if (name.equals("card")) {eventTiles.add(ct);}
+                            if (name.equals("card")) {
+                                if (ct.getType().equals("Community")) {ct.setPathname("resources/chest.png");}
+                                if (ct.getType().equals("Chance")) {ct.setPathname("resources/chance.png");}
+                                eventTiles.add(ct);
+                            }
                             name = null;
                             break;
                         }

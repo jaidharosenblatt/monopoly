@@ -27,8 +27,9 @@ public class TabView {
   public TabView(double width, double height){
     tabPane = new TabPane();
     tabPane.setPrefSize(width, height);
-    tabsRegistry.put("Rules", RulesTab.class);
     tabsRegistry.put("Players", PlayersTab.class);
+    tabsRegistry.put("Rules", RulesTab.class);
+
     rulesTabID = this.createTab("Rules");
     playersTabID = this.createTab("Players");
 

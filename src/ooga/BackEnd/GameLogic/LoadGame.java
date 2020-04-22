@@ -46,7 +46,7 @@ public class LoadGame {
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
         this.doubleTurns = 0;
-        
+
         createPlayers(player_number);
         currentPlayer = activePlayers.get(0);
 
