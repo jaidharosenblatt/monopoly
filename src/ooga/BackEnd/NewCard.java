@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NewCard {
-
-    private static final int JAIL_INDEX = 10;
     private static final int GO_INDEX = 0;
     private static final int ILLINOIS_INDEX = 24;
     private static final int ST_CHARLES_INDEX = 11;
@@ -39,12 +37,10 @@ public class NewCard {
             int probality = (int) (Math.random() * 16) + 1;
             switch (probality) {
                 case 1:
-                    System.out.println("Advance to \"GO\". (Collect $200)");
                     user.receive(CROSS_GO);
                     user.moveTo(GO_INDEX);
                     break;
                 case 2:
-                    System.out.println("Advance to Illinois Avenue. If you pass Go, collect $200.");
                     if (user.getTile() > ILLINOIS_INDEX) {
                         user.receive(CROSS_GO);
                     }
@@ -56,7 +52,6 @@ public class NewCard {
                     }
                     break;
                 case 3:
-                    System.out.println("Advance to St. Charles Place. If you pass Go, collect $200.");
                     if (user.getTile() > ST_CHARLES_INDEX) {
                         user.receive(CROSS_GO);
                     }
@@ -68,8 +63,6 @@ public class NewCard {
                     }
                     break;
                 case 4:
-                    System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. " +
-                            "If owned, throw dice and pay owner a total 10 times the amount thrown.");
                     if (user.getTile() > 20) {
                         payUtil10(WATER_INDEX);
                     }
@@ -79,8 +72,6 @@ public class NewCard {
                     break;
                 case 5:
                 case 6:
-                    System.out.println("Advance token to the nearest Railroad and pay owner twice the rental to which " +
-                            "he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.");
                     if (user.getTile() < 10) {
                         payRR2(READING_RR_INDEX);
                     }
@@ -92,15 +83,12 @@ public class NewCard {
                     }
                     break;
                 case 7:
-                    System.out.println("Bank pays you dividend of $50.");
                     user.receive(50);
                     break;
                 case 8:
-                    System.out.println("Get out of Jail Free. This card may be kept until needed, or traded/sold.");
                     user.getJailFreeCard();
                     break;
                 case 9:
-                    System.out.println("Go Back Three Spaces.");
                     int newTile = this.user.getTile() - 3;
                     this.user.moveTo(newTile);
                     for (Property p : properties) {
@@ -110,19 +98,15 @@ public class NewCard {
                     }
                     break;
                 case 10:
-                    System.out.println("Go to Jail. Go directly to Jail. Do not pass GO, do not collect $200.");
                     user.setJailed();
                     break;
                 case 11:
-                    System.out.println("Make general repairs on all your property: For each house pay $25, For each hotel $125.");
                     user.payBank(user.getHouses() * 25);
                     break;
                 case 12:
-                    System.out.println("Pay poor tax of $15");
                     user.payBank(15);
                     break;
                 case 13:
-                    System.out.println("Take a trip to Reading Railroad. If you pass Go, collect $200.");
                     if (user.getTile() > READING_RR_INDEX) {
                         user.receive(CROSS_GO);
                     }
@@ -134,7 +118,6 @@ public class NewCard {
                     }
                     break;
                 case 14:
-                    System.out.println("Take a walk on the Boardwalk. Advance token to Boardwalk.");
                     user.moveTo(BOARDWALK_INDEX);
                     for (Property p : properties) {
                         if (p.getBoardIndex() == BOARDWALK_INDEX) {
@@ -143,7 +126,6 @@ public class NewCard {
                     }
                     break;
                 case 15:
-                    System.out.println("You have been elected Chairman of the Board. Pay each player $50.");
                     for (Player p : players) {
                         if (user != p) {
                             user.payPlayer(p, 50);
@@ -151,11 +133,9 @@ public class NewCard {
                     }
                     break;
                 case 16:
-                    System.out.println("Your building loan matures. Receive $150.");
                     user.receive(150);
                     break;
                 case 17:
-                    System.out.println("You have won a crossword competition. Collect $100.");
                     user.receive(100);
                     break;
             }
@@ -164,32 +144,25 @@ public class NewCard {
             int probality = (int) (Math.random() * 17) + 1;
             switch (probality) {
                 case 1:
-                    System.out.println("Advance to \"GO\". (Collect $200)");
                     user.receive(CROSS_GO);
                     user.moveTo(GO_INDEX);
                     break;
                 case 2:
-                    System.out.println("Bank error in your favor. Collect $200.");
                     user.receive(CROSS_GO);
                     break;
                 case 3:
-                    System.out.println("Doctor's fees. Pay $50.");
                     user.payBank(50);
                     break;
                 case 4:
-                    System.out.println("From sale of stock you get $50. ");
                     user.receive(50);
                     break;
                 case 5:
-                    System.out.println("Get Out of Jail Free. This card may be kept until needed or sold/traded.");
                     user.getJailFreeCard();
                     break;
                 case 6:
-                    System.out.println("Go to Jail. Go directly to jail. Do not pass Go, Do not collect $200.");
                     user.setJailed();
                     break;
                 case 7:
-                    System.out.println("Grand Opera Night. Collect $50 from every player for opening night seats.");
                     for (Player p : players) {
                         if (user != p) {
                             p.payPlayer(user, 50);
@@ -197,7 +170,6 @@ public class NewCard {
                     }
                     break;
                 case 8:
-                    System.out.println("Holiday Fund matures. Receive $100.");
                     user.receive(100);
                     break;
                 case 9:
