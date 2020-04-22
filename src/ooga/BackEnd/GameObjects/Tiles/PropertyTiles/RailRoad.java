@@ -3,6 +3,7 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 public class RailRoad extends Property {
 
     private static final int RENT = 25;
+    private String pathname;
 
     public RailRoad() {}
 
@@ -37,4 +38,8 @@ public class RailRoad extends Property {
             return RENT;
         }
     }
+
+    public void setPathname(String s) {this.pathname = s;}
+
+    public String getPathname() {return this.pathname;}
 }
