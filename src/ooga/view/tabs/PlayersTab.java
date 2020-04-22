@@ -26,6 +26,8 @@ public class PlayersTab extends DisplayTab{
 
     @Override
     void updateTab(List<Object> info) {
+        myPane.getChildren().clear();
+        addTitle(TITLE);
         int i = 0;
         while (i < info.size()) {
             VBox vbox = createPlayerDisplay((String) info.get(i).toString(),(Integer) info.get(i + 1), (List<Property>) info.get(i + 2));
@@ -36,7 +38,10 @@ public class PlayersTab extends DisplayTab{
 
     protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties){
         VBox vbox = new VBox(SPACING);
-        HBox title = makeColorAndTextHbox(color, "Player" + number.toString());
+        HBox title = new HBox();
+        title.getChildren().add(new Text("Player "));
+        title.getChildren().add(makeColorAndTextHbox(color, "Balance: $" + number.toString()));
+        title.getChildren().add(new Text(", Owns:"));
         vbox.getChildren().add(title);
         for (Property p: properties){
             HBox property = makeColorAndTextHbox(p.getGroupColor(),p.getTitle());
