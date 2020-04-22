@@ -1,43 +1,45 @@
 package ooga.view.gamedisplay;
 
+
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import ooga.api.objects.Decision;
 import ooga.api.objects.StringDecision;
 
-public class StringDecisionView {
+public class StringDecisionView extends Decisions {
 
-  private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
-  private VBox vBox = new VBox();
+  private TextArea input;
   private StringDecision decision;
-  private Stage stage;
+  private static final double INPUT_HEIGHT = 20;
+  private static final double INPUT_WIDTH = 200;
+
 
   public StringDecisionView(StringDecision decision, String playerName, Color playerColor) {
+    super(decision.getPrompt(), playerName, playerColor);
     this.decision = decision;
-    stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    Scene scene = new Scene(vBox);
-    scene.getStylesheets().add(RESOURCES_DEFAULT_CSS);
+    addInput();
+    createStage();
+  }
 
-    vBox.setAlignment(Pos.CENTER);
-    vBox.setId("decision-display");
+  private void addInput() {
+    VBox buttons = new VBox();
+    buttons.setAlignment(Pos.CENTER);
+    buttons.setSpacing(5);
+    input = new TextArea();
+    input.setPrefSize(INPUT_WIDTH,INPUT_HEIGHT);
 
-    Text playerText = new Text(playerName);
-    playerText.setId("name");
-    playerText.setFill(playerColor);
+    Button submit = new Button("Submit");
+    submit.setOnAction(event -> submit());
 
-    Text promptText = new Text(decision.getPrompt());
+    buttons.getChildren().addAll(input, submit);
+    addElement(buttons);
+  }
 
-    vBox.getChildren().addAll(playerText, promptText);
-    vBox.setSpacing(5);
-
-    stage.setScene(scene);
-    stage.showAndWait();
+  private void submit() {
+    decision.setChoice(input.getText());
+    closeStage();
   }
 
 }

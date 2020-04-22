@@ -72,7 +72,6 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleTrade() {
     System.out.println("Trade");
-    makeStringDecision(new ooga.BackEnd.GameLogic.StringDecision("hello"));
   }
 
   public void makeStringDecision(StringDecision decision){

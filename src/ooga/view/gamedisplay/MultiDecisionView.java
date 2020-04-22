@@ -1,20 +1,15 @@
 package ooga.view.gamedisplay;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.api.objects.MultiDecision;
 
 public class MultiDecisionView extends Decisions {
 
-  private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
   private MultiDecision decision;
 
   public MultiDecisionView(MultiDecision decision, String playerName, Color playerColor) {
