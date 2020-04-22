@@ -8,10 +8,7 @@ import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
 import ooga.BackEnd.GameLogic.Decisions.StringDecision;
-import ooga.BackEnd.GameLogic.PlayerActions.Build;
-import ooga.BackEnd.GameLogic.PlayerActions.Mortgage;
-import ooga.BackEnd.GameLogic.PlayerActions.Sell;
-import ooga.BackEnd.GameLogic.PlayerActions.Unmortgage;
+import ooga.BackEnd.GameLogic.PlayerActions.*;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.cardTile;
@@ -177,59 +174,7 @@ public class LoadGame {
 
     public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view);}
 
-    public void trade() {
-        ArrayList<Player> temp = new ArrayList<>();
-        for (Player a : activePlayers) {
-            if (currentPlayer != a) {
-                temp.add(a);
-            }
-        }
-        List<Player> options = temp;
-        MultiPlayerDecision decisionPlayer = new MultiPlayerDecision("Which player would you like to trade with?", options);
-        view.makeMultiPlayerDecision(decisionPlayer);
-
-        if (decisionPlayer.getChoice().size() == 0) {
-            return;
-        }
-
-        List<Property> options1 = decisionPlayer.getChoice().get(0).getProperties();
-        MultiPropDecision decisionPropWant = new MultiPropDecision("Which property do you want from " + decisionPlayer.getChoice().get(0).getName() + "?",options1);
-        view.makeMultiDecision(decisionPropWant);
-
-        StringDecision decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
-        view.makeStringDecision(decisionCashWant);
-
-        decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
-        view.makeStringDecision(decisionCashWant);
-
-        List<Property> options2 = currentPlayer.getProperties();
-        MultiPropDecision decisionPropGive = new MultiPropDecision("Which property will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?",options2);
-        view.makeMultiDecision(decisionPropGive);
-
-        StringDecision decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
-        view.makeStringDecision(decisionCashGive);
-
-        decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
-        view.makeStringDecision(decisionCashGive);
-
-        int cashGive = 0;
-        if (isNumeric(decisionCashGive.getChoice())) {
-            cashGive = Integer.parseInt(decisionCashGive.getChoice());
-        }
-        int cashWant = 0;
-        if (isNumeric(decisionCashWant.getChoice())) {
-            cashWant = Integer.parseInt(decisionCashWant.getChoice());
-        }
-
-        List<String> option = List.of("Yes", "No");
-        Decision d = new Decision("Does " + decisionPlayer.getChoice().get(0).getName() + " accept the offer?",option);
-        view.makeUserDecision(d);
-
-        if (d.getChoice().equals("Yes")) {
-            currentPlayer.trade(cashGive, decisionPropGive.getChoice(),
-                    decisionPlayer.getChoice().get(0), cashWant, decisionPropWant.getChoice());
-        }
-    }
+    public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers);}
 
 //      updateCardTiles();
 
@@ -323,21 +268,6 @@ public class LoadGame {
             return true;
         }
         return false;
-    }
-
-    public boolean isNumeric(String str) {
-        if (str == null || str.length() == 0) {
-            return false;
-        }
-
-        for (char c : str.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-
-        return true;
-
     }
 
 }
