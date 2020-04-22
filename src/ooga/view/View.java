@@ -15,9 +15,11 @@ import ooga.api.FrontEndExternal;
 import ooga.api.objects.Decision;
 import ooga.api.objects.MultiDecision;
 import ooga.api.objects.PlayerInfo;
+import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
+import ooga.view.gamedisplay.StringDecisionView;
 import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
 
@@ -70,6 +72,10 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleTrade() {
     System.out.println("Trade");
+  }
+
+  public void makeStringDecision(StringDecision decision){
+    new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override
