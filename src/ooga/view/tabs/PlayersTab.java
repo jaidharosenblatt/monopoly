@@ -70,9 +70,6 @@ public class PlayersTab extends DisplayTab{
         Text playerNum = new Text(text);
         HBox hBox = new HBox(SPACING);
         hBox.getChildren().addAll(circle,playerNum);
-//        if (property) {
-//            hBox.setAlignment(Pos.CENTER);
-//        }
         return hBox;
     }
 }
