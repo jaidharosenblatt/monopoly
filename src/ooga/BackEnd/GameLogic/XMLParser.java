@@ -177,7 +177,7 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "railroad": {
-                            r.setPathname("resources/rail.gif");
+                            r.setPathname("rail.gif");
                             railroads.add(r);
                             break;
                         }
@@ -238,10 +238,10 @@ public class XMLParser {
                     switch (reader.getLocalName()) {
                         case "utility": {
                             if (u.getTitle().equals("Electric Company")) {
-                                u.setPathname("resources/electric.png");
+                                u.setPathname("electric.png");
                             }
                             if (u.getTitle().equals("Water Works")) {
-                                u.setPathname("resources/waterworks.png");
+                                u.setPathname("waterworks.png");
                             }
                             utilities.add(u);
                             break;
@@ -319,17 +319,46 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "event": {
-                            if (name.equals("go")) {eventTiles.add(g);}
-                            if (name.equals("jail")) {eventTiles.add(j);}
+                            if (name.equals("go")) {
+                                g.setPathname("go.png");
+                                g.setBName("Go");
+                                eventTiles.add(g);
+                            }
+                            if (name.equals("jail")) {
+                                j.setPathname("jail.png");
+                                j.setBName("Jail");
+                                eventTiles.add(j);
+                            }
                             if (name.equals("tax")) {
-                                if (t.getTax() == 75) {t.setPathname("resources/luxury.png");}
+                                if (t.getTax() == 75) {
+                                    t.setPathname("luxury.png");
+                                    t.setBName("Luxury Tax");
+                                }
+                                else {
+                                    t.setPathname("incometax.png");
+                                    t.setBName("Income Tax");
+                                }
                                 eventTiles.add(t);
                             }
-                            if (name.equals("free_parking")) {eventTiles.add(fp);}
-                            if (name.equals("go_to_jail")) {eventTiles.add(gtj);}
+                            if (name.equals("free_parking")) {
+                                fp.setPathname("freeparking.png");
+                                fp.setBName("Free Parking");
+                                eventTiles.add(fp);
+                            }
+                            if (name.equals("go_to_jail")) {
+                                gtj.setPathname("gotojail.png");
+                                gtj.setBName("Go To Jail");
+                                eventTiles.add(gtj);
+                            }
                             if (name.equals("card")) {
-                                if (ct.getType().equals("Community")) {ct.setPathname("resources/chest.png");}
-                                if (ct.getType().equals("Chance")) {ct.setPathname("resources/chance.png");}
+                                if (ct.getType().equals("Community")) {
+                                    ct.setPathname("chest.png");
+                                    ct.setBName("Community Chest");
+                                }
+                                if (ct.getType().equals("Chance")) {
+                                    ct.setPathname("chance.png");
+                                    ct.setBName("Chance");
+                                }
                                 eventTiles.add(ct);
                             }
                             name = null;
