@@ -1,5 +1,6 @@
 package ooga.view.tabs;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -36,17 +37,18 @@ public class PlayersTab extends DisplayTab{
 
     protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties){
         VBox vbox = new VBox(SPACING);
-        HBox title = makeColorAndTextHbox(color, "Player" + number.toString());
+        HBox title = makeColorAndTextHbox(color, "Balance: " + number.toString(), false);
         vbox.getChildren().add(title);
         for (Property p: properties){
-            HBox property = makeColorAndTextHbox(p.getGroupColor(),p.getTitle());
+            HBox property = makeColorAndTextHbox(p.getGroupColor(),p.getTitle(), true);
             vbox.getChildren().add(property);
         }
         return vbox;
     }
 
 
-    private HBox makeColorAndTextHbox(String color, String text) {
+    private HBox makeColorAndTextHbox(String color, String text, boolean property) {
+        System.out.println(color);
         if (color.length() > 7) {
             color = color.substring(4);
             color = "#" + color;
@@ -59,6 +61,9 @@ public class PlayersTab extends DisplayTab{
         Text playerNum = new Text(text);
         HBox hBox = new HBox(SPACING);
         hBox.getChildren().addAll(circle,playerNum);
+        if (property) {
+            hBox.setAlignment(Pos.CENTER);
+        }
         return hBox;
     }
 }
