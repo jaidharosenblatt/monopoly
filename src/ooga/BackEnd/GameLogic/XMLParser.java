@@ -237,10 +237,10 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "utility": {
-                            if (u.getTitle().equals("Electric Company")) {
+                            if (u.getTitle().equals("Electric Company") || u.getTitle().equals("Telescope") || u.getTitle().equals("Solar Power")) {
                                 u.setPathname("electric.png");
                             }
-                            if (u.getTitle().equals("Water Works")) {
+                            if (u.getTitle().equals("Water Works") || u.getTitle().equals("Astronauts") || u.getTitle().equals("Wind Power")) {
                                 u.setPathname("waterworks.png");
                             }
                             utilities.add(u);
