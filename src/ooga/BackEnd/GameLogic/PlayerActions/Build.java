@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Build {
 
-    public Build(Player currentPlayer, View view) {
+    public Build(Player currentPlayer, View view, Map<Integer, Player> map) {
         if (currentPlayer.getProperties().size() < 1) {
             List<String> options = List.of("OK");
             Decision d = new Decision("ERROR: You do not own any properties",options);
@@ -42,6 +42,8 @@ public class Build {
             return;
         }
         buildLoop(currentPlayer, view);
+        view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
     }
 
     private void buildLoop(Player p, View view) {

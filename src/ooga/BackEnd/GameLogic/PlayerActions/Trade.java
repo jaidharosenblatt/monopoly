@@ -10,10 +10,11 @@ import ooga.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Trade {
 
-    public Trade(Player currentPlayer, View view, List<Player> activePlayers) {
+    public Trade(Player currentPlayer, View view, List<Player> activePlayers, Map<Integer, Player> map) {
         ArrayList<Player> temp = new ArrayList<>();
         for (Player a : activePlayers) {
             if (currentPlayer != a) {
@@ -65,6 +66,8 @@ public class Trade {
             currentPlayer.trade(cashGive, decisionPropGive.getChoice(),
                     decisionPlayer.getChoice().get(0), cashWant, decisionPropWant.getChoice());
         }
+        view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
     }
 
     private boolean isNumeric(String str) {

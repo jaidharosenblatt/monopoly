@@ -39,6 +39,11 @@ public class RailRoad extends Property {
         }
     }
 
+    @Override
+    public void bankrupt() {
+        this.mortgaged = false;
+    }
+
     public void setPathname(String s) {this.pathname = s;}
 
     public String getPathname() {return this.pathname;}

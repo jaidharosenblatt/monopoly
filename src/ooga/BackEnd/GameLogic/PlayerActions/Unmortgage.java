@@ -8,9 +8,10 @@ import ooga.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Unmortgage {
-    public Unmortgage(Player currentPlayer, View view) {
+    public Unmortgage(Player currentPlayer, View view, Map<Integer, Player> map) {
         if (currentPlayer.getProperties().size() < 1) {
             List<String> option = List.of("OK");
             Decision d = new Decision("ERROR: You do not have an properties",option);
@@ -33,5 +34,7 @@ public class Unmortgage {
                 p.liftMortgage();
             }
         }
+        view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
     }
 }

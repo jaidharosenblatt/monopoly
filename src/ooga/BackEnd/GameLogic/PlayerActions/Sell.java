@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Sell {
 
-    public Sell(Player currentPlayer, View view) {
+    public Sell(Player currentPlayer, View view, Map<Integer, Player> map) {
         if (currentPlayer.getHouses() < 1) {
             List<String> options = List.of("OK");
             Decision d = new Decision("ERROR: You do not have any houses to sell",options);
@@ -22,6 +22,8 @@ public class Sell {
             return;
         }
         sellLoop(currentPlayer, view);
+        view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
     }
 
     private void sellLoop(Player p, View view) {

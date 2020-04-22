@@ -74,6 +74,8 @@ public class LoadGame {
         playerInfoList.addAll(activePlayers);
 
         view = new View(stage, this, playerInfoList, allTiles);
+        view.setCurrentPlayer(currentPlayer);
+        view.refreshPlayers(map);
 
         for (Tile t : allTiles) {
             t.setView(view);
@@ -94,11 +96,11 @@ public class LoadGame {
             //----------------------------------------------
             temp[i] = new Player("Player " + (i + 1), this.allTiles);
             temp[i].setColor(colors.get(i));
-            this.map.put(i, temp[i]);
         }
         temp = rollForOrder(temp);
         for (Player p : temp) {
             this.activePlayers.add(p);
+            this.map.put(activePlayers.indexOf(p), p);
         }
     }
 
@@ -132,7 +134,11 @@ public class LoadGame {
                 view.makeUserDecision(d);
 
                 //Make all of player's properties neutral again
-                for (Property s : currentPlayer.getProperties()) {s.setOwner(null);}
+                for (Property s : currentPlayer.getProperties()) {
+                    s.liftMortgage();
+                    
+                    s.setOwner(null);
+                }
                 currentPlayer.setProperties(null);
                 activePlayers.remove(currentPlayer);
                 int remove = 0;
@@ -152,6 +158,7 @@ public class LoadGame {
                 }
             }
 
+
             allTiles.get(currentPlayer.getTile()).onTile(currentPlayer);
             //Prevents player that rolled doubles from leaving jail
             if (currentPlayer.isJailed()) {doubleTurns = 0;}
@@ -159,9 +166,7 @@ public class LoadGame {
             //if doubles were rolled, stay on the current player
             if (doubleTurns == 0) {nextPlayer();}
 
-            //Update methods
             view.setCurrentPlayer(currentPlayer);
-            view.refreshPlayers(map);
             updateCardTiles();
 
             //Player either moves normally or completes jail action
@@ -170,6 +175,9 @@ public class LoadGame {
                 allTiles.get(JAIL_INDEX).action();
             }
             else {rollDiceAndMove(currentPlayer);}
+
+            //Update methods
+            view.refreshPlayers(map);
         }
     }
 
@@ -213,15 +221,15 @@ public class LoadGame {
         doubleTurns++;
     }
 
-    public void build() {Build b = new Build(currentPlayer, view);}
+    public void build() {Build b = new Build(currentPlayer, view, map);}
 
-    public void sell() {Sell s = new Sell(currentPlayer, view);}
+    public void sell() {Sell s = new Sell(currentPlayer, view, map);}
 
-    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view);}
+    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, map);}
 
-    public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view);}
+    public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view, map);}
 
-    public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers);}
+    public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, map);}
 
     private void isBankrupt() {
         if (currentPlayer.getBalance() < 0) {

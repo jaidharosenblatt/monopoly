@@ -49,6 +49,8 @@ public abstract class Property extends Tile {
 
     public abstract int getRent();
 
+    public abstract void bankrupt();
+
     public void setTitle(String title) {this.title_deed = title;}
 
     public String getTitle() {return this.title_deed;}
