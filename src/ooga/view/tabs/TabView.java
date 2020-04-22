@@ -53,7 +53,7 @@ public class TabView {
     tabs.get(rulesTabID).updateTab(info);
   }
 
-  protected void updatePlayersTab(Map<Integer, Player> currentPlayers){
+  public void updatePlayersTab(Map<Integer, Player> currentPlayers){
     List<Object> information = playerInfoToList(currentPlayers);
     tabs.get(playersTabID).updateTab(information);
   }
@@ -64,7 +64,7 @@ public class TabView {
       Player playerInfo = (currentPlayers.get(i));
       playerInfoList.add(playerInfo.getPlayerColor());
       playerInfoList.add(playerInfo.getCashBalance());
-      playerInfoList.add(playerInfo.getPropertiesUnmodifiable());
+      playerInfoList.add(playerInfo.getProperties());
     }
     return playerInfoList;
   }

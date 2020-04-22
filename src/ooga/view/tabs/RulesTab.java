@@ -23,18 +23,23 @@ public class RulesTab extends DisplayTab {
 
   @Override
   void updateTab(List<Object> info) {
-    myPane.getChildren().clear();
-    addTitle(TITLE);
-    for (Object rule: info){
-      try{
-        addText((String) rule);
-      }
-      catch (Exception exception){
-        System.out.println("Rules tab only accepts Strings");
-      }
 
-    }
   }
+
+//  @Override
+//  void updateTab(List<Object> info) {
+//    myPane.getChildren().clear();
+//    addTitle(TITLE);
+//    for (Object rule: info){
+//      try{
+//        addText((String) rule);
+//      }
+//      catch (Exception exception){
+//        System.out.println("Rules tab only accepts Strings");
+//      }
+//
+//    }
+//  }
 
 
 

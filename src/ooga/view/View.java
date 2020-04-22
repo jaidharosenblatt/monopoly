@@ -87,7 +87,7 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
+  public void refreshPlayers(Map<Integer, Player> currentPlayers) {
     tabView.updatePlayersTab(currentPlayers);
     System.out.println("RefreshPlayers");
   }

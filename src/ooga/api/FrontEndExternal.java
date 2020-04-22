@@ -7,7 +7,6 @@ import java.util.Map;
 import ooga.BackEnd.GameLogic.MultiDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.view.Decision;
-import ooga.api.view.PlayerInfo;
 
 
 public interface FrontEndExternal {
@@ -41,7 +40,7 @@ public interface FrontEndExternal {
    *
    * @param currentPlayers This Map holds all of the current asset information for the players
    */
-  void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers);
+  void refreshPlayers(Map<Integer, Player> currentPlayers);
 
   /**
    * Use this method to animate the movement of a players token to a new board space
