@@ -13,12 +13,12 @@ import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.objects.Decision;
-import ooga.api.objects.MultiDecision;
+import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
-import ooga.view.gamedisplay.MultiDecisionView;
+import ooga.view.gamedisplay.MultiPropDecisionView;
 import ooga.view.gamedisplay.StringDecisionView;
 import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
@@ -84,8 +84,8 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void makeMultiDecision(MultiDecision decision) {
-    new MultiDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+  public void makeMultiDecision(MultiPropDecision decision) {
+    new MultiPropDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override

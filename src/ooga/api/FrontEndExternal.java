@@ -6,7 +6,7 @@ import java.util.Map;
 
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.Decision;
-import ooga.api.objects.MultiDecision;
+import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 
@@ -27,7 +27,7 @@ public interface FrontEndExternal {
    *
    * @param decision the decision to present to the user
    */
-  void makeMultiDecision(MultiDecision decision);
+  void makeMultiDecision(MultiPropDecision decision);
 
 
   /**

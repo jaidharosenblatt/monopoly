@@ -203,7 +203,7 @@ public class LoadGame {
             }
         }
         List<Property> options = streets;
-        MultiDecision d = new MultiDecision("Which property would you like to buy a house on?",options);
+        MultiPropDecision d = new MultiPropDecision("Which property would you like to buy a house on?",options);
         view.makeMultiDecision(d);
 
         Map<String, ArrayList<Property>> choicemap = new HashMap<>();
@@ -268,7 +268,7 @@ public class LoadGame {
             }
         }
         List<Property> options = streets;
-        MultiDecision d = new MultiDecision("Which property would you like to sell a house on?",options);
+        MultiPropDecision d = new MultiPropDecision("Which property would you like to sell a house on?",options);
         view.makeMultiDecision(d);
 
         Map<String, ArrayList<Property>> choicemap = new HashMap<>();
@@ -328,7 +328,7 @@ public class LoadGame {
         }
 
         List<Property> options = filter;
-        MultiDecision d = new MultiDecision("Which property would you like to mortgage?",options);
+        MultiPropDecision d = new MultiPropDecision("Which property would you like to mortgage?",options);
         view.makeMultiDecision(d);
 
         for (Property p : d.getChoice()) {
@@ -353,7 +353,7 @@ public class LoadGame {
         }
 
         List<Property> options = filter;
-        MultiDecision d = new MultiDecision("Which property would you like to unmortgage?",options);
+        MultiPropDecision d = new MultiPropDecision("Which property would you like to unmortgage?",options);
         view.makeMultiDecision(d);
 
         for (Property p : d.getChoice()) {
@@ -417,66 +417,72 @@ public class LoadGame {
 //            }
 //        }
 
-    private String trade(Player p) {
-        String test = "";
-        for (Player a : activePlayers) {
-            if (p != a) {
-                System.out.print(a.getName() + " ");
-            }
-        }
-        System.out.println("");
-        while(!test.equals("done")) {
-            System.out.println("Which player would you like to trade with?");
-            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-            String input = myObj.nextLine();
-            for (Player b : activePlayers) {
-                if (b.getName().equals(input)) {
-                    System.out.println("List properties you want and cash: Ex. [prop,prop,...,200]");
-                    Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
-                    String input2 = myObj2.nextLine();
-                    String[] want = input2.split(",");
-                    System.out.println("List properties and cash amount you will give: Ex. [prop,prop,...,200]");
-                    Scanner myObj3 = new Scanner(System.in); //replace this with front-end decision instead
-                    String input3 = myObj3.nextLine();
-                    String[] give = input3.split(",");
-                    int cashWant = Integer.parseInt(want[want.length - 1]);
-                    int cashGive = Integer.parseInt(give[give.length - 1]);
-                    ArrayList<Property> propWant = new ArrayList<>();
-                    ArrayList<Property> propGive = new ArrayList<>();
-                    for (Property q : this.properties) {
-                        for (String s : want) {
-                            if (s.equals(q.getTitle())) {
-                                propWant.add(q);
-                            }
-                        }
-                    }
-                    for (Property q : this.properties) {
-                        for (String s : give) {
-                            if (s.equals(q.getTitle())) {
-                                propGive.add(q);
-                            }
-                        }
-                    }
-                    if (!(p.getProperties().containsAll(propGive)) || !(b.getProperties().containsAll(propWant)) || p.getBalance() < cashGive || b.getBalance() < cashWant) {
-                        System.out.println("Trade is not possible");
-                        return "";
-                    }
-                    System.out.println("Does " + b.getName() + " accept this trade? [Y or N]");
-                    Scanner myObj4 = new Scanner(System.in); //replace this with front-end decision instead
-                    String input4 = myObj4.nextLine();
-                    if (input4.equals("Y")) {
-                        System.out.println(p.getName() + " has successfully traded with " + b.getName());
-                        p.trade(cashGive, propGive, b, cashWant, propWant);
-                        test = "done";
-                        break;
-                    }
-                    System.out.println("Trade not successful");
-                    return "";
-                }
-            }
-        }
-        return "";
-    }
+//    public void trade() {
+//        ArrayList<Player> temp = new ArrayList<>();
+//        for (Player a : activePlayers) {
+//            if (currentPlayer != a) {
+//                temp.add(a);
+//            }
+//        }
+//        List<Player> options = temp;
+//        MultiDecision d = new MultiDecision("Which property would you like to mortgage?", options);
+//        view.makeMultiDecision(d);
+//
+//        StringDecision d = new StringDecision("Enter your name");
+//        view.makeStringDecision(d);
+//        System.out.println("");
+//        while(!test.equals("done")) {
+//            System.out.println("Which player would you like to trade with?");
+//            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
+//            String input = myObj.nextLine();
+//            for (Player b : activePlayers) {
+//                if (b.getName().equals(input)) {
+//                    System.out.println("List properties you want and cash: Ex. [prop,prop,...,200]");
+//                    Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
+//                    String input2 = myObj2.nextLine();
+//                    String[] want = input2.split(",");
+//                    System.out.println("List properties and cash amount you will give: Ex. [prop,prop,...,200]");
+//                    Scanner myObj3 = new Scanner(System.in); //replace this with front-end decision instead
+//                    String input3 = myObj3.nextLine();
+//                    String[] give = input3.split(",");
+//                    int cashWant = Integer.parseInt(want[want.length - 1]);
+//                    int cashGive = Integer.parseInt(give[give.length - 1]);
+//                    ArrayList<Property> propWant = new ArrayList<>();
+//                    ArrayList<Property> propGive = new ArrayList<>();
+//                    for (Property q : this.properties) {
+//                        for (String s : want) {
+//                            if (s.equals(q.getTitle())) {
+//                                propWant.add(q);
+//                            }
+//                        }
+//                    }
+//                    for (Property q : this.properties) {
+//                        for (String s : give) {
+//                            if (s.equals(q.getTitle())) {
+//                                propGive.add(q);
+//                            }
+//                        }
+//                    }
+//                    if (!(p.getProperties().containsAll(propGive)) || !(b.getProperties().containsAll(propWant)) || p.getBalance() < cashGive || b.getBalance() < cashWant) {
+//                        System.out.println("Trade is not possible");
+//                        return "";
+//                    }
+//                    System.out.println("Does " + b.getName() + " accept this trade? [Y or N]");
+//                    Scanner myObj4 = new Scanner(System.in); //replace this with front-end decision instead
+//                    String input4 = myObj4.nextLine();
+//                    if (input4.equals("Y")) {
+//                        System.out.println(p.getName() + " has successfully traded with " + b.getName());
+//                        p.trade(cashGive, propGive, b, cashWant, propWant);
+//                        test = "done";
+//                        break;
+//                    }
+//                    System.out.println("Trade not successful");
+//                    return "";
+//                }
+//            }
+//        }
+//        return "";
+//    }
 
     private void isBankrupt(Player p) {
         String input = "";

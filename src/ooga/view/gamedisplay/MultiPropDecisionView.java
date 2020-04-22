@@ -6,20 +6,20 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
-import ooga.api.objects.MultiDecision;
+import ooga.api.objects.MultiPropDecision;
 
-public class MultiDecisionView extends Decisions {
+public class MultiPropDecisionView extends Decisions {
 
-  private MultiDecision decision;
+  private MultiPropDecision decision;
 
-  public MultiDecisionView(MultiDecision decision, String playerName, Color playerColor) {
+  public MultiPropDecisionView(MultiPropDecision decision, String playerName, Color playerColor) {
     super(decision.getPrompt(),playerName,playerColor);
     this.decision = decision;
     addButtons(decision);
     createStage();
   }
 
-  private void addButtons(MultiDecision decision) {
+  private void addButtons(MultiPropDecision decision) {
     VBox buttons = new VBox();
     buttons.setAlignment(Pos.CENTER);
     buttons.setSpacing(5);
