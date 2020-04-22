@@ -47,7 +47,6 @@ public class PlayersTab extends DisplayTab{
 
 
     private HBox makeColorAndTextHbox(String color, String text) {
-        System.out.println(color);
         if (color.length() > 7) {
             color = color.substring(4);
             color = "#" + color;
