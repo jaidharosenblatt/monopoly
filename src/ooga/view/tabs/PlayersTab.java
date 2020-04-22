@@ -27,6 +27,8 @@ public class PlayersTab extends DisplayTab{
 
     @Override
     void updateTab(List<Object> info) {
+        myPane.getChildren().clear();
+        addTitle(TITLE);
         int i = 0;
         while (i < info.size()) {
             VBox vbox = createPlayerDisplay((String) info.get(i).toString(),(Integer) info.get(i + 1), (List<Property>) info.get(i + 2));
@@ -37,17 +39,24 @@ public class PlayersTab extends DisplayTab{
 
     protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties){
         VBox vbox = new VBox(SPACING);
-        HBox title = makeColorAndTextHbox(color, "Balance: " + number.toString(), false);
+        HBox title = new HBox();
+        title.getChildren().add(new Text("Player "));
+        title.getChildren().add(makeColorAndTextHbox(color, "Balance: $" + number.toString()));
+        title.getChildren().add(new Text(", Owns:"));
+
         vbox.getChildren().add(title);
         for (Property p: properties){
-            HBox property = makeColorAndTextHbox(p.getGroupColor(),p.getTitle(), true);
+            HBox property = makeColorAndTextHbox(p.getGroupColor(),p.getTitle());
             vbox.getChildren().add(property);
         }
+        HBox spacer = new HBox();
+        spacer.getChildren().add(new Text(""));
+        vbox.getChildren().add(spacer);
         return vbox;
     }
 
 
-    private HBox makeColorAndTextHbox(String color, String text, boolean property) {
+    private HBox makeColorAndTextHbox(String color, String text) {
         System.out.println(color);
         if (color.length() > 7) {
             color = color.substring(2, color.length() - 2);
@@ -61,9 +70,9 @@ public class PlayersTab extends DisplayTab{
         Text playerNum = new Text(text);
         HBox hBox = new HBox(SPACING);
         hBox.getChildren().addAll(circle,playerNum);
-        if (property) {
-            hBox.setAlignment(Pos.CENTER);
-        }
+//        if (property) {
+//            hBox.setAlignment(Pos.CENTER);
+//        }
         return hBox;
     }
 }
