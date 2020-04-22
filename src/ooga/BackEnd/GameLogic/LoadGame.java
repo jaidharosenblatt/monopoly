@@ -258,7 +258,9 @@ public class LoadGame {
             }
         }
         for (Property q : currentPlayer.getProperties()) {
-            total += (q.getCost() / 2);
+            if (!q.isMortgaged()) {
+                total += (q.getCost() / 2);
+            }
         }
         if (total >= 0) {
             return true;
