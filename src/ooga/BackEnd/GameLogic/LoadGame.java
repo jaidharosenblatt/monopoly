@@ -37,16 +37,17 @@ public class LoadGame {
     private ArrayList<Tile> allTiles;
     private ArrayList<Player> activePlayers;
     private ArrayList<PlayerInfo> playerInfoList;
-    private Iterator<Player> itr;
     private View view;
     private Player currentPlayer;
+    private int currentIndex;
     private int doubleTurns;
     private Map<Integer, Player> map;
+    private boolean stopTurn;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
 
         XMLParser parse = new XMLParser(game_pathname);
-
+        this.stopTurn = false;
         this.properties = (ArrayList<Property>) parse.properties.clone();
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
@@ -54,12 +55,13 @@ public class LoadGame {
 
         createPlayers(player_number);
         currentPlayer = activePlayers.get(0);
+        currentIndex = 0;
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets the first 12 available properties
         ArrayList<Property> test = new ArrayList<>();
         for (Tile t : allTiles) {
-            if (t.getBoardIndex() < 12 && t instanceof Property) {
+            if (t.getBoardIndex() < 40 && t instanceof Property) {
                 ((Property) t).setOwner(currentPlayer);
                 test.add((Property) t);
             }
@@ -68,7 +70,7 @@ public class LoadGame {
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
-         playerInfoList = new ArrayList<>();
+        playerInfoList = new ArrayList<>();
         playerInfoList.addAll(activePlayers);
 
         view = new View(stage, this, playerInfoList, allTiles);
@@ -116,33 +118,69 @@ public class LoadGame {
     }
 
     public void takeTurn(){
-        allTiles.get(currentPlayer.getTile()).onTile(currentPlayer);
-        //Prevents player that rolled doubles from leaving jail
-        if (currentPlayer.isJailed()) {doubleTurns = 0;}
-
-        //if doubles were rolled, stay on the current player
-        if (doubleTurns == 0) {nextPlayer();}
-
-        //Update methods
-        view.setCurrentPlayer(currentPlayer);
-        view.refreshPlayers(map);
-        updateCardTiles();
-
-        //Player either moves normally or completes jail action
-        if (currentPlayer.isJailed()) {
-            allTiles.get(JAIL_INDEX).onTile(currentPlayer);
-            allTiles.get(JAIL_INDEX).action();
+        isBankrupt();
+        //Only if player can avoid bankruptcy without trading with other players
+        if (stopTurn) {
+            return;
         }
-        else {rollDiceAndMove(currentPlayer);}
+        else {
+            //If player is negative after ending their turn, player loses
+            if (currentPlayer.getBalance() < 0) {
+
+                List<String> options = List.of("OK");
+                Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", options);
+                view.makeUserDecision(d);
+
+                //Make all of player's properties neutral again
+                for (Property s : currentPlayer.getProperties()) {s.setOwner(null);}
+                currentPlayer.setProperties(null);
+                activePlayers.remove(currentPlayer);
+                int remove = 0;
+                for (int i : map.keySet()) {
+                    if (map.get(i) == currentPlayer) {
+                        remove = i;
+                    }
+                }
+                map.remove(remove);
+                doubleTurns = 0;
+
+                //End the game if there's only one player left
+                if (activePlayers.size() == 1) {
+                    List<String> options2 = List.of("OK");
+                    Decision d1 = new Decision(activePlayers.get(0).getName() + " wins!", options2);
+                    view.makeUserDecision(d1);
+                }
+            }
+
+            allTiles.get(currentPlayer.getTile()).onTile(currentPlayer);
+            //Prevents player that rolled doubles from leaving jail
+            if (currentPlayer.isJailed()) {doubleTurns = 0;}
+
+            //if doubles were rolled, stay on the current player
+            if (doubleTurns == 0) {nextPlayer();}
+
+            //Update methods
+            view.setCurrentPlayer(currentPlayer);
+            view.refreshPlayers(map);
+            updateCardTiles();
+
+            //Player either moves normally or completes jail action
+            if (currentPlayer.isJailed()) {
+                allTiles.get(JAIL_INDEX).onTile(currentPlayer);
+                allTiles.get(JAIL_INDEX).action();
+            }
+            else {rollDiceAndMove(currentPlayer);}
+        }
     }
 
     private void nextPlayer(){
-        int i = activePlayers.indexOf(currentPlayer);
-        if (i+1 >= activePlayers.size()){
+        if (currentIndex + 1 >= activePlayers.size()) {
             currentPlayer = activePlayers.get(0);
+            currentIndex = 0;
         }
         else {
-            currentPlayer = activePlayers.get(i+1);
+            currentPlayer = activePlayers.get(currentIndex + 1);
+            currentIndex++;
         }
     }
 
@@ -185,84 +223,33 @@ public class LoadGame {
 
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers);}
 
-//      updateCardTiles();
-
-
-//      int game = 0;
-//        String input = "";
-//        while(game != 1) {
-//            this.itr = this.activePlayers.iterator();
-//            while (itr.hasNext()) {
-//                Player p = itr.next();
-//                view.setCurrentPlayer(p);
-//                if (activePlayers.size() == 1) {
-//                    System.out.println(activePlayers.get(0).getName() + " wins!");
-//                    itr.remove();
-//                    game = 1;
-//                    break;
-//                }
-//                if (p.isJailed()) {
-//                    p.moveTo(JAIL_INDEX);
-//                    if (p.isJailed()) {
-//                        System.out.println("You remain in jail");
-//                        promptPlayer(p);
-//                        continue;
-//                    }
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//                else {
-//                    updateCardTiles();
-//                    displayAssets(p);
-//                    System.out.println("");
-//                    promptPlayer(p);
-//                    basicTurn(p);
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-    private void isBankrupt(Player p) {
-        String input = "";
-        if (p.getBalance() < 0) {
-            if (checkAssets(p)) {
-                System.out.println(p.getName() + " can afford to end bankruptcy without trading");
+    private void isBankrupt() {
+        if (currentPlayer.getBalance() < 0) {
+            if (checkAssets()) {
+                List<String> options = List.of("OK");
+                Decision d = new Decision(currentPlayer.getName() + " can afford to end bankruptcy without trading",options);
+                view.makeUserDecision(d);
+                stopTurn = true;
             }
             else {
-                System.out.println(p.getName() + " must trade to avoid bankruptcy");
+                List<String> options = List.of("OK");
+                Decision d = new Decision(currentPlayer.getName() + " must trade to avoid bankruptcy",options);
+                view.makeUserDecision(d);
+                stopTurn = false;
+                sell();
+                mortgage();
+                trade();
             }
-            if (p.getBalance() < 0) {
-                System.out.println(p.getName() + " went bankrupt");
-                for (Property s : p.getProperties()) {
-                    s.setOwner(null);
-                }
-                p.setProperties(null);
-                itr.remove();
-            }
+        }
+        else {
+            stopTurn = false;
         }
     }
 
-    private boolean checkAssets(Player p) {
-        int total = p.getBalance();
-        if (p.getHouses() > 0) {
-            for (Property s : p.getProperties()) {
+    private boolean checkAssets() {
+        int total = currentPlayer.getBalance();
+        if (currentPlayer.getHouses() > 0) {
+            for (Property s : currentPlayer.getProperties()) {
                 if (s instanceof Street) {
                     if (((Street) s).getHouses() > 0) {
                         total += (((Street) s).getHouseCost() * ((Street) s).getHouses()) / 2;
@@ -270,7 +257,7 @@ public class LoadGame {
                 }
             }
         }
-        for (Property q : p.getProperties()) {
+        for (Property q : currentPlayer.getProperties()) {
             total += (q.getCost() / 2);
         }
         if (total >= 0) {
