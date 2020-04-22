@@ -9,6 +9,7 @@ import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
 import ooga.BackEnd.GameLogic.Decisions.StringDecision;
 import ooga.BackEnd.GameLogic.PlayerActions.Build;
+import ooga.BackEnd.GameLogic.PlayerActions.Mortgage;
 import ooga.BackEnd.GameLogic.PlayerActions.Sell;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
@@ -171,30 +172,7 @@ public class LoadGame {
 
     public void sell() {Sell s = new Sell(currentPlayer, view);}
 
-    public void mortgage() {
-        if (currentPlayer.getProperties().size() < 1) {
-            List<String> option = List.of("OK");
-            Decision d = new Decision("ERROR: You do not have an properties",option);
-            view.makeUserDecision(d);
-            return;
-        }
-        ArrayList<Property> filter = new ArrayList<>();
-        for (Property p: currentPlayer.getProperties()) {
-            if (!p.isMortgaged()) {
-                filter.add(p);
-            }
-        }
-
-        List<Property> options = filter;
-        MultiPropDecision d = new MultiPropDecision("Which property would you like to mortgage?",options);
-        view.makeMultiDecision(d);
-
-        for (Property p : d.getChoice()) {
-            if (!(p.isMortgaged())) {
-                p.setMortgaged();
-            }
-        }
-    }
+    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view);}
 
     public void unmortgage() {
         if (currentPlayer.getProperties().size() < 1) {
