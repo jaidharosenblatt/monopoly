@@ -177,6 +177,7 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "railroad": {
+                            r.setPathname("resources/rail.gif");
                             railroads.add(r);
                             break;
                         }
@@ -236,6 +237,12 @@ public class XMLParser {
                 case XMLStreamConstants.END_ELEMENT: {
                     switch (reader.getLocalName()) {
                         case "utility": {
+                            if (u.getTitle().equals("Electric Company")) {
+                                u.setPathname("resources/electric.png");
+                            }
+                            if (u.getTitle().equals("Water Works")) {
+                                u.setPathname("resources/waterworks.png");
+                            }
                             utilities.add(u);
                             break;
                         }

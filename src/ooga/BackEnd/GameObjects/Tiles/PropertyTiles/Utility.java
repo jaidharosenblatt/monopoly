@@ -2,6 +2,8 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
 public class Utility extends Property {
 
+    private String pathname;
+
     public Utility() {}
 
     public Utility(String tileID, int boardIndex) {
@@ -23,4 +25,8 @@ public class Utility extends Property {
             return (this.visiting.dice1 + this.visiting.dice2) * 4;
         }
     }
+
+    public void setPathname(String s) {this.pathname = s;}
+
+    public String getPathname() {return this.pathname;}
 }
