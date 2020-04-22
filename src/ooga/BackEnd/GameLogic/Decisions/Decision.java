@@ -1,4 +1,4 @@
-package ooga.BackEnd.GameLogic;
+package ooga.BackEnd.GameLogic.Decisions;
 
 import java.util.List;
 

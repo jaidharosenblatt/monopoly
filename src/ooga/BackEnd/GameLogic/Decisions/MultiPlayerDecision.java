@@ -1,4 +1,4 @@
-package ooga.BackEnd.GameLogic;
+package ooga.BackEnd.GameLogic.Decisions;
 
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;

@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
-import ooga.BackEnd.GameLogic.MultiPlayerDecision;
+import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.Decision;
 import ooga.api.objects.MultiPropDecision;

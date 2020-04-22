@@ -4,6 +4,10 @@ import java.awt.*;
 import java.util.*;
 
 import javafx.stage.Stage;
+import ooga.BackEnd.GameLogic.Decisions.Decision;
+import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
+import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
+import ooga.BackEnd.GameLogic.Decisions.StringDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.cardTile;
@@ -114,7 +118,6 @@ public class LoadGame {
         if (doubleTurns == 0) {
             nextPlayer();
         }
-        displayAssets(currentPlayer);
         view.setCurrentPlayer(currentPlayer);
         view.refreshPlayers(map);
         updateCardTiles();

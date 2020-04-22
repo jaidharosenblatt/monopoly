@@ -1,10 +1,8 @@
 package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
-import ooga.BackEnd.GameLogic.Decision;
-import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.BackEnd.GameLogic.Decisions.Decision;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Jail extends Event {
 

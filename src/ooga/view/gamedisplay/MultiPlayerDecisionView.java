@@ -5,10 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import ooga.BackEnd.GameLogic.MultiPlayerDecision;
+import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
-import ooga.api.objects.MultiPropDecision;
 
 public class MultiPlayerDecisionView extends Decisions {
 
