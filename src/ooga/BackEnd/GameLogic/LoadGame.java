@@ -417,72 +417,50 @@ public class LoadGame {
 //            }
 //        }
 
-//    public void trade() {
-//        ArrayList<Player> temp = new ArrayList<>();
-//        for (Player a : activePlayers) {
-//            if (currentPlayer != a) {
-//                temp.add(a);
-//            }
-//        }
-//        List<Player> options = temp;
-//        MultiDecision d = new MultiDecision("Which property would you like to mortgage?", options);
-//        view.makeMultiDecision(d);
-//
-//        StringDecision d = new StringDecision("Enter your name");
-//        view.makeStringDecision(d);
-//        System.out.println("");
-//        while(!test.equals("done")) {
-//            System.out.println("Which player would you like to trade with?");
-//            Scanner myObj = new Scanner(System.in); //replace this with front-end decision instead
-//            String input = myObj.nextLine();
-//            for (Player b : activePlayers) {
-//                if (b.getName().equals(input)) {
-//                    System.out.println("List properties you want and cash: Ex. [prop,prop,...,200]");
-//                    Scanner myObj2 = new Scanner(System.in); //replace this with front-end decision instead
-//                    String input2 = myObj2.nextLine();
-//                    String[] want = input2.split(",");
-//                    System.out.println("List properties and cash amount you will give: Ex. [prop,prop,...,200]");
-//                    Scanner myObj3 = new Scanner(System.in); //replace this with front-end decision instead
-//                    String input3 = myObj3.nextLine();
-//                    String[] give = input3.split(",");
-//                    int cashWant = Integer.parseInt(want[want.length - 1]);
-//                    int cashGive = Integer.parseInt(give[give.length - 1]);
-//                    ArrayList<Property> propWant = new ArrayList<>();
-//                    ArrayList<Property> propGive = new ArrayList<>();
-//                    for (Property q : this.properties) {
-//                        for (String s : want) {
-//                            if (s.equals(q.getTitle())) {
-//                                propWant.add(q);
-//                            }
-//                        }
-//                    }
-//                    for (Property q : this.properties) {
-//                        for (String s : give) {
-//                            if (s.equals(q.getTitle())) {
-//                                propGive.add(q);
-//                            }
-//                        }
-//                    }
-//                    if (!(p.getProperties().containsAll(propGive)) || !(b.getProperties().containsAll(propWant)) || p.getBalance() < cashGive || b.getBalance() < cashWant) {
-//                        System.out.println("Trade is not possible");
-//                        return "";
-//                    }
-//                    System.out.println("Does " + b.getName() + " accept this trade? [Y or N]");
-//                    Scanner myObj4 = new Scanner(System.in); //replace this with front-end decision instead
-//                    String input4 = myObj4.nextLine();
-//                    if (input4.equals("Y")) {
-//                        System.out.println(p.getName() + " has successfully traded with " + b.getName());
-//                        p.trade(cashGive, propGive, b, cashWant, propWant);
-//                        test = "done";
-//                        break;
-//                    }
-//                    System.out.println("Trade not successful");
-//                    return "";
-//                }
-//            }
-//        }
-//        return "";
-//    }
+    public void trade() {
+        ArrayList<Player> temp = new ArrayList<>();
+        for (Player a : activePlayers) {
+            if (currentPlayer != a) {
+                temp.add(a);
+            }
+        }
+        List<Player> options = temp;
+        MultiPlayerDecision decisionPlayer = new MultiPlayerDecision("Which player would you like to trade with?", options);
+        view.makeMultiPlayerDecision(decisionPlayer);
+
+        List<Property> options1 = decisionPlayer.getChoice().get(0).getProperties();
+        MultiPropDecision decisionPropWant = new MultiPropDecision("Which property do you want from " + decisionPlayer.getChoice().get(0).getName() + "?",options1);
+        view.makeMultiDecision(decisionPropWant);
+
+        StringDecision decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
+        view.makeStringDecision(decisionCashWant);
+
+        while(decisionPlayer.getChoice().get(0).getBalance() < Integer.parseInt(decisionCashWant.getChoice())) {
+            decisionCashWant = new StringDecision("How much money do you want from " + decisionPlayer.getChoice().get(0).getName() + "?");
+            view.makeStringDecision(decisionCashWant);
+        }
+
+        List<Property> options2 = currentPlayer.getProperties();
+        MultiPropDecision decisionPropGive = new MultiPropDecision("Which property will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?",options2);
+        view.makeMultiDecision(decisionPropGive);
+
+        StringDecision decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
+        view.makeStringDecision(decisionCashGive);
+
+        while(currentPlayer.getBalance() < Integer.parseInt(decisionCashGive.getChoice())) {
+            decisionCashGive = new StringDecision("How much money will you offer to " + decisionPlayer.getChoice().get(0).getName() + "?");
+            view.makeStringDecision(decisionCashGive);
+        }
+
+        List<String> option = List.of("Yes", "No");
+        Decision d = new Decision("Does " + decisionPlayer.getChoice().get(0).getName() + " accept the offer?",option);
+        view.makeUserDecision(d);
+
+        if (d.getChoice().equals("Yes")) {
+            currentPlayer.trade(Integer.parseInt(decisionCashGive.getChoice()), decisionPropGive.getChoice(),
+                    decisionPlayer.getChoice().get(0), Integer.parseInt(decisionCashWant.getChoice()), decisionPropWant.getChoice());
+        }
+    }
 
     private void isBankrupt(Player p) {
         String input = "";

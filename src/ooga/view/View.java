@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
+import ooga.BackEnd.GameLogic.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
@@ -17,10 +18,7 @@ import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
-import ooga.view.gamedisplay.DecisionView;
-import ooga.view.gamedisplay.MultiPropDecisionView;
-import ooga.view.gamedisplay.StringDecisionView;
-import ooga.view.gamedisplay.TurnActionButtons;
+import ooga.view.gamedisplay.*;
 import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {
@@ -70,9 +68,7 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleUnmortgage() {controller.unmortgage();}
 
-  public void handleTrade() {
-    System.out.println("Trade");
-  }
+  public void handleTrade() {controller.trade();}
 
   public void makeStringDecision(StringDecision decision){
     new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
@@ -86,6 +82,11 @@ public class View extends BorderPane implements FrontEndExternal {
   @Override
   public void makeMultiDecision(MultiPropDecision decision) {
     new MultiPropDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+  }
+
+  @Override
+  public void makeMultiPlayerDecision(MultiPlayerDecision decision) {
+    new MultiPlayerDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override
