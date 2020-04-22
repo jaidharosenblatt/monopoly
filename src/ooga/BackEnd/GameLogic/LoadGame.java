@@ -116,6 +116,7 @@ public class LoadGame {
     }
 
     public void takeTurn(){
+        allTiles.get(currentPlayer.getTile()).onTile(currentPlayer);
         //Prevents player that rolled doubles from leaving jail
         if (currentPlayer.isJailed()) {doubleTurns = 0;}
 

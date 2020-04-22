@@ -28,6 +28,7 @@ public class Jail extends Event {
                     this.visiting.setFree();
                     this.visiting.rollDice();
                     this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
+                    return;
                 }
             }
             if (this.visiting.getJailTurn() < 2) {
