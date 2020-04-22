@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
+import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.Decision;
 import ooga.api.objects.MultiDecision;
 import ooga.api.objects.PlayerInfo;
@@ -48,7 +49,7 @@ public interface FrontEndExternal {
    *
    * @param currentPlayers This Map holds all of the current asset information for the players
    */
-  void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers);
+  void refreshPlayers(Map<Integer, Player> currentPlayers);
 
   /**
    * Use this method to animate the movement of a players token to a new board space

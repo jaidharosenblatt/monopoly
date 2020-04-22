@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.PlayerInfo;
 
 public class TabView {
@@ -25,8 +26,9 @@ public class TabView {
   public TabView(double width, double height){
     tabPane = new TabPane();
     tabPane.setPrefSize(width, height);
-    tabsRegistry.put("Rules", RulesTab.class);
     tabsRegistry.put("Players", PlayersTab.class);
+    tabsRegistry.put("Rules", RulesTab.class);
+
     rulesTabID = this.createTab("Rules");
     playersTabID = this.createTab("Players");
 
@@ -52,18 +54,18 @@ public class TabView {
     tabs.get(rulesTabID).updateTab(info);
   }
 
-  public void updatePlayersTab(Map<Integer, PlayerInfo> currentPlayers){
+  public void updatePlayersTab(Map<Integer, Player> currentPlayers){
     List<Object> information = playerInfoToList(currentPlayers);
     tabs.get(playersTabID).updateTab(information);
   }
 
-  private List<Object> playerInfoToList(Map<Integer, PlayerInfo> currentPlayers) {
+  private List<Object> playerInfoToList(Map<Integer, Player> currentPlayers) {
     List<Object> playerInfoList = new ArrayList<>();
     for (Integer i: currentPlayers.keySet()){
-      PlayerInfo playerInfo = (currentPlayers.get(i));
+      Player playerInfo = (currentPlayers.get(i));
       playerInfoList.add(playerInfo.getPlayerColor());
       playerInfoList.add(playerInfo.getCashBalance());
-      playerInfoList.add(playerInfo.getPropertiesUnmodifiable());
+      playerInfoList.add(playerInfo.getProperties());
     }
     return playerInfoList;
   }

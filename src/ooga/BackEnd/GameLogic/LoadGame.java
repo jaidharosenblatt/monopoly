@@ -36,7 +36,7 @@ public class LoadGame {
     private View view;
     private Player currentPlayer;
     private int doubleTurns;
-    private Map<Integer, PlayerInfo> map;
+    private Map<Integer, Player> map;
 
     public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
 
