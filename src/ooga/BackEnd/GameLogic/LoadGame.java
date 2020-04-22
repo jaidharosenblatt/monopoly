@@ -52,14 +52,14 @@ public class LoadGame {
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets the first 12 available properties
-//        ArrayList<Property> test = new ArrayList<>();
-//        for (Tile t : allTiles) {
-//            if (t.getBoardIndex() < 12 && t instanceof Property) {
-//                ((Property) t).setOwner(currentPlayer);
-//                test.add((Property) t);
-//            }
-//        }
-//        currentPlayer.setProperties(test);
+        ArrayList<Property> test = new ArrayList<>();
+        for (Tile t : allTiles) {
+            if (t.getBoardIndex() < 12 && t instanceof Property) {
+                ((Property) t).setOwner(currentPlayer);
+                test.add((Property) t);
+            }
+        }
+        currentPlayer.setProperties(test);
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
@@ -363,60 +363,6 @@ public class LoadGame {
         }
     }
 
-//      updateCardTiles();
-
-
-//      int game = 0;
-//        String input = "";
-//        while(game != 1) {
-//            this.itr = this.activePlayers.iterator();
-//            while (itr.hasNext()) {
-//                Player p = itr.next();
-//                view.setCurrentPlayer(p);
-//                if (activePlayers.size() == 1) {
-//                    System.out.println(activePlayers.get(0).getName() + " wins!");
-//                    itr.remove();
-//                    game = 1;
-//                    break;
-//                }
-//                if (p.isJailed()) {
-//                    p.moveTo(JAIL_INDEX);
-//                    if (p.isJailed()) {
-//                        System.out.println("You remain in jail");
-//                        promptPlayer(p);
-//                        continue;
-//                    }
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//                else {
-//                    updateCardTiles();
-//                    displayAssets(p);
-//                    System.out.println("");
-//                    promptPlayer(p);
-//                    basicTurn(p);
-//                    if (p.getBalance() < 0) {
-//                        isBankrupt(p);
-//                    }
-//                    else {
-//                        System.out.println("");
-//                        input = "";
-//                        while(!input.equals("end")) {
-//                            input = decision(p);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
     public void trade() {
         ArrayList<Player> temp = new ArrayList<>();
         for (Player a : activePlayers) {
@@ -471,6 +417,60 @@ public class LoadGame {
         }
     }
 
+//      updateCardTiles();
+
+
+//      int game = 0;
+//        String input = "";
+//        while(game != 1) {
+//            this.itr = this.activePlayers.iterator();
+//            while (itr.hasNext()) {
+//                Player p = itr.next();
+//                view.setCurrentPlayer(p);
+//                if (activePlayers.size() == 1) {
+//                    System.out.println(activePlayers.get(0).getName() + " wins!");
+//                    itr.remove();
+//                    game = 1;
+//                    break;
+//                }
+//                if (p.isJailed()) {
+//                    p.moveTo(JAIL_INDEX);
+//                    if (p.isJailed()) {
+//                        System.out.println("You remain in jail");
+//                        promptPlayer(p);
+//                        continue;
+//                    }
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//                else {
+//                    updateCardTiles();
+//                    displayAssets(p);
+//                    System.out.println("");
+//                    promptPlayer(p);
+//                    basicTurn(p);
+//                    if (p.getBalance() < 0) {
+//                        isBankrupt(p);
+//                    }
+//                    else {
+//                        System.out.println("");
+//                        input = "";
+//                        while(!input.equals("end")) {
+//                            input = decision(p);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
     private void isBankrupt(Player p) {
         String input = "";
         if (p.getBalance() < 0) {
@@ -509,35 +509,6 @@ public class LoadGame {
             return true;
         }
         return false;
-    }
-
-    private void displayAssets(Player p) {
-        System.out.println("---------------------------------");
-        System.out.println(p.getName() + " has $" + p.getBalance());
-        System.out.print(p.getName() + " owns:");
-        for (Property prop : p.getProperties()) {
-            System.out.print(" " + prop.getTitle() + " ");
-        }
-        System.out.println("");
-        System.out.println(p.getName() + " is on " + p.getTileName());
-        System.out.print(p.getName() + " mortgaged:");
-        for (Property prop : p.getProperties()) {
-            if (prop.isMortgaged()) {
-                System.out.print(" " + prop.getTitle() + " ");
-            }
-        }
-        System.out.println("");
-        System.out.print(p.getName() + " monopolies:");
-        ArrayList<String> colors = new ArrayList<>();
-        for (Property prop : p.getProperties()) {
-            if (p.hasMonopoly(prop) && !(colors.contains(prop.getGroupColor()))) {
-                System.out.print(" " + prop.getGroupColor() + " ");
-                colors.add(prop.getGroupColor());
-            }
-        }
-        System.out.println("");
-        System.out.println(p.getName() + " has " + p.getNumJFC() + " Get Out of Jail Free cards");
-        System.out.println("---------------------------------");
     }
 
     public boolean isNumeric(String str) {
