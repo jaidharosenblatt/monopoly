@@ -116,21 +116,23 @@ public class LoadGame {
     }
 
     public void takeTurn(){
-        if (currentPlayer.isJailed()) {
-            doubleTurns = 0;
-        }
-        if (doubleTurns == 0) {
-            nextPlayer();
-        }
+        //Prevents player that rolled doubles from leaving jail
+        if (currentPlayer.isJailed()) {doubleTurns = 0;}
+
+        //if doubles were rolled, stay on the current player
+        if (doubleTurns == 0) {nextPlayer();}
+
+        //Update methods
         view.setCurrentPlayer(currentPlayer);
         view.refreshPlayers(map);
         updateCardTiles();
+
+        //Player either moves normally or completes jail action
         if (currentPlayer.isJailed()) {
+            allTiles.get(JAIL_INDEX).onTile(currentPlayer);
             allTiles.get(JAIL_INDEX).action();
         }
-        else {
-            rollDiceAndMove(currentPlayer);
-        }
+        else {rollDiceAndMove(currentPlayer);}
     }
 
     private void nextPlayer(){
