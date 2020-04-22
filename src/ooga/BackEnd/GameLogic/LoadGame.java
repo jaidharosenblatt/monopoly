@@ -59,14 +59,14 @@ public class LoadGame {
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets all available properties
-//        ArrayList<Property> test = new ArrayList<>();
-//        for (Tile t : allTiles) {
-//            if (t.getBoardIndex() < 40 && t instanceof Property) {
-//                ((Property) t).setOwner(currentPlayer);
-//                test.add((Property) t);
-//            }
-//        }
-//        currentPlayer.setProperties(test);
+        ArrayList<Property> test = new ArrayList<>();
+        for (Tile t : allTiles) {
+            if (t.getBoardIndex() < 40 && t instanceof Property) {
+                ((Property) t).setOwner(currentPlayer);
+                test.add((Property) t);
+            }
+        }
+        currentPlayer.setProperties(test);
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 

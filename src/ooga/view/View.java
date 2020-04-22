@@ -28,7 +28,7 @@ public class View extends BorderPane implements FrontEndExternal {
   private TurnActionButtons gameDisplay;
   private LoadGame controller;
   private static final double SCENE_WIDTH = 900;
-  private static final double SCENE_HEIGHT = 700;
+  private static final double SCENE_HEIGHT = 735;
   private List<PlayerInfo> players;
   private PlayerInfo currentPlayer;
   private TabView tabView;
@@ -45,7 +45,7 @@ public class View extends BorderPane implements FrontEndExternal {
     Group boardGroup = new Group(board);
     gameDisplay = new TurnActionButtons(this);
     Group tabGroup = new Group();
-    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT);
+    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT - 15);
     tabView.addTabPaneToGroup(tabGroup);
 
     setLeft(boardGroup);
