@@ -135,8 +135,7 @@ public class LoadGame {
 
                 //Make all of player's properties neutral again
                 for (Property s : currentPlayer.getProperties()) {
-                    s.liftMortgage();
-                    
+                    s.bankrupt();
                     s.setOwner(null);
                 }
                 currentPlayer.setProperties(null);
