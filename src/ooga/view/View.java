@@ -9,17 +9,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
-
-import ooga.api.objects.MultiDecision;
+import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.objects.Decision;
+import ooga.api.objects.MultiDecision;
 import ooga.api.objects.PlayerInfo;
-import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.DecisionView;
 import ooga.view.gamedisplay.MultiDecisionView;
-import ooga.view.gamedisplay.StringDecisionView;
 import ooga.view.gamedisplay.TurnActionButtons;
 import ooga.view.tabs.TabView;
 
@@ -58,7 +56,7 @@ public class View extends BorderPane implements FrontEndExternal {
     stage.show();
   }
 
-  public void setCurrentPlayer(PlayerInfo p) { this.currentPlayer = p;}
+  public void setCurrentPlayer(Player p) { this.currentPlayer = p;}
 
   public void handleRoll() {controller.takeTurn();}
 
@@ -72,10 +70,6 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleTrade() {
     System.out.println("Trade");
-  }
-
-  public void makeStringDecision(StringDecision decision){
-    new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override
@@ -94,7 +88,8 @@ public class View extends BorderPane implements FrontEndExternal {
 
   @Override
   public void refreshPlayers(Map<Integer, PlayerInfo> currentPlayers) {
-
+    tabView.updatePlayersTab(currentPlayers);
+    System.out.println("RefreshPlayers");
   }
 
   @Override
