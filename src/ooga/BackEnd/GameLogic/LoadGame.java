@@ -52,14 +52,14 @@ public class LoadGame {
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets the first 12 available properties
-        ArrayList<Property> test = new ArrayList<>();
-        for (Tile t : allTiles) {
-            if (t.getBoardIndex() < 12 && t instanceof Property) {
-                ((Property) t).setOwner(currentPlayer);
-                test.add((Property) t);
-            }
-        }
-        currentPlayer.setProperties(test);
+//        ArrayList<Property> test = new ArrayList<>();
+//        for (Tile t : allTiles) {
+//            if (t.getBoardIndex() < 12 && t instanceof Property) {
+//                ((Property) t).setOwner(currentPlayer);
+//                test.add((Property) t);
+//            }
+//        }
+//        currentPlayer.setProperties(test);
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
