@@ -2,6 +2,8 @@ package ooga.view.tabs;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.geometry.Insets;
 import javafx.print.Collation;
 import javafx.scene.layout.HBox;
@@ -12,11 +14,12 @@ import javafx.scene.text.TextAlignment;
 
 
 public class RulesTab extends DisplayTab {
-  private static final String TITLE = "Game Rules";
+  private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
+  private static final String TITLE = myResources.getString("rulesTabTitle");
   private static final int SPACING = 10;
   private static final int FONT_SIZE = 12;
   private  Pane myPane;
-  private Text title;
+
   public RulesTab(String tabName, Pane pane) {
     super(tabName, pane);
     this.myPane = pane;
@@ -34,7 +37,7 @@ public class RulesTab extends DisplayTab {
         addText((String) rule);
       }
       catch (Exception exception){
-        System.out.println("Rules tab only accepts Strings");
+        System.out.println(myResources.getString("stringException"));
       }
     }
   }

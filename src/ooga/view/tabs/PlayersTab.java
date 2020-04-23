@@ -8,9 +8,11 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class PlayersTab extends DisplayTab{
-    private static final String TITLE = "Player Assets";
+    private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
+    private static final String TITLE = myResources.getString("playersTabTitle");
     private static final int SPACING = 10;
     private static final double FONT_SIZE = 12;
 
@@ -39,9 +41,9 @@ public class PlayersTab extends DisplayTab{
     protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties){
         VBox vbox = new VBox(SPACING);
         HBox title = new HBox();
-        title.getChildren().add(new Text("Player "));
-        title.getChildren().add(makeColorAndTextHBox(color, "Balance: $" + number.toString(), false, null));
-        title.getChildren().add(new Text(", Owns:"));
+        title.getChildren().add(new Text(myResources.getString("player")));
+        title.getChildren().add(makeColorAndTextHBox(color, myResources.getString("balance") + number.toString(), false, null));
+        title.getChildren().add(new Text(myResources.getString("owns")));
 
         vbox.getChildren().add(title);
         for (Property p: properties){

@@ -8,7 +8,8 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import java.util.*;
 
 public class PropertiesTab extends DisplayTab{
-    private static final String TITLE = "Available Properties";
+    private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
+    private static final String TITLE = myResources.getString("propertiesTabTitle");
     private static final int SPACING = 10;
     private static final double FONT_SIZE = 12;
 
