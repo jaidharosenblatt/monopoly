@@ -59,14 +59,14 @@ public class LoadGame {
 
         ///////////////////////////////////////////////////////////////////////////////////
         //TESTING PURPOSES ONLY: last player in turn gets all available properties
-        ArrayList<Property> test = new ArrayList<>();
-        for (Tile t : allTiles) {
-            if (t.getBoardIndex() < 40 && t instanceof Property) {
-                ((Property) t).setOwner(currentPlayer);
-                test.add((Property) t);
-            }
-        }
-        currentPlayer.setProperties(test);
+//        ArrayList<Property> test = new ArrayList<>();
+//        for (Tile t : allTiles) {
+//            if (t.getBoardIndex() < 40 && t instanceof Property) {
+//                ((Property) t).setOwner(currentPlayer);
+//                test.add((Property) t);
+//            }
+//        }
+//        currentPlayer.setProperties(test);
         //DELETE AFTER FINISHING TESTING
         ///////////////////////////////////////////////////////////////////////////////////
 
@@ -126,39 +126,9 @@ public class LoadGame {
             return;
         }
         else {
-            //If player is negative after ending their turn, player loses
-            if (currentPlayer.getBalance() < 0) {
 
-                List<String> options = List.of("OK");
-                Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", options);
-                view.makeUserDecision(d);
+            doesPlayerLose();
 
-                //Make all of player's properties neutral again
-                for (Property s : currentPlayer.getProperties()) {
-                    s.bankrupt();
-                    s.setOwner(null);
-                }
-                currentPlayer.setProperties(null);
-                activePlayers.remove(currentPlayer);
-                int remove = 0;
-                for (int i : map.keySet()) {
-                    if (map.get(i) == currentPlayer) {
-                        remove = i;
-                    }
-                }
-                map.remove(remove);
-                doubleTurns = 0;
-
-                //End the game if there's only one player left
-                if (activePlayers.size() == 1) {
-                    List<String> options2 = List.of("OK");
-                    Decision d1 = new Decision(activePlayers.get(0).getName() + " wins!", options2);
-                    view.makeUserDecision(d1);
-                }
-            }
-
-
-            allTiles.get(currentPlayer.getTile()).onTile(currentPlayer);
             //Prevents player that rolled doubles from leaving jail
             if (currentPlayer.isJailed()) {doubleTurns = 0;}
 
@@ -175,7 +145,7 @@ public class LoadGame {
             }
             else {rollDiceAndMove(currentPlayer);}
 
-            //Update methods
+            //Update player tab
             view.refreshPlayers(map);
         }
     }
@@ -273,6 +243,39 @@ public class LoadGame {
             return true;
         }
         return false;
+    }
+
+    private void doesPlayerLose() {
+        //If player is negative after ending their turn, player loses
+        if (currentPlayer.getBalance() < 0) {
+
+            List<String> options = List.of("OK");
+            Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", options);
+            view.makeUserDecision(d);
+
+            //Make all of player's properties neutral again
+            for (Property s : currentPlayer.getProperties()) {
+                s.bankrupt();
+                s.setOwner(null);
+            }
+            currentPlayer.setProperties(null);
+            activePlayers.remove(currentPlayer);
+            int remove = 0;
+            for (int i : map.keySet()) {
+                if (map.get(i) == currentPlayer) {
+                    remove = i;
+                }
+            }
+            map.remove(remove);
+            doubleTurns = 0;
+
+            //End the game if there's only one player left
+            if (activePlayers.size() == 1) {
+                List<String> options2 = List.of("OK");
+                Decision d1 = new Decision(activePlayers.get(0).getName() + " wins!", options2);
+                view.makeUserDecision(d1);
+            }
+        }
     }
 
 }
