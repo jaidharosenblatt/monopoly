@@ -20,7 +20,7 @@ public class GameTypePicker extends VBox {
   private List<String> displayTypes = new ArrayList<>();
   private SplashScreen splashScreen;
 
-  public GameTypePicker(SplashScreen splashScreen) {
+  protected GameTypePicker(SplashScreen splashScreen) {
     this.splashScreen = splashScreen;
     setAlignment(Pos.CENTER);
     createGameTypes();

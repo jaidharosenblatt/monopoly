@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -13,12 +14,14 @@ public class NumberPlayersDropdown extends VBox {
 
   private final static String PLAYERS_TEXT = " players";
   private SplashScreen splashScreen;
-  private Map<String, Integer> choices;
+  private Map<String, Integer> choices = new HashMap<>();
   private ComboBox<String> dropdown = new ComboBox<>();
 
-  public NumberPlayersDropdown(int defaultNumPlayers, int maxPlayers, SplashScreen splashScreen) {
+  protected NumberPlayersDropdown(int defaultNumPlayers, int maxPlayers, SplashScreen splashScreen) {
+
     this.splashScreen = splashScreen;
-    choices = new HashMap<>();
+    setAlignment(Pos.CENTER);
+
     List<String> choicesDisplay = new ArrayList<>();
 
     for (int i = 1; i <= maxPlayers; i++) {

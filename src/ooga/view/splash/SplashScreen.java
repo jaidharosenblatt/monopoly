@@ -1,5 +1,7 @@
 package ooga.view.splash;
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -12,7 +14,8 @@ public class SplashScreen {
   private Stage stage;
   private View view;
   private VBox vBox = new VBox();
-  private int numPlayers = DEFAULT_NUMBER_OF_PLAYERS;
+  private Map<String, String> playerInfo = new HashMap<>();
+
   private static final int DEFAULT_NUMBER_OF_PLAYERS = 4;
   private static final int MAX_NUMBER_OF_PLAYERS = 6;
   private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
@@ -43,8 +46,17 @@ public class SplashScreen {
   }
 
   protected void setNumPlayers(int numPlayers) {
-    this.numPlayers = numPlayers;
-    System.out.println(numPlayers);
+    createPlayersBox(numPlayers);
+  }
+
+  protected void createPlayersBox(int numPlayers){
+    VBox players = new VBox();
+    for (int i = 0; i<= numPlayers; i++){
+      PlayerSetter player = new PlayerSetter("Player" + i);
+      players.getChildren().add(player);
+      playerInfo.put(player.getName(),player.getColor());
+    }
+    vBox.getChildren().add(players);
   }
 
 }
