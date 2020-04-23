@@ -1,7 +1,9 @@
 package ooga.view.splash;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,15 +14,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.stream.XMLStreamException;
 import ooga.Main;
-import ooga.view.View;
 
 public class SplashScreen {
 
   private Stage stage;
   private VBox root = new VBox();
-  private VBox players = new VBox();
-
-  private Map<String, String> playerInfo = new HashMap<>();
+  private VBox playersBox = new VBox();
+  private List<PlayerSetter> playersList = new ArrayList<>();
 
   private Main controller;
   private static final int DEFAULT_NUMBER_OF_PLAYERS = 4;
@@ -49,7 +49,7 @@ public class SplashScreen {
         MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this);
 
     GameTypePicker picker = new GameTypePicker("Board type", this);
-    root.getChildren().addAll(title, dropdown, players, picker);
+    root.getChildren().addAll(title, dropdown, playersBox, picker);
 
     Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
     scene.getStylesheets().add(RESOURCES_DEFAULT_CSS);
@@ -60,12 +60,20 @@ public class SplashScreen {
 
   protected void submit(String boardPath) {
     try {
-      controller.startGame(playerInfo,boardPath);
+      controller.startGame(getPlayerInfo(), boardPath);
     } catch (FileNotFoundException e) {
       System.out.println("no file");
     } catch (XMLStreamException e) {
       System.out.println("no XML");
     }
+  }
+
+  private Map<String, String> getPlayerInfo() {
+    Map<String, String> playerInfo = new HashMap<>();
+    for (PlayerSetter player : playersList) {
+      playerInfo.put(player.getName(), player.getColor());
+    }
+    return playerInfo;
   }
 
   protected void closeStage() {
@@ -77,11 +85,11 @@ public class SplashScreen {
   }
 
   protected void createPlayersBox(int numPlayers) {
-    players.getChildren().clear();
+    playersBox.getChildren().clear();
     for (int i = 1; i <= numPlayers; i++) {
       PlayerSetter player = new PlayerSetter("Player Color", "Name", "Player " + i);
-      players.getChildren().add(player);
-      playerInfo.put(player.getName(), player.getColor());
+      playersBox.getChildren().add(player);
+      playersList.add(player);
     }
   }
 

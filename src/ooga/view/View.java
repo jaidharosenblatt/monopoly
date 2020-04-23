@@ -30,12 +30,10 @@ public class View extends BorderPane implements FrontEndExternal {
   private LoadGame controller;
   private static final double SCENE_WIDTH = 900;
   private static final double SCENE_HEIGHT = 735;
-  private List<PlayerInfo> players;
   private PlayerInfo currentPlayer;
   private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<PlayerInfo> players, List<Tile> tiles) {
-    this.players = players;
     this.controller = controller;
 
     getStylesheets().add(RESOURCES_DEFAULT_CSS);
