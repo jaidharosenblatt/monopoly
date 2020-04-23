@@ -12,6 +12,9 @@ public class SplashScreen {
   private Stage stage;
   private View view;
   private VBox vBox = new VBox();
+  private int numPlayers = DEFAULT_NUMBER_OF_PLAYERS;
+  private static final int DEFAULT_NUMBER_OF_PLAYERS = 4;
+  private static final int MAX_NUMBER_OF_PLAYERS = 6;
   private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
 
   public SplashScreen(double width, double height, View view) {
@@ -21,6 +24,8 @@ public class SplashScreen {
 
     vBox.setAlignment(Pos.CENTER);
     vBox.setId("decision-display");
+    vBox.getChildren()
+        .add(new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this));
     vBox.getChildren().add(new GameTypePicker(this));
 
     Scene scene = new Scene(vBox, width, height);
@@ -35,6 +40,11 @@ public class SplashScreen {
 
   protected void closeStage() {
     stage.close();
+  }
+
+  protected void setNumPlayers(int numPlayers) {
+    this.numPlayers = numPlayers;
+    System.out.println(numPlayers);
   }
 
 }

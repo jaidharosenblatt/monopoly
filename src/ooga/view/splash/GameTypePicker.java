@@ -10,8 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import ooga.view.View;
 
 public class GameTypePicker extends VBox {
 
