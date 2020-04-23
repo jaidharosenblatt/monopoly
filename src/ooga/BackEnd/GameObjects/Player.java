@@ -1,7 +1,7 @@
 package ooga.BackEnd.GameObjects;
 
 import javafx.scene.paint.Paint;
-import ooga.BackEnd.GameLogic.Decision;
+import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;

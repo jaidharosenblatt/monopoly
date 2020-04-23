@@ -1,4 +1,4 @@
-package ooga.BackEnd.GameLogic;
+package ooga.BackEnd.GameLogic.Decisions;
 
 public class StringDecision implements ooga.api.objects.StringDecision {
   private String prompt;

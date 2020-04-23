@@ -7,7 +7,11 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.RailRoad;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
+import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Utility;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.objects.PlayerInfo;
 
@@ -105,13 +109,33 @@ public class Board extends BorderPane {
 
   }
 
+//  private TileView getPropertyFromTile(Tile t) {
+//    if (t instanceof Property) {
+//      Property p = (Property) t;
+//      return p.convertView();
+//    } else {
+//      return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
+//          TILE_HEIGHT);
+//    }
+//  }
+
   private TileView getPropertyFromTile(Tile t) {
-    if (t instanceof Property) {
+    if (t instanceof Street) {
       Property p = (Property) t;
       return p.convertView();
-    } else {
+    }
+    else {
+      if (t instanceof Utility) {
+        return new UtilityTileView(((Utility) t).getTitle(), ((Utility) t).getCost(), ((Utility) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+      }
+      if (t instanceof RailRoad) {
+        return new UtilityTileView(((RailRoad) t).getTitle(), ((RailRoad) t).getCost(), ((RailRoad) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+      }
+      if (t instanceof Event) {
+        return new UtilityTileView(((Event) t).getBName(), 30, ((Event) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+      }
       return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
-          TILE_HEIGHT);
+              TILE_HEIGHT);
     }
   }
 

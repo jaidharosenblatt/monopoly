@@ -3,7 +3,7 @@ package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 import java.util.List;
 
 import javafx.scene.paint.Color;
-import ooga.BackEnd.GameLogic.Decision;
+import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.view.board.PropertyView;
@@ -48,6 +48,8 @@ public abstract class Property extends Tile {
     }
 
     public abstract int getRent();
+
+    public abstract void bankrupt();
 
     public void setTitle(String title) {this.title_deed = title;}
 

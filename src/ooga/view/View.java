@@ -9,18 +9,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.LoadGame;
+import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.FrontEndExternal;
 import ooga.api.objects.Decision;
-import ooga.api.objects.MultiDecision;
+import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
-import ooga.view.gamedisplay.DecisionView;
-import ooga.view.gamedisplay.MultiDecisionView;
-import ooga.view.gamedisplay.StringDecisionView;
-import ooga.view.gamedisplay.TurnActionButtons;
+import ooga.view.gamedisplay.*;
 import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {
@@ -30,7 +28,7 @@ public class View extends BorderPane implements FrontEndExternal {
   private TurnActionButtons gameDisplay;
   private LoadGame controller;
   private static final double SCENE_WIDTH = 900;
-  private static final double SCENE_HEIGHT = 700;
+  private static final double SCENE_HEIGHT = 735;
   private List<PlayerInfo> players;
   private PlayerInfo currentPlayer;
   private TabView tabView;
@@ -49,7 +47,7 @@ public class View extends BorderPane implements FrontEndExternal {
     Group boardGroup = new Group(board);
     gameDisplay = new TurnActionButtons(this);
     Group tabGroup = new Group();
-    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT);
+    tabView = new TabView(SCENE_WIDTH / 3, SCENE_HEIGHT - 15);
     tabView.addTabPaneToGroup(tabGroup);
 
     setLeft(boardGroup);
@@ -72,9 +70,7 @@ public class View extends BorderPane implements FrontEndExternal {
 
   public void handleUnmortgage() {controller.unmortgage();}
 
-  public void handleTrade() {
-    System.out.println("Trade");
-  }
+  public void handleTrade() {controller.trade();}
 
   public void makeStringDecision(StringDecision decision){
     new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
@@ -86,8 +82,13 @@ public class View extends BorderPane implements FrontEndExternal {
   }
 
   @Override
-  public void makeMultiDecision(MultiDecision decision) {
-    new MultiDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+  public void makeMultiDecision(MultiPropDecision decision) {
+    new MultiPropDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+  }
+
+  @Override
+  public void makeMultiPlayerDecision(MultiPlayerDecision decision) {
+    new MultiPlayerDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
   }
 
   @Override

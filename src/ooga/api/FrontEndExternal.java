@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
+import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.Decision;
-import ooga.api.objects.MultiDecision;
+import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 
@@ -27,7 +28,15 @@ public interface FrontEndExternal {
    *
    * @param decision the decision to present to the user
    */
-  void makeMultiDecision(MultiDecision decision);
+  void makeMultiDecision(MultiPropDecision decision);
+
+  /**
+   * This method is used by the back end to prompt the player for an input to a set of responses. An
+   * example of this is "Which Player?" ,{"Player 1","Player 2", "Player 3"}
+   *
+   * @param decision the decision to present to the user
+   */
+  void makeMultiPlayerDecision(MultiPlayerDecision decision);
 
 
   /**

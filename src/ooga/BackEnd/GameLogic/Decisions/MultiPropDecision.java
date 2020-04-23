@@ -1,17 +1,17 @@
-package ooga.BackEnd.GameLogic;
+package ooga.BackEnd.GameLogic.Decisions;
 
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiDecision implements ooga.api.objects.MultiDecision {
+public class MultiPropDecision implements ooga.api.objects.MultiPropDecision {
 
     private String prompt;
     private List<Property> options;
     private ArrayList<Property> choices;
 
-    public MultiDecision(String prompt, List<Property> options) {
+    public MultiPropDecision(String prompt, List<Property> options) {
         this.prompt = prompt;
         this.options = options;
         this.choices = new ArrayList<>();

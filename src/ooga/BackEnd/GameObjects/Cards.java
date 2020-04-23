@@ -1,13 +1,11 @@
 package ooga.BackEnd.GameObjects;
 
-import ooga.BackEnd.GameLogic.Decision;
+import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Cards {
 

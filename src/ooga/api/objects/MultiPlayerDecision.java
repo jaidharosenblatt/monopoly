@@ -1,10 +1,10 @@
 package ooga.api.objects;
 
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.BackEnd.GameObjects.Player;
 
 import java.util.List;
 
-public interface MultiDecision {
+public interface MultiPlayerDecision {
 
 
     /**
@@ -19,15 +19,15 @@ public interface MultiDecision {
      *
      * @return a list of possible choices as Properties
      */
-    List<Property> getOptions();
+    List<Player> getOptions();
 
     /**
      * Set the choice that the player picked in the gui
      *
      */
-    void setChoice(Property p);
+    void setChoice(Player p);
 
-    void remChoice(Property p);
+    void remChoice(Player p);
 
-    List<Property> getChoice();
+    List<Player> getChoice();
 }

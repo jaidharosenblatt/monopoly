@@ -21,25 +21,21 @@ public class RulesTab extends DisplayTab {
     super.addTitle(TITLE);
   }
 
+
+
   @Override
   void updateTab(List<Object> info) {
-
+    myPane.getChildren().clear();
+    addTitle(TITLE);
+    for (Object rule: info){
+      try{
+        addText((String) rule);
+      }
+      catch (Exception exception){
+        System.out.println("Rules tab only accepts Strings");
+      }
+    }
   }
-
-//  @Override
-//  void updateTab(List<Object> info) {
-//    myPane.getChildren().clear();
-//    addTitle(TITLE);
-//    for (Object rule: info){
-//      try{
-//        addText((String) rule);
-//      }
-//      catch (Exception exception){
-//        System.out.println("Rules tab only accepts Strings");
-//      }
-//
-//    }
-//  }
 
 
 
@@ -49,7 +45,7 @@ public class RulesTab extends DisplayTab {
     HBox hbox = new HBox();
     Text text = new Text(rule);
     text.setFont(new Font(FONT_SIZE));
-    text.maxWidth(Integer.MAX_VALUE);
+    text.setWrappingWidth(250); //TODO:make this not hard-coded
     text.setTextAlignment(TextAlignment.LEFT);
     hbox.getChildren().add(text);
     HBox.setMargin(text, new Insets(0 , 0, 0, 10));

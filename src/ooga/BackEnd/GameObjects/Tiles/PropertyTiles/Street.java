@@ -101,6 +101,12 @@ public class Street extends Property {
     }
 
     @Override
+    public void bankrupt() {
+        this.mortgaged = false;
+        this.houses = 0;
+    }
+
+    @Override
     public void setMortgaged() {
         this.mortgaged = true;
         int sellHouses = 0;
