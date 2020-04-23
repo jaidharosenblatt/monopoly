@@ -20,7 +20,6 @@ public abstract class Decisions {
     stage.initModality(Modality.APPLICATION_MODAL);
 
 
-    vBox.setAlignment(Pos.CENTER);
     vBox.setId("decision-display");
 
     Text playerText = new Text(playerName);

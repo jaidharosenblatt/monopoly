@@ -22,8 +22,7 @@ public class MultiPropDecisionView extends Decisions {
 
   private void addButtons(MultiPropDecision decision) {
     VBox buttons = new VBox();
-    buttons.setAlignment(Pos.CENTER);
-    buttons.setSpacing(5);
+    buttons.setId("padded-box");
     for (Property choice : decision.getOptions()) {
       RadioButton button = new RadioButton(choice.getTitle());
       button.setOnAction(e -> handleClick(button, choice));

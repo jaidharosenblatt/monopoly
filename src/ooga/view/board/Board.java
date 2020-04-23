@@ -41,7 +41,6 @@ public class Board extends BorderPane {
 
   public void displayRoll(List<Integer> rolls) {
     HBox hBox = new HBox();
-    hBox.setAlignment(Pos.CENTER);
     for (int die : rolls) {
       hBox.getChildren().add(new Die(die));
     }

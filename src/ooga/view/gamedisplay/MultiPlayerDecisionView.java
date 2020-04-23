@@ -24,8 +24,7 @@ public class MultiPlayerDecisionView extends Decisions {
 
   private void addButtons(MultiPlayerDecision decision) {
     VBox buttons = new VBox();
-    buttons.setAlignment(Pos.CENTER);
-    buttons.setSpacing(PADDING);
+    buttons.setId("padded-box");
     for (Player choice : decision.getOptions()) {
       RadioButton button = new RadioButton(choice.getName());
       button.setOnAction(e -> handleClick(button, choice));

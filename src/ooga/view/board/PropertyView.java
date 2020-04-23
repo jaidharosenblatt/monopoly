@@ -16,7 +16,6 @@ public class PropertyView extends TileView {
     setPrefSize(width, height);
 
     VBox box = new VBox();
-    box.setAlignment(Pos.CENTER);
 
     Text nameText = new Text(name);
     nameText.setWrappingWidth(getPrefWidth());

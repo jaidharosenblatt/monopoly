@@ -27,8 +27,7 @@ public class StringDecisionView extends Decisions {
 
   private void addInput() {
     VBox buttons = new VBox();
-    buttons.setAlignment(Pos.CENTER);
-    buttons.setSpacing(PADDING);
+    buttons.setId("padded-Box");
     input = new TextArea();
     input.setPrefSize(INPUT_WIDTH,INPUT_HEIGHT);
 

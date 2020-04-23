@@ -22,7 +22,6 @@ public abstract class TileView extends BorderPane {
 
   public TileView() {
     this.setId("tile");
-    playersPane.setAlignment(Pos.CENTER);
     centerTile.getChildren().add(playersPane);
     setCenter(centerTile);
   }

@@ -21,8 +21,7 @@ public class DecisionView extends Decisions{
 
   private void addButtons(Decision decision) {
     HBox buttons = new HBox();
-    buttons.setAlignment(Pos.CENTER);
-    buttons.setSpacing(PADDING);
+    buttons.setId("padded-box");
     for (String choice : decision.getOptions()) {
       Button button = new Button(choice);
       button.setOnAction(e -> handleClick(choice));

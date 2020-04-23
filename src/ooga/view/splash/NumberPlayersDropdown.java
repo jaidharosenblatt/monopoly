@@ -22,7 +22,7 @@ public class NumberPlayersDropdown extends HBox {
   protected NumberPlayersDropdown(int defaultNumPlayers, int minPlayers, int maxPlayers,
       SplashScreen splashScreen) {
     this.splashScreen = splashScreen;
-    setId("splash-box");
+    setId("padded-box");
     List<String> choicesDisplay = new ArrayList<>();
 
     for (int i = minPlayers; i <= maxPlayers; i++) {

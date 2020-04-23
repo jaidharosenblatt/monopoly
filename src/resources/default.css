@@ -29,6 +29,7 @@
 
 #tile {
   -fx-background-color: -fx-board;
+  -fx-alignment: Center;
   -fx-font-size: 10;
 }
 
@@ -40,6 +41,8 @@
 #decision-display {
   -fx-background-color: -fx-primary;
   -fx-padding: 5;
+  -fx-alignment: Center;
+
 }
 
 #decision-display #name {
@@ -51,20 +54,30 @@
   -fx-background-color: -fx-board;
   -fx-padding: 5;
   -fx-spacing: 10;
-}
-
-#splash-box {
-  -fx-spacing: 10;
   -fx-alignment: Center;
-  -fx-padding: 5;
+
 }
 
-#splash-input{
+#padded-box {
+  -fx-spacing: 10;
+  -fx-padding: 5;
+  -fx-alignment: Center;
+
+}
+
+#splash-input {
   -fx-background-color: -fx-tertiary;
   -fx-control-inner-background: -fx-tertiary;
   -fx-prompt-text-fill: -fx-secondary;
   -fx-background-radius: 5;
   -fx-pref-height: 10;
   -fx-pref-width: 200;
+}
 
+HBox {
+  -fx-alignment: Center;
+}
+
+VBox {
+  -fx-alignment: Center;
 }

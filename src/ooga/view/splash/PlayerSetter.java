@@ -13,7 +13,7 @@ public class PlayerSetter extends HBox {
   private TextArea input;
 
   protected PlayerSetter(String colorPrompt, String namePrompt, String defaultName) {
-    setId("splash-box");
+    setId("padded-box");
     Label colorLabel = new Label(colorPrompt);
     Label nameLabel = new Label(namePrompt);
 
