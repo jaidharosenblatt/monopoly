@@ -37,7 +37,7 @@ public class Player implements PlayerInfo {
     private int getOutCards;
 
     private View view;
-    private Color color;
+    private String color;
 
     public int dice1;
     public int dice2;
@@ -61,7 +61,7 @@ public class Player implements PlayerInfo {
 
     public int getBalance() {return this.currentBalance;}
 
-    public void setColor(Color c) {this.color = c;}
+    public void setColor(String color) {this.color = color;}
 
     public int getTile() {return this.currentTile;}
 
@@ -271,14 +271,7 @@ public class Player implements PlayerInfo {
     }
 
     @Override
-    public Paint getPlayerColor() {
-        java.awt.Color awtColor = color;
-        int r = awtColor.getRed();
-        int g = awtColor.getGreen();
-        int b = awtColor.getBlue();
-        int a = awtColor.getAlpha();
-        double opacity = a / 255.0 ;
-        javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(r, g, b, opacity);
-        return fxColor;
+    public String getPlayerColor() {
+        return color;
     }
 }

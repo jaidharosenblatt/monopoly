@@ -26,6 +26,6 @@ public class Main extends Application {
 
   public void startGame(Map<String, String> playerInfo, String boardType)
       throws FileNotFoundException, XMLStreamException {
-    new LoadGame(boardType, 3, primaryStage);
+    new LoadGame(boardType, playerInfo, primaryStage);
   }
 }

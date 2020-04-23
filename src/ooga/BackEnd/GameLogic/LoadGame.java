@@ -44,7 +44,7 @@ public class LoadGame {
     private Map<Integer, Player> map;
     private boolean stopTurn;
 
-    public LoadGame(String game_pathname, int player_number, Stage stage) throws FileNotFoundException, XMLStreamException {
+    public LoadGame(String game_pathname, Map<String, String> playerInfo, Stage stage) throws FileNotFoundException, XMLStreamException {
 
         XMLParser parse = new XMLParser(game_pathname);
         this.stopTurn = false;
@@ -53,7 +53,7 @@ public class LoadGame {
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
         this.doubleTurns = 0;
 
-        createPlayers(player_number);
+        createPlayers(playerInfo);
         currentPlayer = activePlayers.get(0);
         currentIndex = 0;
 
@@ -85,19 +85,22 @@ public class LoadGame {
         }
     }
 
-    private void createPlayers(int player_number) {
+    private void createPlayers(Map<String, String> playerInfo) {
         this.activePlayers = new ArrayList<>();
-        this.map = new HashMap<>();
-        List<Color> colors = List.of(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW);
-        Player[] temp = new Player[player_number];
-        for (int i = 0; i < player_number; i++) {
-            //----------------------------------------------
-            //INPUT FRONT-END TEXT-FIELD USER-INTERFACE HERE
-            //----------------------------------------------
-            temp[i] = new Player("Player " + (i + 1), this.allTiles);
-            temp[i].setColor(colors.get(i));
+
+        Player[] players = new Player[playerInfo.size()];
+        int i =0;
+        for (String playerName : playerInfo.keySet()){
+          Player player = new Player(playerName, allTiles);
+          String color = playerInfo.get(playerName);
+          player.setColor(color);
+          players[i] = player;
+          i++;
         }
-        temp = rollForOrder(temp);
+
+        this.map = new HashMap<>();
+
+        Player[] temp = rollForOrder(players);
         for (Player p : temp) {
             this.activePlayers.add(p);
             this.map.put(activePlayers.indexOf(p), p);

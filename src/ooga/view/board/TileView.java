@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import ooga.api.objects.PlayerInfo;
@@ -44,7 +45,7 @@ public abstract class TileView extends BorderPane {
   }
 
   public void addPlayer(PlayerInfo player) {
-    Shape piece = new Circle(PLAYER_SIZE, player.getPlayerColor());
+    Shape piece = new Circle(PLAYER_SIZE, Color.web(player.getPlayerColor()));
 
     players.put(player, piece);
     playersPane.getChildren().clear();

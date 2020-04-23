@@ -72,22 +72,22 @@ public class View extends BorderPane implements FrontEndExternal {
   public void handleTrade() {controller.trade();}
 
   public void makeStringDecision(StringDecision decision){
-    new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new StringDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeUserDecision(Decision decision) {
-    new DecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeMultiDecision(MultiPropDecision decision) {
-    new MultiPropDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new MultiPropDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeMultiPlayerDecision(MultiPlayerDecision decision) {
-    new MultiPlayerDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new MultiPlayerDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
