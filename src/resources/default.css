@@ -64,6 +64,7 @@
   -fx-control-inner-background: -fx-tertiary;
   -fx-prompt-text-fill: -fx-secondary;
   -fx-background-radius: 5;
+  -fx-pref-height: 10;
   -fx-pref-width: 200;
 
 }
