@@ -1,7 +1,9 @@
 package ooga.view.tabs;
 
+import java.util.Collection;
 import java.util.List;
 import javafx.geometry.Insets;
+import javafx.print.Collation;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -24,7 +26,7 @@ public class RulesTab extends DisplayTab {
 
 
   @Override
-  void updateTab(List<Object> info) {
+  void updateTab(Collection<Object> info) {
     myPane.getChildren().clear();
     addTitle(TITLE);
     for (Object rule: info){
