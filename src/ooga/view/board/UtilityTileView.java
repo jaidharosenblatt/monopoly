@@ -9,13 +9,14 @@ import javafx.scene.text.Text;
 public class UtilityTileView extends TileView {
 
   ImageView image;
+  private final double IMAGE_SIZE = 22;
 
-  public UtilityTileView(String name, double price, String filename, double width, double height) {
+  public UtilityTileView(String name, String price, String filename, double width, double height) {
     setPrefSize(width, height);
 
     image = new ImageView(getImageByName(filename));
-    image.setFitHeight(30);
-    image.setFitWidth(30);
+    image.setFitHeight(IMAGE_SIZE);
+    image.setFitWidth(IMAGE_SIZE);
 
     Text nameText = new Text(name);
     setTop(nameText);
@@ -24,7 +25,7 @@ public class UtilityTileView extends TileView {
 
     setToCenter(image);
 
-    Text priceText = new Text("M" + price);
+    Text priceText = new Text(price);
     setBottom(priceText);
     setAlignment(priceText, Pos.CENTER);
   }
