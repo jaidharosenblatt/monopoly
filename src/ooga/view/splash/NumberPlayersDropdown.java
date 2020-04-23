@@ -8,23 +8,24 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class NumberPlayersDropdown extends VBox {
+public class NumberPlayersDropdown extends HBox {
 
   private final static String PLAYERS_TEXT = " players";
   private SplashScreen splashScreen;
   private Map<String, Integer> choices = new HashMap<>();
   private ComboBox<String> dropdown = new ComboBox<>();
 
-  protected NumberPlayersDropdown(int defaultNumPlayers, int maxPlayers, SplashScreen splashScreen) {
+  protected NumberPlayersDropdown(int defaultNumPlayers, int minPlayers, int maxPlayers, SplashScreen splashScreen) {
 
     this.splashScreen = splashScreen;
     setAlignment(Pos.CENTER);
 
     List<String> choicesDisplay = new ArrayList<>();
 
-    for (int i = 1; i <= maxPlayers; i++) {
+    for (int i = minPlayers; i <= maxPlayers; i++) {
       String display = i + PLAYERS_TEXT;
       choices.put(display, i);
       choicesDisplay.add(display);
@@ -33,7 +34,7 @@ public class NumberPlayersDropdown extends VBox {
     dropdown.setItems(FXCollections.observableList(choicesDisplay));
     dropdown.setValue(defaultNumPlayers + PLAYERS_TEXT);
 
-    Button submit = new Button("Submit");
+    Button submit = new Button("Set");
     submit.setOnAction(event -> handleSubmit());
 
     getChildren().addAll(dropdown, submit);

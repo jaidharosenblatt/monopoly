@@ -9,9 +9,11 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class GameTypePicker extends VBox {
+public class GameTypePicker extends HBox {
 
   private static final String DATA_PATH = "data";
   private static final String FILE_TO_HIDE = "FOLDER_PURPOSE.md";
@@ -20,10 +22,12 @@ public class GameTypePicker extends VBox {
   private List<String> displayTypes = new ArrayList<>();
   private SplashScreen splashScreen;
 
-  protected GameTypePicker(SplashScreen splashScreen) {
+  protected GameTypePicker(String labelPrompt, SplashScreen splashScreen) {
     this.splashScreen = splashScreen;
     setAlignment(Pos.CENTER);
     createGameTypes();
+
+    Label label = new Label(labelPrompt);
 
     dropdown = new ComboBox<>();
     dropdown.setItems(FXCollections.observableList(displayTypes));
@@ -32,7 +36,7 @@ public class GameTypePicker extends VBox {
     Button submit = new Button("Submit");
     submit.setOnAction(event -> handleSubmit());
 
-    getChildren().addAll(dropdown, submit);
+    getChildren().addAll(label, dropdown, submit);
   }
 
 
@@ -40,7 +44,9 @@ public class GameTypePicker extends VBox {
     File[] f = new File(DATA_PATH).listFiles();
     for (File file : f) {
       if (file.isFile() && !file.getName().equals(FILE_TO_HIDE)) {
-        String display = file.getName().split("\\.")[0];
+        String boardType = file.getName().split("board")[1];
+        String display = boardType.split("\\.")[0];
+
         String path = file.getPath();
         gameTypes.put(display, path);
         displayTypes.add(display);

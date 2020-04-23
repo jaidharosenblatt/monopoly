@@ -13,10 +13,13 @@ public class SplashScreen {
 
   private Stage stage;
   private View view;
-  private VBox vBox = new VBox();
+  private VBox root = new VBox();
+  private VBox players = new VBox();
+
   private Map<String, String> playerInfo = new HashMap<>();
 
   private static final int DEFAULT_NUMBER_OF_PLAYERS = 4;
+  private static final int MIN_NUMBER_OF_PLAYERS = 2;
   private static final int MAX_NUMBER_OF_PLAYERS = 6;
   private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
 
@@ -25,13 +28,15 @@ public class SplashScreen {
     stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
 
-    vBox.setAlignment(Pos.CENTER);
-    vBox.setId("decision-display");
-    vBox.getChildren()
-        .add(new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this));
-    vBox.getChildren().add(new GameTypePicker(this));
+    root.setAlignment(Pos.CENTER);
+    root.setId("decision-display");
+    NumberPlayersDropdown dropdown = new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS,
+        MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this);
 
-    Scene scene = new Scene(vBox, width, height);
+    GameTypePicker picker = new GameTypePicker("Board type", this);
+    root.getChildren().addAll(dropdown, players, picker);
+
+    Scene scene = new Scene(root, width, height);
     scene.getStylesheets().add(RESOURCES_DEFAULT_CSS);
     stage.setScene(scene);
     stage.showAndWait();
@@ -49,14 +54,13 @@ public class SplashScreen {
     createPlayersBox(numPlayers);
   }
 
-  protected void createPlayersBox(int numPlayers){
-    VBox players = new VBox();
-    for (int i = 0; i<= numPlayers; i++){
-      PlayerSetter player = new PlayerSetter("Player" + i);
+  protected void createPlayersBox(int numPlayers) {
+    players.getChildren().clear();
+    for (int i = 1; i <= numPlayers; i++) {
+      PlayerSetter player = new PlayerSetter("Player Color", "Name", "Player " + i);
       players.getChildren().add(player);
-      playerInfo.put(player.getName(),player.getColor());
+      playerInfo.put(player.getName(), player.getColor());
     }
-    vBox.getChildren().add(players);
   }
 
 }
