@@ -36,6 +36,8 @@ public class View extends BorderPane implements FrontEndExternal {
   private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<PlayerInfo> players, List<Tile> tiles) {
+    new SplashScreen(SCENE_WIDTH,SCENE_HEIGHT);
+
     this.players = players;
     this.controller = controller;
 
