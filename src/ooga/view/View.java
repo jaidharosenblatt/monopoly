@@ -19,6 +19,7 @@ import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
 import ooga.view.board.Board;
 import ooga.view.gamedisplay.*;
+import ooga.view.splash.SplashScreen;
 import ooga.view.tabs.TabView;
 
 public class View extends BorderPane implements FrontEndExternal {

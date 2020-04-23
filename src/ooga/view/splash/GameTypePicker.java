@@ -1,4 +1,4 @@
-package ooga.view.gamedisplay;
+package ooga.view.splash;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,18 +20,16 @@ public class GameTypePicker extends VBox {
   private Map<String, String> gameTypes = new HashMap<>();
   private ComboBox<String> dropdown;
   private List<String> displayTypes = new ArrayList<>();
-  private Stage stage;
-  private View view;
+  private SplashScreen splashScreen;
 
-  public GameTypePicker(Stage stage, View view) {
-    this.view = view;
-    this.stage = stage;
-
+  public GameTypePicker(SplashScreen splashScreen) {
+    this.splashScreen = splashScreen;
     setAlignment(Pos.CENTER);
     createGameTypes();
 
     dropdown = new ComboBox<>();
     dropdown.setItems(FXCollections.observableList(displayTypes));
+    dropdown.setValue(displayTypes.get(0));
 
     Button submit = new Button("Submit");
     submit.setOnAction(event -> handleSubmit());
@@ -57,8 +55,8 @@ public class GameTypePicker extends VBox {
   }
 
   private void handleSubmit() {
-    view.setGameType(getPathFromDropdown());
-    stage.close();
+    splashScreen.setGameType(getPathFromDropdown());
+    splashScreen.closeStage();
   }
 
 }
