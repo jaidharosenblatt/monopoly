@@ -1,19 +1,28 @@
 package ooga.view.gamedisplay;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
+import ooga.api.objects.MultiPlayerDecision;
 import ooga.util.PropertiesGetter;
 
+/**
+ * @author jaidharosenblatt create a multiple choice decision to display to the user. Takes in a
+ * decision object to get the prompt and options and sets the choice of that user
+ */
 public class MultiPlayerDecisionView extends Decisions {
 
   private MultiPlayerDecision decision;
-  private static final int PADDING = 5;
 
+  /**
+   * Constructs a multiple decision view
+   *
+   * @param decision    the multiple player choice decision to be made
+   * @param playerName  the name to display for whose decision it is
+   * @param playerColor the color of that player
+   */
   public MultiPlayerDecisionView(MultiPlayerDecision decision, String playerName,
       Color playerColor) {
     super(decision.getPrompt(), playerName, playerColor);

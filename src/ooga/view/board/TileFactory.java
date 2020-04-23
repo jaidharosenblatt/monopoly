@@ -9,6 +9,10 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.util.PropertiesGetter;
 import ooga.util.ViewException;
 
+/**
+ * @author jaidharosenblatt uses factory pattern to map backend tile objects to frontend tile view
+ * objects. Depedent on TileView and related classes as well as backend Tile classes.
+ */
 public class TileFactory {
 
   private double tileWidth;
@@ -22,7 +26,7 @@ public class TileFactory {
   }
 
   protected TileView getPropertyFromTile(Tile tile, int index) {
-    TileView t = getTileType(tile,index);
+    TileView t = getTileType(tile, index);
     t.setRotate(getRotation(index));
     return t;
   }

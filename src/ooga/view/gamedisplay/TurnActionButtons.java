@@ -5,10 +5,19 @@ import javafx.scene.layout.HBox;
 import ooga.util.PropertiesGetter;
 import ooga.view.View;
 
+/**
+ * @author jaidharosenblatt, @rodrigo.araujo controls player actions and calls view methods in
+ * backend. Could use reflection to improve.
+ */
 public class TurnActionButtons extends HBox {
 
   private static final double PADDING = 5;
 
+  /**
+   * Creates a button pane
+   *
+   * @param view instance of the view in order to control backend
+   */
   public TurnActionButtons(View view) {
     setId("turn-buttons");
     setSpacing(PADDING);

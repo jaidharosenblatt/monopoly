@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import ooga.util.PropertiesGetter;
 
+/**
+ * @author jaidharosenblatt Combination of a labeled dropdown and submit button. Displays a list of
+ * possible number of players
+ */
 public class NumberPlayersDropdown extends HBox {
 
   private final static String PLAYERS_TEXT = " " + PropertiesGetter.getPromptFromKey("Players");

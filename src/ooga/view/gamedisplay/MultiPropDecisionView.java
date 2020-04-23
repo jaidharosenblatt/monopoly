@@ -1,6 +1,5 @@
 package ooga.view.gamedisplay;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.VBox;
@@ -9,12 +8,23 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.api.objects.MultiPropDecision;
 import ooga.util.PropertiesGetter;
 
+/**
+ * @author rodrigo.araujo made exact duplication of MultiPlayerDecision (for some reason necessary for
+ * backend)
+ */
 public class MultiPropDecisionView extends Decisions {
 
   private MultiPropDecision decision;
 
+  /**
+   * Constructs a single decision view
+   *
+   * @param decision    the multiple property choice decision to be made
+   * @param playerName  the name to display for whose decision it is
+   * @param playerColor the color of that player
+   */
   public MultiPropDecisionView(MultiPropDecision decision, String playerName, Color playerColor) {
-    super(decision.getPrompt(),playerName,playerColor);
+    super(decision.getPrompt(), playerName, playerColor);
     this.decision = decision;
     addButtons(decision);
     createStage();

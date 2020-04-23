@@ -1,12 +1,11 @@
 package ooga.api;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
-import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.api.objects.Decision;
+import ooga.api.objects.MultiPlayerDecision;
 import ooga.api.objects.MultiPropDecision;
 import ooga.api.objects.PlayerInfo;
 import ooga.api.objects.StringDecision;
@@ -46,13 +45,6 @@ public interface FrontEndExternal {
   void makeStringDecision(StringDecision decision);
 
   /**
-   * Display text to alert player
-   *
-   * @param text to display
-   */
-  void displayText(String text);
-
-  /**
    * Use this method to refresh the players display after a turn has been completed. Specifically it
    * will update the assets of the players.
    *
@@ -76,11 +68,9 @@ public interface FrontEndExternal {
   void displayRoll(List<Integer> rolls);
 
   /**
-   * Use this method to change the theme of the board and the UI
-   *
-   * @param pathToThemePropertyFile the new Theme to change to
+   * Update the current player in the frontend
+   * @param p the player whose turn it is
    */
-  void changeTheme(String pathToThemePropertyFile) throws FileNotFoundException;
-
+  void setCurrentPlayer(Player p);
 
 }

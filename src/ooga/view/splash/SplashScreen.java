@@ -1,22 +1,24 @@
 package ooga.view.splash;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.xml.stream.XMLStreamException;
 import ooga.Main;
 import ooga.util.PropertiesGetter;
 import ooga.view.error.ErrorView;
 
+/**
+ * @author jaidharosenblatt Screen to begin the game and prompt user to give players details and
+ * game type Controls and is depedent on dropdowns for game type, selecting number of players, and
+ * player info
+ */
 public class SplashScreen {
 
   private Stage stage;
@@ -37,6 +39,12 @@ public class SplashScreen {
   private static final double IMAGE_HEIGHT = 100;
 
 
+  /**
+   * Constructor
+   *
+   * @param main instance of main class in order to call the creation of the backend/frontend with
+   *             settings from this class
+   */
   public SplashScreen(Main main) {
     this.controller = main;
     stage = new Stage();

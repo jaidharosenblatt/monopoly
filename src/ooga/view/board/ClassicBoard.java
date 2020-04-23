@@ -3,15 +3,21 @@ package ooga.view.board;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.api.objects.Board;
 import ooga.api.objects.PlayerInfo;
 
-
-public class Board extends BorderPane {
+/**
+ * @author jaidharosenblatt controller class for board and related classes. Uses two Hboxes to
+ * represent top and bottom board, two VBoxes to represent sides. This creates complications for
+ * accessing specific tiles but was the only way to get the board to be adjustable. The board is
+ * basically static aside from reading in a layout and moving players. Also displays rolls using
+ * dice images. Is depdent on all classes in board package.
+ */
+public class ClassicBoard extends BorderPane implements Board {
 
   private final static int NUMBER_OF_TILES = 40;
   private final static int ROW_LENGTH = NUMBER_OF_TILES / 4;
@@ -24,7 +30,14 @@ public class Board extends BorderPane {
   private HBox bottom = new HBox();
   private VBox left = new VBox();
 
-  public Board(List<PlayerInfo> players, List<Tile> tiles) {
+  /**
+   * Creates a board that can be added to a stage. This also sets each player position to the first
+   * tile.
+   *
+   * @param players in the game
+   * @param tiles   tiles to read in
+   */
+  public ClassicBoard(List<PlayerInfo> players, List<Tile> tiles) {
 
     for (PlayerInfo p : players) {
       playerPositions.put(p, 0);
@@ -39,6 +52,12 @@ public class Board extends BorderPane {
     }
   }
 
+  /**
+   * Use this to display the result of the dice roll
+   *
+   * @return a list of the value each die had
+   */
+  @Override
   public void displayRoll(List<Integer> rolls) {
     HBox hBox = new HBox();
     for (int die : rolls) {
@@ -47,6 +66,13 @@ public class Board extends BorderPane {
     setCenter(hBox);
   }
 
+  /**
+   * Use this method to animate the movement of a players token to a new board space
+   *
+   * @param player      player to move
+   * @param newPosition position on board to move to
+   */
+  @Override
   public void movePlayer(PlayerInfo player, int newPosition) {
     int oldPosition = playerPositions.get(player);
     playerPositions.put(player, newPosition);

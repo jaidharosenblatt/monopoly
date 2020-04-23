@@ -13,6 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import ooga.util.PropertiesGetter;
 
+/**
+ * @author jaidharosenblatt Combination of a labeled dropdown and submit button. Displays a list of
+ * possible board layouts from /data/. Depedent on data and XML files
+ */
 public class GameTypePicker extends HBox {
 
   private static final String DATA_PATH = "data";
@@ -55,8 +59,8 @@ public class GameTypePicker extends HBox {
     }
   }
 
-  private String getPathFromDropdown(){
-    return  gameTypes.get(dropdown.getValue());
+  private String getPathFromDropdown() {
+    return gameTypes.get(dropdown.getValue());
   }
 
   private void handleSubmit() {

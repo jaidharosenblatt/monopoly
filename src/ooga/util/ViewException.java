@@ -1,6 +1,10 @@
 package ooga.util;
 
-public class ViewException extends  RuntimeException{
+/**
+ * @author jaidharosenblatt Custom exception for errors in the frontend
+ */
+public class ViewException extends RuntimeException {
+
   /**
    * Create an exception based on an issue in our code.
    */
