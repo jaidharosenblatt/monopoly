@@ -10,15 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import ooga.util.PropertiesGetter;
 
 public class NumberPlayersDropdown extends HBox {
 
-  private final static String PLAYERS_TEXT = " players";
+  private final static String PLAYERS_TEXT = " " + PropertiesGetter.getPromptFromKey("Players");
   private SplashScreen splashScreen;
   private Map<String, Integer> choices = new HashMap<>();
   private ComboBox<String> dropdown = new ComboBox<>();
 
-  protected NumberPlayersDropdown(int defaultNumPlayers, int minPlayers, int maxPlayers, SplashScreen splashScreen) {
+  protected NumberPlayersDropdown(int defaultNumPlayers, int minPlayers, int maxPlayers,
+      SplashScreen splashScreen) {
 
     this.splashScreen = splashScreen;
     setAlignment(Pos.CENTER);
@@ -34,7 +36,7 @@ public class NumberPlayersDropdown extends HBox {
     dropdown.setItems(FXCollections.observableList(choicesDisplay));
     dropdown.setValue(defaultNumPlayers + PLAYERS_TEXT);
 
-    Button submit = new Button("Add Players");
+    Button submit = new Button(PropertiesGetter.getPromptFromKey("AddPlayers"));
     submit.setOnAction(event -> handleSubmit());
 
     getChildren().addAll(dropdown, submit);

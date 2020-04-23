@@ -10,8 +10,7 @@ public class PropertyView extends TileView {
 
   private static final double BAR_HEIGHT = 10;
 
-  public PropertyView(String name, String price, Color categoryColor,
-      double width, double height) {
+  public PropertyView(String name, String price, Color categoryColor, double width, double height) {
     //remove bg colors
 
     setPrefSize(width, height);

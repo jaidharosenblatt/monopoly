@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.xml.stream.XMLStreamException;
 import ooga.Main;
+import ooga.util.PropertiesGetter;
 
 public class SplashScreen {
 
@@ -28,10 +29,9 @@ public class SplashScreen {
   private static final int MAX_NUMBER_OF_PLAYERS = 6;
   private static final String RESOURCES_DEFAULT_CSS = "resources/default.css";
   private static final String IMAGE_PATH = "monopoly.png";
+
   private static final double SCENE_WIDTH = 800;
   private static final double SCENE_HEIGHT = 600;
-
-
   private static final double IMAGE_WIDTH = 400;
   private static final double IMAGE_HEIGHT = 100;
 
@@ -48,7 +48,7 @@ public class SplashScreen {
     NumberPlayersDropdown dropdown = new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS,
         MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this);
 
-    GameTypePicker picker = new GameTypePicker("Board type", this);
+    GameTypePicker picker = new GameTypePicker(PropertiesGetter.getPromptFromKey("BoardType"), this);
     root.getChildren().addAll(title, dropdown, playersBox, picker);
 
     Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
@@ -87,7 +87,9 @@ public class SplashScreen {
   protected void createPlayersBox(int numPlayers) {
     playersBox.getChildren().clear();
     for (int i = 1; i <= numPlayers; i++) {
-      PlayerSetter player = new PlayerSetter("Player Color", "Name", "Player " + i);
+      PlayerSetter player = new PlayerSetter(PropertiesGetter.getPromptFromKey("PlayerColor"),
+          PropertiesGetter.getPromptFromKey("Name"),
+          PropertiesGetter.getPromptFromKey("Player") + i);
       playersBox.getChildren().add(player);
       playersList.add(player);
     }

@@ -9,6 +9,7 @@ import ooga.api.objects.Decision;
 
 public class DecisionView extends Decisions{
 
+  private static final int PADDING = 5;
   private Decision decision;
 
   public DecisionView(Decision decision, String playerName, Color playerColor) {
@@ -21,7 +22,7 @@ public class DecisionView extends Decisions{
   private void addButtons(Decision decision) {
     HBox buttons = new HBox();
     buttons.setAlignment(Pos.CENTER);
-    buttons.setSpacing(5);
+    buttons.setSpacing(PADDING);
     for (String choice : decision.getOptions()) {
       Button button = new Button(choice);
       button.setOnAction(e -> handleClick(choice));

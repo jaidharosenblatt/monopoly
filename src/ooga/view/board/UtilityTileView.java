@@ -2,7 +2,6 @@ package ooga.view.board;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 

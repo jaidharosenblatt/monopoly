@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.api.objects.MultiPropDecision;
+import ooga.util.PropertiesGetter;
 
 public class MultiPropDecisionView extends Decisions {
 
@@ -28,7 +29,7 @@ public class MultiPropDecisionView extends Decisions {
       button.setOnAction(e -> handleClick(button, choice));
       buttons.getChildren().add(button);
     }
-    Button submit = new Button("Submit");
+    Button submit = new Button(PropertiesGetter.getPromptFromKey("Submit"));
     submit.setOnAction(event -> closeStage());
     buttons.getChildren().add(submit);
     addElement(buttons);

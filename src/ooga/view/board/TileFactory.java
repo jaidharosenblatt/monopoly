@@ -6,6 +6,8 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.RailRoad;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Utility;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.util.PropertiesGetter;
+import ooga.util.ViewException;
 
 public class TileFactory {
 
@@ -25,15 +27,16 @@ public class TileFactory {
     return t;
   }
 
-  private TileView getTileType(Tile t, int index) {
+  private TileView getTileType(Tile t, int index) throws ViewException {
+    String prefix = PropertiesGetter.getPromptFromKey("moneySign");
     if (t instanceof Street) {
       Property p = (Property) t;
       return p.convertView();
     } else if (t instanceof Utility) {
-      return new UtilityTileView(((Utility) t).getTitle(), "M" + ((Utility) t).getCost(),
+      return new UtilityTileView(((Utility) t).getTitle(), prefix + ((Utility) t).getCost(),
           ((Utility) t).getPathname(), tileWidth, tileHeight);
     } else if (t instanceof RailRoad) {
-      return new UtilityTileView(((RailRoad) t).getTitle(), "M" + ((RailRoad) t).getCost(),
+      return new UtilityTileView(((RailRoad) t).getTitle(), prefix + ((RailRoad) t).getCost(),
           ((RailRoad) t).getPathname(), tileWidth, tileHeight);
     } else if (t instanceof Event) {
       if (index % 10 == 0) {
@@ -42,8 +45,7 @@ public class TileFactory {
       return new UtilityTileView(((Event) t).getBName(), "", ((Event) t).getPathname(), tileWidth,
           tileHeight);
     }
-    return new UtilityTileView("property", "", "rcd.jpg", tileWidth,
-        tileHeight);
+    throw new ViewException(PropertiesGetter.getErrorMessageFromKey("InvalidTile"));
   }
 
   private double getRotation(int index) {

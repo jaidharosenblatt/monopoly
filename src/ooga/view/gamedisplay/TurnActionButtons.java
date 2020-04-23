@@ -2,6 +2,7 @@ package ooga.view.gamedisplay;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import ooga.util.PropertiesGetter;
 import ooga.view.View;
 
 public class TurnActionButtons extends HBox {
@@ -12,22 +13,22 @@ public class TurnActionButtons extends HBox {
     setId("turn-buttons");
     setSpacing(PADDING);
 
-    Button turn = new Button("Take turn");
+    Button turn = new Button(PropertiesGetter.getPromptFromKey("TakeTurn"));
     turn.setOnAction(e -> view.handleRoll());
 
-    Button build = new Button("Build");
+    Button build = new Button(PropertiesGetter.getPromptFromKey("Build"));
     build.setOnAction(e -> view.handleBuild());
 
-    Button sell = new Button("Sell");
+    Button sell = new Button(PropertiesGetter.getPromptFromKey("Sell"));
     sell.setOnAction(e -> view.handleSell());
 
-    Button mortgage = new Button("Mortgage");
+    Button mortgage = new Button(PropertiesGetter.getPromptFromKey("Mortgage"));
     mortgage.setOnAction(e -> view.handleMortgage());
 
-    Button unmortgage = new Button("Unmortgage");
+    Button unmortgage = new Button(PropertiesGetter.getPromptFromKey("Unmortgage"));
     unmortgage.setOnAction(e -> view.handleUnmortgage());
 
-    Button trade = new Button("Trade");
+    Button trade = new Button(PropertiesGetter.getPromptFromKey("Trade"));
     trade.setOnAction(e -> view.handleTrade());
 
     getChildren().addAll(turn, build, sell, mortgage, unmortgage, trade);

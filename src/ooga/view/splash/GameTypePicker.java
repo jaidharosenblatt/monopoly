@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import ooga.util.PropertiesGetter;
 
 public class GameTypePicker extends HBox {
 
@@ -32,7 +33,7 @@ public class GameTypePicker extends HBox {
     dropdown.setItems(FXCollections.observableList(displayTypes));
     dropdown.setValue(displayTypes.get(0));
 
-    Button submit = new Button("Submit");
+    Button submit = new Button(PropertiesGetter.getPromptFromKey("Submit"));
     submit.setOnAction(event -> handleSubmit());
 
     getChildren().addAll(label, dropdown, submit);
