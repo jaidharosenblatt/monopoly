@@ -24,7 +24,8 @@ public class GameTypePicker extends HBox {
 
   protected GameTypePicker(String labelPrompt, SplashScreen splashScreen) {
     this.splashScreen = splashScreen;
-    setAlignment(Pos.CENTER);
+    setId("splash-box");
+
     createGameTypes();
 
     Label label = new Label(labelPrompt);

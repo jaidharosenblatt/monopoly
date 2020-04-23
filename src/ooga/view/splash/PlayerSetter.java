@@ -5,29 +5,31 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class PlayerSetter extends HBox {
 
   private ColorPicker picker;
   private TextArea input;
-  private static final double INPUT_WIDTH = 80;
-  private static final double INPUT_HEIGHT = 8;
 
   protected PlayerSetter(String colorPrompt, String namePrompt, String defaultName) {
-    setAlignment(Pos.CENTER);
+    setId("splash-box");
     Label colorLabel = new Label(colorPrompt);
     Label nameLabel = new Label(namePrompt);
 
     picker = new ColorPicker();
-    input = new TextArea();
-    input.setPrefWidth(INPUT_WIDTH);
-    input.setPrefHeight(INPUT_HEIGHT);
+    picker.setValue(getRandomColor());
 
+    input = new TextArea();
     input.setText(defaultName);
+    input.setId("splash-input");
 
     getChildren().addAll(colorLabel,picker,nameLabel, input);
   }
 
+  private Color getRandomColor(){
+    return Color.color(Math.random(), Math.random(), Math.random());
+  }
   protected String getName(){
     return input.getText();
   }

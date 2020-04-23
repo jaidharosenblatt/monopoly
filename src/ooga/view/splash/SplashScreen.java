@@ -44,7 +44,7 @@ public class SplashScreen {
     ImageView title = getTitleImage();
 
     root.setAlignment(Pos.CENTER);
-    root.setId("decision-display");
+    root.setId("splash");
     NumberPlayersDropdown dropdown = new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS,
         MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this);
 

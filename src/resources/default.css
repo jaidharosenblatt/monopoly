@@ -7,22 +7,32 @@
   -fx-accent: #64A4E7;
 }
 
-.button{
+.combo-box {
+  -fx-background-color: -fx-tertiary;
+  -fx-background-radius: 5;
+}
+
+.button {
   -fx-background-color: -fx-tertiary;
   -fx-border-radius: 5;
   -fx-background-radius: 5;
 }
 
-.button:hover{
+.button:hover {
   -fx-background-color: -fx-accent;
 }
 
-#tile{
+.color-picker {
+  -fx-background-color: -fx-tertiary;
+  -fx-background-radius: 5;
+}
+
+#tile {
   -fx-background-color: -fx-board;
   -fx-font-size: 10;
 }
 
-#turn-buttons{
+#turn-buttons {
   -fx-background-color: -fx-secondary;
   -fx-padding: 5;
 }
@@ -35,4 +45,25 @@
 #decision-display #name {
   -fx-font-size: 20;
   -fx-font-weight: bold;
+}
+
+#splash {
+  -fx-background-color: -fx-board;
+  -fx-padding: 5;
+  -fx-spacing: 10;
+}
+
+#splash-box {
+  -fx-spacing: 10;
+  -fx-alignment: Center;
+  -fx-padding: 5;
+}
+
+#splash-input{
+  -fx-background-color: -fx-tertiary;
+  -fx-control-inner-background: -fx-tertiary;
+  -fx-prompt-text-fill: -fx-secondary;
+  -fx-background-radius: 5;
+  -fx-pref-width: 200;
+
 }
