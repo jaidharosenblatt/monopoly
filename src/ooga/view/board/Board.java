@@ -1,5 +1,6 @@
 package ooga.view.board;
 
+import java.awt.HeadlessException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,12 +69,12 @@ public class Board extends BorderPane {
   private void createGrid(List<Tile> tiles) {
 
     for (int i = ROW_LENGTH; i >= 0; i--) {
-      TileView tile = getPropertyFromTile(tiles.get(i));
+      TileView tile = getPropertyFromTile(tiles.get(i), i);
       bottom.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 2 - 1; i > ROW_LENGTH; i--) {
-      TileView tile = getPropertyFromTile(tiles.get(i));
+      TileView tile = getPropertyFromTile(tiles.get(i), i);
       tile.setRotate(90);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
 
@@ -81,62 +82,38 @@ public class Board extends BorderPane {
     }
 
     for (int i = ROW_LENGTH * 2; i <= ROW_LENGTH * 3; i++) {
-      TileView tile = getPropertyFromTile(tiles.get(i));
+      TileView tile = getPropertyFromTile(tiles.get(i), i);
       tile.setRotate(180);
       top.getChildren().add(tile);
     }
 
     for (int i = ROW_LENGTH * 3 + 1; i < ROW_LENGTH * 4; i++) {
-      TileView tile = getPropertyFromTile(tiles.get(i));
+      TileView tile = getPropertyFromTile(tiles.get(i), i);
       tile.setRotate(270);
       tile.setPrefSize(TILE_HEIGHT, TILE_WIDTH);
       right.getChildren().add(tile);
     }
-
-    bottom.getChildren().remove(ROW_LENGTH);
-    bottom.getChildren().add(new CornerTileView( "go.png", TILE_WIDTH, TILE_HEIGHT));
-
-    bottom.getChildren().remove(0);
-    bottom.getChildren()
-        .add(0, new CornerTileView("jail.png", TILE_WIDTH, TILE_HEIGHT));
-
-    top.getChildren().remove(ROW_LENGTH);
-    top.getChildren().add(new CornerTileView("gotojail.png", TILE_WIDTH, TILE_HEIGHT));
-
-    top.getChildren().remove(0);
-    top.getChildren()
-        .add(0, new CornerTileView("freeparking.png", TILE_WIDTH, TILE_HEIGHT));
-
   }
 
-//  private TileView getPropertyFromTile(Tile t) {
-//    if (t instanceof Property) {
-//      Property p = (Property) t;
-//      return p.convertView();
-//    } else {
-//      return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
-//          TILE_HEIGHT);
-//    }
-//  }
-
-  private TileView getPropertyFromTile(Tile t) {
+  private TileView getPropertyFromTile(Tile t, int index) {
     if (t instanceof Street) {
       Property p = (Property) t;
       return p.convertView();
+    } else if (t instanceof Utility) {
+      return new UtilityTileView(((Utility) t).getTitle(), "M" + ((Utility) t).getCost(),
+          ((Utility) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+    } else if (t instanceof RailRoad) {
+      return new UtilityTileView(((RailRoad) t).getTitle(), "M" + ((RailRoad) t).getCost(),
+          ((RailRoad) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+    } else if (t instanceof Event) {
+      if (index % 10 == 0) {
+        return new CornerTileView(((Event) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
+      }
+      return new UtilityTileView(((Event) t).getBName(), "", ((Event) t).getPathname(), TILE_WIDTH,
+          TILE_HEIGHT);
     }
-    else {
-      if (t instanceof Utility) {
-        return new UtilityTileView(((Utility) t).getTitle(), ((Utility) t).getCost(), ((Utility) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
-      }
-      if (t instanceof RailRoad) {
-        return new UtilityTileView(((RailRoad) t).getTitle(), ((RailRoad) t).getCost(), ((RailRoad) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
-      }
-      if (t instanceof Event) {
-        return new UtilityTileView(((Event) t).getBName(), 30, ((Event) t).getPathname(), TILE_WIDTH, TILE_HEIGHT);
-      }
-      return new UtilityTileView("property", 30, "rcd.jpg", TILE_WIDTH,
-              TILE_HEIGHT);
-    }
+    return new UtilityTileView("property", "", "rcd.jpg", TILE_WIDTH,
+        TILE_HEIGHT);
   }
 
   private TileView getTileByIndex(int index) {

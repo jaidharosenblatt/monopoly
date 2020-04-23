@@ -90,6 +90,6 @@ public abstract class Property extends Tile {
     }
 
     public PropertyView convertView() {
-        return new PropertyView(this.title_deed, this.cost, Color.web(group_color), TILE_WIDTH, TILE_HEIGHT);
+        return new PropertyView(this.title_deed, "M" + this.cost, Color.web(group_color), TILE_WIDTH, TILE_HEIGHT);
     }
 }

@@ -10,7 +10,7 @@ public class PropertyView extends TileView {
 
   private static final double BAR_HEIGHT = 10;
 
-  public PropertyView(String name, double price, Color categoryColor,
+  public PropertyView(String name, String price, Color categoryColor,
       double width, double height) {
     //remove bg colors
 
@@ -25,7 +25,7 @@ public class PropertyView extends TileView {
     box.getChildren().addAll(new Rectangle(getPrefWidth(), BAR_HEIGHT, categoryColor), nameText);
     setTop(box);
 
-    Text text = new Text("$" + price);
+    Text text = new Text(price);
     setBottom(text);
     setAlignment(text, Pos.CENTER);
   }
