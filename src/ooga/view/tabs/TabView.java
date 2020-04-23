@@ -30,8 +30,8 @@ public class TabView {
     tabsRegistry.put("Players", PlayersTab.class);
     tabsRegistry.put("Rules", RulesTab.class);
 
-    rulesTabID = this.createTab("Rules");
     playersTabID = this.createTab("Players");
+    rulesTabID = this.createTab("Rules");
 
   }
 
