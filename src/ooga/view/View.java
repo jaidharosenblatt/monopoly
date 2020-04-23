@@ -34,7 +34,7 @@ public class View extends BorderPane implements FrontEndExternal {
   private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<PlayerInfo> players, List<Tile> tiles) {
-    new SplashScreen(SCENE_WIDTH,SCENE_HEIGHT);
+    new SplashScreen(SCENE_WIDTH,SCENE_HEIGHT, this);
 
     this.players = players;
     this.controller = controller;
@@ -56,6 +56,14 @@ public class View extends BorderPane implements FrontEndExternal {
 
     stage.setScene(scene);
     stage.show();
+  }
+
+  public void setPlayers(Map<String,Color> players){
+    System.out.println(players);
+  }
+
+  public void setGameType(String boardPath){
+    System.out.println(boardPath);
   }
 
   public void setCurrentPlayer(Player p) { this.currentPlayer = p;}
