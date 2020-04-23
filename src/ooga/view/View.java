@@ -30,14 +30,10 @@ public class View extends BorderPane implements FrontEndExternal {
   private LoadGame controller;
   private static final double SCENE_WIDTH = 1000;
   private static final double SCENE_HEIGHT = 735;
-  private List<PlayerInfo> players;
   private PlayerInfo currentPlayer;
   private TabView tabView;
 
   public View(Stage stage, LoadGame controller, List<PlayerInfo> players, List<Tile> tiles) {
-    new SplashScreen(SCENE_WIDTH,SCENE_HEIGHT, this);
-
-    this.players = players;
     this.controller = controller;
 
     getStylesheets().add(RESOURCES_DEFAULT_CSS);
@@ -60,14 +56,6 @@ public class View extends BorderPane implements FrontEndExternal {
     stage.show();
   }
 
-  public void setPlayers(Map<String,Color> players){
-    System.out.println(players);
-  }
-
-  public void setGameType(String boardPath){
-    System.out.println(boardPath);
-  }
-
   public void setCurrentPlayer(Player p) { this.currentPlayer = p;}
 
   public void handleRoll() {controller.takeTurn();}
@@ -83,22 +71,22 @@ public class View extends BorderPane implements FrontEndExternal {
   public void handleTrade() {controller.trade();}
 
   public void makeStringDecision(StringDecision decision){
-    new StringDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new StringDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeUserDecision(Decision decision) {
-    new DecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new DecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeMultiDecision(MultiPropDecision decision) {
-    new MultiPropDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new MultiPropDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
   public void makeMultiPlayerDecision(MultiPlayerDecision decision) {
-    new MultiPlayerDecisionView(decision, currentPlayer.getName(), (Color) currentPlayer.getPlayerColor());
+    new MultiPlayerDecisionView(decision, currentPlayer.getName(), Color.web(currentPlayer.getPlayerColor()));
   }
 
   @Override
