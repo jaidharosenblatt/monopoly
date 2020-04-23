@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javax.xml.stream.XMLStreamException;
 import ooga.Main;
 import ooga.util.PropertiesGetter;
+import ooga.view.error.ErrorView;
 
 public class SplashScreen {
 
@@ -47,7 +48,8 @@ public class SplashScreen {
     NumberPlayersDropdown dropdown = new NumberPlayersDropdown(DEFAULT_NUMBER_OF_PLAYERS,
         MIN_NUMBER_OF_PLAYERS, MAX_NUMBER_OF_PLAYERS, this);
 
-    GameTypePicker picker = new GameTypePicker(PropertiesGetter.getPromptFromKey("BoardType"), this);
+    GameTypePicker picker = new GameTypePicker(PropertiesGetter.getPromptFromKey("BoardType"),
+        this);
     root.getChildren().addAll(title, dropdown, playersBox, picker);
 
     Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
@@ -60,10 +62,8 @@ public class SplashScreen {
   protected void submit(String boardPath) {
     try {
       controller.startGame(getPlayerInfo(), boardPath);
-    } catch (FileNotFoundException e) {
-      System.out.println("no file");
-    } catch (XMLStreamException e) {
-      System.out.println("no XML");
+    } catch (Exception e) {
+      new ErrorView("NullPlayer");
     }
   }
 

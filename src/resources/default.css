@@ -74,6 +74,10 @@
   -fx-pref-width: 200;
 }
 
+#error {
+  -fx-background-color: -fx-primary;
+}
+
 HBox {
   -fx-alignment: Center;
 }
