@@ -20,8 +20,10 @@ public class PlayerSetter extends HBox {
 
     picker = new ColorPicker();
     input = new TextArea();
+    input.setPrefWidth(INPUT_WIDTH);
+    input.setPrefHeight(INPUT_HEIGHT);
+
     input.setText(defaultName);
-    input.setPrefSize(INPUT_WIDTH,INPUT_HEIGHT);
 
     getChildren().addAll(colorLabel,picker,nameLabel, input);
   }

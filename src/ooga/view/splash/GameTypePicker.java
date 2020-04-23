@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class GameTypePicker extends HBox {
 
@@ -59,7 +58,7 @@ public class GameTypePicker extends HBox {
   }
 
   private void handleSubmit() {
-    splashScreen.setGameType(getPathFromDropdown());
+    splashScreen.submit(getPathFromDropdown());
     splashScreen.closeStage();
   }
 
