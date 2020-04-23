@@ -34,7 +34,7 @@ public class NumberPlayersDropdown extends HBox {
     dropdown.setItems(FXCollections.observableList(choicesDisplay));
     dropdown.setValue(defaultNumPlayers + PLAYERS_TEXT);
 
-    Button submit = new Button("Set");
+    Button submit = new Button("Add Players");
     submit.setOnAction(event -> handleSubmit());
 
     getChildren().addAll(dropdown, submit);
