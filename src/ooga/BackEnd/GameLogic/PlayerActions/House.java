@@ -64,34 +64,37 @@ public class House {
         MultiPropDecision d = new MultiPropDecision("Which property would you like to " + prompt + " a house on?",options);
         view.makeMultiDecision(d);
 
-        Map<String, List<Property>> choicesMap = monopolyPropertiesMap(d.getChoice());
-
+        //The maps contain the color and a list of all matching properties from that color set
         Map<String, List<Property>> originalChoicesMap = monopolyPropertiesMap(d.getOptions());
-
+        Map<String, List<Property>> selectedChoicesMap = monopolyPropertiesMap(d.getChoice());
+        
         loop:
-        for (Property owned : d.getChoice()) {
-            for (String key : choicesMap.keySet()) {
-                if (owned.getGroupNumber() == choicesMap.get(key).size()) {
-                    if (build) {currentPlayer.buyHouse(1, (Street) owned);}
-                    if (!build) {currentPlayer.sellHouse(1, (Street) owned);}
-                    continue loop;
-                }
-                else if (owned.getGroupColor().equals(key)) {
-                    for (Property w : originalChoicesMap.get(key)) {
-                        if (w instanceof Street && owned instanceof Street && owned != w) {
-                            int diff = ((Street) owned).getHouses() - ((Street) w).getHouses();
-                            if ((diff > 0 && build) || (diff < 0 && !build)) {
-                                Decision d1 = new Decision("ERROR: Houses must be distributed evenly",option);
-                                view.makeUserDecision(d1);
-                                break loop;
-                            }
-                        }
-                    }
-                    if (build) {currentPlayer.buyHouse(1, (Street) owned);}
-                    if (!build) {currentPlayer.sellHouse(1, (Street) owned);}
+        for (Property chosen : d.getChoice()) {
+            //Checks to see if user selected entire monopoly for that property color
+            //No need to check for house evenness
+            for (String key : selectedChoicesMap.keySet()) {
+                if (chosen.getGroupNumber() == selectedChoicesMap.get(key).size() &&
+                    chosen.getGroupColor().equals(selectedChoicesMap.get(key))) {
+                    if (build) {currentPlayer.buyHouse(1, (Street) chosen);}
+                    if (!build) {currentPlayer.sellHouse(1, (Street) chosen);}
                     continue loop;
                 }
             }
+            //Checks to see if property has one more or one less than the other properties in that color set
+            for (String key : originalChoicesMap.keySet()) {
+                for (Property original : originalChoicesMap.get(key)) {
+                    int diff = ((Street) chosen).getHouses() - ((Street) original).getHouses();
+                    if ((diff > 0 && build) || (diff < 0 && !build)) {
+                        Decision d1 = new Decision("ERROR: Houses must be distributed evenly",option);
+                        view.makeUserDecision(d1);
+                        break loop;
+                    }
+                }
+            }
+            //If property reaches this point, it is a singular property without distribution issues
+            if (build) {currentPlayer.buyHouse(1, (Street) chosen);}
+            if (!build) {currentPlayer.sellHouse(1, (Street) chosen);}
+            continue loop;
         }
     }
 
