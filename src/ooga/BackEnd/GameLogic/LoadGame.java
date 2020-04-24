@@ -19,7 +19,7 @@ import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
 /**
- * @author rodrigo.araujo handles turn-based logic and triggering player actions
+ * @author rodrigoaraujo handles turn-based logic and triggering player actions
  */
 
 public class LoadGame implements BackendExternal {
@@ -214,7 +214,7 @@ public class LoadGame implements BackendExternal {
     private void updateCardTiles() {
         for (Event e : this.eventTiles) {
             if (e instanceof CardTile) {
-                ((CardTile) e).playerList(this.activePlayers);
+                ((CardTile) e).updatePlayers(this.activePlayers);
                 ((CardTile) e).updateProps(this.properties);
             }
         }

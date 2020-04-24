@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author rodrigo.araujo contains all the logic for choosing to mortgage or unmortgage a property
+ * @author rodrigoaraujo contains all the logic for choosing to mortgage or unmortgage a property
  */
 
 public class Mortgage {

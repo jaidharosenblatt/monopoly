@@ -2,6 +2,11 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
+/**
+ * @author rodrigoaraujo Any event tile on the board (Chance, Community,
+ * Go, Jail, Go To Jail, Free Parking, and Tax).
+ */
+
 public abstract class Event extends Tile {
     private String name;
     private String boardName;

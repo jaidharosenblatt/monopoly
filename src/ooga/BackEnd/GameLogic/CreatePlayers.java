@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author rodrigo.araujo creates players and randomizes their orders
+ * @author rodrigoaraujo creates players and randomizes their orders
  */
 
 public class CreatePlayers {

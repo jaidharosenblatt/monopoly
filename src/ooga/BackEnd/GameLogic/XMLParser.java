@@ -20,7 +20,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 /**
- * @author rodrigo.araujo handles parsing XML files. streetParser, railroadParser, utilityParser,
+ * @author rodrigoaraujo handles parsing XML files. streetParser, railroadParser, utilityParser,
  * and eventTileParser could be combined into one method. However, that method would be unnecessarily
  * long. Structure was duplicated to keep organization.
  */

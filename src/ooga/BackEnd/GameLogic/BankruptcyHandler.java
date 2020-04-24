@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author rodrigo.araujo contains all the logic for players going bankrupt
+ * @author rodrigoaraujo contains all the logic for players going bankrupt
  */
 
 public class BankruptcyHandler {

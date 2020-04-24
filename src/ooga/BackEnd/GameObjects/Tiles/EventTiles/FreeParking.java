@@ -6,9 +6,17 @@ import ooga.util.PropertiesGetter;
 
 import java.util.List;
 
+/**
+ * @author rodrigoaraujo Event tile for free parking
+ */
+
 public class FreeParking extends Event {
 
     private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
+
+    /**
+     * default constructor for parsing
+     */
 
     public FreeParking() {}
 

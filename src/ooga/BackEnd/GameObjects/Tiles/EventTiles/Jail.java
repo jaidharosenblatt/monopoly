@@ -5,10 +5,18 @@ import ooga.util.PropertiesGetter;
 
 import java.util.List;
 
+/**
+ * @author rodrigoaraujo Event tile for jail
+ */
+
 public class Jail extends Event {
 
     private static final List<String> options = List.of(PropertiesGetter.getPromptFromKey("Yes"),PropertiesGetter.getPromptFromKey("No"));
     private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
+
+    /**
+     * default constructor for parsing
+     */
 
     public Jail() {}
 

@@ -2,7 +2,15 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
+/**
+ * @author rodrigoaraujo Event tile for Go To Jail
+ */
+
 public class GoToJail extends Event {
+
+    /**
+     * default constructor for parsing
+     */
 
     public GoToJail() {}
 

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author rodrigo.araujo contains all the logic for choosing to buy or sell a house on a property
+ * @author rodrigoaraujo contains all the logic for choosing to buy or sell a house on a property
  */
 
 public class House {

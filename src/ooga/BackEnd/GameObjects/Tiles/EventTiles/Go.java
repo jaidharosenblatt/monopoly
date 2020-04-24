@@ -2,9 +2,17 @@ package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
+/**
+ * @author rodrigoaraujo Event tile for Go
+ */
+
 public class Go extends Event {
 
     private static final int GO_MONEY = 200;
+
+    /**
+     * default constructor for parsing
+     */
 
     public Go() {}
 
