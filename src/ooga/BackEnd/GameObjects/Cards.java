@@ -20,7 +20,7 @@ public class Cards {
     private static final int BO_RR_INDEX = 25;
     private static final int SHORT_RR_INDEX = 35;
     private static final int CROSS_GO = 200;
-    private static final List<String> option = List.of("OK");
+    private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
     private static final List<String> options = List.of(PropertiesGetter.getPromptFromKey("Yes"), PropertiesGetter.getPromptFromKey("No"));
 
     private View view;

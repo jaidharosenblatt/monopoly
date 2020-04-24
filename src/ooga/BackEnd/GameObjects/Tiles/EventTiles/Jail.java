@@ -65,7 +65,7 @@ public class Jail extends Event {
             }
         }
         else {
-            Decision d = new Decision(PropertiesGetter.getPromptFromKey("jailprompt3"),options);
+            Decision d = new Decision(PropertiesGetter.getPromptFromKey("jailprompt3"),option);
             getView().makeUserDecision(d);
         }
     }

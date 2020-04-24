@@ -8,6 +8,7 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 import ooga.api.objects.Card;
 import ooga.api.objects.PlayerInfo;
+import ooga.util.PropertiesGetter;
 import ooga.view.View;
 import ooga.view.board.PropertyView;
 
@@ -147,14 +148,14 @@ public class Player implements PlayerInfo {
 
     public void payBank(int amount, Boolean alert) {
         if (alert) {
-            Decision d = new Decision("You've paid the bank $" + amount, option);
+            Decision d = new Decision(PropertiesGetter.getPromptFromKey("playerprompt1") + amount, option);
             view.makeUserDecision(d);
         }
         this.currentBalance -= amount;
     }
 
     public void payBail() {
-        Decision d = new Decision("You've paid $50 for bail", option);
+        Decision d = new Decision(PropertiesGetter.getPromptFromKey("playerprompt2"), option);
         view.makeUserDecision(d);
         payBank(BAIL, false);
     }
