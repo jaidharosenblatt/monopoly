@@ -70,9 +70,12 @@ public class SplashScreen {
   protected void submit(String boardPath) {
     try {
       controller.startGame(getPlayerInfo(), boardPath);
-    } catch (Exception e) {
+    } catch (IndexOutOfBoundsException e ){
       new ErrorView("NullPlayer");
       new SplashScreen(controller);
+    }
+    catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
