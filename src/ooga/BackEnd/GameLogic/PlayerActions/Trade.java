@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rodrigo.araujo contains all the logic for choosing to trade
+ */
+
 public class Trade {
 
     /**

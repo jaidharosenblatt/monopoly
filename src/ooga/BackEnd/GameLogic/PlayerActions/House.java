@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rodrigo.araujo contains all the logic for choosing to buy or sell a house on a property
+ */
+
 public class House {
 
     private final static List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));

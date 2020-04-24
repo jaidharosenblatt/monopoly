@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rodrigo.araujo creates players and randomizes their orders
+ */
+
 public class CreatePlayers {
 
     private List<Player> activePlayers;

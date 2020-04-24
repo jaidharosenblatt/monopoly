@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rodrigo.araujo contains all the logic for choosing to mortgage or unmortgage a property
+ */
+
 public class Mortgage {
 
     private final static List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));

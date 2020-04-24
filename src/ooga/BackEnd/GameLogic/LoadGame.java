@@ -18,6 +18,10 @@ import ooga.api.BackendExternal;
 import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
+/**
+ * @author rodrigo.araujo handles turn-based logic and triggering player actions
+ */
+
 public class LoadGame implements BackendExternal {
 
     private static final int JAIL_INDEX = 10;

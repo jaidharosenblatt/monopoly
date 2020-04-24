@@ -7,6 +7,8 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class CardTile extends Event {
 
     private String type;

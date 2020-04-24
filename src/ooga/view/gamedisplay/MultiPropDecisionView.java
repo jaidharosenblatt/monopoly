@@ -9,8 +9,9 @@ import ooga.api.objects.MultiPropDecision;
 import ooga.util.PropertiesGetter;
 
 /**
- * @author rodrigo.araujo made exact duplication of MultiPlayerDecision (for some reason necessary for
- * backend)
+ * @author rodrigo.araujo create a multiple choice decision of properties to display to the user. Takes in a
+ * decision object to get the prompt and options and sets the choice of that user. Could be combined with
+ * MultiPlayerDecisionView.
  */
 public class MultiPropDecisionView extends Decisions {
 

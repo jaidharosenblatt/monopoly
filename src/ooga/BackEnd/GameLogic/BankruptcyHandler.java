@@ -13,6 +13,10 @@ import ooga.view.View;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rodrigo.araujo contains all the logic for players going bankrupt
+ */
+
 public class BankruptcyHandler {
 
     private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
