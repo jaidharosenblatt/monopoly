@@ -24,5 +24,11 @@ public interface Decision {
    */
   void setChoice(String choice);
 
+  /**
+   * Get the choice that the player picked in the gui
+   *
+   * @return string
+   */
+
   String getChoice();
 }

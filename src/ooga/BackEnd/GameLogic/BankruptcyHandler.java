@@ -25,6 +25,15 @@ public class BankruptcyHandler {
     private boolean stopTurn;
     private int doubleTurns;
 
+    /**
+     * Handles the logic behind checking and dealing with a player that goes bankrupt
+     *
+     * @param view the visuals of the boardgame
+     * @param activePlayers list of active players
+     * @param currentPlayer current player of the turn
+     * @param map key is the players' turn orders
+     * @param doubleTurns int to determine if doubles were just rolled
+     */
 
     public BankruptcyHandler(View view, List<Player> activePlayers, Player currentPlayer, Map<Integer, Player> playerTabMap, int doubleTurns) {
         this.view = view;
@@ -79,11 +88,22 @@ public class BankruptcyHandler {
         return false;
     }
 
+    /**
+     * Checks if player's balance is below 0
+     *
+     * @return boolean of whether or not player's balance is below 0
+     */
+
     public boolean doesPlayerLose() {
         //If player is negative after ending their turn, player loses
         if (currentPlayer.getCashBalance() < 0) {return true;}
         return false;
     }
+
+    /**
+     * Handles logic of player going bankrupt
+     *
+     */
 
     public void playerLoses() {
         Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", option);
@@ -112,8 +132,35 @@ public class BankruptcyHandler {
         }
     }
 
+    /**
+     * Checks if stopTurn is true or false
+     *
+     * @return boolean of whether or not to prevent turn from continuing
+     */
+
     public boolean getStopTurn() {return stopTurn;}
+
+    /**
+     * Gets doubleTurns
+     *
+     * @return int
+     */
+
     public int getDoubleTurns() {return doubleTurns;}
+
+    /**
+     * Gets activePlayers
+     *
+     * @return List of Players
+     */
+
     public List<Player> getActivePlayers() {return activePlayers;}
+
+    /**
+     * Gets playerTabMap
+     *
+     * @return Map
+     */
+
     public Map<Integer, Player> getPlayerTabMap() {return playerTabMap;}
 }

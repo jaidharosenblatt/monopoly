@@ -16,6 +16,16 @@ public class Mortgage {
 
     private final static List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
 
+    /**
+     * Handles the logic behind a player mortgaging or lifting the mortgage on their properties.
+     * Updates player, property, and view classes based on GUI decisions.
+     *
+     * @param currentPlayer current player of the turn
+     * @param view the visuals of the boardgame
+     * @param map key is the players' turn orders
+     * @param mortgage determines if the player wants to mortgage or unmortgage
+     */
+
     public Mortgage(Player currentPlayer, View view, Map<Integer, Player> map, boolean mortgage) {
         String prompt = "";
         if (currentPlayer.getProperties().size() < 1) {

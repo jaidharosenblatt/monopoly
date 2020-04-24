@@ -19,6 +19,16 @@ public class House {
 
     private String prompt = "";
 
+    /**
+     * Handles the logic behind a player buying or selling homes on their properties.
+     * Updates player, property, and view classes based on GUI decisions.
+     *
+     * @param currentPlayer current player of the turn
+     * @param view the visuals of the boardgame
+     * @param map key is the players' turn orders
+     * @param build determines if the player wants to buy or sell a house
+     */
+
     public House(Player currentPlayer, View view, Map<Integer, Player> map, boolean build) {
         if (currentPlayer.getProperties().size() < 1) {
             Decision d = new Decision("ERROR: You do not own any properties",option);

@@ -28,6 +28,13 @@ public class XMLParser {
     public ArrayList<Event> eventTiles;
     public ArrayList<Tile> allTiles;
 
+    /**
+     * Handles parsing of XML files into Lists of the boardgame with
+     * appropriate values
+     *
+     * @param pathname url of XML file for game
+     */
+
     public XMLParser(String pathname) throws FileNotFoundException, XMLStreamException {
         this.properties = propertySetUp(pathname);
         this.eventTiles = eventSetUp(pathname);

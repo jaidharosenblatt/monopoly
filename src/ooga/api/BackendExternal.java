@@ -63,7 +63,7 @@ public interface BackendExternal {
 
   /**
    * This method is used by the back end to trigger the Mortgage class
-   * which allows for the player to life the mortgage off of a property
+   * which allows for the player to lift the mortgage off of a property
    * if he or she qualifies to do so.
    *
    */

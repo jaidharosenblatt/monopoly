@@ -15,6 +15,16 @@ import java.util.Map;
 
 public class Trade {
 
+    /**
+     * Handles the logic behind a player trading items with another player.
+     * Updates player, property, and view classes based on GUI decisions.
+     *
+     * @param currentPlayer current player of the turn
+     * @param view the visuals of the boardgame
+     * @param activePlayers a list of all players in the game
+     * @param map key is the players' turn orders
+     */
+
     public Trade(Player currentPlayer, View view, List<Player> activePlayers, Map<Integer, Player> map) {
         ArrayList<Player> temp = new ArrayList<>();
         for (Player a : activePlayers) {

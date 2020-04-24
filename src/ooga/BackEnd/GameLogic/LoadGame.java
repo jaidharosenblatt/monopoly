@@ -36,6 +36,14 @@ public class LoadGame implements BackendExternal {
     private int currentIndex;
     private int doubleTurns;
 
+    /**
+     * Handles setting up the game, turn logic, and triggering player actions
+     *
+     * @param game_pathname url of XML file for game
+     * @param playerInfo map of player name to player color in strings
+     * @param stage passed into the view
+     */
+
     public LoadGame(String game_pathname, Map<String, String> playerInfo, Stage stage) throws FileNotFoundException, XMLStreamException {
 
         XMLParser parse = new XMLParser(game_pathname);
@@ -64,6 +72,13 @@ public class LoadGame implements BackendExternal {
             p.setView(view);
         }
     }
+
+    /**
+     * This method is used by the back end to update global variables
+     * containing players and tiles based on rules and actions that
+     * happened during a player's turn.
+     *
+     */
 
     @Override
     public void takeTurn(){
@@ -101,6 +116,12 @@ public class LoadGame implements BackendExternal {
         }
     }
 
+    /**
+     * This method is used by the back end to select the next player
+     * in the rotation.
+     *
+     */
+
     @Override
     public void nextPlayer(){
         if (currentIndex + 1 >= activePlayers.size()) {
@@ -112,6 +133,13 @@ public class LoadGame implements BackendExternal {
             currentIndex++;
         }
     }
+
+    /**
+     * This method is used by the back end to roll the current player's
+     * dice, move him or her to that spot, and trigger the action of
+     * that tile.
+     *
+     */
 
     @Override
     public void rollDiceAndMove(Player p) {
@@ -130,17 +158,51 @@ public class LoadGame implements BackendExternal {
         p.moveTo(new_tile);
     }
 
+    /**
+     * This method is used by the back end to trigger the House class
+     * which allows for the player to build a house on a property if
+     * he or she qualifies to do so.
+     *
+     */
+
     @Override
     public void buildHouse() {House b = new House(currentPlayer, view, playerTabMap, true);}
+
+    /**
+     * This method is used by the back end to trigger the Mortgage class
+     * which allows for the player to mortgage a property if he or she
+     * qualifies to do so.
+     *
+     */
 
     @Override
     public void sellHouse() {House s = new House(currentPlayer, view, playerTabMap, false);}
 
+    /**
+     * This method is used by the back end to trigger the Mortgage class
+     * which allows for the player to mortgage a property if he or she
+     * qualifies to do so.
+     *
+     */
+
     @Override
     public void mortgageProp() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap, true);}
 
+    /**
+     * This method is used by the back end to trigger the Mortgage class
+     * which allows for the player to lift the mortgage off of a property
+     * if he or she qualifies to do so.
+     *
+     */
+
     @Override
     public void unmortgageProp() {Mortgage u = new Mortgage(currentPlayer, view, playerTabMap, false);}
+
+    /**
+     * This method is used by the back end to trigger the Trade class
+     * which allows for the player to trade with another player.
+     *
+     */
 
     @Override
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);}

@@ -17,7 +17,7 @@ public interface MultiPlayerDecision {
     /**
      * Display the choices available to the player
      *
-     * @return a list of possible choices as Properties
+     * @return a list of possible choices as Players
      */
     List<Player> getOptions();
 
@@ -27,7 +27,18 @@ public interface MultiPlayerDecision {
      */
     void setChoice(Player p);
 
+    /**
+     * Remove the choice that the player unselected in the gui
+     *
+     */
+
     void remChoice(Player p);
+
+    /**
+     * Get the choice(s) that the player picked in the gui
+     *
+     * @return a list of selected players
+     */
 
     List<Player> getChoice();
 }

@@ -14,6 +14,13 @@ public class CreatePlayers {
     private List<Player> activePlayers;
     private Map<Integer, Player> playerTabMap;
 
+    /**
+     * Handles creating players and randomizing the order of them
+     *
+     * @param playerInfo map of player name and player color in strings
+     * @param allTiles list of all tiles on the board
+     */
+
     public CreatePlayers(Map<String, String> playerInfo, List<Tile> allTiles) {
         this.activePlayers = new ArrayList<>();
         Player[] players = new Player[playerInfo.size()];
@@ -48,7 +55,19 @@ public class CreatePlayers {
         return order;
     }
 
+    /**
+     * Gets activePlayers
+     *
+     * @return List of Players
+     */
+
     public List<Player> getActivePlayers() {return activePlayers;}
+
+    /**
+     * Gets playerTabMap
+     *
+     * @return Map
+     */
 
     public Map<Integer, Player> getPlayerTabMap() {return playerTabMap;}
 }
