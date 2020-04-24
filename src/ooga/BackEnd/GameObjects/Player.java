@@ -16,6 +16,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author rodrigoaraujo A player class. Able to roll dice, interact with other players, buy property, etc.
+ * Implements PlayerInfo interface in order to be able to securely pass information along to the Frontend.
+ */
 
 public class Player implements PlayerInfo {
 
@@ -43,6 +47,15 @@ public class Player implements PlayerInfo {
     public int dice1;
     public int dice2;
 
+    /**
+     * Creates the player class. Keeps track of turns in jail, properties,
+     * cash balance, houses, tile location, jail status, get out of jail cards,
+     * roll dice, trade, and other methods that inpact moving and paying.
+     *
+     * @param name String value determined before game begins
+     * @param boardGame list of all tiles on the board
+     */
+
     public Player(String name, List<Tile> boardGame){
         this.name = name;
         this.boardGame = boardGame;
@@ -55,7 +68,6 @@ public class Player implements PlayerInfo {
         this.turnsinJail = 0;
         this.getOutCards = 0;
     }
-
 
     @Override
     public List<PropertyView> getPropertiesUnmodifiable() {
@@ -96,9 +108,19 @@ public class Player implements PlayerInfo {
 
     public void setColor(String color) {this.color = color;}
 
+    /**
+     * Changes player location without triggering action on that
+     * tile. Useful for being sent to Jail or when Chance card
+     * asks for rent to be calculated differently on utility or
+     * railroad tiles.
+     *
+     * @param tile int value of location on board
+     */
+
     public void setTile(int tile) {
         System.out.println(name + " just moved to tile " + tile);
         currentTile = tile;
+        view.movePlayer(this,tile);
         boardGame.get(tile).onTile(this);
     }
 
@@ -120,6 +142,10 @@ public class Player implements PlayerInfo {
         this.turnsinJail = 0;
     }
 
+    /**
+     * Moves player to jail without triggering action for jail tile
+     */
+
     public void setJailed() {
         Decision d = new Decision("You've been jailed!", option);
         view.makeUserDecision(d);
@@ -137,6 +163,14 @@ public class Player implements PlayerInfo {
         }
     }
 
+    /**
+     * Transaction between this player and another player
+     *
+     * @param otherPlayer other player that will receive money
+     * @param amount int cash sent to other player
+     * @param alert whether or not to make a GUI pop up
+     */
+
     public void payPlayer(Player otherPlayer, int amount, Boolean alert) {
         if (alert) {
             Decision d = new Decision("You've paid " + otherPlayer.getName() + " $" + amount, option);
@@ -146,6 +180,13 @@ public class Player implements PlayerInfo {
         otherPlayer.receive(amount);
     }
 
+    /**
+     * Transaction between this player and bank
+     *
+     * @param amount int cash sent to bank
+     * @param alert whether or not to make a GUI pop up
+     */
+
     public void payBank(int amount, Boolean alert) {
         if (alert) {
             Decision d = new Decision(PropertiesGetter.getPromptFromKey("playerprompt1") + amount, option);
@@ -154,16 +195,33 @@ public class Player implements PlayerInfo {
         this.currentBalance -= amount;
     }
 
+    /**
+     * Pays bail and appropriate GUI alert pops up
+     */
+
     public void payBail() {
         Decision d = new Decision(PropertiesGetter.getPromptFromKey("playerprompt2"), option);
         view.makeUserDecision(d);
         payBank(BAIL, false);
     }
 
+    /**
+     * Player receives cash
+     *
+     * @param amount int cash received
+     */
+
     public void receive(int amount) {
         System.out.println(this.name + " has received $" + amount);
         this.currentBalance += amount;
     }
+
+    /**
+     * Move player to tile on board visually and internally while
+     * triggering the action command for the new tile.
+     *
+     * @param tile int index of new location on board
+     */
 
     public void moveTo(int tile) {
         System.out.println(this.name + " just moved to tile " + tile);
@@ -177,6 +235,12 @@ public class Player implements PlayerInfo {
 
     public void setProperties(List<Property> list) {this.properties = list;}
 
+    /**
+     * Buys property if player can afford it
+     *
+     * @param P property to buy
+     */
+
     public void buyProperty(Property P) {
         if (this.currentBalance > P.getCost()) {
             System.out.println(this.name + " has bought " + P.getTitle());
@@ -184,6 +248,14 @@ public class Player implements PlayerInfo {
             properties.add(P);
         }
     }
+
+    /**
+     * Checks if player has a monopoly of that property in
+     * his or her possession.
+     *
+     * @param P property to check
+     * @return boolean
+     */
 
     public boolean hasMonopoly(Property P) {
         int total = 0;
@@ -198,6 +270,14 @@ public class Player implements PlayerInfo {
         return false;
     }
 
+    /**
+     * If player has a monopoly of the property and that property has
+     * less than 5 houses, this will add a house to it.
+     *
+     * @param amount number of houses to buy
+     * @param S street to buy houses to
+     */
+
     public void buyHouse(int amount, Street S) {
         if (this.hasMonopoly(S) && S.getHouses() + amount <= 5) {
             System.out.println(this.name + " has bought " + amount + " house on " + S.getTitle());
@@ -210,12 +290,25 @@ public class Player implements PlayerInfo {
         }
     }
 
+    /**
+     * Sells houses if player has any on that specific
+     * property.
+     *
+     * @param amount number of houses to sell
+     * @param S street to sell houses from
+     */
+
     public void sellHouse(int amount, Street S) {
         System.out.println(this.name + " has sold " + amount + " house on " + S.getTitle());
         this.receive((S.getHouseCost() * amount) / 2);
         S.removeHouse(amount);
         this.houses -= amount;
     }
+
+    /**
+     * Randomly rolls two dice and updates dice variables in player
+     * class.
+     */
 
     public void rollDice() {
         this.dice1 = (int) (Math.random() * 6) + 1;
@@ -224,11 +317,31 @@ public class Player implements PlayerInfo {
         System.out.println(this.name + " has rolled a " + dice1 + " and a " + dice2 + ", so " + (dice1 + dice2) + " total.");
     }
 
+    /**
+     * Draws card using Card class and triggers the action for that randomly
+     * drawn card.
+     *
+     * @param type type of card to draw ("Community" or "Chance")
+     * @param props list of properties
+     * @param players list of active players
+     */
+
     public void drawCard(String type, List<Property> props, List<Player> players) {
         System.out.println(this.name + " has drawn a " + type + " card.");
         Cards draw = new Cards(type, this, props, players, this.view);
         draw.action();
     }
+
+    /**
+     * Trades money and properties between this player and another
+     * player.
+     *
+     * @param moneyGive money sent to other player
+     * @param propertiesGive list of properties sent to other player
+     * @param otherPlayer other player in trade
+     * @param moneyReceive money received by other player
+     * @param propertiesReceive list of properties received by other player
+     */
 
     public void trade(int moneyGive, List<Property> propertiesGive, Player otherPlayer, int moneyReceive, List<Property> propertiesReceive) {
         this.payPlayer(otherPlayer, moneyGive, false);

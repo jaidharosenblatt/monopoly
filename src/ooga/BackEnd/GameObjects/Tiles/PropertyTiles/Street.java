@@ -1,5 +1,10 @@
 package ooga.BackEnd.GameObjects.Tiles.PropertyTiles;
 
+/**
+ * @author rodrigoaraujo A Street tile. Extends Property and adds unique features
+ * only accessible to streets, such as houses.
+ */
+
 public class Street extends Property {
 
     private int base_rent;
@@ -12,7 +17,30 @@ public class Street extends Property {
     private int house_cost;
     private int houses;
 
+    /**
+     * default constructor for parsing
+     */
+
     public Street() {}
+
+    /**
+     * Creates the street class (subclass of Property)
+     *
+     * @param tileID String value of number gotten from XML
+     * @param boardIndex int value from 0-39
+     * @param cost int value of purchasing cost
+     * @param title_deed String value for display name on board
+     * @param base_rent int value of rent without monopoly
+     * @param monopoly_rent int value of rent with monopoly
+     * @param rent_one_house int value of rent with 1 house
+     * @param rent_two_house int value of rent with 2 houses
+     * @param rent_three_house int value of rent with 3 houses
+     * @param rent_four_house int value of rent with 4 houses
+     * @param rent_hotel int value of rent with hotel
+     * @param house_cost int value of cost of purchasing a house
+     * @param group_color String value of color set
+     * @param group_number int value of of total in color set
+     */
 
     public Street(String tileID, int boardIndex, int cost, String title_deed, int base_rent, int monopoly_rent, int rent_one_house, int rent_two_house, int rent_three_house, int rent_four_house, int rent_hotel, int house_cost, String group_color, int group_number) {
         this.tileID = tileID;
@@ -72,6 +100,13 @@ public class Street extends Property {
 
     public void removeHouse(int amount) {this.houses -= amount;}
 
+    /**
+     * Returns rent cost by checking how many (if any) houses are
+     * on the property and whether or not the owner has a monopoly.
+     *
+     * @return int
+     */
+
     @Override
     public int getRent() {
         if (this.houses == 1) {
@@ -100,11 +135,19 @@ public class Street extends Property {
         }
     }
 
+    /**
+     * Wipes the mortgage and house values (unique to Street property)
+     */
+
     @Override
     public void bankrupt() {
         this.mortgaged = false;
         this.houses = 0;
     }
+
+    /**
+     * When mortgaged, Street properties need to sell off any houses
+     */
 
     @Override
     public void setMortgaged() {

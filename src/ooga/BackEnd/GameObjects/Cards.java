@@ -7,6 +7,10 @@ import ooga.view.View;
 
 import java.util.List;
 
+/**
+ * @author rodrigoaraujo A card class. Contains all possible Chance and Community cards.
+ */
+
 public class Cards {
 
     private static final int JAIL_INDEX = 10;
@@ -29,6 +33,17 @@ public class Cards {
     private List<Property> properties;
     private List<Player> players;
 
+    /**
+     * Creates the card class which is used inside of the Player class to draw a
+     * random chance or community card for the player.
+     *
+     * @param type either "Chance" or "Community"
+     * @param user player that is drawing a card
+     * @param properties list of all properties
+     * @param players list of all players
+     * @param view the visuals of the boardgame
+     */
+
     public Cards(String type, Player user, List<Property> properties, List<Player> players, View view) {
         this.type = type;
         this.user = user;
@@ -36,6 +51,11 @@ public class Cards {
         this.players = players;
         this.view = view;
     }
+
+    /**
+     * randomly chooses a card and completes the actions from the prompt
+     * onto the player drawing the card
+     */
 
     public void action() {
         Decision d = new Decision(user.getName() + " just pulled a " + this.type + " card", option);
