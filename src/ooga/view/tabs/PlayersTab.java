@@ -14,7 +14,7 @@ public class PlayersTab extends DisplayTab{
     private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
     private static final String TITLE = myResources.getString("playersTabTitle");
     private static final int SPACING = 10;
-    private static final int INFO_LENGTH = 3;
+    private static final int INFO_LENGTH = 4;
 
     private  Pane myPane;
 
@@ -41,7 +41,7 @@ public class PlayersTab extends DisplayTab{
     protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties, String playerName){
         VBox vbox = new VBox(SPACING);
         HBox title = new HBox();
-        title.getChildren().add(new Text(playerName));
+        title.getChildren().add(new Text(playerName + " "));
         title.getChildren().add(makeColorAndTextHBox(color, myResources.getString("balance") + number.toString(), false, null));
         title.getChildren().add(new Text(myResources.getString("owns")));
 
