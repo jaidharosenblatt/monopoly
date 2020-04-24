@@ -3,13 +3,11 @@ package ooga.BackEnd.GameLogic;
 import java.util.*;
 
 import javafx.stage.Stage;
-import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameLogic.PlayerActions.*;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.CardTile;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
@@ -141,9 +139,9 @@ public class LoadGame {
         doubleTurns++;
     }
 
-    public void build() {Build b = new Build(currentPlayer, view, playerTabMap);}
+    public void build() {House b = new House(currentPlayer, view, playerTabMap, true);}
 
-    public void sell() {Sell s = new Sell(currentPlayer, view, playerTabMap);}
+    public void sell() {House s = new House(currentPlayer, view, playerTabMap, false);}
 
     public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap);}
 

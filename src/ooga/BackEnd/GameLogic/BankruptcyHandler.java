@@ -1,8 +1,8 @@
 package ooga.BackEnd.GameLogic;
 
 import ooga.BackEnd.GameLogic.Decisions.Decision;
+import ooga.BackEnd.GameLogic.PlayerActions.House;
 import ooga.BackEnd.GameLogic.PlayerActions.Mortgage;
-import ooga.BackEnd.GameLogic.PlayerActions.Sell;
 import ooga.BackEnd.GameLogic.PlayerActions.Trade;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
@@ -46,7 +46,7 @@ public class BankruptcyHandler {
                 Decision d = new Decision(currentPlayer.getName() + " must trade to avoid bankruptcy",option);
                 view.makeUserDecision(d);
                 stopTurn = false;
-                Sell s = new Sell(currentPlayer, view, playerTabMap);
+                House s = new House(currentPlayer, view, playerTabMap, false);
                 Mortgage m = new Mortgage(currentPlayer, view, playerTabMap);
                 Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);
             }
