@@ -36,12 +36,10 @@ public class LoadGame {
 
     private int currentIndex;
     private int doubleTurns;
-    private boolean stopTurn;
 
     public LoadGame(String game_pathname, Map<String, String> playerInfo, Stage stage) throws FileNotFoundException, XMLStreamException {
 
         XMLParser parse = new XMLParser(game_pathname);
-        this.stopTurn = false;
         this.properties = (ArrayList<Property>) parse.properties.clone();
         this.eventTiles = (ArrayList<Event>) parse.eventTiles.clone();
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
@@ -69,14 +67,18 @@ public class LoadGame {
     }
 
     public void takeTurn(){
-        isBankrupt();
+        BankruptcyHandler bank = new BankruptcyHandler(view, activePlayers, currentPlayer, playerTabMap, doubleTurns);
+
         //Only if player can avoid bankruptcy without trading with other players
-        if (stopTurn) {
+        if (bank.getStopTurn()) {
             return;
         }
         else {
 
-            doesPlayerLose();
+            if (bank.doesPlayerLose()) {
+                bank.playerLoses();
+                activePlayers = bank.getActivePlayers(); doubleTurns = bank.getDoubleTurns(); playerTabMap = bank.getPlayerTabMap();
+            }
 
             //Prevents player that rolled doubles from leaving jail
             if (currentPlayer.isJailed()) {doubleTurns = 0;}
@@ -148,83 +150,5 @@ public class LoadGame {
     public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view, playerTabMap);}
 
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);}
-
-    private void isBankrupt() {
-        if (currentPlayer.getCashBalance() < 0) {
-            if (checkAssets()) {
-                List<String> options = List.of("OK");
-                Decision d = new Decision(currentPlayer.getName() + " can afford to end bankruptcy without trading",options);
-                view.makeUserDecision(d);
-                stopTurn = true;
-            }
-            else {
-                List<String> options = List.of("OK");
-                Decision d = new Decision(currentPlayer.getName() + " must trade to avoid bankruptcy",options);
-                view.makeUserDecision(d);
-                stopTurn = false;
-                sell();
-                mortgage();
-                trade();
-            }
-        }
-        else {
-            stopTurn = false;
-        }
-    }
-
-    private boolean checkAssets() {
-        int total = currentPlayer.getCashBalance();
-        if (currentPlayer.getHouses() > 0) {
-            for (Property s : currentPlayer.getProperties()) {
-                if (s instanceof Street) {
-                    if (((Street) s).getHouses() > 0) {
-                        total += (((Street) s).getHouseCost() * ((Street) s).getHouses()) / 2;
-                    }
-                }
-            }
-        }
-        for (Property q : currentPlayer.getProperties()) {
-            if (!q.isMortgaged()) {
-                total += (q.getCost() / 2);
-            }
-        }
-        if (total >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private void doesPlayerLose() {
-        //If player is negative after ending their turn, player loses
-        if (currentPlayer.getCashBalance() < 0) {
-
-            List<String> options = List.of("OK");
-            Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", options);
-            view.makeUserDecision(d);
-
-            //Make all of player's properties neutral again
-            for (Property s : currentPlayer.getProperties()) {
-                s.bankrupt();
-                s.setOwner(null);
-            }
-            currentPlayer.setProperties(null);
-            activePlayers.remove(currentPlayer);
-            int remove = 0;
-            for (int i : playerTabMap.keySet()) {
-                if (playerTabMap.get(i) == currentPlayer) {
-                    remove = i;
-                }
-            }
-            playerTabMap.remove(remove);
-            doubleTurns = 0;
-
-            //End the game if there's only one player left
-            if (activePlayers.size() == 1) {
-                List<String> options2 = List.of("OK");
-                Decision d1 = new Decision(activePlayers.get(0).getName() + " wins!", options2);
-                view.makeUserDecision(d1);
-            }
-        }
-    }
 
 }
