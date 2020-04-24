@@ -47,7 +47,7 @@ public class BankruptcyHandler {
                 view.makeUserDecision(d);
                 stopTurn = false;
                 House s = new House(currentPlayer, view, playerTabMap, false);
-                Mortgage m = new Mortgage(currentPlayer, view, playerTabMap);
+                Mortgage m = new Mortgage(currentPlayer, view, playerTabMap, true);
                 Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);
             }
         }

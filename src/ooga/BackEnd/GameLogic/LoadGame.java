@@ -135,17 +135,15 @@ public class LoadGame {
         p.moveTo(new_tile);
     }
 
-    private void doubles() {
-        doubleTurns++;
-    }
+    private void doubles() {doubleTurns++;}
 
     public void build() {House b = new House(currentPlayer, view, playerTabMap, true);}
 
     public void sell() {House s = new House(currentPlayer, view, playerTabMap, false);}
 
-    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap);}
+    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap, true);}
 
-    public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view, playerTabMap);}
+    public void unmortgage() {Mortgage u = new Mortgage(currentPlayer, view, playerTabMap, false);}
 
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);}
 
