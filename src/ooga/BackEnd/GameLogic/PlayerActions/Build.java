@@ -26,7 +26,7 @@ public class Build {
             if (currentPlayer.hasMonopoly(owned)) {
                 check++;
                 if (owned instanceof Street) {
-                    if (currentPlayer.getBalance() < ((Street) owned).getHouseCost()) {
+                    if (currentPlayer.getCashBalance() < ((Street) owned).getHouseCost()) {
                         List<String> options = List.of("OK");
                         Decision d = new Decision("ERROR: You do not have enough funds",options);
                         view.makeUserDecision(d);

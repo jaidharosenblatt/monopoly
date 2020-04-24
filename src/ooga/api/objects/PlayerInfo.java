@@ -14,11 +14,6 @@ public interface PlayerInfo {
   List<PropertyView> getPropertiesUnmodifiable();
 
   /**
-   * @return a List of cards that a player currently owns
-   */
-  List<Card> getHeldCardsUnmodifiable();
-
-  /**
    * @return amount of money the player has
    */
   Integer getCashBalance();

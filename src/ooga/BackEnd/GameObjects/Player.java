@@ -44,10 +44,10 @@ public class Player implements PlayerInfo {
 
     public Player(String name, List<Tile> boardGame){
         this.name = name;
+        this.boardGame = boardGame;
         this.playerID = (int)(Math.random()*100);
         currentBalance = INITIAL_BALANCE;
         currentTile = 0;
-        this.boardGame = boardGame;
         this.properties = new ArrayList<>();
         this.houses = 0;
         this.isJailed = false;
@@ -55,35 +55,50 @@ public class Player implements PlayerInfo {
         this.getOutCards = 0;
     }
 
+
+    @Override
+    public List<PropertyView> getPropertiesUnmodifiable() {
+        ArrayList<PropertyView> propertiesView = new ArrayList<>();
+        for (Property p : properties) {
+            propertiesView.add(p.convertView());
+        }
+        return propertiesView;
+    }
+
+
+    @Override
+    public Integer getCashBalance() {
+        return currentBalance;
+    }
+
+    @Override
+    public Integer getPositionOnBoard() {
+        return currentTile;
+    }
+
+    @Override
+    public int getPlayerId() {
+        return playerID;
+    }
+
+    @Override
+    public String getPlayerColor() {
+        return color;
+    }
+
+    @Override
     public String getName() {return this.name;}
+
+    public void setView(View view) {this.view = view;}
 
     public int getHouses() {return this.houses;}
 
-    public int getBalance() {return this.currentBalance;}
-
     public void setColor(String color) {this.color = color;}
-
-    public int getTile() {return this.currentTile;}
 
     public void setTile(int tile) {
         System.out.println(name + " just moved to tile " + tile);
         currentTile = tile;
         boardGame.get(tile).onTile(this);
-    }
-
-    public String getTileName() {
-        String result = "";
-        for (Tile t : boardGame) {
-            if (t.getBoardIndex() == currentTile) {
-                if (t instanceof Event) {
-                    result = ((Event) t).getName();
-                }
-                if (t instanceof Property) {
-                    result = ((Property) t).getTitle();
-                }
-            }
-        }
-        return result;
     }
 
     public boolean hasJailFreeCards() {return (this.getOutCards > 0) ? true : false;}
@@ -161,15 +176,11 @@ public class Player implements PlayerInfo {
 
     public void setProperties(List<Property> list) {this.properties = list;}
 
-    public void addProperty(Property P) {properties.add(P);}
-
-    public void loseProperty(Property P) {properties.remove(P);}
-
     public void buyProperty(Property P) {
         if (this.currentBalance > P.getCost()) {
             System.out.println(this.name + " has bought " + P.getTitle());
             payBank(P.getCost(), false);
-            addProperty(P);
+            properties.add(P);
         }
     }
 
@@ -235,43 +246,5 @@ public class Player implements PlayerInfo {
         this.properties.addAll(propertiesReceive);
         temp.addAll(propertiesGive);
         otherPlayer.setProperties(temp);
-    }
-
-    public View getView() {return view;}
-
-    public void setView(View view) {this.view = view;}
-
-    @Override
-    public List<PropertyView> getPropertiesUnmodifiable() {
-        ArrayList<PropertyView> propertiesView = new ArrayList<>();
-        for (Property p : properties) {
-            propertiesView.add(p.convertView());
-        }
-        return propertiesView;
-    }
-
-    @Override
-    public List<Card> getHeldCardsUnmodifiable() {
-        return null;
-    }
-
-    @Override
-    public Integer getCashBalance() {
-        return currentBalance;
-    }
-
-    @Override
-    public Integer getPositionOnBoard() {
-        return currentTile;
-    }
-
-    @Override
-    public int getPlayerId() {
-        return playerID;
-    }
-
-    @Override
-    public String getPlayerColor() {
-        return color;
     }
 }

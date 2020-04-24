@@ -1,13 +1,9 @@
 package ooga.BackEnd.GameLogic;
 
-import java.awt.*;
 import java.util.*;
 
 import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.Decisions.Decision;
-import ooga.BackEnd.GameLogic.Decisions.MultiPlayerDecision;
-import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
-import ooga.BackEnd.GameLogic.Decisions.StringDecision;
 import ooga.BackEnd.GameLogic.PlayerActions.*;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
@@ -168,7 +164,7 @@ public class LoadGame {
             return;
         }
         if (doubleTurns > 0 && p.dice1 != p.dice2) {doubleTurns = 0;}
-        int new_tile = p.getTile() + p.dice1 + p.dice2;
+        int new_tile = p.getPositionOnBoard() + p.dice1 + p.dice2;
         if (new_tile > 39) {
             new_tile -= 40;
             p.receive(200);
@@ -191,7 +187,7 @@ public class LoadGame {
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, map);}
 
     private void isBankrupt() {
-        if (currentPlayer.getBalance() < 0) {
+        if (currentPlayer.getCashBalance() < 0) {
             if (checkAssets()) {
                 List<String> options = List.of("OK");
                 Decision d = new Decision(currentPlayer.getName() + " can afford to end bankruptcy without trading",options);
@@ -214,7 +210,7 @@ public class LoadGame {
     }
 
     private boolean checkAssets() {
-        int total = currentPlayer.getBalance();
+        int total = currentPlayer.getCashBalance();
         if (currentPlayer.getHouses() > 0) {
             for (Property s : currentPlayer.getProperties()) {
                 if (s instanceof Street) {
@@ -237,7 +233,7 @@ public class LoadGame {
 
     private void doesPlayerLose() {
         //If player is negative after ending their turn, player loses
-        if (currentPlayer.getBalance() < 0) {
+        if (currentPlayer.getCashBalance() < 0) {
 
             List<String> options = List.of("OK");
             Decision d = new Decision(currentPlayer.getName() + " went bankrupt!", options);

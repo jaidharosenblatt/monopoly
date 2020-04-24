@@ -30,7 +30,7 @@ public abstract class Property extends Tile {
             getView().makeUserDecision(d);
 
           if (d.getChoice().equals("Yes")) {
-            if (this.visiting.getBalance() >= this.cost) {
+            if (this.visiting.getCashBalance() >= this.cost) {
               this.setOwner(this.visiting);
               this.owner.buyProperty(this);
             }

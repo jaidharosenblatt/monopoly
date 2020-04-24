@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
  */
 public class UtilityTileView extends TileView {
 
-  private final double IMAGE_SIZE = 22;
+  private final double IMAGE_SIZE = 24;
 
   /**
    * Creates a utility tile

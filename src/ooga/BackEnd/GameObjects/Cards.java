@@ -4,7 +4,6 @@ import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Cards {
@@ -50,7 +49,7 @@ public class Cards {
                 case 2:
                     Decision d2 = new Decision("Advance to Illinois Avenue. If you pass Go, collect $200.", option);
                     view.makeUserDecision(d2);
-                    if (user.getTile() > ILLINOIS_INDEX) {
+                    if (user.getPositionOnBoard() > ILLINOIS_INDEX) {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(ILLINOIS_INDEX);
@@ -58,7 +57,7 @@ public class Cards {
                 case 3:
                     Decision d3 = new Decision("Advance to St. Charles Place. If you pass Go, collect $200.", option);
                     view.makeUserDecision(d3);
-                    if (user.getTile() > ST_CHARLES_INDEX) {
+                    if (user.getPositionOnBoard() > ST_CHARLES_INDEX) {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(ST_CHARLES_INDEX);
@@ -67,7 +66,7 @@ public class Cards {
                     Decision d4 = new Decision("Advance token to nearest Utility. If unowned, you may buy it from the Bank. " +
                                                        "If owned, throw dice and pay owner a total 10 times the amount thrown.", option);
                     view.makeUserDecision(d4);
-                    if (user.getTile() > 20) {
+                    if (user.getPositionOnBoard() > 20) {
                         payUtil10(WATER_INDEX);
                     }
                     else {
@@ -79,10 +78,10 @@ public class Cards {
                     Decision d5 = new Decision("Advance token to the nearest Railroad and pay owner twice the rental to which " +
                                                       "he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank.", option);
                     view.makeUserDecision(d5);
-                    if (user.getTile() < 10) {
+                    if (user.getPositionOnBoard() < 10) {
                         payRR2(READING_RR_INDEX);
                     }
-                    else if (user.getTile() < 30) {
+                    else if (user.getPositionOnBoard() < 30) {
                         payRR2(BO_RR_INDEX);
                     }
                     else {
@@ -102,7 +101,7 @@ public class Cards {
                 case 9:
                     Decision d8 = new Decision("Go Back Three Spaces.", option);
                     view.makeUserDecision(d8);
-                    int newTile = this.user.getTile() - 3;
+                    int newTile = this.user.getPositionOnBoard() - 3;
                     this.user.moveTo(newTile);
                     break;
                 case 10:
@@ -123,7 +122,7 @@ public class Cards {
                 case 13:
                     Decision d12 = new Decision( "Take a trip to Reading Railroad. If you pass Go, collect $200.", option);
                     view.makeUserDecision(d12);
-                    if (user.getTile() > READING_RR_INDEX) {
+                    if (user.getPositionOnBoard() > READING_RR_INDEX) {
                         user.receive(CROSS_GO);
                     }
                     user.moveTo(READING_RR_INDEX);
@@ -264,7 +263,7 @@ public class Cards {
                     Decision d = new Decision("Would you like to buy " + p.getTitle() + " for $" + p.getCost() + "?", option1);
                     view.makeUserDecision(d);
                     if (d.getChoice().equals("Yes")) {
-                        if (this.user.getBalance() >= p.getCost()) {
+                        if (this.user.getCashBalance() >= p.getCost()) {
                             p.setOwner(this.user);
                             this.user.buyProperty(p);
                         }
