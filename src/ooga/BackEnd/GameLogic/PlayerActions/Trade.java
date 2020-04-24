@@ -6,6 +6,7 @@ import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
 import ooga.BackEnd.GameLogic.Decisions.StringDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
+import ooga.util.PropertiesGetter;
 import ooga.view.View;
 
 import java.util.ArrayList;
@@ -58,11 +59,11 @@ public class Trade {
             cashWant = Integer.parseInt(decisionCashWant.getChoice());
         }
 
-        List<String> option = List.of("Yes", "No");
+        List<String> option = List.of(PropertiesGetter.getPromptFromKey("Yes"), PropertiesGetter.getPromptFromKey("No"));
         Decision d = new Decision("Does " + decisionPlayer.getChoice().get(0).getName() + " accept the offer?",option);
         view.makeUserDecision(d);
 
-        if (d.getChoice().equals("Yes")) {
+        if (d.getChoice().equals(PropertiesGetter.getPromptFromKey("Yes"))) {
             currentPlayer.trade(cashGive, decisionPropGive.getChoice(),
                     decisionPlayer.getChoice().get(0), cashWant, decisionPropWant.getChoice());
         }

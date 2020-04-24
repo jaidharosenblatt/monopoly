@@ -1,8 +1,14 @@
 package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
+import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.util.PropertiesGetter;
+
+import java.util.List;
 
 public class FreeParking extends Event {
+
+    private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
 
     public FreeParking() {}
 
@@ -14,7 +20,8 @@ public class FreeParking extends Event {
 
     @Override
     public void action() {
-        System.out.println("Free Parking");
+        Decision d = new Decision(PropertiesGetter.getPromptFromKey("freeparking"), option);
+        view.makeUserDecision(d);
     }
 }
 

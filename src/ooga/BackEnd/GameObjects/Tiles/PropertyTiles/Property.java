@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
+import ooga.util.PropertiesGetter;
 import ooga.view.board.PropertyView;
 
 public abstract class Property extends Tile {
@@ -19,17 +20,16 @@ public abstract class Property extends Tile {
     protected String group_color;
     protected int group_number;
     protected boolean mortgaged;
+    private List<String> options = List.of(PropertiesGetter.getPromptFromKey("Yes"),PropertiesGetter.getPromptFromKey("No"));
 
     @Override
     public void action() {
         System.out.println(this.visiting.getName() + " just landed on " + this.title_deed);
         if (!isOwned()) {
-
-            List<String> options = List.of("Yes","No");
             Decision d = new Decision("Would you like to buy " + this.title_deed + " for $" + this.cost + "?",options);
             getView().makeUserDecision(d);
 
-          if (d.getChoice().equals("Yes")) {
+          if (d.getChoice().equals(PropertiesGetter.getPromptFromKey("Yes"))) {
             if (this.visiting.getCashBalance() >= this.cost) {
               this.setOwner(this.visiting);
               this.owner.buyProperty(this);

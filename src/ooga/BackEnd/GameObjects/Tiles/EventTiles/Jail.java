@@ -1,13 +1,14 @@
 package ooga.BackEnd.GameObjects.Tiles.EventTiles;
 
 import ooga.BackEnd.GameLogic.Decisions.Decision;
+import ooga.util.PropertiesGetter;
 
 import java.util.List;
 
 public class Jail extends Event {
 
-    private static final List<String> options = List.of("Yes","No");
-    private static final List<String> option = List.of("OK");
+    private static final List<String> options = List.of(PropertiesGetter.getPromptFromKey("Yes"),PropertiesGetter.getPromptFromKey("No"));
+    private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
 
     public Jail() {}
 
@@ -22,10 +23,10 @@ public class Jail extends Event {
         if (this.visiting.isJailed()) {
             System.out.println(this.visiting.getName() + " is currently in Jail.");
             if (this.visiting.hasJailFreeCards()) {
-                Decision d = new Decision("Would you like to use your Get Out of Jail Free Card?",options);
+                Decision d = new Decision(PropertiesGetter.getPromptFromKey("jailprompt1"),options);
                 getView().makeUserDecision(d);
 
-                if (d.getChoice().equals("Yes")) {
+                if (d.getChoice().equals(PropertiesGetter.getPromptFromKey("Yes"))) {
                     this.visiting.useJailFreeCard();
                     this.visiting.setFree();
                     this.visiting.rollDice();
@@ -34,16 +35,15 @@ public class Jail extends Event {
                 }
             }
             if (this.visiting.getJailTurn() < 2) {
-                List<String> options = List.of("Yes","No");
-                Decision d = new Decision("Would you like to bail out of jail?",options);
+                Decision d = new Decision(PropertiesGetter.getPromptFromKey("jailprompt2"),options);
                 getView().makeUserDecision(d);
-                if (d.getChoice().equals("Yes")) {
+                if (d.getChoice().equals(PropertiesGetter.getPromptFromKey("Yes"))) {
                     this.visiting.payBail();
                     this.visiting.setFree();
                     this.visiting.rollDice();
                     this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                 }
-                if (d.getChoice().equals("No")) {
+                if (d.getChoice().equals(PropertiesGetter.getPromptFromKey("No"))) {
                     this.visiting.addJailTurn();
                     this.visiting.rollDice();
                     if (this.visiting.dice1 == this.visiting.dice2) {
@@ -63,6 +63,10 @@ public class Jail extends Event {
                 this.visiting.rollDice();
                 this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
             }
+        }
+        else {
+            Decision d = new Decision(PropertiesGetter.getPromptFromKey("jailprompt3"),options);
+            getView().makeUserDecision(d);
         }
     }
 }

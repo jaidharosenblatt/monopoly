@@ -7,6 +7,7 @@ import ooga.BackEnd.GameLogic.PlayerActions.Trade;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
+import ooga.util.PropertiesGetter;
 import ooga.view.View;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class BankruptcyHandler {
 
-    private static final List<String> option = List.of("OK");
+    private static final List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
 
     private View view;
 

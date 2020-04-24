@@ -5,6 +5,7 @@ import ooga.BackEnd.GameLogic.Decisions.MultiPropDecision;
 import ooga.BackEnd.GameObjects.Player;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
+import ooga.util.PropertiesGetter;
 import ooga.view.View;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 public class Mortgage {
 
-    private final static List<String> option = List.of("OK");
+    private final static List<String> option = List.of(PropertiesGetter.getPromptFromKey("Ok"));
 
     public Mortgage(Player currentPlayer, View view, Map<Integer, Player> map, boolean mortgage) {
         String prompt = "";
