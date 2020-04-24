@@ -75,7 +75,7 @@ public class SplashScreen {
       new SplashScreen(controller);
     }
     catch (Exception e) {
-      e.printStackTrace();
+      new ErrorView("LoadGame");
     }
   }
 
