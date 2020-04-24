@@ -7,15 +7,15 @@ import ooga.BackEnd.GameObjects.Tiles.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cardTile extends Event {
+public class CardTile extends Event {
 
     private String type;
     private List<Property> properties;
     private List<Player> players;
 
-    public cardTile() {}
+    public CardTile() {}
 
-    public cardTile(String tileID, int boardIndex, String type) {
+    public CardTile(String tileID, int boardIndex, String type) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.type = type;

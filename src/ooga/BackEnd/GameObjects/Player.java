@@ -216,8 +216,6 @@ public class Player implements PlayerInfo {
         this.houses -= amount;
     }
 
-
-
     public void rollDice() {
         this.dice1 = (int) (Math.random() * 6) + 1;
         this.dice2 = (int) (Math.random() * 6) + 1;

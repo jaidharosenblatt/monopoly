@@ -281,7 +281,7 @@ public class XMLParser {
         Tax t = null;
         FreeParking fp = null;
         GoToJail gtj = null;
-        cardTile ct = null;
+        CardTile ct = null;
         String text = null;
         String name = null;
 
@@ -304,7 +304,7 @@ public class XMLParser {
                         fp.setTileID(reader.getAttributeValue(0));
                         gtj = new GoToJail();
                         gtj.setTileID(reader.getAttributeValue(0));
-                        ct = new cardTile();
+                        ct = new CardTile();
                         ct.setTileID(reader.getAttributeValue(0));
                     }
                     if ("eventTiles".equals(reader.getLocalName()))

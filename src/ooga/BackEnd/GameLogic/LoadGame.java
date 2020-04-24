@@ -6,12 +6,10 @@ import javafx.stage.Stage;
 import ooga.BackEnd.GameLogic.Decisions.Decision;
 import ooga.BackEnd.GameLogic.PlayerActions.*;
 import ooga.BackEnd.GameObjects.Player;
+import ooga.BackEnd.GameObjects.Tiles.EventTiles.CardTile;
 import ooga.BackEnd.GameObjects.Tiles.EventTiles.Event;
-import ooga.BackEnd.GameObjects.Tiles.EventTiles.cardTile;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.RailRoad;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
-import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Utility;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import javax.xml.stream.XMLStreamException;
@@ -25,19 +23,19 @@ public class LoadGame {
 
     private static final int JAIL_INDEX = 10;
 
-    private List<Property> properties;
-    private List<Street> streets;
-    private List<RailRoad> railroads;
-    private List<Utility> utilities;
-    private List<Event> eventTiles;
-    private List<Tile> allTiles;
-    private List<Player> activePlayers;
-    private List<PlayerInfo> playerInfoList;
     private View view;
+
+    private List<PlayerInfo> playerInfoList;
+    private List<Player> activePlayers;
     private Player currentPlayer;
+    private Map<Integer, Player> playerTabMap;
+
+    private List<Tile> allTiles;
+    private List<Property> properties;
+    private List<Event> eventTiles;
+
     private int currentIndex;
     private int doubleTurns;
-    private Map<Integer, Player> map;
     private boolean stopTurn;
 
     public LoadGame(String game_pathname, Map<String, String> playerInfo, Stage stage) throws FileNotFoundException, XMLStreamException {
@@ -49,7 +47,9 @@ public class LoadGame {
         this.allTiles = (ArrayList<Tile>) parse.allTiles.clone();
         this.doubleTurns = 0;
 
-        createPlayers(playerInfo);
+        CreatePlayers cp = new CreatePlayers(playerInfo, allTiles);
+        activePlayers = cp.getActivePlayers();
+        playerTabMap = cp.getPlayerTabMap();
         currentPlayer = activePlayers.get(0);
         currentIndex = 0;
 
@@ -58,7 +58,7 @@ public class LoadGame {
 
         view = new View(stage, this, playerInfoList, allTiles);
         view.setCurrentPlayer(currentPlayer);
-        view.refreshPlayers(map);
+        view.refreshPlayers(playerTabMap);
 
         for (Tile t : allTiles) {
             t.setView(view);
@@ -66,43 +66,6 @@ public class LoadGame {
         for (Player p : activePlayers) {
             p.setView(view);
         }
-    }
-
-    private void createPlayers(Map<String, String> playerInfo) {
-        this.activePlayers = new ArrayList<>();
-
-        Player[] players = new Player[playerInfo.size()];
-        int i =0;
-        for (String playerName : playerInfo.keySet()){
-          Player player = new Player(playerName, allTiles);
-          String color = playerInfo.get(playerName);
-          player.setColor(color);
-          players[i] = player;
-          i++;
-        }
-
-        this.map = new HashMap<>();
-
-        Player[] temp = rollForOrder(players);
-        for (Player p : temp) {
-            this.activePlayers.add(p);
-            this.map.put(activePlayers.indexOf(p), p);
-        }
-    }
-
-    private Player[] rollForOrder(Player[] list) {
-        Player[] order = new Player[list.length];
-        int counter = 0;
-        ArrayList<Integer> chosen = new ArrayList<>();
-        while (chosen.size() < list.length) {
-            int probality = (int) (Math.random() * list.length);
-            if (!chosen.contains(probality)) {
-                chosen.add(probality);
-                order[counter] = list[probality];
-                counter++;
-            }
-        }
-        return order;
     }
 
     public void takeTurn(){
@@ -132,7 +95,7 @@ public class LoadGame {
             else {rollDiceAndMove(currentPlayer);}
 
             //Update player tab
-            view.refreshPlayers(map);
+            view.refreshPlayers(playerTabMap);
         }
     }
 
@@ -149,9 +112,9 @@ public class LoadGame {
 
     private void updateCardTiles() {
         for (Event e : this.eventTiles) {
-            if (e instanceof cardTile) {
-                ((cardTile) e).playerList(this.activePlayers);
-                ((cardTile) e).updateProps(this.properties);
+            if (e instanceof CardTile) {
+                ((CardTile) e).playerList(this.activePlayers);
+                ((CardTile) e).updateProps(this.properties);
             }
         }
     }
@@ -176,15 +139,15 @@ public class LoadGame {
         doubleTurns++;
     }
 
-    public void build() {Build b = new Build(currentPlayer, view, map);}
+    public void build() {Build b = new Build(currentPlayer, view, playerTabMap);}
 
-    public void sell() {Sell s = new Sell(currentPlayer, view, map);}
+    public void sell() {Sell s = new Sell(currentPlayer, view, playerTabMap);}
 
-    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, map);}
+    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap);}
 
-    public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view, map);}
+    public void unmortgage() {Unmortgage u = new Unmortgage(currentPlayer, view, playerTabMap);}
 
-    public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, map);}
+    public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);}
 
     private void isBankrupt() {
         if (currentPlayer.getCashBalance() < 0) {
@@ -247,12 +210,12 @@ public class LoadGame {
             currentPlayer.setProperties(null);
             activePlayers.remove(currentPlayer);
             int remove = 0;
-            for (int i : map.keySet()) {
-                if (map.get(i) == currentPlayer) {
+            for (int i : playerTabMap.keySet()) {
+                if (playerTabMap.get(i) == currentPlayer) {
                     remove = i;
                 }
             }
-            map.remove(remove);
+            playerTabMap.remove(remove);
             doubleTurns = 0;
 
             //End the game if there's only one player left
