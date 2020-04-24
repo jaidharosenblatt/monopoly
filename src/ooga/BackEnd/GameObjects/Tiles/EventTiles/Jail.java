@@ -20,11 +20,33 @@ public class Jail extends Event {
 
     public Jail() {}
 
+    /**
+     * Creates Jail class, which is the subclass to Event,
+     * which is the subclass to Tile.
+     *
+     * @param tileID String value of number gotten from XML
+     * @param boardIndex int value from 0-39
+     */
+
     public Jail(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.visiting = null;
     }
+
+    /**
+     * First checks if player is visiting or not.
+     *
+     * Then checks whether or not the player has any "Get Out of Jail Free" cards.
+     *
+     * Prompts the player if he or she would like to use a card (if they have one).
+     *
+     * Prompts the player if he or she would like to bail out for $50.
+     *
+     * Rolls dice and sets player free if they roll doubles
+     *
+     * Maximum three turns in jail
+     */
 
     @Override
     public void action() {

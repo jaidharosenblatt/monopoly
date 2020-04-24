@@ -20,11 +20,23 @@ public class FreeParking extends Event {
 
     public FreeParking() {}
 
+    /**
+     * Creates FreeParking class, which is the subclass to Event,
+     * which is the subclass to Tile.
+     *
+     * @param tileID String value of number gotten from XML
+     * @param boardIndex int value from 0-39
+     */
+
     public FreeParking(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.visiting = null;
     }
+
+    /**
+     * Tells the player they've gotten "free parking"
+     */
 
     @Override
     public void action() {

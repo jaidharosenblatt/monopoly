@@ -31,12 +31,28 @@ public class Tax extends Event {
         this.visiting = null;
     }
 
+    /**
+     * makes the visiting player pay the bank the appropriate tax_cost
+     */
+
     @Override
     public void action() {
         this.visiting.payBank(this.tax_cost, true);
     }
 
+    /**
+     * Sets tax value (in parser)
+     *
+     * @param tax int value
+     */
+
     public void setTax(int tax) {this.tax_cost = tax;}
+
+    /**
+     * Gets the tax value
+     *
+     * @return int
+     */
 
     public int getTax() {return this.tax_cost;}
 }

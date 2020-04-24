@@ -16,11 +16,24 @@ public class Go extends Event {
 
     public Go() {}
 
+    /**
+     * Creates Go class, which is the subclass to Event,
+     * which is the subclass to Tile.
+     *
+     * @param tileID String value of number gotten from XML
+     * @param boardIndex int value from 0-39
+     */
+
     public Go(String tileID, int boardIndex) {
         this.tileID = tileID;
         this.boardIndex = boardIndex;
         this.visiting = null;
     }
+
+    /**
+     * Gives player $200 for landing on it (passing Go is handled
+     * inside of rollDiceAndMove from BackendExternal api method)
+     */
 
     @Override
     public void action() {
