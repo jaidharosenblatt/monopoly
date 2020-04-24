@@ -72,6 +72,7 @@ public class SplashScreen {
       controller.startGame(getPlayerInfo(), boardPath);
     } catch (Exception e) {
       new ErrorView("NullPlayer");
+      new SplashScreen(controller);
     }
   }
 
