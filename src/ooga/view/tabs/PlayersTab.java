@@ -14,7 +14,7 @@ public class PlayersTab extends DisplayTab{
     private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
     private static final String TITLE = myResources.getString("playersTabTitle");
     private static final int SPACING = 10;
-    private static final double FONT_SIZE = 12;
+    private static final int INFO_LENGTH = 3;
 
     private  Pane myPane;
 
@@ -34,7 +34,7 @@ public class PlayersTab extends DisplayTab{
         while (i < info.size()) {
             VBox vbox = createPlayerDisplay( inform.get(i).toString(),(Integer) inform.get(i + 1), (List<Property>) inform.get(i + 2));
             myPane.getChildren().add(vbox);
-            i += 3;
+            i += INFO_LENGTH;
         }
     }
 

@@ -17,8 +17,8 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Street;
 
 public abstract class DisplayTab {
-  private final double FONT_SIZE = 12;
-  private final double SPACING = 10;
+  private static final double FONT_SIZE = 12;
+  private static final double SPACING = 10;
   Tab myTab;
   Pane myPane;
   public DisplayTab(String tabName, Pane pane){
@@ -33,7 +33,7 @@ public abstract class DisplayTab {
   protected void addTitle(String str) {
     HBox hbox = new HBox();
     Text title = new Text(str);
-    title.setFont(new Font(20));
+    title.setFont(new Font(FONT_SIZE*2));
     hbox.setAlignment(Pos.CENTER);
     hbox.getChildren().add(title);
     myPane.getChildren().add(hbox);
@@ -48,8 +48,8 @@ public abstract class DisplayTab {
       HBox houses = new HBox(SPACING / 2);
       for (int i = 0; i < ((Street) p).getHouses(); i++) {
         ImageView house = new ImageView(new Image(this.getClass().getClassLoader().getResourceAsStream("house.png")));
-        house.setFitHeight(10);
-        house.setFitWidth(10);
+        house.setFitHeight(SPACING);
+        house.setFitWidth(SPACING);
         houses.getChildren().add(house);
       }
       hBox.getChildren().add(houses);

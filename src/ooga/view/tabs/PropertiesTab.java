@@ -7,11 +7,11 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 
 import java.util.*;
 
+
 public class PropertiesTab extends DisplayTab{
     private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
     private static final String TITLE = myResources.getString("propertiesTabTitle");
     private static final int SPACING = 10;
-    private static final double FONT_SIZE = 12;
 
     private List<Property> availableProperty;
 
@@ -47,7 +47,7 @@ public class PropertiesTab extends DisplayTab{
         }
         myPane.getChildren().add(vBox);
     }
-    class SortByColor implements Comparator<Property>{
+    class SortByColor implements Comparator<Property> {
         @Override
         public int compare(Property o1, Property o2) {
             return o1.getGroupNumber() - o2.getGroupNumber();
