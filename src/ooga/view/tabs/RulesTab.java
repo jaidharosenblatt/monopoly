@@ -14,20 +14,22 @@ import javafx.scene.text.TextAlignment;
 public class RulesTab extends DisplayTab {
   private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
   private static final String TITLE = myResources.getString("rulesTabTitle");
-  private static final ResourceBundle rules = ResourceBundle.getBundle("ooga/view/tabs/DefaultRules");
+
   private static final int FONT_SIZE = 12;
   private static final int WRAPPING_WIDTH = 300;
   private static final int SPACING = 10;
+  private ResourceBundle rules;
   private  Pane myPane;
 
   public RulesTab(String tabName, Pane pane) {
     super(tabName, pane);
     this.myPane = pane;
     super.addTitle(TITLE);
-    displayDefaultRules();
+    displayRules("Default");
   }
 
-  private void displayDefaultRules() {
+  private void displayRules(String GameType) {
+    rules = ResourceBundle.getBundle("ooga/view/tabs/"+GameType + "Rules");
     String [] ruleSet = rules.getString("ruleSet").split(",");
     Collection<Object> gameRules = new LinkedList<>();
     for (String rule : ruleSet){
