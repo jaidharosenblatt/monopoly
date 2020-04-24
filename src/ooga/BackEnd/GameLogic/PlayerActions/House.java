@@ -16,7 +16,14 @@ public class House {
 
     private final static List<String> option = List.of("OK");
 
+    private String prompt = "";
+
     public House(Player currentPlayer, View view, Map<Integer, Player> map, boolean build) {
+        if (currentPlayer.getProperties().size() < 1) {
+            Decision d = new Decision("ERROR: You do not own any properties",option);
+            view.makeUserDecision(d);
+            return;
+        }
         if (build) {
             buildHouseChecks(currentPlayer, view, build);
         }
@@ -28,22 +35,10 @@ public class House {
     }
 
     private void buildHouseChecks(Player currentPlayer, View view, boolean build) {
-        if (currentPlayer.getProperties().size() < 1) {
-            Decision d = new Decision("ERROR: You do not own any properties",option);
-            view.makeUserDecision(d);
-            return;
-        }
         int check = 0;
         for (Property owned : currentPlayer.getProperties()) {
             if (currentPlayer.hasMonopoly(owned)) {
                 check++;
-                if (owned instanceof Street) {
-                    if (currentPlayer.getCashBalance() < ((Street) owned).getHouseCost()) {
-                        Decision d = new Decision("ERROR: You do not have enough funds",option);
-                        view.makeUserDecision(d);
-                        return;
-                    }
-                }
             }
         }
         if (check < 1) {
@@ -64,50 +59,25 @@ public class House {
     }
 
     private void loopBuildSellHouse(Player currentPlayer, View view, boolean build) {
-        String prompt = "";
-        List<Property> streets = new ArrayList<>();
-        for(Property q : currentPlayer.getProperties()) {
-            if (q instanceof Street && !q.isMortgaged() && currentPlayer.hasMonopoly(q)) {
-                if (((Street) q).getHouses() < 5 && build) {
-                    streets.add((Street) q);
-                    prompt = "buy";
-                }
-                if (((Street) q).getHouses() > 0 && !build) {
-                    streets.add((Street) q);
-                    prompt = "sell";
-                }
-            }
-        }
-        List<Property> options = streets;
+
+        List<Property> options = filterHousingOptions(currentPlayer, build);
         MultiPropDecision d = new MultiPropDecision("Which property would you like to " + prompt + " a house on?",options);
         view.makeMultiDecision(d);
 
-        Map<String, ArrayList<Property>> choicemap = new HashMap<>();
-        for (Property r : d.getChoice()) {
-            if (!choicemap.containsKey(r.getGroupColor())) {
-                choicemap.put(r.getGroupColor(), new ArrayList<Property>());
-            }
-            choicemap.get(r.getGroupColor()).add(r);
-        }
+        Map<String, List<Property>> choicesMap = monopolyPropertiesMap(d.getChoice());
 
-        Map<String, ArrayList<Property>> originalMap = new HashMap<>();
-        for (Property opt : d.getOptions()) {
-            if (!originalMap.containsKey(opt.getGroupColor())) {
-                originalMap.put(opt.getGroupColor(), new ArrayList<Property>());
-            }
-            originalMap.get(opt.getGroupColor()).add(opt);
-        }
+        Map<String, List<Property>> originalChoicesMap = monopolyPropertiesMap(d.getOptions());
 
         loop:
         for (Property owned : d.getChoice()) {
-            for (String key : choicemap.keySet()) {
-                if (owned.getGroupNumber() == choicemap.get(key).size()) {
+            for (String key : choicesMap.keySet()) {
+                if (owned.getGroupNumber() == choicesMap.get(key).size()) {
                     if (build) {currentPlayer.buyHouse(1, (Street) owned);}
                     if (!build) {currentPlayer.sellHouse(1, (Street) owned);}
                     continue loop;
                 }
                 else if (owned.getGroupColor().equals(key)) {
-                    for (Property w : originalMap.get(key)) {
+                    for (Property w : originalChoicesMap.get(key)) {
                         if (w instanceof Street && owned instanceof Street && owned != w) {
                             int diff = ((Street) owned).getHouses() - ((Street) w).getHouses();
                             if ((diff > 0 && build) || (diff < 0 && !build)) {
@@ -123,6 +93,34 @@ public class House {
                 }
             }
         }
+    }
+
+    private List<Property> filterHousingOptions(Player currentPlayer, boolean build) {
+        List<Property> temp = new ArrayList<>();
+        for(Property q : currentPlayer.getProperties()) {
+            if (q instanceof Street && !q.isMortgaged() && currentPlayer.hasMonopoly(q)) {
+                if (((Street) q).getHouses() < 5 && build) {
+                    temp.add((Street) q);
+                    prompt = "buy";
+                }
+                if (((Street) q).getHouses() > 0 && !build) {
+                    temp.add((Street) q);
+                    prompt = "sell";
+                }
+            }
+        }
+        return temp;
+    }
+
+    private Map<String, List<Property>> monopolyPropertiesMap(List<Property> properties) {
+        Map<String, List<Property>> temp = new HashMap<>();
+        for (Property p : properties) {
+            if (!temp.containsKey(p.getGroupColor())) {
+                temp.put(p.getGroupColor(), new ArrayList<Property>());
+            }
+            temp.get(p.getGroupColor()).add(p);
+        }
+        return temp;
     }
 
 }
