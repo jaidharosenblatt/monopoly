@@ -29,14 +29,14 @@ public class LoadGame {
 
     private static final int JAIL_INDEX = 10;
 
-    private ArrayList<Property> properties;
-    private ArrayList<Street> streets;
-    private ArrayList<RailRoad> railroads;
-    private ArrayList<Utility> utilities;
-    private ArrayList<Event> eventTiles;
-    private ArrayList<Tile> allTiles;
-    private ArrayList<Player> activePlayers;
-    private ArrayList<PlayerInfo> playerInfoList;
+    private List<Property> properties;
+    private List<Street> streets;
+    private List<RailRoad> railroads;
+    private List<Utility> utilities;
+    private List<Event> eventTiles;
+    private List<Tile> allTiles;
+    private List<Player> activePlayers;
+    private List<PlayerInfo> playerInfoList;
     private View view;
     private Player currentPlayer;
     private int currentIndex;
@@ -56,19 +56,6 @@ public class LoadGame {
         createPlayers(playerInfo);
         currentPlayer = activePlayers.get(0);
         currentIndex = 0;
-
-        ///////////////////////////////////////////////////////////////////////////////////
-        //TESTING PURPOSES ONLY: last player in turn gets all available properties
-//        ArrayList<Property> test = new ArrayList<>();
-//        for (Tile t : allTiles) {
-//            if (t.getBoardIndex() < 40 && t instanceof Property) {
-//                ((Property) t).setOwner(currentPlayer);
-//                test.add((Property) t);
-//            }
-//        }
-//        currentPlayer.setProperties(test);
-        //DELETE AFTER FINISHING TESTING
-        ///////////////////////////////////////////////////////////////////////////////////
 
         playerInfoList = new ArrayList<>();
         playerInfoList.addAll(activePlayers);

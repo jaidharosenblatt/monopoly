@@ -28,8 +28,8 @@ public class Player implements PlayerInfo {
     private final int playerID;
     private int currentBalance;
     private int currentTile;
-    private ArrayList<Tile> boardGame;
-    private ArrayList<Property> properties;
+    private List<Tile> boardGame;
+    private List<Property> properties;
     private int houses;
 
     private boolean isJailed;
@@ -42,7 +42,7 @@ public class Player implements PlayerInfo {
     public int dice1;
     public int dice2;
 
-    public Player(String name, ArrayList<Tile> boardGame){
+    public Player(String name, List<Tile> boardGame){
         this.name = name;
         this.playerID = (int)(Math.random()*100);
         currentBalance = INITIAL_BALANCE;
@@ -157,9 +157,9 @@ public class Player implements PlayerInfo {
         boardGame.get(tile).action();
     }
 
-    public ArrayList<Property> getProperties() {return properties;}
+    public List<Property> getProperties() {return properties;}
 
-    public void setProperties(ArrayList<Property> list) {this.properties = list;}
+    public void setProperties(List<Property> list) {this.properties = list;}
 
     public void addProperty(Property P) {properties.add(P);}
 
@@ -214,17 +214,17 @@ public class Player implements PlayerInfo {
         System.out.println(this.name + " has rolled a " + dice1 + " and a " + dice2 + ", so " + (dice1 + dice2) + " total.");
     }
 
-    public void drawCard(String type, ArrayList<Property> props, ArrayList<Player> players) {
+    public void drawCard(String type, List<Property> props, List<Player> players) {
         System.out.println(this.name + " has drawn a " + type + " card.");
         Cards draw = new Cards(type, this, props, players, this.view);
         draw.action();
     }
 
-    public void trade(int moneyGive, ArrayList<Property> propertiesGive, Player otherPlayer, int moneyReceive, ArrayList<Property> propertiesReceive) {
+    public void trade(int moneyGive, List<Property> propertiesGive, Player otherPlayer, int moneyReceive, List<Property> propertiesReceive) {
         this.payPlayer(otherPlayer, moneyGive, false);
         otherPlayer.payPlayer(this, moneyReceive, false);
         this.properties.removeAll(propertiesGive);
-        ArrayList<Property> temp = otherPlayer.getProperties();
+        List<Property> temp = otherPlayer.getProperties();
         temp.removeAll(propertiesReceive);
         for (Property p : propertiesGive) {
             p.setOwner(otherPlayer);

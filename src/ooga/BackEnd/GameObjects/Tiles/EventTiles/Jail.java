@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Jail extends Event {
 
+    private static final List<String> option = List.of("Yes","No");
+    private static final List<String> option1 = List.of("OK");
+
     public Jail() {}
 
     public Jail(String tileID, int boardIndex) {
@@ -19,8 +22,7 @@ public class Jail extends Event {
         if (this.visiting.isJailed()) {
             System.out.println(this.visiting.getName() + " is currently in Jail.");
             if (this.visiting.hasJailFreeCards()) {
-                List<String> options = List.of("Yes","No");
-                Decision d = new Decision("Would you like to use your Get Out of Jail Free Card?",options);
+                Decision d = new Decision("Would you like to use your Get Out of Jail Free Card?",option);
                 getView().makeUserDecision(d);
 
                 if (d.getChoice().equals("Yes")) {
@@ -33,7 +35,7 @@ public class Jail extends Event {
             }
             if (this.visiting.getJailTurn() < 2) {
                 List<String> options = List.of("Yes","No");
-                Decision d = new Decision("Would you like to bail out of jail?",options);
+                Decision d = new Decision("Would you like to bail out of jail?",option);
                 getView().makeUserDecision(d);
                 if (d.getChoice().equals("Yes")) {
                     this.visiting.payBail();
@@ -49,8 +51,8 @@ public class Jail extends Event {
                         this.visiting.moveTo(10 + this.visiting.dice1 + this.visiting.dice2);
                     }
                     else {
-                        List<String> option = List.of("OK");
-                        Decision d1 = new Decision(this.visiting.getName() + " remains in Jail",option);
+
+                        Decision d1 = new Decision(this.visiting.getName() + " remains in Jail",option1);
                         view.makeUserDecision(d1);
                     }
                 }

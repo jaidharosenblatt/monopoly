@@ -25,10 +25,10 @@ public class Cards {
     private View view;
     private Player user;
     private String type;
-    private ArrayList<Property> properties;
-    private ArrayList<Player> players;
+    private List<Property> properties;
+    private List<Player> players;
 
-    public Cards(String type, Player user, ArrayList<Property> properties, ArrayList<Player> players, View view) {
+    public Cards(String type, Player user, List<Property> properties, List<Player> players, View view) {
         this.type = type;
         this.user = user;
         this.properties = properties;

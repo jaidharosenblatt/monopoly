@@ -5,12 +5,13 @@ import ooga.BackEnd.GameObjects.Tiles.PropertyTiles.Property;
 import ooga.BackEnd.GameObjects.Tiles.Tile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class cardTile extends Event {
 
     private String type;
-    private ArrayList<Property> properties = new ArrayList<Property>();
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private List<Property> properties;
+    private List<Player> players;
 
     public cardTile() {}
 
@@ -19,14 +20,16 @@ public class cardTile extends Event {
         this.boardIndex = boardIndex;
         this.type = type;
         this.visiting = null;
+        properties = new ArrayList<>();
+        players = new ArrayList<>();
     }
 
     @Override
     public void action() {this.visiting.drawCard(this.type, properties, players);}
 
-    public void updateProps(ArrayList<Property> properties) { this.properties = properties; }
+    public void updateProps(List<Property> properties) { this.properties = properties; }
 
-    public void playerList(ArrayList<Player> players) {
+    public void playerList(List<Player> players) {
         this.players = players;
     }
 
