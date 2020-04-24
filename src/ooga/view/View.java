@@ -80,28 +80,28 @@ public class View extends BorderPane implements FrontEndExternal {
    * Tells the backend that user wants to build houses
    */
   public void handleBuild() {
-    controller.build();
+    controller.buildHouse();
   }
 
   /**
    * Tells the backend that user wants to sell houses
    */
   public void handleSell() {
-    controller.sell();
+    controller.sellHouse();
   }
 
   /**
    * Tells the backend that user wants to mortgage a property
    */
   public void handleMortgage() {
-    controller.mortgage();
+    controller.mortgageProp();
   }
 
   /**
    * Tells the backend that user wants to unmortgage a property
    */
   public void handleUnmortgage() {
-    controller.unmortgage();
+    controller.unmortgageProp();
   }
 
   /**

@@ -14,10 +14,11 @@ import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import ooga.api.BackendExternal;
 import ooga.api.objects.PlayerInfo;
 import ooga.view.View;
 
-public class LoadGame {
+public class LoadGame implements BackendExternal {
 
     private static final int JAIL_INDEX = 10;
 
@@ -64,6 +65,7 @@ public class LoadGame {
         }
     }
 
+    @Override
     public void takeTurn(){
         BankruptcyHandler bank = new BankruptcyHandler(view, activePlayers, currentPlayer, playerTabMap, doubleTurns);
 
@@ -99,7 +101,8 @@ public class LoadGame {
         }
     }
 
-    private void nextPlayer(){
+    @Override
+    public void nextPlayer(){
         if (currentIndex + 1 >= activePlayers.size()) {
             currentPlayer = activePlayers.get(0);
             currentIndex = 0;
@@ -110,16 +113,8 @@ public class LoadGame {
         }
     }
 
-    private void updateCardTiles() {
-        for (Event e : this.eventTiles) {
-            if (e instanceof CardTile) {
-                ((CardTile) e).playerList(this.activePlayers);
-                ((CardTile) e).updateProps(this.properties);
-            }
-        }
-    }
-
-    private void rollDiceAndMove(Player p) {
+    @Override
+    public void rollDiceAndMove(Player p) {
         p.rollDice();
         if (p.dice1 == p.dice2) {doubles();}
         if (doubleTurns == 3) {
@@ -135,16 +130,29 @@ public class LoadGame {
         p.moveTo(new_tile);
     }
 
-    private void doubles() {doubleTurns++;}
+    @Override
+    public void buildHouse() {House b = new House(currentPlayer, view, playerTabMap, true);}
 
-    public void build() {House b = new House(currentPlayer, view, playerTabMap, true);}
+    @Override
+    public void sellHouse() {House s = new House(currentPlayer, view, playerTabMap, false);}
 
-    public void sell() {House s = new House(currentPlayer, view, playerTabMap, false);}
+    @Override
+    public void mortgageProp() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap, true);}
 
-    public void mortgage() {Mortgage m = new Mortgage(currentPlayer, view, playerTabMap, true);}
+    @Override
+    public void unmortgageProp() {Mortgage u = new Mortgage(currentPlayer, view, playerTabMap, false);}
 
-    public void unmortgage() {Mortgage u = new Mortgage(currentPlayer, view, playerTabMap, false);}
-
+    @Override
     public void trade() {Trade t = new Trade(currentPlayer, view, activePlayers, playerTabMap);}
 
+    private void updateCardTiles() {
+        for (Event e : this.eventTiles) {
+            if (e instanceof CardTile) {
+                ((CardTile) e).playerList(this.activePlayers);
+                ((CardTile) e).updateProps(this.properties);
+            }
+        }
+    }
+
+    private void doubles() {doubleTurns++;}
 }
