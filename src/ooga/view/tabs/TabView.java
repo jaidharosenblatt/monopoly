@@ -65,6 +65,11 @@ public class TabView {
     tabs.get(rulesTabID).updateTab(info);
   }
 
+  public void changeRuleSet(String newGameType){
+    RulesTab rulesTab = (RulesTab) tabs.get(rulesTabID);
+    rulesTab.changeRules(newGameType);
+  }
+
   public void initializeProperties(List<Tile> tiles){
     PropertiesTab propertiesTab = (PropertiesTab) tabs.get(propertiesTabID);
     List properties = new ArrayList<Property>();
@@ -89,6 +94,7 @@ public class TabView {
       playerInfoList.add(playerInfo.getPlayerColor());
       playerInfoList.add(playerInfo.getCashBalance());
       playerInfoList.add(playerInfo.getProperties());
+      playerInfoList.add(playerInfo.getName());
       ownedProperty.addAll(playerInfo.getProperties());
     }
     return playerInfoList;

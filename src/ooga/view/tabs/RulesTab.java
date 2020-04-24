@@ -28,8 +28,8 @@ public class RulesTab extends DisplayTab {
     displayRules("Default");
   }
 
-  private void displayRules(String GameType) {
-    rules = ResourceBundle.getBundle("ooga/view/tabs/"+GameType + "Rules");
+  private void displayRules(String gameType) {
+    rules = ResourceBundle.getBundle("ooga/view/tabs/"+gameType + "Rules");
     String [] ruleSet = rules.getString("ruleSet").split(",");
     Collection<Object> gameRules = new LinkedList<>();
     for (String rule : ruleSet){
@@ -39,6 +39,9 @@ public class RulesTab extends DisplayTab {
     updateTab(gameRules);
   }
 
+  protected void changeRules(String gameType){
+    displayRules(gameType);
+  }
 
   @Override
   void updateTab(Collection<Object> info) {

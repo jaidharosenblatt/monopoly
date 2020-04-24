@@ -32,16 +32,16 @@ public class PlayersTab extends DisplayTab{
         addTitle(TITLE);
         int i = 0;
         while (i < info.size()) {
-            VBox vbox = createPlayerDisplay( inform.get(i).toString(),(Integer) inform.get(i + 1), (List<Property>) inform.get(i + 2));
+            VBox vbox = createPlayerDisplay( inform.get(i).toString(),(Integer) inform.get(i + 1), (List<Property>) inform.get(i + 2),(String) inform.get(i+3));
             myPane.getChildren().add(vbox);
             i += INFO_LENGTH;
         }
     }
 
-    protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties){
+    protected VBox createPlayerDisplay(String color, Integer number, List<Property> properties, String playerName){
         VBox vbox = new VBox(SPACING);
         HBox title = new HBox();
-        title.getChildren().add(new Text(myResources.getString("player")));
+        title.getChildren().add(new Text(playerName));
         title.getChildren().add(makeColorAndTextHBox(color, myResources.getString("balance") + number.toString(), false, null));
         title.getChildren().add(new Text(myResources.getString("owns")));
 
