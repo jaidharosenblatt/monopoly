@@ -68,9 +68,9 @@ public abstract class DisplayTab {
    * @param p the property to be displayed
    * @return
    */
-  HBox makeColorAndTextHBox(String color, String text, boolean property, Property p, boolean isMortgaged) {
+  HBox makeColorAndTextHBox(String color, String text, boolean property, Property p) {
     Color color1 =  Color.web(color);
-    if (isMortgaged) {
+    if (property && p.isMortgaged()) {
       color1 = Color.web(color, 0.25);
     }
     Circle circle = new Circle(FONT_SIZE /2, color1);
