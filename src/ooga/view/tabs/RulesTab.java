@@ -10,7 +10,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-
+/**
+ * This class is a child of the DisplayTab and creates a tab for displaying the rules of the game. Right now there are two
+ * different ways to update the rules. One is to use the updateTab method. The other is to use the changeRules method
+ * which will read in a rule set from a properties file
+ */
 public class RulesTab extends DisplayTab {
   private static final ResourceBundle myResources = ResourceBundle.getBundle("ooga/view/tabs/TabStringResources");
   private static final String TITLE = myResources.getString("rulesTabTitle");
@@ -21,6 +25,11 @@ public class RulesTab extends DisplayTab {
   private ResourceBundle rules;
   private  Pane myPane;
 
+  /**
+   * Construct a rules tab.
+   * @param tabName the text to be displayed at the top of the pane
+   * @param pane the pane that will house all of the information to be displayed in this tab
+   */
   public RulesTab(String tabName, Pane pane) {
     super(tabName, pane);
     this.myPane = pane;
@@ -39,10 +48,19 @@ public class RulesTab extends DisplayTab {
     updateTab(gameRules);
   }
 
+  /**
+   * Change the displayed rules to a new set that come from a properties file. Assumes there is a properties file of the
+   * name GameTypeRules.properties that contains the rules.
+   * @param gameType the String of the type of game in format GameType
+   */
   protected void changeRules(String gameType){
     displayRules(gameType);
   }
 
+  /**
+   * The other way to update the rules. This takes in directly the Strings of rules to be displayed.
+   * @param info The updated information that needs to be displayed in the respective tab.
+   */
   @Override
   void updateTab(Collection<Object> info) {
     myPane.getChildren().clear();
@@ -56,10 +74,6 @@ public class RulesTab extends DisplayTab {
       }
     }
   }
-
-
-
-
 
   private void addText(String rule) {
     HBox hbox = new HBox();
